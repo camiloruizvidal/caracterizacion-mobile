@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
-
+import { SteperComponent } from './steper/steper.component';
 
 @NgModule({
-  declarations: [],
+  declarations: [SteperComponent],
+  exports: [SteperComponent],
   imports: [
     CommonModule
   ]
