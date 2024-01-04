@@ -1,19 +1,19 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { IonicModule } from '@ionic/angular';
 
-import { TextShortComponent } from './text-short.component';
+import { TextAreaComponent } from './text-area.component';
 
-describe('TextShortComponent', () => {
-  let component: TextShortComponent;
-  let fixture: ComponentFixture<TextShortComponent>;
+describe('TextAreaComponent', () => {
+  let component: TextAreaComponent;
+  let fixture: ComponentFixture<TextAreaComponent>;
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ TextShortComponent ],
+      declarations: [ TextAreaComponent ],
       imports: [IonicModule.forRoot()]
     }).compileComponents();
 
-    fixture = TestBed.createComponent(TextShortComponent);
+    fixture = TestBed.createComponent(TextAreaComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   }));

@@ -15,7 +15,9 @@
   </ion-header>
 
   <div id="container">
-    <strong>Form generator</strong>
-    <app-steper [dataCard]="formDinamic"></app-steper>
+    <strong>Form generator Family Card</strong>
+    <app-steper [dataSteper]="formDinamic.familyCard"></app-steper>
+    <strong>Form generator Person Card</strong>
+    <app-steper [dataSteper]="formDinamic.personCard"></app-steper>
   </div>
 </ion-content>

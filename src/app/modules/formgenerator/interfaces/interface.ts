@@ -16,28 +16,27 @@ export interface ISteperValues {
     order:       number;
     label:       string;
     description: string;
-    type:        string;
+    type:        ESteperType;
     options:     IOptionsCheck | null;
     default:     boolean | string;
     visibility:  IOptionsVisibility;
     required:    IOptionsRequired;
 }
 
-export enum SteperType {
-    Text = 'text',
-    TextArea = 'textarea',
-    Check = 'check',
+export enum ESteperType {
+    Address = 'address',
     Calendar = 'calendar',
+    Check = 'check',
     Email = 'email',
+    Filter = 'filter',
     Numbers = 'numbers',
     Phone = 'phone',
-    SelectFilter = 'selectFilter',
-    TextLong = 'textLong',
-    TextShort = 'textShort',
-    Address = 'address',
+    Relationship = 'relationship',
     Select = 'select',
-    Relationship = 'relationship'
-  }
+    SelectFilter = 'selectFilter',
+    Text = 'text',
+    TextArea = 'textarea',
+}
 
 export interface IOptionsCheck {
     valueTrue:  string;

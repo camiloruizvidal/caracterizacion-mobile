@@ -1,3 +1,4 @@
+import { ESteperType } from './../interfaces/interface';
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { IFamilyCard } from '../interfaces/interface';
@@ -22,7 +23,7 @@ export class TestService {
           order: 1,
           label: 'Campo de prueba 1',
           description: 'Este campo es de prueba, asi que no tiene nada que ver',
-          type: 'text',
+          type: ESteperType.Text,
           options: null,
           default: '',
           visibility: {
@@ -40,7 +41,7 @@ export class TestService {
           order: 2,
           label: 'Campo de prueba 2',
           description: 'Este campo es de prueba para un texto largo, asi que no tiene nada que ver',
-          type: 'textarea',
+          type: ESteperType.TextArea,
           options: null,
           default: '',
           visibility: {
@@ -58,7 +59,7 @@ export class TestService {
           order: 3,
           label: 'Campo de prueba 3',
           description: 'Este campo es de prueba para un texto largo, asi que no tiene nada que ver',
-          type: 'check',
+          type: ESteperType.Check,
           options: { valueTrue: 'Sí', valueFalse: 'No'},
           default: true,
           visibility: {
@@ -76,14 +77,14 @@ export class TestService {
           order: 4,
           label: 'Campo de prueba 4, campo dependiente de 3',
           description: 'Este campo es de prueba para un texto largo, asi que no tiene nada que ver',
-          type: 'check',
-          options: { valueTrue: 'Sí', valueFalse: 'No'},
+          type: ESteperType.TextArea,
+          options: null,
           default: true,
           visibility: {
             isDepent: true,
             rules: [
               [{
-                columnDepend: 'columnName',
+                columnDepend: 'prueba_3_check_box',
                 rule: '=',
                 value: 'Sí'
               }]
@@ -98,13 +99,13 @@ export class TestService {
         }]
       }],
       personCard: [{
-        title: 'Tarjeta Familiar',
+        title: 'Tarjeta persona',
         values: [{
           columnName: 'prueba_1_texto',
           order: 1,
           label: 'Campo de prueba 1',
           description: 'Este campo es de prueba, asi que no tiene nada que ver',
-          type: 'text',
+          type: ESteperType.Text,
           options: null,
           default: '',
           visibility: {
@@ -122,7 +123,7 @@ export class TestService {
           order: 2,
           label: 'Campo de prueba 2',
           description: 'Este campo es de prueba para un texto largo, asi que no tiene nada que ver',
-          type: 'textarea',
+          type: ESteperType.TextArea,
           options: null,
           default: '',
           visibility: {
@@ -140,7 +141,7 @@ export class TestService {
           order: 3,
           label: 'Campo de prueba 3',
           description: 'Este campo es de prueba para un texto largo, asi que no tiene nada que ver',
-          type: 'check',
+          type: ESteperType.Check,
           options: { valueTrue: 'Sí', valueFalse: 'No'},
           default: true,
           visibility: {
@@ -158,14 +159,14 @@ export class TestService {
           order: 4,
           label: 'Campo de prueba 4, campo dependiente de 3',
           description: 'Este campo es de prueba para un texto largo, asi que no tiene nada que ver',
-          type: 'check',
-          options: { valueTrue: 'Sí', valueFalse: 'No'},
+          type: ESteperType.TextArea,
+          options: null,
           default: true,
           visibility: {
             isDepent: true,
             rules: [
               [{
-                columnDepend: 'columnName',
+                columnDepend: 'prueba_3_check_box',
                 rule: '=',
                 value: 'Sí'
               }]

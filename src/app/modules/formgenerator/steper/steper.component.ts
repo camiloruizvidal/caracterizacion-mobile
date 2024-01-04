@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { IFamilyCard, IStepers } from '../interfaces/interface';
+import { ESteperType, IFamilyCard, IStepers } from '../interfaces/interface';
 
 @Component({
   selector: 'app-steper',
@@ -8,13 +8,16 @@ import { IFamilyCard, IStepers } from '../interfaces/interface';
 })
 export class SteperComponent  implements OnInit {
 
-  @Input() dataCard!: IFamilyCard;
-  public familyCards!: IStepers[];
+  @Input() dataSteper!: IStepers[];
 
   constructor() { }
 
   ngOnInit() {
-    this.familyCards = this.dataCard.familyCard;
+    console.log(this.dataSteper)
+  }
+
+  public get SteperType(): typeof ESteperType {
+    return ESteperType;
   }
 
 }

@@ -1,19 +1,19 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { IonicModule } from '@ionic/angular';
 
-import { TextLongComponent } from './text-long.component';
+import { RelationshipComponent } from './relationship.component';
 
-describe('TextLongComponent', () => {
-  let component: TextLongComponent;
-  let fixture: ComponentFixture<TextLongComponent>;
+describe('RelationshipComponent', () => {
+  let component: RelationshipComponent;
+  let fixture: ComponentFixture<RelationshipComponent>;
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ TextLongComponent ],
+      declarations: [ RelationshipComponent ],
       imports: [IonicModule.forRoot()]
     }).compileComponents();
 
-    fixture = TestBed.createComponent(TextLongComponent);
+    fixture = TestBed.createComponent(RelationshipComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   }));

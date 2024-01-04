@@ -1,4 +1,4 @@
-<div *ngFor="let card of familyCards" >
+<div *ngFor="let card of dataSteper" >
   <ion-card>
     <ion-card-header>
       <ion-card-title>
@@ -13,10 +13,45 @@
       <ion-item *ngFor="let itemInputs of card.values">
         <pre>{{itemInputs|json}}</pre>
         <div [ngSwitch]="itemInputs.type">
-          <div *ngSwitchCase="'case1'">Contenido para el caso 1</div>
-          <div *ngSwitchCase="'case2'">Contenido para el caso 2</div>
-          <div *ngSwitchCase="'case3'">Contenido para el caso 3</div>
-          <div *ngSwitchDefault>Contenido por defecto si no coincide con ningún caso</div>
+          <div *ngSwitchCase="SteperType.Address">
+            Contenido para el caso {{SteperType.Address}}
+          </div>
+          <div *ngSwitchCase="SteperType.Calendar">
+            Contenido para el caso {{SteperType.Calendar}}
+          </div>
+          <div *ngSwitchCase="SteperType.Check">
+            Contenido para el caso {{SteperType.Check}}
+          </div>
+          <div *ngSwitchCase="SteperType.Email">
+            Contenido para el caso {{SteperType.Email}}
+          </div>
+          <div *ngSwitchCase="SteperType.Filter">
+            Contenido para el caso {{SteperType.Filter}}
+          </div>
+          <div *ngSwitchCase="SteperType.Numbers">
+            Contenido para el caso {{SteperType.Numbers}}
+          </div>
+          <div *ngSwitchCase="SteperType.Phone">
+            Contenido para el caso {{SteperType.Phone}}
+          </div>
+          <div *ngSwitchCase="SteperType.Relationship">
+            Contenido para el caso {{SteperType.Relationship}}
+          </div>
+          <div *ngSwitchCase="SteperType.Select">
+            Contenido para el caso {{SteperType.Select}}
+          </div>
+          <div *ngSwitchCase="SteperType.SelectFilter">
+            Contenido para el caso {{SteperType.SelectFilter}}
+          </div>
+          <div *ngSwitchCase="SteperType.Text">
+            Contenido para el caso {{SteperType.Text}}
+          </div>
+          <div *ngSwitchCase="SteperType.TextArea">
+            Contenido para el caso {{SteperType.TextArea}}
+          </div>
+          <div *ngSwitchDefault>
+            Contenido por defecto si no coincide con ningún caso.
+          </div>
         </div>
       </ion-item>
       <pre>{{card.values|json}}</pre>
