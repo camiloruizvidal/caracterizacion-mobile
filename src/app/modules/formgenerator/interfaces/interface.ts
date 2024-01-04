@@ -21,6 +21,7 @@ export interface ISteperValues {
     default:     boolean | string;
     visibility:  IOptionsVisibility;
     required:    IOptionsRequired;
+    value?:      any;
 }
 
 export enum ESteperType {

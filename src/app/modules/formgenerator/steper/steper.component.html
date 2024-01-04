@@ -11,51 +11,36 @@
 
     <ion-card-content>
       <ion-item *ngFor="let itemInputs of card.values">
-        <pre>{{itemInputs|json}}</pre>
         <div [ngSwitch]="itemInputs.type">
-          <app-address></app-address>
-          <div *ngSwitchCase="SteperType.Address">
-            Contenido para el caso {{SteperType.Address}}
-          </div>
-          <div *ngSwitchCase="SteperType.Calendar">
-            Contenido para el caso {{SteperType.Calendar}}
-          </div>
-          <div *ngSwitchCase="SteperType.Check">
-            Contenido para el caso {{SteperType.Check}}
-          </div>
-          <div *ngSwitchCase="SteperType.Email">
-            Contenido para el caso {{SteperType.Email}}
-          </div>
-          <div *ngSwitchCase="SteperType.Filter">
-            Contenido para el caso {{SteperType.Filter}}
-          </div>
-          <div *ngSwitchCase="SteperType.Numbers">
-            Contenido para el caso {{SteperType.Numbers}}
-          </div>
-          <div *ngSwitchCase="SteperType.Phone">
-            Contenido para el caso {{SteperType.Phone}}
-          </div>
-          <div *ngSwitchCase="SteperType.Relationship">
-            Contenido para el caso {{SteperType.Relationship}}
-          </div>
-          <div *ngSwitchCase="SteperType.Select">
-            Contenido para el caso {{SteperType.Select}}
-          </div>
-          <div *ngSwitchCase="SteperType.SelectFilter">
-            Contenido para el caso {{SteperType.SelectFilter}}
-          </div>
-          <div *ngSwitchCase="SteperType.Text">
-            Contenido para el caso {{SteperType.Text}}
-          </div>
-          <div *ngSwitchCase="SteperType.TextArea">
-            Contenido para el caso {{SteperType.TextArea}}
-          </div>
+          <app-address [steperValue]="itemInputs" *ngSwitchCase="SteperType.Address">
+          </app-address>
+          <app-calendar [steperValue]="itemInputs" *ngSwitchCase="SteperType.Calendar">
+          </app-calendar>
+          <app-check [steperValue]="itemInputs" *ngSwitchCase="SteperType.Check">
+          </app-check>
+          <app-email [steperValue]="itemInputs" *ngSwitchCase="SteperType.Email">
+          </app-email>
+          <app-filter [steperValue]="itemInputs" *ngSwitchCase="SteperType.Filter">
+          </app-filter>
+          <app-numbers [steperValue]="itemInputs" *ngSwitchCase="SteperType.Numbers">
+          </app-numbers>
+          <app-phone [steperValue]="itemInputs" *ngSwitchCase="SteperType.Phone">
+          </app-phone>
+          <app-relationship [steperValue]="itemInputs" *ngSwitchCase="SteperType.Relationship">
+          </app-relationship>
+          <app-select [steperValue]="itemInputs" *ngSwitchCase="SteperType.Select">
+          </app-select>
+          <app-select-filter [steperValue]="itemInputs" *ngSwitchCase="SteperType.SelectFilter">
+          </app-select-filter>
+          <app-text [steperValue]="itemInputs" *ngSwitchCase="SteperType.Text">
+          </app-text>
+          <app-text-area [steperValue]="itemInputs" *ngSwitchCase="SteperType.TextArea">
+          </app-text-area>
           <div *ngSwitchDefault>
             Contenido por defecto si no coincide con ningún caso.
           </div>
         </div>
       </ion-item>
-      <pre>{{card.values|json}}</pre>
     </ion-card-content>
   </ion-card>
 </div>
