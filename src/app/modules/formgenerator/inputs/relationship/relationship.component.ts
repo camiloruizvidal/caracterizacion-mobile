@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { ISteperValues } from '../../interfaces/interface';
 
 @Component({
   selector: 'app-relationship',
@@ -7,8 +8,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RelationshipComponent  implements OnInit {
 
+  @Input() steperValue!: ISteperValues;
+
   constructor() { }
 
-  ngOnInit() {}
+  ngOnInit() {
+    console.log({steperValues: this.steperValue});
+  }
 
 }

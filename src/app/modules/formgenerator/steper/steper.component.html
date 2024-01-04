@@ -13,6 +13,7 @@
       <ion-item *ngFor="let itemInputs of card.values">
         <pre>{{itemInputs|json}}</pre>
         <div [ngSwitch]="itemInputs.type">
+          <app-address></app-address>
           <div *ngSwitchCase="SteperType.Address">
             Contenido para el caso {{SteperType.Address}}
           </div>

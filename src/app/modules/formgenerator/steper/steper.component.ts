@@ -13,7 +13,6 @@ export class SteperComponent  implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    console.log(this.dataSteper)
   }
 
   public get SteperType(): typeof ESteperType {
