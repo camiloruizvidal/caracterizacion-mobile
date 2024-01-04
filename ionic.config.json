@@ -1,0 +1,7 @@
+{
+  "name": "caracterizacion-mobile",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
