@@ -10,10 +10,13 @@
   <ion-header collapse="condense">
     <ion-toolbar>
       <ion-title size="large">
-        
       </ion-title>
     </ion-toolbar>
   </ion-header>
 
-  <app-explore-container name="Tab 1 page"></app-explore-container>
+  <div id="container">
+    <strong>Form generator</strong>
+    formDinamic:{{formDinamic}}
+    <app-steper [dataCard]="formDinamic"></app-steper>
+  </div>
 </ion-content>
