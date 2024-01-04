@@ -7,6 +7,7 @@ export interface IFamilyCard {
 
 export interface IStepers {
     title:  string;
+    subtitle?: string;
     values: ISteperValues[];
 }
 
@@ -21,6 +22,22 @@ export interface ISteperValues {
     visibility:  IOptionsVisibility;
     required:    IOptionsRequired;
 }
+
+export enum SteperType {
+    Text = 'text',
+    TextArea = 'textarea',
+    Check = 'check',
+    Calendar = 'calendar',
+    Email = 'email',
+    Numbers = 'numbers',
+    Phone = 'phone',
+    SelectFilter = 'selectFilter',
+    TextLong = 'textLong',
+    TextShort = 'textShort',
+    Address = 'address',
+    Select = 'select',
+    Relationship = 'relationship'
+  }
 
 export interface IOptionsCheck {
     valueTrue:  string;
