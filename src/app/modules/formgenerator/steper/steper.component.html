@@ -1,40 +1,73 @@
-<div *ngFor="let card of dataSteper" >
-  <ion-card>
+<div *ngFor="let card of dataSteper; let i = index">
+  <ion-card *ngIf="currentStep === i">
     <ion-card-header>
       <ion-card-title>
-        {{card.title}}
+        {{ card.title }}
       </ion-card-title>
       <ion-card-subtitle>
-        {{card?.subtitle}}
+        {{ card?.subtitle }}
       </ion-card-subtitle>
     </ion-card-header>
 
     <ion-card-content>
       <ion-item *ngFor="let itemInputs of card.values">
         <div [ngSwitch]="itemInputs.type">
-          <app-address [steperValue]="itemInputs" *ngSwitchCase="SteperType.Address">
+          <app-address
+            [steperValue]="itemInputs"
+            *ngSwitchCase="SteperType.Address"
+          >
           </app-address>
-          <app-calendar [steperValue]="itemInputs" *ngSwitchCase="SteperType.Calendar">
+          <app-calendar
+            [steperValue]="itemInputs"
+            *ngSwitchCase="SteperType.Calendar"
+          >
           </app-calendar>
-          <app-check [steperValue]="itemInputs" *ngSwitchCase="SteperType.Check">
+          <app-check
+            [steperValue]="itemInputs"
+            *ngSwitchCase="SteperType.Check"
+          >
           </app-check>
-          <app-email [steperValue]="itemInputs" *ngSwitchCase="SteperType.Email">
+          <app-email
+            [steperValue]="itemInputs"
+            *ngSwitchCase="SteperType.Email"
+          >
           </app-email>
-          <app-filter [steperValue]="itemInputs" *ngSwitchCase="SteperType.Filter">
+          <app-filter
+            [steperValue]="itemInputs"
+            *ngSwitchCase="SteperType.Filter"
+          >
           </app-filter>
-          <app-numbers [steperValue]="itemInputs" *ngSwitchCase="SteperType.Numbers">
+          <app-numbers
+            [steperValue]="itemInputs"
+            *ngSwitchCase="SteperType.Numbers"
+          >
           </app-numbers>
-          <app-phone [steperValue]="itemInputs" *ngSwitchCase="SteperType.Phone">
+          <app-phone
+            [steperValue]="itemInputs"
+            *ngSwitchCase="SteperType.Phone"
+          >
           </app-phone>
-          <app-relationship [steperValue]="itemInputs" *ngSwitchCase="SteperType.Relationship">
+          <app-relationship
+            [steperValue]="itemInputs"
+            *ngSwitchCase="SteperType.Relationship"
+          >
           </app-relationship>
-          <app-select [steperValue]="itemInputs" *ngSwitchCase="SteperType.Select">
+          <app-select
+            [steperValue]="itemInputs"
+            *ngSwitchCase="SteperType.Select"
+          >
           </app-select>
-          <app-select-filter [steperValue]="itemInputs" *ngSwitchCase="SteperType.SelectFilter">
+          <app-select-filter
+            [steperValue]="itemInputs"
+            *ngSwitchCase="SteperType.SelectFilter"
+          >
           </app-select-filter>
           <app-text [steperValue]="itemInputs" *ngSwitchCase="SteperType.Text">
           </app-text>
-          <app-text-area [steperValue]="itemInputs" *ngSwitchCase="SteperType.TextArea">
+          <app-text-area
+            [steperValue]="itemInputs"
+            *ngSwitchCase="SteperType.TextArea"
+          >
           </app-text-area>
           <div *ngSwitchDefault>
             Contenido por defecto si no coincide con ningún caso.
@@ -44,3 +77,26 @@
     </ion-card-content>
   </ion-card>
 </div>
+<ion-grid>
+  <ion-row>
+    <ion-col>
+      <ion-button expand="block" [disabled]="isLastDisabled" (click)="goBack()">
+        <ion-icon name="arrow-back-outline"></ion-icon>
+        Anterior
+      </ion-button>
+    </ion-col>
+
+    <ion-col *ngIf="!isShowSave">
+      <ion-button expand="block" [disabled]="isNextDisabled" (click)="goNext()">
+        Siguiente
+        <ion-icon name="arrow-forward-outline"></ion-icon>
+      </ion-button>
+    </ion-col>
+    <ion-col *ngIf="isShowSave">
+      <ion-button color="success" expand="block">
+        <ion-icon name="save-outline"></ion-icon>
+        &nbsp; Guardar
+      </ion-button>
+    </ion-col>
+  </ion-row>
+</ion-grid>

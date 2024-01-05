@@ -6,17 +6,35 @@ import { ESteperType, IFamilyCard, IStepers } from '../interfaces/interface';
   templateUrl: './steper.component.html',
   styleUrls: ['./steper.component.scss'],
 })
-export class SteperComponent  implements OnInit {
+export class SteperComponent {
 
   @Input() dataSteper!: IStepers[];
 
+  public currentStep: number = 0;
+
   constructor() { }
 
-  ngOnInit() {
+  public goNext(): void {
+    this.currentStep = this.currentStep + 1;
+  }
+  public goBack(): void {
+    this.currentStep = this.currentStep - 1;
   }
 
   public get SteperType(): typeof ESteperType {
     return ESteperType;
+  }
+
+  public get isNextDisabled() : boolean {
+    return this.currentStep >= this.dataSteper.length - 1;
+  }
+
+  public get isLastDisabled() : boolean {
+    return this.currentStep < this.dataSteper.length - 1;
+  }
+
+  public get isShowSave() : boolean {
+    return this.currentStep === this.dataSteper.length - 1;
   }
 
 }

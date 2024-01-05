@@ -100,9 +100,9 @@ export class TestService {
       },{
         title: 'Tarjeta Familiar step 2',
         values: [{
-          columnName: 'prueba_1_texto',
-          order: 1,
-          label: 'Campo de prueba 1',
+          columnName: 'prueba_5_texto',
+          order: 5,
+          label: 'Campo de prueba 5',
           description: 'Este campo es de prueba, asi que no tiene nada que ver',
           type: ESteperType.Text,
           options: null,
@@ -118,9 +118,9 @@ export class TestService {
             required: true,
           }
         },{
-          columnName: 'prueba_2_texto_largo',
-          order: 2,
-          label: 'Campo de prueba 2',
+          columnName: 'prueba_6_texto_largo',
+          order: 6,
+          label: 'Campo de prueba 6',
           description: 'Este campo es de prueba para un texto largo, asi que no tiene nada que ver',
           type: ESteperType.TextArea,
           options: null,
@@ -136,9 +136,9 @@ export class TestService {
             required: true,
           }
         },{
-          columnName: 'prueba_3_check_box',
-          order: 3,
-          label: 'Campo de prueba 3',
+          columnName: 'prueba_7_check_box',
+          order: 7,
+          label: 'Campo de prueba 7',
           description: 'Este campo es de prueba para un texto largo, asi que no tiene nada que ver',
           type: ESteperType.Check,
           options: { valueTrue: 'Sí', valueFalse: 'No'},
@@ -154,9 +154,9 @@ export class TestService {
             required: true,
           }
         },{
-          columnName: 'prueba_4_texto_largo_dependiente',
-          order: 4,
-          label: 'Campo de prueba 4, campo dependiente de 3',
+          columnName: 'prueba_8_texto_largo_dependiente',
+          order: 8,
+          label: 'Campo de prueba 8, campo dependiente de 7',
           description: 'Este campo es de prueba para un texto largo, asi que no tiene nada que ver',
           type: ESteperType.TextArea,
           options: null,
@@ -165,7 +165,7 @@ export class TestService {
             isDepent: true,
             rules: [
               [{
-                columnDepend: 'prueba_3_check_box',
+                columnDepend: 'prueba_7_check_box',
                 rule: '=',
                 value: 'Sí'
               }]
