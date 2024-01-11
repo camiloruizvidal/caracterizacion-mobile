@@ -61,3 +61,8 @@ export interface IOptionsRule {
     rule:         string;
     value:        string;
 }
+
+export interface IValueColumn {
+    columnName: string;
+    value: any;
+}

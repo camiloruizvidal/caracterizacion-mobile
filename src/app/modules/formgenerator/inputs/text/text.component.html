@@ -3,5 +3,6 @@
   [label]="steperValue.label"
   [value]="steperValue.value"
   [required]="isRequired"
+  (ionChange)="saveInput($event)"
   labelPlacement="floating"
 ></ion-input>

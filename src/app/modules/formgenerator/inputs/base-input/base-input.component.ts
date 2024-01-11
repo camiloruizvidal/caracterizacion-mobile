@@ -1,6 +1,6 @@
 import { Input, Output, EventEmitter, Component } from '@angular/core';
 import { Injectable } from '@angular/core';
-import { ISteperValues } from '../../interfaces/interface';
+import { ISteperValues, IValueColumn } from '../../interfaces/interface';
 
 @Component({
   selector: 'app-base-input',
@@ -13,10 +13,15 @@ export class BaseInputComponent {
   }
 
   @Input() steperValue!: ISteperValues;
-  @Output() saveInputEvent = new EventEmitter<{ columnName: string, value: any }>();
+  @Output() saveInputData = new EventEmitter<IValueColumn>();
 
-  public saveInput(columnName: string, value: any): void {
-    this.saveInputEvent.emit({ columnName, value });
+  public saveInput(value: any): void {
+
+    this.saveInputData.emit({
+      columnName: this.steperValue.columnName,
+      value: value.detail.value
+    });
+
   }
 
   public get isRequired() : boolean {

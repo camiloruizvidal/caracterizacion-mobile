@@ -62,7 +62,11 @@
             *ngSwitchCase="SteperType.SelectFilter"
           >
           </app-select-filter>
-          <app-text [steperValue]="itemInputs" *ngSwitchCase="SteperType.Text">
+          <app-text
+            [steperValue]="itemInputs"
+            *ngSwitchCase="SteperType.Text"
+            (saveInputData)="saveValueColumn($event)"
+          >
           </app-text>
           <app-text-area
             [steperValue]="itemInputs"
