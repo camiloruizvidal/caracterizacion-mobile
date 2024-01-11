@@ -4,7 +4,7 @@
 <ion-datetime
   locale="es-CO"
   presentation="date"
-  [value]="defaultDate"
+  [value]="defaultDate | date: 'yyyy-MM-dd'"
   labelPlacement="floating"
   [showDefaultTitle]="true"
   [id]="steperValue.columnName"

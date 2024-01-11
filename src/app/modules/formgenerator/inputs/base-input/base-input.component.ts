@@ -9,7 +9,6 @@ import { ISteperValues, IValueColumn } from '../../interfaces/interface';
 export class BaseInputComponent {
 
   constructor() {
-    console.log({this: this})
   }
 
   @Input() steperValue!: ISteperValues;
