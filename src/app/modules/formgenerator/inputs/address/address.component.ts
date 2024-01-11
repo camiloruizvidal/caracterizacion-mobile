@@ -1,19 +1,20 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ISteperValues } from '../../interfaces/interface';
+import { BaseInputComponent } from '../base-input/base-input.component';
 
 @Component({
   selector: 'app-address',
   templateUrl: './address.component.html',
   styleUrls: ['./address.component.scss'],
 })
-export class AddressComponent  implements OnInit {
+export class AddressComponent extends BaseInputComponent implements OnInit {
 
-  @Input() steperValue!: ISteperValues;
-
-  constructor() { }
+  constructor() {
+    super();
+  }
 
   ngOnInit() {
-    console.log({steperValues: this.steperValue});
+    console.log({steperValue: this.steperValue});
   }
 
 }
