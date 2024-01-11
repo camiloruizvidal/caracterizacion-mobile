@@ -18,7 +18,6 @@ export class SteperComponent implements OnInit {
 
   public ngOnInit(): void {
     this.setDataDefault();
-    console.log({saveData: this.saveData})
   }
 
   private setDataDefault(): void {
@@ -46,7 +45,6 @@ export class SteperComponent implements OnInit {
       this.saveData.push(value);
     }
 
-    console.log({saveData: this.saveData})
   }
 
   public goNext(): void {
