@@ -15,51 +15,61 @@
           <app-address
             [steperValue]="itemInputs"
             *ngSwitchCase="SteperType.Address"
+            (saveInputData)="saveValueColumn($event)"
           >
           </app-address>
           <app-calendar
             [steperValue]="itemInputs"
             *ngSwitchCase="SteperType.Calendar"
+            (saveInputData)="saveValueColumn($event)"
           >
           </app-calendar>
           <app-check
             [steperValue]="itemInputs"
             *ngSwitchCase="SteperType.Check"
+            (saveInputData)="saveValueColumn($event)"
           >
           </app-check>
           <app-email
             [steperValue]="itemInputs"
             *ngSwitchCase="SteperType.Email"
+            (saveInputData)="saveValueColumn($event)"
           >
           </app-email>
           <app-filter
             [steperValue]="itemInputs"
             *ngSwitchCase="SteperType.Filter"
+            (saveInputData)="saveValueColumn($event)"
           >
           </app-filter>
           <app-numbers
             [steperValue]="itemInputs"
             *ngSwitchCase="SteperType.Numbers"
+            (saveInputData)="saveValueColumn($event)"
           >
           </app-numbers>
           <app-phone
             [steperValue]="itemInputs"
             *ngSwitchCase="SteperType.Phone"
+            (saveInputData)="saveValueColumn($event)"
           >
           </app-phone>
           <app-relationship
             [steperValue]="itemInputs"
             *ngSwitchCase="SteperType.Relationship"
+            (saveInputData)="saveValueColumn($event)"
           >
           </app-relationship>
           <app-select
             [steperValue]="itemInputs"
             *ngSwitchCase="SteperType.Select"
+            (saveInputData)="saveValueColumn($event)"
           >
           </app-select>
           <app-select-filter
             [steperValue]="itemInputs"
             *ngSwitchCase="SteperType.SelectFilter"
+            (saveInputData)="saveValueColumn($event)"
           >
           </app-select-filter>
           <app-text
@@ -71,11 +81,9 @@
           <app-text-area
             [steperValue]="itemInputs"
             *ngSwitchCase="SteperType.TextArea"
+            (saveInputData)="saveValueColumn($event)"
           >
           </app-text-area>
-          <div *ngSwitchDefault>
-            Contenido por defecto si no coincide con ningún caso.
-          </div>
         </div>
       </ion-item>
     </ion-card-content>

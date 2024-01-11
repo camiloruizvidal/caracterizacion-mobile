@@ -15,11 +15,15 @@ export class BaseInputComponent {
   @Input() steperValue!: ISteperValues;
   @Output() saveInputData = new EventEmitter<IValueColumn>();
 
+  public valueData: any = '';
+
   public saveInput(value: any): void {
+
+    this.valueData = value.detail.value;
 
     this.saveInputData.emit({
       columnName: this.steperValue.columnName,
-      value: value.detail.value
+      value: this.valueData
     });
 
   }

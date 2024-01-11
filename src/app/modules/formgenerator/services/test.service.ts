@@ -200,6 +200,24 @@ export class TestService {
             required: true,
           }
         },{
+          columnName: 'prueba_2,1_calendar',
+          order: 2,
+          label: 'Calendario',
+          description: 'Calendar',
+          type: ESteperType.Calendar,
+          options: null,
+          default: '',
+          visibility: {
+            isDepent: false,
+            rules: null,
+            isShow: true,
+          },
+          required: {
+            isDepend: false,
+            rules: null,
+            required: true,
+          }
+        },{
           columnName: 'prueba_2_texto_largo',
           order: 2,
           label: 'Campo de prueba 2',

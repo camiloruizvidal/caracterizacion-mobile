@@ -1,3 +1,14 @@
-<p>
-  calendar works!
-</p>
+<span>{{edadTexto}}</span>
+<ion-label>
+  {{steperValue.label}}
+</ion-label>
+<ion-datetime
+  [showDefaultTitle]="true"
+  locale="es-CO"
+  [id]="steperValue.columnName"
+  [value]="steperValue.default"
+  (ionChange)="saveInput($event)"
+  labelPlacement="floating"
+  presentation="date"
+>
+</ion-datetime>
