@@ -1,24 +1,17 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ISteperValues } from '../../interfaces/interface';
 import { ValidationsService } from '../../services/validations.service';
+import { BaseInputComponent } from '../base-input/base-input.component';
 
 @Component({
   selector: 'app-text',
   templateUrl: './text.component.html',
   styleUrls: ['./text.component.scss'],
 })
-export class TextComponent implements OnInit {
+export class TextComponent extends BaseInputComponent {
 
-  @Input() steperValue!: ISteperValues;
-
-  constructor() { }
-
-  ngOnInit() {
-    const a = 1;
-  }
-
-  public get isRequired() : boolean {
-    return ValidationsService.isRequired(this.steperValue.required);
+  constructor() {
+    super();
   }
 
 }

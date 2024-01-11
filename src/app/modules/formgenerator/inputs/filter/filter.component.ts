@@ -1,19 +1,16 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ISteperValues } from '../../interfaces/interface';
+import { BaseInputComponent } from '../base-input/base-input.component';
 
 @Component({
   selector: 'app-filter',
   templateUrl: './filter.component.html',
   styleUrls: ['./filter.component.scss'],
 })
-export class FilterComponent  implements OnInit {
+export class FilterComponent extends BaseInputComponent {
 
-  @Input() steperValue!: ISteperValues;
-
-  constructor() { }
-
-  ngOnInit() {
-    console.log({steperValues: this.steperValue});
+  constructor() {
+    super();
   }
 
 }

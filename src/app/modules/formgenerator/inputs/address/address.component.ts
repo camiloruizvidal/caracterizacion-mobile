@@ -7,14 +7,10 @@ import { BaseInputComponent } from '../base-input/base-input.component';
   templateUrl: './address.component.html',
   styleUrls: ['./address.component.scss'],
 })
-export class AddressComponent extends BaseInputComponent implements OnInit {
+export class AddressComponent extends BaseInputComponent {
 
   constructor() {
     super();
-  }
-
-  ngOnInit() {
-    console.log({steperValue: this.steperValue});
   }
 
 }

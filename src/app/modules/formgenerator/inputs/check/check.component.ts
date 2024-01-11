@@ -1,22 +1,21 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { IOptionsCheck, ISteperValues } from '../../interfaces/interface';
-import { ValidationsService } from '../../services/validations.service';
+import { BaseInputComponent } from '../base-input/base-input.component';
 
 @Component({
   selector: 'app-check',
   templateUrl: './check.component.html',
   styleUrls: ['./check.component.scss'],
 })
-export class CheckComponent  implements OnInit {
+export class CheckComponent extends BaseInputComponent implements OnInit {
 
-  @Input() steperValue!: ISteperValues;
+  constructor() {
+    super();
+  }
 
   public value: any;
 
   private valueOption: IOptionsCheck | null = null;
-
-  constructor() {
-  }
 
   ngOnInit() {
     this.value = this.steperValue.value;
@@ -32,10 +31,6 @@ export class CheckComponent  implements OnInit {
     this.value = this.value === this.valueOption?.valueTrue
                 ? this.valueOption?.valueFalse
                 : this.valueOption?.valueTrue;
-  }
-
-  public get isRequired() : boolean {
-    return ValidationsService.isRequired(this.steperValue.required);
   }
 
 }

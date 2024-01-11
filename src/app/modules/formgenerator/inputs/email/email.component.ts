@@ -1,19 +1,16 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ISteperValues } from '../../interfaces/interface';
+import { BaseInputComponent } from '../base-input/base-input.component';
 
 @Component({
   selector: 'app-email',
   templateUrl: './email.component.html',
   styleUrls: ['./email.component.scss'],
 })
-export class EmailComponent  implements OnInit {
+export class EmailComponent extends BaseInputComponent {
 
-  @Input() steperValue!: ISteperValues;
-
-  constructor() { }
-
-  ngOnInit() {
-    console.log({steperValues: this.steperValue});
+  constructor() {
+    super();
   }
 
 }
