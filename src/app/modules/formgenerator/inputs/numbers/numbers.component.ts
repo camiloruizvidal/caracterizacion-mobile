@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { ISteperValues } from '../../interfaces/interface';
 import { BaseInputComponent } from '../base-input/base-input.component';
 
