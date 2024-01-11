@@ -15,9 +15,13 @@
   </ion-header>
 
   <div id="container">
-    <app-steper [dataSteper]="formDinamic.familyCard"></app-steper>
-    <!--
-    <app-steper [dataSteper]="formDinamic.personCard"></app-steper>
-    -->
+    <app-steper
+      *ngIf="formDinamic?.familyCard"
+      [dataSteper]="formDinamic.familyCard"
+    ></app-steper>
+    <app-steper
+      *ngIf="formDinamic?.personCard"
+      [dataSteper]="formDinamic.personCard"
+    ></app-steper>
   </div>
 </ion-content>

@@ -1,3 +1,4 @@
+import { PersonasService } from './../tarjetas/services/personas/personas.service';
 import { IFamilyCard } from '../formgenerator/interfaces/interface';
 import { TestService } from './../formgenerator/services/test.service';
 import { Component, OnInit } from '@angular/core';
@@ -11,12 +12,17 @@ export class Tab1Page implements OnInit {
 
   public formDinamic!: IFamilyCard;
 
-  constructor(private testService: TestService) {}
+  constructor(
+    private testService: TestService,
+    private personasService: PersonasService
+  ) {}
 
-  ngOnInit() {
+  async ngOnInit() {
+
     this.testService.getDataTest().subscribe((response: IFamilyCard) => {
       this.formDinamic = response;
     })
+
   }
 
 }

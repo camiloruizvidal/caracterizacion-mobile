@@ -7,6 +7,8 @@ import { ExploreContainerComponentModule } from '../explore-container/explore-co
 
 import { Tab1PageRoutingModule } from './tab1-routing.module';
 import { FormgeneratorModule } from '../formgenerator/formgenerator.module';
+import { TarjetasModule } from '../tarjetas/tarjetas.module';
+import { PersonasService } from '../tarjetas/services/personas/personas.service';
 
 @NgModule({
   imports: [
@@ -15,8 +17,12 @@ import { FormgeneratorModule } from '../formgenerator/formgenerator.module';
     FormsModule,
     ExploreContainerComponentModule,
     Tab1PageRoutingModule,
-    FormgeneratorModule
+    FormgeneratorModule,
+    TarjetasModule
   ],
-  declarations: [Tab1Page]
+  declarations: [Tab1Page],
+  providers: [
+    PersonasService
+  ]
 })
-export class Tab1PageModule {}
+export class Tab1PageModule { }
