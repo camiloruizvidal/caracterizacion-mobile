@@ -1,6 +1,5 @@
 import { Component, Input } from '@angular/core';
 import { ISteperValues } from '../../interfaces/interface';
-import { ValidationsService } from '../../services/validations.service';
 import { BaseInputComponent } from '../base-input/base-input.component';
 
 @Component({
