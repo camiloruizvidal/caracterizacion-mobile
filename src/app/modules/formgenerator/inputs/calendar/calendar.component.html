@@ -1,14 +1,14 @@
-<span>{{edadTexto}}</span>
 <ion-label>
   {{steperValue.label}}
 </ion-label>
 <ion-datetime
-  [showDefaultTitle]="true"
   locale="es-CO"
-  [id]="steperValue.columnName"
-  [value]="steperValue.default"
-  (ionChange)="saveInput($event)"
-  labelPlacement="floating"
   presentation="date"
+  [value]="defaultDate"
+  labelPlacement="floating"
+  [showDefaultTitle]="true"
+  [id]="steperValue.columnName"
+  (ionChange)="saveInput($event)"
 >
 </ion-datetime>
+<span>{{edadTexto}}</span>

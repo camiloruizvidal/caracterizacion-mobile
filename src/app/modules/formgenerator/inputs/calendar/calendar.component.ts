@@ -14,16 +14,20 @@ export class CalendarComponent extends BaseInputComponent {
     super();
   }
 
-  public get edadTexto() : string  {
-    const fechaNacimiento:string = this.valueData;
-    if(fechaNacimiento.trim() === '') {
+  public get edadTexto(): string {
+    const fechaNacimiento: string = this.valueData;
+
+    if (fechaNacimiento.trim() === '') {
       return '';
     }
+
     const hoy = moment();
     const fechaNac = moment(fechaNacimiento, 'YYYY-MM-DDTHH:mm:ss');
 
     const anios = hoy.diff(fechaNac, 'years');
-    const meses = hoy.diff(fechaNac, 'months') % 12;
+    fechaNac.add(anios, 'years'); // Restar años de la fecha de nacimiento
+    const meses = hoy.diff(fechaNac, 'months');
+    fechaNac.add(meses, 'months'); // Restar meses de la fecha de nacimiento
     const dias = hoy.diff(fechaNac, 'days');
 
     let resultado = '';
@@ -43,6 +47,10 @@ export class CalendarComponent extends BaseInputComponent {
     }
 
     return resultado.length > 0 ? resultado : 'Recién nacido';
+  }
+
+  public get defaultDate(): string {
+    return moment().format('YYYY-MM-DDTHH:mm:ss');
   }
 
 }
