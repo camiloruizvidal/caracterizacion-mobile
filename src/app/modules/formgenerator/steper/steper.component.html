@@ -10,82 +10,127 @@
     </ion-card-header>
 
     <ion-card-content>
-      <ion-item *ngFor="let itemInputs of card.values">
-        <div [ngSwitch]="itemInputs.type">
-          <app-address
-            [steperValue]="itemInputs"
+      <ion-grid>
+        <ion-row *ngFor="let itemInputs of card.values" [ngSwitch]="itemInputs.type">
+          <ion-col
             *ngSwitchCase="SteperType.Address"
-            (saveInputData)="saveValueColumn($event)"
           >
-          </app-address>
-          <app-calendar
-            [steperValue]="itemInputs"
+            <app-address
+              [steperValue]="itemInputs"
+              (saveInputData)="saveValueColumn($event)"
+            >
+            </app-address>
+          </ion-col>
+          <ion-col
             *ngSwitchCase="SteperType.Calendar"
-            (saveInputData)="saveValueColumn($event)"
           >
-          </app-calendar>
-          <app-check
-            [steperValue]="itemInputs"
+            <app-calendar
+              [steperValue]="itemInputs"
+              (saveInputData)="saveValueColumn($event)"
+            >
+            </app-calendar>
+          </ion-col>
+          <ion-col
             *ngSwitchCase="SteperType.Check"
-            (saveInputData)="saveValueColumn($event)"
           >
-          </app-check>
-          <app-email
-            [steperValue]="itemInputs"
+            <app-check
+              [steperValue]="itemInputs"
+              (saveInputData)="saveValueColumn($event)"
+            >
+            </app-check>
+          </ion-col>
+          <ion-col
             *ngSwitchCase="SteperType.Email"
-            (saveInputData)="saveValueColumn($event)"
           >
-          </app-email>
-          <app-filter
-            [steperValue]="itemInputs"
+            <app-email
+              [steperValue]="itemInputs"
+              (saveInputData)="saveValueColumn($event)"
+            >
+            </app-email>
+          </ion-col>
+          <ion-col
             *ngSwitchCase="SteperType.Filter"
-            (saveInputData)="saveValueColumn($event)"
           >
-          </app-filter>
-          <app-numbers
-            [steperValue]="itemInputs"
+            <app-filter
+              [steperValue]="itemInputs"
+              (saveInputData)="saveValueColumn($event)"
+            >
+            </app-filter>
+          </ion-col>
+          <ion-col
             *ngSwitchCase="SteperType.Numbers"
-            (saveInputData)="saveValueColumn($event)"
           >
-          </app-numbers>
-          <app-phone
-            [steperValue]="itemInputs"
+            <app-numbers
+              [steperValue]="itemInputs"
+              (saveInputData)="saveValueColumn($event)"
+            >
+            </app-numbers>
+          </ion-col>
+          <ion-col
             *ngSwitchCase="SteperType.Phone"
-            (saveInputData)="saveValueColumn($event)"
           >
-          </app-phone>
-          <app-relationship
-            [steperValue]="itemInputs"
+            <app-phone
+              [steperValue]="itemInputs"
+              (saveInputData)="saveValueColumn($event)"
+            >
+            </app-phone>
+          </ion-col>
+          <ion-col
             *ngSwitchCase="SteperType.Relationship"
-            (saveInputData)="saveValueColumn($event)"
           >
-          </app-relationship>
-          <app-select
-            [steperValue]="itemInputs"
+            <app-relationship
+              [steperValue]="itemInputs"
+              (saveInputData)="saveValueColumn($event)"
+            >
+            </app-relationship>
+          </ion-col>
+          <ion-col
             *ngSwitchCase="SteperType.Select"
-            (saveInputData)="saveValueColumn($event)"
           >
-          </app-select>
-          <app-select-filter
-            [steperValue]="itemInputs"
+            <app-select
+              [steperValue]="itemInputs"
+              (saveInputData)="saveValueColumn($event)"
+            >
+            </app-select>
+          </ion-col>
+          <ion-col
             *ngSwitchCase="SteperType.SelectFilter"
-            (saveInputData)="saveValueColumn($event)"
           >
-          </app-select-filter>
-          <app-text
-            [steperValue]="itemInputs"
+            <app-select-filter
+              [steperValue]="itemInputs"
+              (saveInputData)="saveValueColumn($event)"
+            >
+            </app-select-filter>
+          </ion-col>
+          <ion-col
             *ngSwitchCase="SteperType.Text"
-            (saveInputData)="saveValueColumn($event)"
           >
-          </app-text>
+            <app-text
+              [steperValue]="itemInputs"
+              (saveInputData)="saveValueColumn($event)"
+            >
+            </app-text>
+          </ion-col>
+          <ion-col
+            *ngSwitchCase="SteperType.TextArea"
+          >
           <app-text-area
             [steperValue]="itemInputs"
-            *ngSwitchCase="SteperType.TextArea"
             (saveInputData)="saveValueColumn($event)"
-          >
+            >
           </app-text-area>
-        </div>
-      </ion-item>
+          </ion-col>
+          <ion-col
+            *ngSwitchCase="SteperType.Photo"
+          >
+            <app-photo
+              [steperValue]="itemInputs"
+              (saveInputData)="saveValueColumn($event)"
+            >
+            </app-photo>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
     </ion-card-content>
   </ion-card>
 </div>
