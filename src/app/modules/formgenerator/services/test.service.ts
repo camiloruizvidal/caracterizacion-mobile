@@ -218,6 +218,24 @@ export class TestService {
             required: true,
           }
         },{
+          columnName: 'prueba_2,2_phptp',
+          order: 2,
+          label: 'Capturar con la camara',
+          description: 'Camara',
+          type: ESteperType.Photo,
+          options: null,
+          default: '',
+          visibility: {
+            isDepent: false,
+            rules: null,
+            isShow: true,
+          },
+          required: {
+            isDepend: false,
+            rules: null,
+            required: true,
+          }
+        },{
           columnName: 'prueba_2_texto_largo',
           order: 2,
           label: 'Campo de prueba 2',

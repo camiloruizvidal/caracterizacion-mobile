@@ -14,6 +14,7 @@ import { SelectComponent } from './inputs/select/select.component';
 import { SelectFilterComponent } from './inputs/select-filter/select-filter.component';
 import { TextComponent } from './inputs/text/text.component';
 import { TextAreaComponent } from './inputs/text-area/text-area.component';
+import { PhotoComponent } from './inputs/photo/photo.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { TextAreaComponent } from './inputs/text-area/text-area.component';
     SelectComponent,
     SelectFilterComponent,
     TextComponent,
-    TextAreaComponent
+    TextAreaComponent,
+    PhotoComponent,
   ],
   exports: [
     SteperComponent,
@@ -44,7 +46,8 @@ import { TextAreaComponent } from './inputs/text-area/text-area.component';
     SelectComponent,
     SelectFilterComponent,
     TextComponent,
-    TextAreaComponent
+    TextAreaComponent,
+    PhotoComponent,
   ],
   imports: [
     CommonModule,

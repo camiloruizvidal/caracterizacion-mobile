@@ -27,6 +27,7 @@ export interface ISteperValues {
 export enum ESteperType {
     Address = 'address',
     Calendar = 'calendar',
+    Photo = 'photo',
     Check = 'check',
     Email = 'email',
     Filter = 'filter',

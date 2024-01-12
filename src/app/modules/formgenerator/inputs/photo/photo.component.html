@@ -1,0 +1,21 @@
+<span>{{this.steperValue.label}}</span>
+
+<ion-button
+  expand="block"
+  (click)="takePhoto()"
+  expand="block"
+>
+  <ion-icon name="camera-outline"></ion-icon>
+  &nbsp;Tomar foto
+</ion-button>
+
+<img [src]="imageElement" *ngIf="imageElement !== ''">
+
+<ion-button
+  expand="block"
+  color="danger"
+  (click)="deletePhoto()"
+  *ngIf="imageElement !== ''"
+>
+  Borrar foto
+</ion-button>
