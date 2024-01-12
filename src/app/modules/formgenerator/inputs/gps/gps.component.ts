@@ -11,7 +11,8 @@ import { BaseInputComponent } from '../base-input/base-input.component';
 export class GPSComponent extends BaseInputComponent {
 
   public locationForm: FormGroup;
-  public isLocationCaptured = false;
+  public isShowError: boolean = false;
+  public isLocationCaptured: boolean = false;
 
   constructor(private formBuilder: FormBuilder) {
     super();
@@ -32,6 +33,7 @@ export class GPSComponent extends BaseInputComponent {
     } catch (error) {
       console.error('Error al obtener la ubicación:', error);
       this.isLocationCaptured = false;
+      this.isShowError = true;
     }
   }
 

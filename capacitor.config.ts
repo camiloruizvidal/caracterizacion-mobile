@@ -6,6 +6,18 @@ const config: CapacitorConfig = {
   webDir: 'www',
   server: {
     androidScheme: 'https'
+  },
+  plugins: {
+    Camera: {
+      ios: {
+        promptLabelPhoto: 'Tomar foto',
+        promptLabelPicture: 'Seleccionar de la galería'
+      },
+      android: {
+        promptLabelPhoto: 'Tomar foto',
+        promptLabelPicture: 'Seleccionar de la galería'
+      }
+    }
   }
 };
 
