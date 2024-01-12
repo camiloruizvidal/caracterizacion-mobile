@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Geolocation, GeolocationPosition } from '@capacitor/geolocation';
 import { BaseInputComponent } from '../base-input/base-input.component';
+import { LoadingController } from '@ionic/angular';
 
 @Component({
   selector: 'app-gps',
@@ -14,7 +15,7 @@ export class GPSComponent extends BaseInputComponent {
   public isShowError: boolean = false;
   public isLocationCaptured: boolean = false;
 
-  constructor(private formBuilder: FormBuilder) {
+  constructor(private formBuilder: FormBuilder, private loadingController: LoadingController) {
     super();
     this.locationForm = this.formBuilder.group({
       longitud: [{ value: '', disabled: true }, Validators.required],
@@ -23,7 +24,14 @@ export class GPSComponent extends BaseInputComponent {
   }
 
   async capturarUbicacion() {
+
+    const loading = await this.loadingController.create({
+      message: 'Cargando ubicación...',
+    });
+
     try {
+      await loading.present();
+
       const position: GeolocationPosition = await Geolocation.getCurrentPosition();
       this.locationForm.patchValue({
         longitud: position.coords.longitude,
@@ -34,6 +42,10 @@ export class GPSComponent extends BaseInputComponent {
       console.error('Error al obtener la ubicación:', error);
       this.isLocationCaptured = false;
       this.isShowError = true;
+    } finally {
+      if (loading) {
+        loading.dismiss();
+      }
     }
   }
 
