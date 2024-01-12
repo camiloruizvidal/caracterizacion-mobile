@@ -1,3 +1,20 @@
-<p>
-  gps works!
-</p>
+<span>{{steperValue.label}}</span>
+
+<form [formGroup]="locationForm">
+  <ion-item>
+    <ion-label position="floating">Longitud</ion-label>
+    <ion-input formControlName="longitud" [disabled]="!isLocationCaptured"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label position="floating">Latitud</ion-label>
+    <ion-input formControlName="latitud" [disabled]="!isLocationCaptured"></ion-input>
+  </ion-item>
+
+  <ion-text color="danger" *ngIf="!isLocationCaptured">
+    No se puede capturar la ubicación
+  </ion-text>
+
+  <ion-button expand="full" (click)="capturarUbicacion()">
+    Capturar Ubicación
+  </ion-button>
+</form>

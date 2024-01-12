@@ -129,6 +129,15 @@
             >
             </app-photo>
           </ion-col>
+          <ion-col
+            *ngSwitchCase="SteperType.GPS"
+          >
+            <app-gps
+              [steperValue]="itemInputs"
+              (saveInputData)="saveValueColumn($event)"
+            >
+            </app-gps>
+          </ion-col>
         </ion-row>
       </ion-grid>
     </ion-card-content>

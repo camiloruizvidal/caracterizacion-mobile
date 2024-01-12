@@ -31,6 +31,7 @@ export enum ESteperType {
     Check = 'check',
     Email = 'email',
     Filter = 'filter',
+    GPS = 'gps',
     Numbers = 'numbers',
     Phone = 'phone',
     Relationship = 'relationship',

@@ -295,6 +295,30 @@ export class TestService {
             rules: null,
             required: true,
           }
+        },{
+          columnName: 'GPS',
+          order: 4,
+          label: 'Campo de GPS',
+          description: 'Este campo es de prueba para un texto largo, asi que no tiene nada que ver',
+          type: ESteperType.GPS,
+          options: null,
+          default: true,
+          visibility: {
+            isDepent: true,
+            rules: [
+              [{
+                columnDepend: 'prueba_3_check_box',
+                rule: '=',
+                value: 'Sí'
+              }]
+            ],
+            isShow: true,
+          },
+          required: {
+            isDepend: false,
+            rules: null,
+            required: true,
+          }
         }]
       }]
 

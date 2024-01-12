@@ -15,6 +15,8 @@ import { SelectFilterComponent } from './inputs/select-filter/select-filter.comp
 import { TextComponent } from './inputs/text/text.component';
 import { TextAreaComponent } from './inputs/text-area/text-area.component';
 import { PhotoComponent } from './inputs/photo/photo.component';
+import { GPSComponent } from './inputs/gps/gps.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -32,6 +34,7 @@ import { PhotoComponent } from './inputs/photo/photo.component';
     TextComponent,
     TextAreaComponent,
     PhotoComponent,
+    GPSComponent
   ],
   exports: [
     SteperComponent,
@@ -48,10 +51,12 @@ import { PhotoComponent } from './inputs/photo/photo.component';
     TextComponent,
     TextAreaComponent,
     PhotoComponent,
+    GPSComponent
   ],
   imports: [
     CommonModule,
-    IonicModule
+    IonicModule,
+    ReactiveFormsModule
   ]
 })
 export class FormgeneratorModule { }
