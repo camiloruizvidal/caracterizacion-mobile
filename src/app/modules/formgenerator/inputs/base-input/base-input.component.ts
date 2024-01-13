@@ -1,6 +1,6 @@
 import { Input, Output, EventEmitter, Component } from '@angular/core';
 import { Injectable } from '@angular/core';
-import { ISteperValues, IValueColumn } from '../../interfaces/interface';
+import { ISteperValues, IStepers, IValueColumn } from '../../interfaces/interface';
 
 @Component({
   selector: 'app-base-input',
@@ -12,9 +12,13 @@ export class BaseInputComponent {
   }
 
   @Input() steperValue!: ISteperValues;
+  @Input() formValue!: IStepers[];
+
   @Output() saveInputData = new EventEmitter<IValueColumn>();
+  @Output() isValidated = new EventEmitter<boolean>();
 
   public valueData: any = '';
+  public isValid: boolean = true;
 
   public saveInput(value: any): void {
 
@@ -22,20 +26,27 @@ export class BaseInputComponent {
 
     this.saveInputData.emit({
       columnName: this.steperValue.columnName,
-      value: this.valueData
+      value: this.valueData,
+      isValid: this.isValid
     });
 
   }
 
   public get isRequired() : boolean {
-    let validation: boolean = false;
-    if(this.steperValue.required.isDepend) {
+    let validate: boolean = false;
+    if(this.steperValue.required.isDepend) {console.log({formValue:this.formValue})
       //TODO se requiere hacer una mayor evaluacion
-      validation = this.steperValue.required.required;
+      validate = this.steperValue.required.required;
     } else {
-      validation = this.steperValue.required.required;
+      validate = this.steperValue.required.required;
     }
-    return validation;
+
+    this.isValid = validate && (this.valueData !== '' && this.valueData !== null);
+    debugger
+    this.isValidated.emit(this.isValid);
+
+    return validate;
+
   }
 
 }

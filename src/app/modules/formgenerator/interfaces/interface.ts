@@ -67,4 +67,5 @@ export interface IOptionsRule {
 export interface IValueColumn {
     columnName: string;
     value: any;
+    isValid?: boolean;
 }
