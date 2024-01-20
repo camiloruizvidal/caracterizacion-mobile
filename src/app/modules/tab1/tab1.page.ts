@@ -1,5 +1,6 @@
+import { FichaService } from './../tarjetas/services/ficha/ficha.service';
 import { PersonasService } from './../tarjetas/services/personas/personas.service';
-import { IFamilyCard } from '../formgenerator/interfaces/interface';
+import { IFamilyCard, IHttpResponse } from '../formgenerator/interfaces/interface';
 import { TestService } from './../formgenerator/services/test.service';
 import { Component, OnInit } from '@angular/core';
 
@@ -14,13 +15,14 @@ export class Tab1Page implements OnInit {
 
   constructor(
     private testService: TestService,
-    private personasService: PersonasService
+    private personasService: PersonasService,
+    private fichaService :FichaService
   ) {}
 
   async ngOnInit() {
 
-    this.testService.getDataTest().subscribe((response: IFamilyCard) => {
-      this.formDinamic = response;
+    this.fichaService.getFicha().subscribe((response: IHttpResponse<IFamilyCard>) => {
+      this.formDinamic = response.data;
     })
 
   }

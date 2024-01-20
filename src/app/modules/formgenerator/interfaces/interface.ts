@@ -1,3 +1,8 @@
+export interface IHttpResponse<T> {
+    data: T;
+    msj: string;
+    code: number;
+}
 export interface IFamilyCard {
     version:         string;
     dateLastVersion: Date;
@@ -19,8 +24,8 @@ export interface ISteperValues {
     type:        ESteperType;
     options:     IOptionsCheck | null;
     default:     boolean | string;
-    visibility:  IOptionsVisibility;
-    required:    IOptionsRequired;
+    visibility:  IOptionsVisibility | null;
+    required:    IOptionsRequired | null;
     value?:      any;
 }
 

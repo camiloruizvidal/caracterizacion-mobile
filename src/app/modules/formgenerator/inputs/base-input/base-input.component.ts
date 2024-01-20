@@ -34,11 +34,12 @@ export class BaseInputComponent {
 
   public get isRequired() : boolean {
     let validate: boolean = false;
-    if(this.steperValue.required.isDepend) {console.log({formValue:this.formValue})
+    return false;
+    if(this.steperValue.required?.isDepend) {
       //TODO se requiere hacer una mayor evaluacion
-      validate = this.steperValue.required.required;
+      validate = this.steperValue.required?.required || true;
     } else {
-      validate = this.steperValue.required.required;
+      validate = this.steperValue.required?.required || false;
     }
 
     this.isValid = validate && (this.valueData !== '' && this.valueData !== null);
