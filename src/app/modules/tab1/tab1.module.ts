@@ -9,6 +9,7 @@ import { Tab1PageRoutingModule } from './tab1-routing.module';
 import { FormgeneratorModule } from '../formgenerator/formgenerator.module';
 import { TarjetasModule } from '../tarjetas/tarjetas.module';
 import { PersonasService } from '../tarjetas/services/personas/personas.service';
+import { DatosModule } from '../datos/datos.module';
 
 @NgModule({
   imports: [
@@ -18,7 +19,8 @@ import { PersonasService } from '../tarjetas/services/personas/personas.service'
     ExploreContainerComponentModule,
     Tab1PageRoutingModule,
     FormgeneratorModule,
-    TarjetasModule
+    TarjetasModule,
+    DatosModule,
   ],
   declarations: [Tab1Page],
   providers: [

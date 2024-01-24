@@ -4,17 +4,13 @@ import { RouteReuseStrategy } from '@angular/router';
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { SQLite } from '@awesome-cordova-plugins/sqlite/ngx';
-import { LocalDataService } from './utils/service/local-data/local-data.service';
+import { LoginModule } from './modules/login/login.module';
+import { DatosModule } from './modules/datos/datos.module';
 
 @NgModule({
   declarations: [AppComponent],
-  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule],
-  providers: [
-    SQLite,
-    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
-    LocalDataService
-  ],
+  imports: [LoginModule, BrowserModule, IonicModule.forRoot(), AppRoutingModule, DatosModule],
+  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

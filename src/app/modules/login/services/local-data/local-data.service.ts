@@ -1,5 +1,5 @@
-import { Injectable } from '@angular/core';
 import { SQLite, SQLiteObject } from '@awesome-cordova-plugins/sqlite/ngx';
+import { Injectable } from '@angular/core';
 
 @Injectable({
   providedIn: 'root'

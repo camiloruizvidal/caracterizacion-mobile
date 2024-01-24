@@ -1,20 +1,18 @@
-import { LocalDataService } from 'src/app/utils/service/local-data/local-data.service';
 import { Injectable } from '@angular/core';
 import {
   ActivatedRouteSnapshot,
   CanActivate,
   Router,
   RouterStateSnapshot,
-  UrlTree,
+  UrlTree
 } from '@angular/router';
 import { Observable } from 'rxjs';
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: 'root'
 })
 export class AuthGuard implements CanActivate {
   constructor(
-    private localDataService: LocalDataService,
     private router: Router
   ) {}
 
@@ -26,8 +24,10 @@ export class AuthGuard implements CanActivate {
     | Promise<boolean | UrlTree>
     | boolean
     | UrlTree {
-    const dataUser = this.localDataService.findOne('user_current');
-    console.log({dataUser});
+      if(!true) {
+        this.router.navigate(['/login']);
+        return true;
+      }
     return true;
   }
 }
