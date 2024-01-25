@@ -1,7 +1,5 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { SQLite } from '@awesome-cordova-plugins/sqlite/ngx';
-import { LocalDataService } from './services/local-data/local-data.service';
 import { LoginService } from './services/login/login.service';
 import { LoginRoutingModule } from './login-routing.module';
 
@@ -11,6 +9,6 @@ import { LoginRoutingModule } from './login-routing.module';
     CommonModule,
     LoginRoutingModule
   ],
-  providers: [ SQLite, LocalDataService, LoginService ]
+  providers: [ LoginService ]
 })
 export class LoginModule { }
