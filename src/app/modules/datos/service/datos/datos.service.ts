@@ -1,3 +1,4 @@
+import { DatabaseService } from 'src/app/utils/services/database/database.service';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
@@ -10,9 +11,11 @@ import {
   providedIn: 'root'
 })
 export class DatosService {
-  private URL: string = '';
-  constructor(private httpClient: HttpClient) {
-    this.URL = `http://localhost:3000/api/v1`;
+  private URL: string = 'http://localhost:3000/api/v1';
+  constructor(
+    private httpClient: HttpClient,
+    private databaseService: DatabaseService
+  ) {
   }
 
   public loadDataForm(): Observable<IHttpResponse<IFamilyCard>> {
@@ -21,6 +24,7 @@ export class DatosService {
   }
 
   public saveDataForm(data: IFamilyCard): void {
-
+    this.databaseService.setTable('form');
+    this.databaseService.createOrUpdate(data, 'version');
   }
 }

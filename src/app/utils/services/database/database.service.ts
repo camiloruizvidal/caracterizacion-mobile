@@ -4,7 +4,6 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class DatabaseService {
-  private readonly dbName: string = 'myDB';
   private table: string | null = null;
 
   public setTable(tableName: string): void {
@@ -21,7 +20,7 @@ export class DatabaseService {
       throw new Error('Table not initialized');
     }
 
-    return `${this.dbName}_${this.table}`;
+    return `${this.table}`;
   }
 
   public addRecord(record: any): void {

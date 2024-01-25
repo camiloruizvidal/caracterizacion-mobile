@@ -18,7 +18,7 @@ const routes: Routes = [
   },
   {
     path: '',
-    redirectTo: '/load/patient',
+    redirectTo: '/load/form',
     pathMatch: 'full'
   }
 ];
