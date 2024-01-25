@@ -4,8 +4,8 @@ import { DatosService } from './service/datos/datos.service';
 import { ReactiveFormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { NgModule } from '@angular/core';
-import { FormLoadComponent } from './component/form-load/form-load.component';
-import { PersonsLoadComponent } from './component/persons-load/persons-load.component';
+import { FormLoadComponent } from './components/form-load/form-load.component';
+import { PersonsLoadComponent } from './components/persons-load/persons-load.component';
 import { HttpClientModule } from '@angular/common/http';
 
 

@@ -9,7 +9,13 @@ import { DatosModule } from './modules/datos/datos.module';
 
 @NgModule({
   declarations: [AppComponent],
-  imports: [LoginModule, BrowserModule, IonicModule.forRoot(), AppRoutingModule, DatosModule],
+  imports: [
+    LoginModule,
+    BrowserModule,
+    IonicModule.forRoot(),
+    AppRoutingModule,
+    DatosModule
+  ],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
   bootstrap: [AppComponent]
 })

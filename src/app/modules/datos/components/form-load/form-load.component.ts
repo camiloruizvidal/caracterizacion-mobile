@@ -13,7 +13,7 @@ export class FormLoadComponent {
 
   public cargarFormulario(): void {
     this.datosService.loadDataForm().subscribe((response: IHttpResponse<IFamilyCard>) => {
-      console.log(response)
+      this.datosService.saveDataForm(response.data);
     })
   }
 }
