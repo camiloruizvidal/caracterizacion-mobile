@@ -1,3 +1,5 @@
+import { DatabaseService } from 'src/app/utils/services/database/database.service';
+import { DatosService } from './../../service/datos/datos.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -7,8 +9,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PersonsLoadComponent  implements OnInit {
 
-  constructor() { }
+  constructor(private databaseService: DatabaseService) {
+    this.databaseService.setTable('patients');
+  }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.loadData();
+  }
 
+  public async loadData() {
+    const d = await this.databaseService.findAll();
+    console.log({d})
+  }
 }

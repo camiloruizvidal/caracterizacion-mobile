@@ -6,8 +6,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginModule } from './modules/login/login.module';
 import { DatosModule } from './modules/datos/datos.module';
-import { SQLite } from '@awesome-cordova-plugins/sqlite/ngx';
 import { DatabaseService } from './utils/services/database/database.service';
+import { SQLite } from '@awesome-cordova-plugins/sqlite/ngx';
 
 @NgModule({
   declarations: [AppComponent],

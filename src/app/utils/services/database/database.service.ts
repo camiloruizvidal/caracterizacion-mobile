@@ -1,61 +1,141 @@
-import { SQLite } from '@awesome-cordova-plugins/sqlite/ngx';
 import { Injectable } from '@angular/core';
-import { SQLiteObject } from '@awesome-cordova-plugins/sqlite';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DatabaseService {
-  private readonly dataBase: string = 'my.db';
+  private readonly dbName: string = 'myDB';
+  private table: string | null = null;
 
-  constructor(private sqlite: SQLite, private db: Promise<SQLiteObject>) {
-    this.db = this.sqlite.create({
-      name: 'data.db',
-      location: 'default'
+  public setTable(tableName: string): void {
+    this.table = tableName;
+    this.initializeDatabase();
+  }
+
+  private initializeDatabase(): void {
+    // En el caso de localStorage, no es necesario una inicialización
+  }
+
+  private getKey(): string {
+    if (!this.table) {
+      throw new Error('Table not initialized');
+    }
+
+    return `${this.dbName}_${this.table}`;
+  }
+
+  public addRecord(record: any): void {
+    const key = this.getKey();
+    let data: any[] = [];
+
+    // Obtiene los datos existentes (si los hay) y agrega el nuevo registro
+    const existingData = localStorage.getItem(key);
+    if (existingData) {
+      data = JSON.parse(existingData);
+    }
+    data.push(record);
+
+    // Guarda los datos actualizados en localStorage
+    localStorage.setItem(key, JSON.stringify(data));
+  }
+
+  public getRecordById(id: number): Promise<any> {
+    return new Promise((resolve, reject) => {
+      const key = this.getKey();
+      const data = localStorage.getItem(key);
+
+      if (data) {
+        const records = JSON.parse(data);
+        const record = records.find((r: any) => r.id === id);
+
+        if (record) {
+          resolve(record);
+        } else {
+          reject('Record not found');
+        }
+      } else {
+        reject('Error retrieving records from localStorage');
+      }
     });
   }
 
-  public findAll(table: string) {
-    return this.db
-      .then((transaction: SQLiteObject) => {
-        return transaction.executeSql(`select * from ${table}`);
-      })
-      .catch(error => {
-        throw 'Transaction ERROR: ' + error.message;
-      });
+  public getRecordsByColumnValue(
+    columnName: string,
+    columnValue: any
+  ): Promise<any[]> {
+    return new Promise((resolve, reject) => {
+      const key = this.getKey();
+      const data = localStorage.getItem(key);
+
+      if (data) {
+        const records = JSON.parse(data);
+        const filteredRecords = records.filter(
+          (r: any) => r[columnName] === columnValue
+        );
+        resolve(filteredRecords);
+      } else {
+        reject('Error retrieving records from localStorage');
+      }
+    });
   }
 
-  public findOne(table: string, where: any = []) {
-    let whereString = '';
-    if (where.length > 0) {
-      whereString =
-        ' WHERE ' +
-        Object.keys(where)
-          .map(value => `${value} = ?`)
-          .join(' and ');
+  public findAll(): Promise<any[]> {
+    return new Promise((resolve, reject) => {
+      const key = this.getKey();
+      const data = localStorage.getItem(key);
+
+      if (data) {
+        const records = JSON.parse(data);
+        resolve(records);
+      } else {
+        reject('Error retrieving records from localStorage');
+      }
+    });
+  }
+
+  public updateRecord(id: number, updatedData: any): Promise<void> {
+    return new Promise((resolve, reject) => {
+      const key = this.getKey();
+      const data = localStorage.getItem(key);
+
+      if (data) {
+        const records = JSON.parse(data);
+        const index = records.findIndex((r: any) => r.id === id);
+
+        if (index !== -1) {
+          records[index] = { ...records[index], ...updatedData };
+          localStorage.setItem(key, JSON.stringify(records));
+          resolve();
+        } else {
+          reject('Record not found');
+        }
+      } else {
+        reject('Error updating record in localStorage');
+      }
+    });
+  }
+
+  public createOrUpdate(record: any, searchColumn: string): void {
+    const key = this.getKey();
+    let data: any[] = [];
+
+    const existingData = localStorage.getItem(key);
+    if (existingData) {
+      data = JSON.parse(existingData);
+
+      const existingRecord = data.find(
+        (r: any) => r[searchColumn] === record[searchColumn]
+      );
+
+      if (existingRecord) {
+        Object.assign(existingRecord, record);
+      } else {
+        data.push(record);
+      }
+    } else {
+      data.push(record);
     }
 
-    return this.db
-      .then((transaction: SQLiteObject) => {
-        const sql: string = `select * from ${table} ${whereString}`;
-        console.log({ sql });
-        return transaction.executeSql(sql);
-      })
-      .catch(error => {
-        throw 'Transaction ERROR: ' + error.message;
-      });
-  }
-
-  public createTableIfNoExist(table: string, columns: string[]): void {
-    const columnsJoin: string = columns.join(', ');
-    this.db
-      .then((transaction: SQLiteObject) => {
-        const sql: string = `CREATE TABLE IF NOT EXISTS ${table} (${columnsJoin})`;
-        console.log({ sql });
-        return transaction.executeSql(sql);
-      })
-      .catch(error => {
-        throw 'Transaction ERROR: ' + error.message;
-      });
+    localStorage.setItem(key, JSON.stringify(data));
   }
 }

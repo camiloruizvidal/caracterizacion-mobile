@@ -1,22 +1,33 @@
+import { HttpClient } from '@angular/common/http';
 import { DatabaseService } from 'src/app/utils/services/database/database.service';
 import { Injectable } from '@angular/core';
+import { Observable, tap } from 'rxjs';
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: 'root'
 })
 export class LoginService {
-
-  private table: string = 'user';
-
-  constructor(private databaseService: DatabaseService) {
-    this.startConfig();
+  private url: string = 'http://localhost:3000/api/v1/usuarios/login';
+  constructor(
+    private httpClient: HttpClient,
+    private databaseService: DatabaseService
+  ) {
+    this.databaseService.setTable('user');
   }
 
-  private startConfig(): void {
-    this.databaseService.createTableIfNoExist(this.table, ['login', 'id_user', 'token']);
+  public loginUser(username: string, password: string): Observable<any> {
+    return this.httpClient.post(this.url, { username, password }).pipe(
+      tap((response: any) => {
+        this.addUser(username, password, response.user);
+      })
+    );
   }
 
-  public async currentUser(): Promise<any> {
-    //const dataUser = await this.databaseService.findOne('user_current');
+  private addUser(username: string, password: string, user: any) {
+    this.databaseService.setTable('config');
+    this.databaseService.createOrUpdate({
+      name: 'current_user',
+      value: { username, password, user }
+    },'current_user');
   }
 }
