@@ -6,28 +6,23 @@
   </ion-header>
   <ion-content class="ion-padding">
     <ion-list class="menu-list">
-      <ion-item [routerLink]="'/registros'">
+      <ion-item (click)="redirectTo('/registros')">
         <ion-icon slot="start" name="list-sharp"></ion-icon>
         <ion-label>Registros</ion-label>
       </ion-item>
-      <ion-item [routerLink]="'/home'">
+      <ion-item (click)="redirectTo('/home')">
         <ion-icon slot="start" name="send-sharp"></ion-icon>
         <ion-label>Enviar registros</ion-label>
       </ion-item>
-      <ion-item [routerLink]="'/home'">
+      <ion-item (click)="redirectTo('/load')">
         <ion-icon slot="start" name="cloud-download-sharp"></ion-icon>
         <ion-label>Actualizar</ion-label>
       </ion-item>
-      <ion-item [routerLink]="'/profile'">
+      <ion-item (click)="redirectTo('/profile')">
         <ion-icon slot="start" name="person-sharp"></ion-icon>
         <ion-label>Perfil</ion-label>
       </ion-item>
-      <ion-item
-        (click)="closeMenu()"
-        button
-        class="cerrar-sesion"
-        [routerLink]="'/'"
-      >
+      <ion-item (click)="redirectTo('/')" button class="cerrar-sesion">
         <ion-icon slot="start" name="log-out-sharp"></ion-icon>
         <ion-label>Cerrar Sesión</ion-label>
       </ion-item>

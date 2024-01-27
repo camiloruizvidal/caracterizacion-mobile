@@ -4,7 +4,7 @@ import {
   IFamilyCard,
   IHttpResponse
 } from 'src/app/modules/formgenerator/interfaces/interface';
-import { LoadingController } from '@ionic/angular';
+import { LoadingController, ToastController } from '@ionic/angular';
 
 @Component({
   selector: 'app-form-load',
@@ -14,31 +14,52 @@ import { LoadingController } from '@ionic/angular';
 export class FormLoadComponent {
   private loading: any;
 
+  public isAlertOpen: boolean = false;
+  public alertButtons = ['Aceptar'];
+
   constructor(
     private datosService: DatosService,
-    private loadingCtrl: LoadingController
+    private loadingCtrl: LoadingController,
+    private toastController: ToastController
   ) {}
 
   private async startLoading(): Promise<void> {
     this.loading = null;
-    this.loading = await this.loadingCtrl.create({
-      message: 'Cargando, por favor espere',
-      spinner: 'circles'
-    });
-    this.loading.present();
+    this.loading = await this.loadingCtrl
+      .create({
+        message: 'Cargando, por favor espere',
+        spinner: 'circles'
+      })
+      .then(loading => loading.present());
   }
 
-  private stopLoading(): void {
+  private stopLoading() {
     this.loading.dismiss();
   }
 
   public cargarFormulario(): void {
-    this.startLoading();
-    this.datosService
-      .loadDataForm()
-      .subscribe((response: IHttpResponse<IFamilyCard>) => {
+    //this.startLoading();
+    this.datosService.loadDataForm().subscribe(
+      (response: IHttpResponse<IFamilyCard>) => {
         this.datosService.saveDataForm(response.data);
-        this.stopLoading();
-      });
+        //this.stopLoading();
+        this.setOpen(true);
+      },
+      async error => {
+        const toast = await this.toastController.create({
+          color: 'dark',
+          position: 'bottom',
+          message: 'Se presento un error cuando se intentaba actualizar.'
+        });
+        await toast.present();
+        //await this.stopLoading();
+      }
+    );
+  }
+
+  public setOpen(isOpen: boolean) {
+    console.log('setOpen');
+
+    this.isAlertOpen = isOpen;
   }
 }

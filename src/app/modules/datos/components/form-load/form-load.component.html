@@ -5,4 +5,12 @@
   <ion-button expand="full" color="primary" (click)="cargarFormulario()">
     Cargar
   </ion-button>
+
+  <ion-alert
+    [isOpen]="isAlertOpen"
+    header="Datos cargados con éxito"
+    message="Se ha actualizado a la ultima versión."
+    [buttons]="alertButtons"
+    (didDismiss)="setOpen(false)"
+  ></ion-alert>
 </ion-card-content>
