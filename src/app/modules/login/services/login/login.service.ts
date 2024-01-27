@@ -31,8 +31,11 @@ export class LoginService {
     },'current_user');
   }
 
-  public isLogin(): boolean {
+  public async isLogin(): Promise<boolean> {
     this.databaseService.setTable('config');
-    this.databaseService.findByKey('current_user')
+    const user = await this.databaseService.findAll();
+    console.log({user});
+    return true;
   }
+
 }

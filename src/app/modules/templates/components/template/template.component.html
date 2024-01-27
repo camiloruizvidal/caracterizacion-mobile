@@ -1,0 +1,49 @@
+<ion-menu contentId="main-content">
+  <ion-header>
+    <ion-toolbar>
+      <ion-title>Menu</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-content class="ion-padding">
+    <ion-list class="menu-list">
+      <ion-item [routerLink]="'/registros'">
+        <ion-icon slot="start" name="list-sharp"></ion-icon>
+        <ion-label>Registros</ion-label>
+      </ion-item>
+      <ion-item [routerLink]="'/home'">
+        <ion-icon slot="start" name="send-sharp"></ion-icon>
+        <ion-label>Enviar registros</ion-label>
+      </ion-item>
+      <ion-item [routerLink]="'/home'">
+        <ion-icon slot="start" name="cloud-download-sharp"></ion-icon>
+        <ion-label>Actualizar</ion-label>
+      </ion-item>
+      <ion-item [routerLink]="'/profile'">
+        <ion-icon slot="start" name="person-sharp"></ion-icon>
+        <ion-label>Perfil</ion-label>
+      </ion-item>
+      <ion-item
+        (click)="closeMenu()"
+        button
+        class="cerrar-sesion"
+        [routerLink]="'/'"
+      >
+        <ion-icon slot="start" name="log-out-sharp"></ion-icon>
+        <ion-label>Cerrar Sesión</ion-label>
+      </ion-item>
+    </ion-list>
+  </ion-content>
+</ion-menu>
+<div class="ion-page" id="main-content">
+  <ion-header>
+    <ion-toolbar>
+      <ion-buttons slot="start">
+        <ion-menu-button></ion-menu-button>
+      </ion-buttons>
+      <ion-title>Menú</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-content class="ion-padding">
+    <ion-router-outlet></ion-router-outlet>
+  </ion-content>
+</div>

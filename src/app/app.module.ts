@@ -7,19 +7,19 @@ import { AppComponent } from './app.component';
 import { LoginModule } from './modules/login/login.module';
 import { DatosModule } from './modules/datos/datos.module';
 import { DatabaseService } from './utils/services/database/database.service';
-import { SQLite } from '@awesome-cordova-plugins/sqlite/ngx';
+import { TemplatesModule } from './modules/templates/templates.module';
 
 @NgModule({
   declarations: [AppComponent],
   imports: [
     LoginModule,
+    TemplatesModule,
     BrowserModule,
     IonicModule.forRoot(),
     AppRoutingModule,
     DatosModule
   ],
   providers: [
-    SQLite,
     DatabaseService,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],

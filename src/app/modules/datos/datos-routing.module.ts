@@ -15,12 +15,12 @@ const routes: Routes = [
         path: 'form',
         component: FormLoadComponent
       }]
-  },
-  {
-    path: '',
-    redirectTo: '/load/form',
-    pathMatch: 'full'
-  }
+  }//,
+  //{
+  //  path: '',
+  //  redirectTo: '/load/form',
+  //  pathMatch: 'full'
+  //}
 ];
 
 @NgModule({

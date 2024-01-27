@@ -13,10 +13,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class AuthGuard implements CanActivate {
-  constructor(
-    private router: Router,
-    private loginService: LoginService
-  ) {}
+  constructor(private router: Router, private loginService: LoginService) {}
 
   canActivate(
     route: ActivatedRouteSnapshot,
@@ -25,12 +22,12 @@ export class AuthGuard implements CanActivate {
     | Observable<boolean | UrlTree>
     | Promise<boolean | UrlTree>
     | boolean
+    //  | Promise<T>
     | UrlTree {
-      this.loginService.
-      if(!true) {
-        this.router.navigate(['/login']);
-        return true;
-      }
+    //    if (await this.loginService.isLogin()) {
+    this.router.navigate(['/login']);
+    //  return true;
+    //}
     return true;
   }
 }
