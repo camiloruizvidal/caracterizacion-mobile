@@ -1,21 +1,21 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { SteperComponent } from './steper/steper.component';
+import { SteperComponent } from './components/steper/steper.component';
 import { IonicModule } from '@ionic/angular';
-import { AddressComponent } from './inputs/address/address.component';
-import { CalendarComponent } from './inputs/calendar/calendar.component';
-import { CheckComponent } from './inputs/check/check.component';
-import { EmailComponent } from './inputs/email/email.component';
-import { FilterComponent } from './inputs/filter/filter.component';
-import { NumbersComponent } from './inputs/numbers/numbers.component';
-import { PhoneComponent } from './inputs/phone/phone.component';
-import { RelationshipComponent } from './inputs/relationship/relationship.component';
-import { SelectComponent } from './inputs/select/select.component';
-import { SelectFilterComponent } from './inputs/select-filter/select-filter.component';
-import { TextComponent } from './inputs/text/text.component';
-import { TextAreaComponent } from './inputs/text-area/text-area.component';
-import { PhotoComponent } from './inputs/photo/photo.component';
-import { GPSComponent } from './inputs/gps/gps.component';
+import { AddressComponent } from './components/inputs/address/address.component';
+import { CalendarComponent } from './components/inputs/calendar/calendar.component';
+import { CheckComponent } from './components/inputs/check/check.component';
+import { EmailComponent } from './components/inputs/email/email.component';
+import { FilterComponent } from './components/inputs/filter/filter.component';
+import { NumbersComponent } from './components/inputs/numbers/numbers.component';
+import { PhoneComponent } from './components/inputs/phone/phone.component';
+import { RelationshipComponent } from './components/inputs/relationship/relationship.component';
+import { SelectComponent } from './components/inputs/select/select.component';
+import { SelectFilterComponent } from './components/inputs/select-filter/select-filter.component';
+import { TextComponent } from './components/inputs/text/text.component';
+import { TextAreaComponent } from './components/inputs/text-area/text-area.component';
+import { PhotoComponent } from './components/inputs/photo/photo.component';
+import { GPSComponent } from './components/inputs/gps/gps.component';
 import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
