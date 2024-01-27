@@ -1,3 +1,4 @@
+import { LoginService } from './../../../modules/login/services/login/login.service';
 import { Injectable } from '@angular/core';
 import {
   ActivatedRouteSnapshot,
@@ -13,7 +14,8 @@ import { Observable } from 'rxjs';
 })
 export class AuthGuard implements CanActivate {
   constructor(
-    private router: Router
+    private router: Router,
+    private loginService: LoginService
   ) {}
 
   canActivate(
@@ -24,6 +26,7 @@ export class AuthGuard implements CanActivate {
     | Promise<boolean | UrlTree>
     | boolean
     | UrlTree {
+      this.loginService.
       if(!true) {
         this.router.navigate(['/login']);
         return true;

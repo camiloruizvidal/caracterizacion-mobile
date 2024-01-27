@@ -30,4 +30,9 @@ export class LoginService {
       value: { username, password, user }
     },'current_user');
   }
+
+  public isLogin(): boolean {
+    this.databaseService.setTable('config');
+    this.databaseService.findByKey('current_user')
+  }
 }

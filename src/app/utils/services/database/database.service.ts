@@ -91,6 +91,8 @@ export class DatabaseService {
       }
     });
   }
+  
+  public findByKey
 
   public updateRecord(id: number, updatedData: any): Promise<void> {
     return new Promise((resolve, reject) => {
