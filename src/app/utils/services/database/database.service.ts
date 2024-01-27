@@ -92,6 +92,11 @@ export class DatabaseService {
     });
   }
 
+  public async findOne(): Promise<any> {
+    const data = await this.findAll();
+    return data[0];
+  }
+
   public updateRecord(id: number, updatedData: any): Promise<void> {
     return new Promise((resolve, reject) => {
       const key = this.getKey();

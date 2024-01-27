@@ -6,9 +6,10 @@ import { IonicModule } from '@ionic/angular';
 import { ListarComponent } from './components/listar/listar.component';
 import { RegistrarComponent } from './components/registrar/registrar.component';
 import { IndexComponent } from './components/index/index.component';
+import { FormgeneratorModule } from '../formgenerator/formgenerator.module';
 
 @NgModule({
   declarations: [ListarComponent, RegistrarComponent, IndexComponent],
-  imports: [IonicModule, CommonModule, TemplatesModule, RegistrosRoutingModule]
+  imports: [IonicModule, CommonModule, TemplatesModule, RegistrosRoutingModule, FormgeneratorModule]
 })
 export class RegistrosModule {}

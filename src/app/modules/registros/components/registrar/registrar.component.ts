@@ -1,14 +1,20 @@
+import { IFamilyCard } from 'src/app/modules/formgenerator/interfaces/interface';
+import { RegistrosService } from './../../services/registros.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-registrar',
   templateUrl: './registrar.component.html',
-  styleUrls: ['./registrar.component.scss'],
+  styleUrls: ['./registrar.component.scss']
 })
-export class RegistrarComponent  implements OnInit {
+export class RegistrarComponent implements OnInit {
+  constructor(private registrosService: RegistrosService) {}
 
-  constructor() { }
+  public card!: IFamilyCard;
 
-  ngOnInit() {}
-
+  async ngOnInit() {
+    this.registrosService.loadForms().then((familyCard: IFamilyCard) => {
+      this.card = familyCard;
+    });
+  }
 }
