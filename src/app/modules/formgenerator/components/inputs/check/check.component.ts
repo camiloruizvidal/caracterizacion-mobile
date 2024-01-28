@@ -5,10 +5,9 @@ import { BaseInputComponent } from '../base-input/base-input.component';
 @Component({
   selector: 'app-check',
   templateUrl: './check.component.html',
-  styleUrls: ['./check.component.scss'],
+  styleUrls: ['./check.component.scss']
 })
 export class CheckComponent extends BaseInputComponent implements OnInit {
-
   constructor() {
     super();
   }
@@ -21,16 +20,15 @@ export class CheckComponent extends BaseInputComponent implements OnInit {
     this.value = this.steperValue.value;
     this.valueOption = this.steperValue.options;
 
-    if(this.value === undefined) {
+    if (this.value === undefined) {
       this.value = this.valueOption?.valueFalse;
     }
-
   }
 
   hadnleChange(): void {
-    this.value = this.value === this.valueOption?.valueTrue
-                ? this.valueOption?.valueFalse
-                : this.valueOption?.valueTrue;
+    this.value =
+      this.value === this.valueOption?.valueTrue
+        ? this.valueOption?.valueFalse
+        : this.valueOption?.valueTrue;
   }
-
 }

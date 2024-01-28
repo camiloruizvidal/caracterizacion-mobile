@@ -48,6 +48,7 @@ export class FormLoadComponent {
       async error => {
         const toast = await this.toastController.create({
           color: 'dark',
+          duration: 5000,
           position: 'bottom',
           message: 'Se presento un error cuando se intentaba actualizar.'
         });

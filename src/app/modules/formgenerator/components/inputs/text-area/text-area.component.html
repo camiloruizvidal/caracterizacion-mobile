@@ -1,11 +1,13 @@
-<ion-text>
-  {{ steperValue.label }}
-</ion-text>
-<ion-textarea
-  [id]="steperValue.columnName"
-  [value]="steperValue.value"
-  [required]="isRequired"
-  [autoGrow]="true"
-  labelPlacement="stacked"
->
-</ion-textarea>
+<div *ngIf="isVisibility">
+  <ion-text>
+    {{ steperValue.label }}
+  </ion-text>
+  <ion-textarea
+    [id]="steperValue.columnName"
+    [value]="steperValue.value"
+    [required]="isRequired"
+    [autoGrow]="true"
+    labelPlacement="stacked"
+  >
+  </ion-textarea>
+</div>

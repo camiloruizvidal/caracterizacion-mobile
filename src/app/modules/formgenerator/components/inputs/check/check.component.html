@@ -1,8 +1,12 @@
-<ion-checkbox
-  [id]="steperValue.columnName"
-  [value]="value"
-  labelPlacement="start"
-  (click)="hadnleChange()"
->
-  {{steperValue.label}}
-</ion-checkbox>
+<div *ngIf="isVisibility">
+  <ion-checkbox
+    [id]="steperValue.columnName"
+    [value]="value"
+    labelPlacement="start"
+    (click)="hadnleChange()"
+  >
+  </ion-checkbox>
+  <ion-text>
+    {{ steperValue.label }}
+  </ion-text>
+</div>

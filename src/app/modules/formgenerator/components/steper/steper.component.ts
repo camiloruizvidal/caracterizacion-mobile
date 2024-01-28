@@ -11,7 +11,7 @@ import {
   templateUrl: './steper.component.html',
   styleUrls: ['./steper.component.scss']
 })
-export class SteperComponent implements OnInit {
+export class SteperComponent {
   constructor() {}
 
   @Input() dataSteper!: IStepers[];
@@ -19,45 +19,10 @@ export class SteperComponent implements OnInit {
 
   public currentStep: number = 0;
 
-  private saveData: IValueColumn[] = [];
+  private saveData: IStepers[] = [];
 
-  public ngOnInit(): void {
-    this.setDataDefault();
-  }
-
-  private setDataDefault(): void {
-    this.dataSteper.forEach(staperItem => {
-      staperItem.values.forEach(field => {
-        this.saveData.push({
-          columnName: field.columnName,
-          value: field.default
-        });
-      });
-    });
-  }
-
-  public saveValueColumn(value: IValueColumn): void {
-    console.log({ value });
-    const existingIndex = this.saveData.findIndex(
-      item => item.columnName === value.columnName
-    );
-    if (existingIndex !== -1) {
-      this.saveData[existingIndex] = value;
-    } else {
-      this.saveData.push(value);
-    }
-  }
-
-  public validateColumn(value: IValueColumn): void {
-    const existingIndex = this.saveData.findIndex(
-      item => item.columnName === value.columnName
-    );
-
-    if (existingIndex !== -1) {
-      this.saveData[existingIndex] = value;
-    } else {
-      this.saveData.push(value);
-    }
+  public saveValueColumn(value: IStepers[]): void {
+    this.saveData  = value;
   }
 
   public goNext(): void {
@@ -72,26 +37,26 @@ export class SteperComponent implements OnInit {
     this.saveDataMethod.emit(this.saveData);
   }
 
-  public isValidStep() {
-    const values = this.dataSteper[this.currentStep].values;
+  //public isValidStep() {
+  //  const values = this.dataSteper[this.currentStep].values;
 
-    values.forEach(field => {
-      const savedField = this.saveData.find(
-        item => item.columnName === field.columnName
-      );
+  //  values.forEach(field => {
+  //    const savedField = this.saveData.find(
+  //      item => item.columnName === field.columnName
+  //    );
 
-      if (savedField) {
-        const savedValue = savedField.value;
-      }
-    });
-  }
+  //    if (savedField) {
+  //      const savedValue = savedField.value;
+  //    }
+  //  });
+  //}
 
   public get SteperType(): typeof ESteperType {
     return ESteperType;
   }
 
   public get isNextDisabled(): boolean {
-    this.isValidStep();
+    //this.isValidStep();
     return this.currentStep >= this.dataSteper.length - 1;
   }
 

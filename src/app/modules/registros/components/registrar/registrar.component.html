@@ -1,5 +1,5 @@
 <ion-content [fullscreen]="true">
-  <div *ngIf="card && estado === estados[0]">
+  <div *ngIf="card && estado === estados[1]">
     <ion-title (click)="nextCode()">Tarjeta familiar - {{ currentCode }}</ion-title>
     <app-steper
       (saveDataMethod)="saveData($event)"
