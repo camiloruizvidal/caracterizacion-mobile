@@ -1,10 +1,6 @@
 import { Input, Output, EventEmitter, Component } from '@angular/core';
 import { Injectable } from '@angular/core';
-import {
-  ISteperValues,
-  IStepers,
-  IValueColumn
-} from '../../../interfaces/interface';
+import { ISteperValues, IStepers } from '../../../interfaces/interface';
 
 @Component({
   selector: 'app-base-input',

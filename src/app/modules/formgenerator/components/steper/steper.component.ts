@@ -1,10 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import {
-  ESteperType,
-  IFamilyCard,
-  IStepers,
-  IValueColumn
-} from '../../interfaces/interface';
+import { ESteperType, IFamilyCard, IStepers } from '../../interfaces/interface';
 
 @Component({
   selector: 'app-steper',
@@ -22,7 +17,7 @@ export class SteperComponent {
   private saveData: IStepers[] = [];
 
   public saveValueColumn(value: IStepers[]): void {
-    this.saveData  = value;
+    this.saveData = value;
   }
 
   public goNext(): void {
