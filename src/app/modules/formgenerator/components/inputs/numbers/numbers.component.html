@@ -1,3 +1,9 @@
-<p>
-  numbers works!
-</p>
+<ion-input
+  [id]="steperValue.columnName"
+  [textContent]="steperValue.label"
+  [value]="steperValue.value"
+  [required]="isRequired"
+  type="number"
+  (ionChange)="saveInput($event)"
+  labelPlacement="floating"
+></ion-input>

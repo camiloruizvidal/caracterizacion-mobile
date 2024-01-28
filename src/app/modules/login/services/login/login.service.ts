@@ -34,7 +34,6 @@ export class LoginService {
   public async isLogin(): Promise<boolean> {
     this.databaseService.setTable('config');
     const user = await this.databaseService.findAll();
-    console.log({user});
     return true;
   }
 

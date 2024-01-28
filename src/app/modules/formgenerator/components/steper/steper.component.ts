@@ -40,7 +40,6 @@ export class SteperComponent implements OnInit {
     const existingIndex = this.saveData.findIndex(
       item => item.columnName === value.columnName
     );
-debugger
     if (existingIndex !== -1) {
       this.saveData[existingIndex] = value;
     } else {
@@ -83,7 +82,6 @@ debugger
 
       if (savedField) {
         const savedValue = savedField.value;
-        //console.log({savedValue, field})
       }
     });
   }

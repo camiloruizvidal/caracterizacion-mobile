@@ -19,6 +19,5 @@ export class PersonsLoadComponent  implements OnInit {
 
   public async loadData() {
     const d = await this.databaseService.findAll();
-    console.log({d})
   }
 }

@@ -58,8 +58,6 @@ export class FormLoadComponent {
   }
 
   public setOpen(isOpen: boolean) {
-    console.log('setOpen');
-
     this.isAlertOpen = isOpen;
   }
 }

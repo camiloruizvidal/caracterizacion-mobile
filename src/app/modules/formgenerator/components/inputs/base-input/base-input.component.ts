@@ -43,7 +43,6 @@ export class BaseInputComponent {
     }
 
     this.isValid = validate && (this.valueData !== '' && this.valueData !== null);
-    debugger
     this.isValidated.emit(this.isValid);
 
     return validate;
