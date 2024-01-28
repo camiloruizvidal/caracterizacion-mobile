@@ -17,4 +17,7 @@ export class RegistrarComponent implements OnInit {
       this.card = familyCard;
     });
   }
+  public saveData(data: any) {
+    console.log({data});
+  }
 }

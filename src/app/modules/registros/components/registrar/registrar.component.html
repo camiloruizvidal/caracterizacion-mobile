@@ -1,2 +1,13 @@
-<app-steper *ngIf="card" [dataSteper]="card.familyCard"></app-steper>
-<app-steper *ngIf="card" [dataSteper]="card.personCard"></app-steper>
+<ion-content [fullscreen]="true">
+
+<!--<app-steper
+  *ngIf="card"
+  (saveData)="saveData($event)"
+  [dataSteper]="card.familyCard"
+></app-steper>-->
+<app-steper
+  *ngIf="card"
+  (saveData)="saveData($event)"
+  [dataSteper]="card.personCard"
+></app-steper>
+</ion-content>

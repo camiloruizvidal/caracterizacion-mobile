@@ -8,13 +8,13 @@
         {{ card?.subtitle }}
       </ion-card-subtitle>
     </ion-card-header>
-
     <ion-card-content>
-      <ion-grid>
-        <ion-row *ngFor="let itemInputs of card.values" [ngSwitch]="itemInputs.type">
-          <ion-col
-            *ngSwitchCase="SteperType.Address"
-          >
+      <ion-grid class="line">
+        <ion-row
+          *ngFor="let itemInputs of card.values"
+          [ngSwitch]="itemInputs.type"
+        >
+          <ion-col *ngSwitchCase="SteperType.Address" class="ion-input-line">
             <app-address
               [steperValue]="itemInputs"
               (saveInputData)="saveValueColumn($event)"
@@ -22,9 +22,7 @@
             >
             </app-address>
           </ion-col>
-          <ion-col
-            *ngSwitchCase="SteperType.Calendar"
-          >
+          <ion-col *ngSwitchCase="SteperType.Calendar" class="ion-input-line">
             <app-calendar
               [steperValue]="itemInputs"
               (saveInputData)="saveValueColumn($event)"
@@ -32,9 +30,7 @@
             >
             </app-calendar>
           </ion-col>
-          <ion-col
-            *ngSwitchCase="SteperType.Check"
-          >
+          <ion-col *ngSwitchCase="SteperType.Check" class="ion-input-line">
             <app-check
               [steperValue]="itemInputs"
               (saveInputData)="saveValueColumn($event)"
@@ -42,9 +38,7 @@
             >
             </app-check>
           </ion-col>
-          <ion-col
-            *ngSwitchCase="SteperType.Email"
-          >
+          <ion-col *ngSwitchCase="SteperType.Email" class="ion-input-line">
             <app-email
               [steperValue]="itemInputs"
               (saveInputData)="saveValueColumn($event)"
@@ -52,9 +46,7 @@
             >
             </app-email>
           </ion-col>
-          <ion-col
-            *ngSwitchCase="SteperType.Filter"
-          >
+          <ion-col *ngSwitchCase="SteperType.Filter" class="ion-input-line">
             <app-filter
               [steperValue]="itemInputs"
               (saveInputData)="saveValueColumn($event)"
@@ -62,9 +54,7 @@
             >
             </app-filter>
           </ion-col>
-          <ion-col
-            *ngSwitchCase="SteperType.Numbers"
-          >
+          <ion-col *ngSwitchCase="SteperType.Numbers" class="ion-input-line">
             <app-numbers
               [steperValue]="itemInputs"
               (saveInputData)="saveValueColumn($event)"
@@ -72,9 +62,7 @@
             >
             </app-numbers>
           </ion-col>
-          <ion-col
-            *ngSwitchCase="SteperType.Phone"
-          >
+          <ion-col *ngSwitchCase="SteperType.Phone" class="ion-input-line">
             <app-phone
               [steperValue]="itemInputs"
               (saveInputData)="saveValueColumn($event)"
@@ -82,9 +70,7 @@
             >
             </app-phone>
           </ion-col>
-          <ion-col
-            *ngSwitchCase="SteperType.Relationship"
-          >
+          <ion-col *ngSwitchCase="SteperType.Relationship" class="ion-input-line">
             <app-relationship
               [steperValue]="itemInputs"
               (saveInputData)="saveValueColumn($event)"
@@ -92,9 +78,7 @@
             >
             </app-relationship>
           </ion-col>
-          <ion-col
-            *ngSwitchCase="SteperType.Select"
-          >
+          <ion-col *ngSwitchCase="SteperType.Select" class="ion-input-line">
             <app-select
               [steperValue]="itemInputs"
               (saveInputData)="saveValueColumn($event)"
@@ -102,9 +86,7 @@
             >
             </app-select>
           </ion-col>
-          <ion-col
-            *ngSwitchCase="SteperType.SelectFilter"
-          >
+          <ion-col *ngSwitchCase="SteperType.SelectFilter" class="ion-input-line">
             <app-select-filter
               [steperValue]="itemInputs"
               (saveInputData)="saveValueColumn($event)"
@@ -112,9 +94,7 @@
             >
             </app-select-filter>
           </ion-col>
-          <ion-col
-            *ngSwitchCase="SteperType.Text"
-          >
+          <ion-col *ngSwitchCase="SteperType.Text" class="ion-input-line">
             <app-text
               [steperValue]="itemInputs"
               (saveInputData)="saveValueColumn($event)"
@@ -122,19 +102,15 @@
             >
             </app-text>
           </ion-col>
-          <ion-col
-            *ngSwitchCase="SteperType.TextArea"
-          >
-          <app-text-area
-            [steperValue]="itemInputs"
-            (saveInputData)="saveValueColumn($event)"
+          <ion-col *ngSwitchCase="SteperType.TextArea" class="ion-input-line">
+            <app-text-area
+              [steperValue]="itemInputs"
+              (saveInputData)="saveValueColumn($event)"
               [formValue]="dataSteper"
             >
-          </app-text-area>
+            </app-text-area>
           </ion-col>
-          <ion-col
-            *ngSwitchCase="SteperType.Photo"
-          >
+          <ion-col *ngSwitchCase="SteperType.Photo" class="ion-input-line">
             <app-photo
               [steperValue]="itemInputs"
               (saveInputData)="saveValueColumn($event)"
@@ -142,9 +118,7 @@
             >
             </app-photo>
           </ion-col>
-          <ion-col
-            *ngSwitchCase="SteperType.GPS"
-          >
+          <ion-col *ngSwitchCase="SteperType.GPS" class="ion-input-line">
             <app-gps
               [steperValue]="itemInputs"
               (saveInputData)="saveValueColumn($event)"

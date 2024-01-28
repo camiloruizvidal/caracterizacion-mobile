@@ -1,8 +1,6 @@
-<ion-text>
-  {{ steperValue.label }}
-</ion-text>
 <ion-input
   [id]="steperValue.columnName"
+  [textContent]="steperValue.label"
   [value]="steperValue.value"
   [required]="isRequired"
   (ionChange)="saveInput($event)"
