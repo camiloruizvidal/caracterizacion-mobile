@@ -1,14 +1,17 @@
 <ion-content [fullscreen]="true">
-  <ion-title>Tarjeta familiar</ion-title>
   <div *ngIf="card && estado === estados[0]">
-    <app-steper (saveData)="saveData($event)" [dataSteper]="card.familyCard">
+    <ion-title (click)="nextCode()">Tarjeta familiar - {{ currentCode }}</ion-title>
+    <app-steper
+      (saveDataMethod)="saveData($event)"
+      [dataSteper]="card.familyCard"
+    >
     </app-steper>
   </div>
   <div *ngIf="card && estado === estados[0]">
     <ion-title>Tarjeta personal</ion-title>
     <app-steper
       *ngIf="card && estado === estados[0]"
-      (saveData)="saveData($event)"
+      (saveDataMethod)="saveData($event)"
       [dataSteper]="card.personCard"
     ></app-steper>
   </div>

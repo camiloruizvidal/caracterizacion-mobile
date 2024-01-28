@@ -42,7 +42,7 @@ export class LoginComponent {
           this.loginForm.value['password']
         )
         .subscribe(response => {
-          this.router.navigate(['/load']);
+          this.router.navigate(['/load'], { replaceUrl: true });
         });
     }
     this.loading.dismiss();

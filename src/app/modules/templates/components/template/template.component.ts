@@ -12,6 +12,6 @@ export class TemplateComponent {
 
   public redirectTo(url: string): void {
     this.menuController.close();
-    this.router.navigate([url]);
+    this.router.navigate([url], { replaceUrl: true });
   }
 }

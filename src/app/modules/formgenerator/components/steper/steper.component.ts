@@ -37,6 +37,7 @@ export class SteperComponent implements OnInit {
   }
 
   public saveValueColumn(value: IValueColumn): void {
+    console.log({ value });
     const existingIndex = this.saveData.findIndex(
       item => item.columnName === value.columnName
     );
@@ -45,7 +46,6 @@ export class SteperComponent implements OnInit {
     } else {
       this.saveData.push(value);
     }
-    this.saveDataMethod.emit(this.saveData);
   }
 
   public validateColumn(value: IValueColumn): void {
@@ -68,8 +68,8 @@ export class SteperComponent implements OnInit {
     this.currentStep = this.currentStep - 1;
   }
 
-  public get SteperType(): typeof ESteperType {
-    return ESteperType;
+  public guardar(): void {
+    this.saveDataMethod.emit(this.saveData);
   }
 
   public isValidStep() {
@@ -84,6 +84,10 @@ export class SteperComponent implements OnInit {
         const savedValue = savedField.value;
       }
     });
+  }
+
+  public get SteperType(): typeof ESteperType {
+    return ESteperType;
   }
 
   public get isNextDisabled(): boolean {
