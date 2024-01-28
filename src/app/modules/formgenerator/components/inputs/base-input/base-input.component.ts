@@ -23,9 +23,9 @@ export class BaseInputComponent {
 
     for (const step of this.formValue) {
       const matchingValue = step.values.find(
-        (st: ISteperValues) => st.columnName === this.steperValue.columnName
+        (steperValue: ISteperValues) =>
+          steperValue.columnName === this.steperValue.columnName
       );
-      console.log({ formValue: this.formValue });
       if (matchingValue) {
         matchingValue.value = this.valueData;
         this.saveInputData.emit(this.formValue);
@@ -51,33 +51,54 @@ export class BaseInputComponent {
   }
 
   public get isVisibility(): boolean {
-    for (const item of this.formValue) {
-      const visibilityRules = this.steperValue.visibility;
-      const validation =
-        visibilityRules?.isDepent &&
-        visibilityRules?.rules &&
-        visibilityRules?.rules.every((ruleGroup: any) =>
-          ruleGroup.every((rule: any) => {
-            debugger;
-            const { columnDepend, rule: comparisonRule, value } = rule;
-            const columnValue = item.values.find((value: any) => {
-              debugger;
-              return value.columnName === columnDepend;
-            })?.value;
-
-            switch (comparisonRule) {
-              case '=':
-                return columnValue === value;
-              // Agrega más casos según sea necesario (pueden ser '>', '<', etc.)
-              default:
-                return false;
-            }
-          })
-        );
-      if (validation) {
-        return true;
+    if (this.hasVisibilityDependency()) {
+      if (this.groupMatchesRules(this.steperValue.visibility?.rules || [])) {
+        return this.steperValue.visibility?.isShow || false;
       }
+      return !this.steperValue.visibility?.isShow;
     }
-    return true;
+    return this.steperValue.visibility?.isShow || true;
+  }
+
+  private hasVisibilityDependency(): boolean {
+    return (
+      this.steperValue.visibility?.isDepent !== undefined &&
+      this.steperValue.visibility?.rules !== undefined
+    );
+  }
+
+  private groupMatchesRules(ruleGroup: any[]): boolean {
+    return ruleGroup?.every(rule => {
+      const dependentValue = this.getDependentValue(rule.columnDepend);
+      return this.evaluateRule(dependentValue, rule.rule, rule.value);
+    });
+  }
+
+  private getDependentValue(columnName: string): any {
+    const dependentStep = this.formValue.find(step =>
+      step.values.some(val => val.columnName === columnName)
+    );
+    //console.log({columnName,dependentStep, steperValue: this.steperValue})
+    const dependentValue = dependentStep?.values.find(
+      val => {
+        //console.log(val)
+        return val.columnName === columnName;
+      }
+    )?.value;
+
+    // Si hay reglas de visibilidad en el valor dependiente, puedes ajustar el código aquí.
+    // Puedes evaluar las reglas de visibilidad si existen y afectan al valor dependiente.
+
+    return dependentValue;
+  }
+
+  private evaluateRule(value: any, rule: string, expectedValue: any): boolean {
+    switch (rule) {
+      case '=':
+        return value === expectedValue;
+      // Puedes agregar más casos según las reglas que necesites manejar
+      default:
+        return false;
+    }
   }
 }

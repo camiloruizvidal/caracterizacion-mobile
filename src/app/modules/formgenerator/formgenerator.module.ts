@@ -16,7 +16,7 @@ import { TextComponent } from './components/inputs/text/text.component';
 import { TextAreaComponent } from './components/inputs/text-area/text-area.component';
 import { PhotoComponent } from './components/inputs/photo/photo.component';
 import { GPSComponent } from './components/inputs/gps/gps.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -56,6 +56,7 @@ import { ReactiveFormsModule } from '@angular/forms';
   imports: [
     CommonModule,
     IonicModule,
+    FormsModule,
     ReactiveFormsModule
   ]
 })

@@ -1,9 +1,9 @@
 <div *ngIf="isVisibility">
   <ion-checkbox
     [id]="steperValue.columnName"
-    [value]="value"
     labelPlacement="start"
     (click)="hadnleChange()"
+    [(ngModel)]="valueCheck"
   >
   </ion-checkbox>
   <ion-text>
