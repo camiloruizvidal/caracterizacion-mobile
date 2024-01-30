@@ -33,7 +33,6 @@ export class ValidationsService {
           break;
       }
     });
-    console.log({isVisilty});
     
     return isVisilty;
   }
