@@ -1,5 +1,13 @@
+import { ValidationsService } from './../../services/validations/validations.service';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { ESteperType, IFamilyCard, IStepers } from '../../interfaces/interface';
+import {
+  ESteperType,
+  IFamilyCard,
+  IFamilyCardSave,
+  ISteperValues,
+  IStepers
+} from '../../interfaces/interface';
+import { RegistrosService } from 'src/app/modules/registros/services/registros.service';
 
 @Component({
   selector: 'app-steper',
@@ -7,17 +15,34 @@ import { ESteperType, IFamilyCard, IStepers } from '../../interfaces/interface';
   styleUrls: ['./steper.component.scss']
 })
 export class SteperComponent {
-  constructor() {}
-
   @Input() dataSteper!: IStepers[];
   @Output() saveDataMethod = new EventEmitter<any>();
-
   public currentStep: number = 0;
 
-  private saveData: IStepers[] = [];
+  private saveData!: IFamilyCardSave;
 
+  constructor(
+    private validationsService: ValidationsService,
+    private registrosService: RegistrosService
+  ) {
+    this.registrosService.loadForms().then((response: IFamilyCard) => {
+      this.inicialiceForm(response);
+    });
+  }
+
+  private inicialiceForm(response: IFamilyCard): void {
+    for (let i = 0; i < this.dataSteper.length; i++) {
+      //console.log(this.dataSteper[i]);
+    }
+    this.saveData = {
+      dateLastVersion: new Date(response.dateLastVersion),
+      version: response.version,
+      data: []
+    };
+  }
   public saveValueColumn(value: IStepers[]): void {
-    this.saveData = value;
+    //console.log({ value });
+    //this.saveData = value;
   }
 
   public goNext(): void {
@@ -32,19 +57,12 @@ export class SteperComponent {
     this.saveDataMethod.emit(this.saveData);
   }
 
-  //public isValidStep() {
-  //  const values = this.dataSteper[this.currentStep].values;
-
-  //  values.forEach(field => {
-  //    const savedField = this.saveData.find(
-  //      item => item.columnName === field.columnName
-  //    );
-
-  //    if (savedField) {
-  //      const savedValue = savedField.value;
-  //    }
-  //  });
-  //}
+  public isVisibilityInput(
+    itemInputs: ISteperValues,
+    card: IStepers
+  ): boolean {
+    return this.validationsService.isVisibility(itemInputs, card);
+  }
 
   public get SteperType(): typeof ESteperType {
     return ESteperType;

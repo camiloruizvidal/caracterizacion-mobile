@@ -68,3 +68,15 @@ export interface IOptionsRule {
   rule: string;
   value: string;
 }
+
+export interface IFamilyCardSave {
+  version?: string;
+  dateLastVersion?: any;
+  dateRegister?: Date;
+  userId?: number;
+  data: IDataFamilyCard[];
+}
+export interface IDataFamilyCard {
+  familiCard: ISteperValues;
+  personCard: ISteperValues[];
+}

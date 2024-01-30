@@ -18,7 +18,6 @@ export class CheckComponent extends BaseInputComponent implements OnInit {
   private valueOption: IOptionsCheck | null = null;
 
   ngOnInit() {
-    console.log(this.steperValue);
     this.value = this.steperValue.value;
     this.valueOption = this.steperValue.options;
 
@@ -34,5 +33,6 @@ export class CheckComponent extends BaseInputComponent implements OnInit {
         ? this.valueOption?.valueFalse
         : this.valueOption?.valueTrue;
     this.valueCheck = this.value == this.valueOption?.valueTrue;
+    this.saveInput({ detail: { value: this.value } });
   }
 }
