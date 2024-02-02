@@ -16,6 +16,7 @@ import { RegistrosService } from 'src/app/modules/registros/services/registros.s
 })
 export class SteperComponent {
   @Input() dataSteper!: IStepers[];
+  @Input() hasManyRegister: Boolean = false;
   @Output() saveDataMethod = new EventEmitter<IStepers[]>();
   public currentStep: number = 0;
   public isDisabled: boolean = false;
@@ -42,6 +43,12 @@ export class SteperComponent {
   public guardar(): void {
     this.isDisabled = true;
     this.saveDataMethod.emit(this.saveData);
+  }
+
+  public nuevoRegistro(): void {
+    this.saveDataMethod.emit(this.saveData);
+    this.currentStep = 0;
+    this.saveData = this.dataSteper;
   }
 
   public isVisibilityInput(itemInputs: ISteperValues, card: IStepers): boolean {

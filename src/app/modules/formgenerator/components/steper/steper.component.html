@@ -166,4 +166,17 @@
       </ion-button>
     </ion-col>
   </ion-row>
+  <ion-row *ngIf="isShowSave && hasManyRegister">
+    <ion-col>
+      <ion-button
+        color="warning"
+        [disabled]="isDisabled"
+        expand="block"
+        (click)="nuevoRegistro()"
+      >
+        <ion-icon name="save-outline"></ion-icon>
+        &nbsp; Nuevo registro
+      </ion-button>
+    </ion-col>
+  </ion-row>
 </ion-grid>
