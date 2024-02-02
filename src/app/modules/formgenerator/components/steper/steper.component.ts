@@ -16,7 +16,7 @@ import { RegistrosService } from 'src/app/modules/registros/services/registros.s
 })
 export class SteperComponent {
   @Input() dataSteper!: IStepers[];
-  @Output() saveDataMethod = new EventEmitter<any>();
+  @Output() saveDataMethod = new EventEmitter<IStepers[]>();
   public currentStep: number = 0;
 
   private saveData: IStepers[] = [];
@@ -28,7 +28,6 @@ export class SteperComponent {
 
   public saveValueColumn(value: IStepers[]): void {
     this.saveData = value;
-    console.log({ saveData: this.saveData });
   }
 
   public goNext(): void {

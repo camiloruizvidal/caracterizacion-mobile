@@ -70,13 +70,13 @@ export interface IOptionsRule {
 }
 
 export interface IFamilyCardSave {
-  version?: string;
-  dateLastVersion?: any;
+  version: string;
+  dateLastVersion: Date;
   dateRegister?: Date;
   userId?: number;
-  data: IDataFamilyCard[];
+  data: IDataFamilyCard;
 }
 export interface IDataFamilyCard {
-  familyCard: any;//ISteperValues;
-  personCard: any;//ISteperValues[];
+  familyCard: ISteperValues[];
+  personCard: ISteperValues[];
 }

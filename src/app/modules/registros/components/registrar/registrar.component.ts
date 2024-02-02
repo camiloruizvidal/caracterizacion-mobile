@@ -1,4 +1,8 @@
-import { IFamilyCard } from 'src/app/modules/formgenerator/interfaces/interface';
+import {
+  IFamilyCard,
+  IFamilyCardSave,
+  IStepers
+} from 'src/app/modules/formgenerator/interfaces/interface';
 import { RegistrosService } from './../../services/registros.service';
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 
@@ -14,7 +18,7 @@ export class RegistrarComponent implements OnInit {
   ) {}
 
   public card!: IFamilyCard;
-  public estados: string[] = ['tarjetaFamiliar', 'tarjetaPersonal'];
+  public estados: string[] = ['familyCard', 'personCard'];
   public estado: string = this.estados[0];
   public currentCode: number = 1;
   public myCodes = [
@@ -23,11 +27,26 @@ export class RegistrarComponent implements OnInit {
     { start: 400, finish: 500 }
   ];
 
+  private dataSaveCard!: IFamilyCardSave;
+
   async ngOnInit() {
     this.registrosService.loadForms().then((familyCard: IFamilyCard) => {
       this.card = familyCard;
       this.cdRef.detectChanges();
+      this.inicialiceCard(familyCard);
     });
+  }
+
+  private inicialiceCard(familyCard: IFamilyCard): void {
+    this.dataSaveCard = {
+      version: familyCard.version,
+      dateLastVersion: familyCard.dateLastVersion,
+      dateRegister: new Date(),
+      data: {
+        familyCard: [],
+        personCard: []
+      }
+    };
   }
 
   public nextCode(): void {
@@ -67,7 +86,7 @@ export class RegistrarComponent implements OnInit {
     }
   }
 
-  public saveData(data: any) {
+  public saveData(data: IStepers[]) {
     console.log({ data });
   }
 }
