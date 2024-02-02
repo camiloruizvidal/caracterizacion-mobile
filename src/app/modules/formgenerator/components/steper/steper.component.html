@@ -156,26 +156,26 @@
     </ion-col>
     <ion-col *ngIf="isShowSave">
       <ion-button
-        color="success"
-        [disabled]="isDisabled"
+        color="warning"
+        [disabled]="isNextDisabled && isDisabled"
         expand="block"
-        (click)="guardar()"
+        (click)="nuevoRegistro()"
       >
         <ion-icon name="save-outline"></ion-icon>
-        &nbsp; Guardar
+        &nbsp; Nuevo registro
       </ion-button>
     </ion-col>
   </ion-row>
   <ion-row *ngIf="isShowSave && hasManyRegister">
     <ion-col>
       <ion-button
-        color="warning"
-        [disabled]="isDisabled"
+        color="danger"
+        [disabled]="isNextDisabled && isDisabled"
         expand="block"
-        (click)="nuevoRegistro()"
+        (click)="guardar()"
       >
         <ion-icon name="save-outline"></ion-icon>
-        &nbsp; Nuevo registro
+        &nbsp; Guardar y salir
       </ion-button>
     </ion-col>
   </ion-row>

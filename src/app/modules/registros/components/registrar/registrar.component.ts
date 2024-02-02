@@ -59,9 +59,9 @@ export class RegistrarComponent implements OnInit {
     };
   }
 
-  private loadOldData(): void {
+  private async loadOldData(): Promise<void> {
     if (this.idRegister > -1) {
-      this.registrosService.loadRegister(this.idRegister);
+      this.dataSaveCard = await this.registrosService.loadRegister(this.idRegister);
       this.estado = this.estados[1];
     }
   }
@@ -111,7 +111,8 @@ export class RegistrarComponent implements OnInit {
       this.router.navigate(['/registros/nuevo/' + this.idRegister]);
     } else {
       this.dataSaveCard.data.personCard.push(data);
-      this.registrosService.updateRegister(this.idRegister, this.dataSaveCard);
+      console.log({ dataSaveCard: this.dataSaveCard, data });
+      //this.registrosService.updateRegister(this.idRegister, this.dataSaveCard);
     }
   }
 }

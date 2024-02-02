@@ -28,7 +28,7 @@ export class RegistrosService {
     this.databaseService.updateRecord(id, updateCard);
   }
 
-  public loadRegister(id: number): any {
+  public async loadRegister(id: number): Promise<IFamilyCardSave> {
     this.databaseService.setTable(this.keySaveRegister);
     return this.databaseService.findOne({ id });
   }

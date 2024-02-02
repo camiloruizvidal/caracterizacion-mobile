@@ -47,8 +47,8 @@ export class SteperComponent {
 
   public nuevoRegistro(): void {
     this.saveDataMethod.emit(this.saveData);
-    this.currentStep = 0;
-    this.saveData = this.dataSteper;
+    //this.currentStep = 0;
+    //this.saveData = this.dataSteper;
   }
 
   public isVisibilityInput(itemInputs: ISteperValues, card: IStepers): boolean {
