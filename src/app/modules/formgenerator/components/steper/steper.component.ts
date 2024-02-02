@@ -60,9 +60,13 @@ export class SteperComponent {
   }
 
   public get isNextDisabled(): boolean {
-    //TODO Make validation All
-    //this.isValidStep();
-    return this.currentStep >= this.dataSteper.length - 1;
+    let requireds = this.dataSteper[this.currentStep].values.filter(
+      value =>
+        value.required && (value.value == null || value.value.trim() === '')
+    );
+    return (
+      this.currentStep >= this.dataSteper.length - 1 || requireds.length > 0
+    );
   }
 
   public get isLastDisabled(): boolean {

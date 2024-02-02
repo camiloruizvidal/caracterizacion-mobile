@@ -113,7 +113,5 @@ export class RegistrarComponent implements OnInit {
       this.dataSaveCard.data.personCard.push(data);
       this.registrosService.updateRegister(this.idRegister, this.dataSaveCard);
     }
-    console.clear();
-    console.log(this.dataSaveCard);
   }
 }
