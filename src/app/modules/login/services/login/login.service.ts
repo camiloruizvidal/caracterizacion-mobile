@@ -25,16 +25,18 @@ export class LoginService {
 
   private addUser(username: string, password: string, user: any) {
     this.databaseService.setTable('config');
-    this.databaseService.createOrUpdate({
-      name: 'current_user',
-      value: { username, password, user }
-    },'current_user');
+    this.databaseService.createOrUpdate(
+      {
+        name: 'current_user',
+        value: { username, password, user }
+      },
+      'current_user'
+    );
   }
 
   public async isLogin(): Promise<boolean> {
     this.databaseService.setTable('config');
     const user = await this.databaseService.findAll();
-    return true;
+    return user.find(u => u.name === 'current_user') !== undefined;
   }
-
 }
