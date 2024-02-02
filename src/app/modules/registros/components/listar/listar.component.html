@@ -1,5 +1,8 @@
 <ion-list>
-    <ion-item *ngFor="let item of elementos">
-      {{ item.name }}
-    </ion-item>
+  <ion-item *ngFor="let familiyCard of familiesCards; let i = index">
+    {{ i + 1 }})
+    Version:{{ familiyCard.version }},
+    Fecha de registro:
+    {{ familiyCard.dateRegister }}
+  </ion-item>
 </ion-list>

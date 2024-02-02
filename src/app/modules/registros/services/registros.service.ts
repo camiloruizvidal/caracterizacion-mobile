@@ -28,8 +28,13 @@ export class RegistrosService {
     this.databaseService.updateRecord(id, updateCard);
   }
 
-  public loadRegister(id: number): any{
+  public loadRegister(id: number): any {
     this.databaseService.setTable(this.keySaveRegister);
-    return this.databaseService.findOne({id});
+    return this.databaseService.findOne({ id });
+  }
+
+  public async loadAllRegister(): Promise<IFamilyCardSave[]> {
+    this.databaseService.setTable(this.keySaveRegister);
+    return this.databaseService.findAll();
   }
 }
