@@ -15,11 +15,11 @@ export class CheckComponent extends BaseInputComponent implements OnInit {
   public value: any;
   public valueCheck: boolean = false;
 
-  private valueOption: IOptionsCheck | null = null;
+  private valueOption!: IOptionsCheck;
 
   ngOnInit() {
     this.value = this.steperValue.value;
-    this.valueOption = this.steperValue.options;
+    this.valueOption = this.steperValue.options as IOptionsCheck;
 
     if (this.value === undefined) {
       this.value = this.valueOption?.valueFalse;
