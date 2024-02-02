@@ -25,7 +25,7 @@ export interface ISteperValues {
   options: IOptionsCheck | null;
   default: boolean | string;
   visibility: IOptionsVisibility | null;
-  required: IOptionsRequired | null;
+  required: IOptionsRequired | boolean | null;
   value?: any;
 }
 
@@ -53,7 +53,7 @@ export interface IOptionsCheck {
 
 export interface IOptionsRequired {
   isDepend: boolean;
-  rules: null;
+  rules: any;
   required: boolean;
 }
 

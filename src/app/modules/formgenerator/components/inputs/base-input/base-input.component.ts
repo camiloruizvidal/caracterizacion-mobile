@@ -36,12 +36,15 @@ export class BaseInputComponent {
 
   public get isRequired(): boolean {
     let validate: boolean = false;
-    return false;
-    if (this.steperValue.required?.isDepend) {
-      //TODO se requiere hacer una mayor evaluacion
-      validate = this.steperValue.required?.required || true;
-    } else {
-      validate = this.steperValue.required?.required || false;
+    if (this.steperValue.required) {
+      if (typeof this.steperValue.required === 'boolean') {
+        validate = this.steperValue.required;
+      } else if (this.steperValue.required.isDepend) {
+        //TODO se requiere hacer una mayor evaluacion
+        validate = this.steperValue.required?.required || true;
+      } else {
+        validate = this.steperValue.required?.required || false;
+      }
     }
 
     this.isValid = validate && this.valueData !== '' && this.valueData !== null;
