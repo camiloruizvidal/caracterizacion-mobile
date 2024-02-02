@@ -19,30 +19,16 @@ export class SteperComponent {
   @Output() saveDataMethod = new EventEmitter<any>();
   public currentStep: number = 0;
 
-  private saveData!: IFamilyCardSave;
+  private saveData: IStepers[] = [];
 
   constructor(
     private validationsService: ValidationsService,
     private registrosService: RegistrosService
-  ) {
-    this.registrosService.loadForms().then((response: IFamilyCard) => {
-      this.inicialiceForm(response);
-    });
-  }
+  ) {}
 
-  private inicialiceForm(response: IFamilyCard): void {
-    for (let i = 0; i < this.dataSteper.length; i++) {
-      //console.log(this.dataSteper[i]);
-    }
-    this.saveData = {
-      dateLastVersion: new Date(response.dateLastVersion),
-      version: response.version,
-      data: []
-    };
-  }
   public saveValueColumn(value: IStepers[]): void {
-    //console.log({ value });
-    //this.saveData = value;
+    this.saveData = value;
+    console.log({ saveData: this.saveData });
   }
 
   public goNext(): void {
@@ -57,10 +43,7 @@ export class SteperComponent {
     this.saveDataMethod.emit(this.saveData);
   }
 
-  public isVisibilityInput(
-    itemInputs: ISteperValues,
-    card: IStepers
-  ): boolean {
+  public isVisibilityInput(itemInputs: ISteperValues, card: IStepers): boolean {
     return this.validationsService.isVisibility(itemInputs, card);
   }
 

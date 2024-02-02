@@ -77,6 +77,6 @@ export interface IFamilyCardSave {
   data: IDataFamilyCard[];
 }
 export interface IDataFamilyCard {
-  familiCard: ISteperValues;
-  personCard: ISteperValues[];
+  familyCard: any;//ISteperValues;
+  personCard: any;//ISteperValues[];
 }
