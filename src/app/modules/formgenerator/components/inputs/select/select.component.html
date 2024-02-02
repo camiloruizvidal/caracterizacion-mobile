@@ -1,11 +1,6 @@
-{{ options | json }}
-<ion-text>
-  {{ steperValue.label }}
-</ion-text>
 <ion-select
+  [label]="steperValue.label"
   [id]="steperValue.columnName"
-  [textContent]="steperValue.label"
-  [value]="steperValue.value"
   (ionChange)="saveInput($event)"
   labelPlacement="floating"
 >
