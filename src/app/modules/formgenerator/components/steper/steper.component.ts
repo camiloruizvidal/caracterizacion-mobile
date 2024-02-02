@@ -18,6 +18,7 @@ export class SteperComponent {
   @Input() dataSteper!: IStepers[];
   @Output() saveDataMethod = new EventEmitter<IStepers[]>();
   public currentStep: number = 0;
+  public isDisabled: boolean = false;
 
   private saveData: IStepers[] = [];
 
@@ -39,6 +40,7 @@ export class SteperComponent {
   }
 
   public guardar(): void {
+    this.isDisabled = true;
     this.saveDataMethod.emit(this.saveData);
   }
 
@@ -51,6 +53,7 @@ export class SteperComponent {
   }
 
   public get isNextDisabled(): boolean {
+    //TODO Make validation All
     //this.isValidStep();
     return this.currentStep >= this.dataSteper.length - 1;
   }

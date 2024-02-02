@@ -87,6 +87,13 @@ export class RegistrarComponent implements OnInit {
   }
 
   public saveData(data: IStepers[]) {
-    console.log({ data });
+    if (this.estado === this.estados[0]) {
+      this.dataSaveCard.data.familyCard = data;
+      this.estado = this.estados[1];
+    } else {
+      this.dataSaveCard.data.personCard.push(data);
+    }
+    console.clear();
+    console.log(this.dataSaveCard);
   }
 }
