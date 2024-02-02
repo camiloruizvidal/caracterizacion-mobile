@@ -14,7 +14,10 @@ export class ValidationsService {
 
   public isVisibility(itemInputs: ISteperValues, card: IStepers): boolean {
     let isVisibility: boolean = true;
-    if (itemInputs.visibility?.rules) {
+    if(typeof itemInputs.visibility === 'boolean') {
+      return itemInputs.visibility;
+    }
+    else if (itemInputs.visibility && itemInputs.visibility?.rules) {
       isVisibility = this.isValidatedRules(itemInputs.visibility, card);
     }
     return isVisibility;

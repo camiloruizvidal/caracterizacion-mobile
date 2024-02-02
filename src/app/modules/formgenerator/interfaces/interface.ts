@@ -22,9 +22,9 @@ export interface ISteperValues {
   label: string;
   description: string;
   type: ESteperType;
-  options: IOptionsCheck | null;
+  options: IOptionsCheck | IOptionsSelect[];
   default: boolean | string;
-  visibility: IOptionsVisibility | null;
+  visibility: IOptionsVisibility | boolean | null;
   required: IOptionsRequired | boolean | null;
   value?: any;
 }
@@ -49,6 +49,11 @@ export enum ESteperType {
 export interface IOptionsCheck {
   valueTrue: string;
   valueFalse: string;
+}
+
+export interface IOptionsSelect {
+  value: string;
+  option: string;
 }
 
 export interface IOptionsRequired {

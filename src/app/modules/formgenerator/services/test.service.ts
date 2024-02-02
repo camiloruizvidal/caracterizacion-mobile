@@ -319,7 +319,21 @@ export class TestService {
             rules: null,
             required: true,
           }
-        }]
+        },{
+          columnName: 'SELCT',
+          order: 4,
+          label: 'Campo de SELECT',
+          description: 'Este campo muestra un simple select',
+          type: ESteperType.Select,
+          options: null,
+          default: true,
+          visibility: {
+            isDepent: false,
+            rules: [],
+            isShow: true,
+          },
+          required: false
+        },]
       }]
 
     };
