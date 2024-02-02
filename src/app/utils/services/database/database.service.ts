@@ -92,9 +92,17 @@ export class DatabaseService {
     });
   }
 
-  public async findOne(): Promise<any> {
+  public async findOne(params?: {
+    id?: number;
+    where?: any;
+    last?: boolean;
+  }): Promise<any> {
     const data = await this.findAll();
-    return data[0];
+    let id = 0;
+    if (params?.last) {
+      id = data.length - 1;
+    }
+    return data[id];
   }
 
   public updateRecord(id: number, updatedData: any): Promise<void> {

@@ -10,6 +10,6 @@ export class RegistrosService {
 
   public async loadForms(): Promise<IFamilyCard> {
     this.databaseService.setTable('form');
-    return await this.databaseService.findOne();
+    return await this.databaseService.findOne({last: true});
   }
 }
