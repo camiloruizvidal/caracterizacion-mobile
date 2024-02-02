@@ -4,7 +4,7 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class DatabaseService {
-  private table: string | null = null;
+  private table: string = '';
 
   public setTable(tableName: string): void {
     this.table = tableName;
@@ -141,5 +141,10 @@ export class DatabaseService {
     }
 
     localStorage.setItem(key, JSON.stringify(data));
+  }
+
+  public delete(id: number): void {
+    const data = JSON.parse(localStorage.getItem(this.table) || '');
+    localStorage.setItem(this.table, JSON.stringify(data.splice(id, 1)));
   }
 }
