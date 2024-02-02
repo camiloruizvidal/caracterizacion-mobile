@@ -5,6 +5,7 @@ import {
 } from 'src/app/modules/formgenerator/interfaces/interface';
 import { RegistrosService } from './../../services/registros.service';
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-registrar',
@@ -14,8 +15,15 @@ import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 export class RegistrarComponent implements OnInit {
   constructor(
     private registrosService: RegistrosService,
-    private cdRef: ChangeDetectorRef
-  ) {}
+    private cdRef: ChangeDetectorRef,
+    private route: ActivatedRoute,
+    private router: Router
+  ) {
+    this.idRegister =
+      this.route.snapshot.paramMap.get('id') === null
+        ? -1
+        : Number(this.route.snapshot.paramMap.get('id'));
+  }
 
   public card!: IFamilyCard;
   public estados: string[] = ['familyCard', 'personCard'];
@@ -28,12 +36,14 @@ export class RegistrarComponent implements OnInit {
   ];
 
   private dataSaveCard!: IFamilyCardSave;
+  private idRegister: number;
 
   async ngOnInit() {
     this.registrosService.loadForms().then((familyCard: IFamilyCard) => {
       this.card = familyCard;
       this.cdRef.detectChanges();
       this.inicialiceCard(familyCard);
+      this.loadOldData();
     });
   }
 
@@ -47,6 +57,13 @@ export class RegistrarComponent implements OnInit {
         personCard: []
       }
     };
+  }
+
+  private loadOldData(): void {
+    if (this.idRegister > -1) {
+      this.registrosService.loadRegister(this.idRegister);
+      this.estado = this.estados[1];
+    }
   }
 
   public nextCode(): void {
@@ -90,8 +107,11 @@ export class RegistrarComponent implements OnInit {
     if (this.estado === this.estados[0]) {
       this.dataSaveCard.data.familyCard = data;
       this.estado = this.estados[1];
+      this.idRegister = this.registrosService.newRegister(this.dataSaveCard);
+      this.router.navigate(['/registros/nuevo/' + this.idRegister]);
     } else {
       this.dataSaveCard.data.personCard.push(data);
+      this.registrosService.updateRegister(this.idRegister, this.dataSaveCard);
     }
     console.clear();
     console.log(this.dataSaveCard);

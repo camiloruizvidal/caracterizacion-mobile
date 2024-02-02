@@ -16,6 +16,10 @@ const routes: Routes = [
   {
     path: 'nuevo',
     component: RegistrarComponent
+  },
+  {
+    path: 'nuevo/:id',
+    component: RegistrarComponent
   }
 ];
 

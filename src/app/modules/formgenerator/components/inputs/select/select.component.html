@@ -1,3 +1,15 @@
-<p>
-  select works!
-</p>
+{{ options | json }}
+<ion-text>
+  {{ steperValue.label }}
+</ion-text>
+<ion-select
+  [id]="steperValue.columnName"
+  [textContent]="steperValue.label"
+  [value]="steperValue.value"
+  (ionChange)="saveInput($event)"
+  labelPlacement="floating"
+>
+  <ion-select-option *ngFor="let option of options" [value]="option.value">
+    {{ option.option }}
+  </ion-select-option>
+</ion-select>

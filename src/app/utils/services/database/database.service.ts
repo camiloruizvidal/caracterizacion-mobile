@@ -23,19 +23,18 @@ export class DatabaseService {
     return `${this.table}`;
   }
 
-  public addRecord(record: any): void {
+  public addRecord(record: any): number {
     const key = this.getKey();
     let data: any[] = [];
 
-    // Obtiene los datos existentes (si los hay) y agrega el nuevo registro
     const existingData = localStorage.getItem(key);
     if (existingData) {
       data = JSON.parse(existingData);
     }
     data.push(record);
 
-    // Guarda los datos actualizados en localStorage
     localStorage.setItem(key, JSON.stringify(data));
+    return data.length - 1;
   }
 
   public getRecordById(id: number): Promise<any> {
@@ -99,6 +98,10 @@ export class DatabaseService {
   }): Promise<any> {
     const data = await this.findAll();
     let id = 0;
+
+    if (params?.id) {
+      id = params.id;
+    }
     if (params?.last) {
       id = data.length - 1;
     }
@@ -127,7 +130,7 @@ export class DatabaseService {
     });
   }
 
-  public createOrUpdate(record: any, searchColumn: string): void {
+  public createOrUpdate(record: any, searchColumn: string): number {
     const key = this.getKey();
     let data: any[] = [];
 
@@ -149,6 +152,7 @@ export class DatabaseService {
     }
 
     localStorage.setItem(key, JSON.stringify(data));
+    return data.length - 1;
   }
 
   public delete(id: number): void {
