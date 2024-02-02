@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit {
   private loading: any;
   public loginForm: FormGroup;
 
@@ -24,6 +24,10 @@ export class LoginComponent {
       password: ['', Validators.required]
     });
     this.startLoading();
+  }
+
+  public ngOnInit(): void {
+    this.loginService.closeLogin();
   }
 
   private async startLoading(): Promise<void> {

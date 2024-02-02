@@ -6,17 +6,13 @@ import { Observable, tap } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
-export class LoginService implements OnInit {
+export class LoginService {
   private url: string = 'http://localhost:3000/api/v1/usuarios/login';
   constructor(
     private httpClient: HttpClient,
     private databaseService: DatabaseService
   ) {
     this.databaseService.setTable('user');
-  }
-
-  public ngOnInit(): void {
-    this.closeLogin();
   }
 
   public loginUser(username: string, password: string): Observable<any> {
