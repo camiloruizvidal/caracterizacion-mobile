@@ -1,5 +1,8 @@
+<ion-text>
+  <span *ngIf="isRequired" class="required-input">*</span>
+  {{ steperValue.label }}
+</ion-text>
 <ion-select
-  [label]="steperValue.label"
   [id]="steperValue.columnName"
   (ionChange)="saveInput($event)"
   labelPlacement="floating"

@@ -1,6 +1,7 @@
-<ion-label>
-  {{steperValue.label}}
-</ion-label>
+<ion-text>
+  <span *ngIf="isRequired" class="required-input">*</span>
+  {{ steperValue.label }}
+</ion-text>
 <ion-datetime
   locale="es-CO"
   presentation="date"

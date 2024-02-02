@@ -1,4 +1,5 @@
 <ion-text>
+  <span *ngIf="isRequired" class="required-input">*</span>
   {{ steperValue.label }}
 </ion-text>
 <ion-textarea
