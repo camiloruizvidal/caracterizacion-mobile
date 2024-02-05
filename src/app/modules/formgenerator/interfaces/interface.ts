@@ -73,15 +73,34 @@ export interface IOptionsRule {
   rule: string;
   value: string;
 }
-
+export interface ICodes {
+  id?: number;
+  user_id?: number;
+  start: number;
+  finish: number;
+}
 export interface IFamilyCardSave {
   version: string;
   dateLastVersion: Date;
   dateRegister?: Date;
+  code: number;
   userId?: number;
   data: IDataFamilyCard;
 }
 export interface IDataFamilyCard {
   familyCard: IStepers[];
   personCard: IStepers[][];
+}
+
+export interface IUser {
+  id: number;
+  username: string;
+  nombrePrimero: string;
+  nombreSegundo: null;
+  apellidoPrimero: string;
+  apellidoSegundo: null;
+  documento: string;
+  documentoTipoId: number;
+  codes: ICodes[];
+  currentCode: number;
 }
