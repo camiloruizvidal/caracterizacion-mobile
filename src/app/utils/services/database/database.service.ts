@@ -53,6 +53,7 @@ export class DatabaseService {
         }
       } else {
         reject('Error retrieving records from localStorage');
+        throw('Error retrieving records from localStorage');
       }
     });
   }
@@ -73,6 +74,7 @@ export class DatabaseService {
         resolve(filteredRecords);
       } else {
         reject('Error retrieving records from localStorage');
+        throw('Error retrieving records from localStorage');
       }
     });
   }
@@ -87,6 +89,7 @@ export class DatabaseService {
         resolve(records);
       } else {
         reject('Error retrieving records from localStorage');
+        throw('Error retrieving records from localStorage');
       }
     });
   }

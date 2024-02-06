@@ -103,7 +103,7 @@ export class LoginService {
     //TODO Esto debe gestionarlo la capa de persistencia
     const config: any[] = JSON.parse(localStorage.getItem('config') || '');
     const idx = config.findIndex(conf => conf.name === 'current_user');
-    config[idx].user = user;
+    config[idx].value.user = user;
     localStorage.setItem('config', JSON.stringify(config));
   }
 }

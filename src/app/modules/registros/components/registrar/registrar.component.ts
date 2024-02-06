@@ -90,12 +90,13 @@ export class RegistrarComponent implements OnInit {
       this.dataSaveCard.data.familyCard = data;
       this.estado = this.estados[1];
       this.idRegister = this.registrosService.newRegister(this.dataSaveCard);
-      this.router.navigate(['/registros/nuevo/' + this.idRegister]);
       this.loginService.nextCode();
+      this.router.navigate(['/registros/nuevo/' + this.idRegister]);
     } else {
       this.dataSaveCard.data.personCard.push(data);
       console.log({ dataSaveCard: this.dataSaveCard, data });
       this.registrosService.updateRegister(this.idRegister, this.dataSaveCard);
+      this.router.navigate(['/registros/nuevo/'], { replaceUrl: true });
     }
   }
 }
