@@ -56,8 +56,6 @@ export class RegistrarComponent implements OnInit {
     this.myCodes = this.userDate.codes;
     this.currentCode = this.userDate.currentCode;
 
-    console.log({ userDate: this.userDate, currentCode: this.currentCode });
-
     this.card = await this.registrosService.loadForms();
     this.cdRef.detectChanges();
     this.inicialiceCard(this.card);
@@ -86,42 +84,6 @@ export class RegistrarComponent implements OnInit {
     }
   }
 
-  public nextCode(): void {
-    let found = false;
-
-    for (const codeRange of this.myCodes) {
-      if (
-        this.currentCode >= codeRange.start &&
-        this.currentCode <= codeRange.finish
-      ) {
-        this.currentCode++;
-
-        if (this.currentCode > codeRange.finish) {
-          found = false;
-        } else {
-          found = true;
-        }
-        break;
-      }
-    }
-
-    if (!found && this.myCodes.length > 0) {
-      for (let i = 0; i < this.myCodes.length - 1; i++) {
-        if (
-          this.currentCode >= this.myCodes[i].finish &&
-          this.currentCode < this.myCodes[i + 1].start
-        ) {
-          this.currentCode = this.myCodes[i + 1].start;
-          found = true;
-          break;
-        }
-      }
-
-      if (!found) {
-        this.currentCode = this.myCodes[0].start;
-      }
-    }
-  }
 
   public saveData(data: IStepers[]) {
     if (this.estado === this.estados[0]) {
@@ -129,10 +91,11 @@ export class RegistrarComponent implements OnInit {
       this.estado = this.estados[1];
       this.idRegister = this.registrosService.newRegister(this.dataSaveCard);
       this.router.navigate(['/registros/nuevo/' + this.idRegister]);
+      this.loginService.nextCode();
     } else {
       this.dataSaveCard.data.personCard.push(data);
       console.log({ dataSaveCard: this.dataSaveCard, data });
-      //this.registrosService.updateRegister(this.idRegister, this.dataSaveCard);
+      this.registrosService.updateRegister(this.idRegister, this.dataSaveCard);
     }
   }
 }

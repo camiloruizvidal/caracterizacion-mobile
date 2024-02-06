@@ -111,16 +111,16 @@ export class DatabaseService {
   public updateRecord(id: number, updatedData: any): Promise<void> {
     return new Promise((resolve, reject) => {
       const key = this.getKey();
+      console.log({ key });
       const data = localStorage.getItem(key);
 
       if (data) {
         const records = JSON.parse(data);
-        const index = records.findIndex((r: any) => r.id === id);
 
-        if (index !== -1) {
-          records[index] = { ...records[index], ...updatedData };
+        if (records[id] !== undefined) {
+          records[id] = updatedData;
           localStorage.setItem(key, JSON.stringify(records));
-          resolve();
+          resolve(records[id]);
         } else {
           reject('Record not found');
         }

@@ -2,7 +2,10 @@ import { HttpClient } from '@angular/common/http';
 import { DatabaseService } from 'src/app/utils/services/database/database.service';
 import { Injectable, OnInit } from '@angular/core';
 import { Observable, tap } from 'rxjs';
-import { IUser } from 'src/app/modules/formgenerator/interfaces/interface';
+import {
+  ICodes,
+  IUser
+} from 'src/app/modules/formgenerator/interfaces/interface';
 
 @Injectable({
   providedIn: 'root'
@@ -53,5 +56,54 @@ export class LoginService {
     const data = await this.databaseService.findAll();
     const user = data.find(u => u.name === 'current_user');
     return user.value.user;
+  }
+
+  public async nextCode(): Promise<number> {
+    let found = false;
+    const user: IUser = await this.getCurrentUser();
+    const myCodes: ICodes[] = user.codes;
+
+    let currentCode = Number(`${user.currentCode}`);
+    for (const codeRange of myCodes) {
+      if (currentCode >= codeRange.start && currentCode <= codeRange.finish) {
+        currentCode++;
+
+        if (currentCode > codeRange.finish) {
+          found = false;
+        } else {
+          found = true;
+        }
+        break;
+      }
+    }
+
+    if (!found && myCodes.length > 0) {
+      for (let i = 0; i < myCodes.length - 1; i++) {
+        if (
+          currentCode >= myCodes[i].finish &&
+          currentCode < myCodes[i + 1].start
+        ) {
+          currentCode = myCodes[i + 1].start;
+          found = true;
+          break;
+        }
+      }
+
+      if (!found) {
+        currentCode = myCodes[0].start;
+      }
+    }
+
+    user.currentCode = currentCode;
+    this.updateCode(user);
+    return currentCode;
+  }
+
+  private updateCode(user: IUser) {
+    //TODO Esto debe gestionarlo la capa de persistencia
+    const config: any[] = JSON.parse(localStorage.getItem('config') || '');
+    const idx = config.findIndex(conf => conf.name === 'current_user');
+    config[idx].user = user;
+    localStorage.setItem('config', JSON.stringify(config));
   }
 }
