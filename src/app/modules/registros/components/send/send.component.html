@@ -1,4 +1,6 @@
 <ion-content class="ion-padding">
   Hay {{ registers.length }} registros guardados. Desea enviarlos?
-  <ion-button (click)="enviarRegistros()">Enviar</ion-button>
+  <ion-button [disabled]="registers.length === 0" (click)="enviarRegistros()">
+    Enviar
+  </ion-button>
 </ion-content>
