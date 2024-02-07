@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { ListarComponent } from './components/listar/listar.component';
 import { RegistrarComponent } from './components/registrar/registrar.component';
 import { IndexComponent } from './components/index/index.component';
+import { SendComponent } from './components/send/send.component';
 
 const routes: Routes = [
   {
@@ -20,6 +21,10 @@ const routes: Routes = [
   {
     path: 'nuevo/:id',
     component: RegistrarComponent
+  },
+  {
+    path: 'enviar',
+    component: SendComponent
   }
 ];
 

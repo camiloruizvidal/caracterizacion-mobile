@@ -4,12 +4,17 @@ import {
   IFamilyCard,
   IFamilyCardSave
 } from '../../formgenerator/interfaces/interface';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class RegistrosService {
-  constructor(private databaseService: DatabaseService) {}
+  constructor(
+    private databaseService: DatabaseService,
+    private httpClient: HttpClient
+  ) {}
 
   private keySaveRegister: string = 'formsSave';
 
@@ -36,5 +41,16 @@ export class RegistrosService {
   public async loadAllRegister(): Promise<IFamilyCardSave[]> {
     this.databaseService.setTable(this.keySaveRegister);
     return this.databaseService.findAll();
+  }
+
+  public saveRegister(data: IFamilyCardSave): Observable<any> {
+    const url = `${this.getUrl()}/api/v1/ficha/save`;
+    return this.httpClient.post<any>(url, data);
+  }
+
+  private async getUrl() {
+    this.databaseService.setTable('server');
+    const url = await this.databaseService.findOne();
+    return `${url}/api/v1`;
   }
 }

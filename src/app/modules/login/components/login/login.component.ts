@@ -20,8 +20,9 @@ export class LoginComponent implements OnInit {
     private router: Router
   ) {
     this.loginForm = this.formBuilder.group({
-      username: ['', Validators.required],
-      password: ['', Validators.required]
+      username: ['admin', Validators.required],
+      password: ['admin', Validators.required],
+      server: ['http://localhost:3000', Validators.required]
     });
     this.startLoading();
   }
@@ -43,7 +44,8 @@ export class LoginComponent implements OnInit {
       this.loginService
         .loginUser(
           this.loginForm.value['username'],
-          this.loginForm.value['password']
+          this.loginForm.value['password'],
+          this.loginForm.value['server']
         )
         .subscribe(response => {
           this.router.navigate(['/load'], { replaceUrl: true });

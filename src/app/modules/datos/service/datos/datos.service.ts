@@ -11,11 +11,19 @@ import {
   providedIn: 'root'
 })
 export class DatosService {
-  private URL: string = 'http://localhost:3000/api/v1';
+  private URL: string = '';
   constructor(
     private httpClient: HttpClient,
     private databaseService: DatabaseService
   ) {
+    this.getUrl();
+  }
+
+  private async getUrl() {
+    this.databaseService.setTable('server')
+    const url = await this.databaseService.findOne()
+    this.URL = `${url}/api/v1`;
+    console.log(this.URL)
   }
 
   public loadDataForm(): Observable<IHttpResponse<IFamilyCard>> {

@@ -13,6 +13,7 @@ export interface IFamilyCard {
 export interface IStepers {
   title: string;
   subtitle?: string;
+  table: string;
   values: ISteperValues[];
 }
 

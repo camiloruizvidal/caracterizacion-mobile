@@ -11,23 +11,40 @@ import {
   providedIn: 'root'
 })
 export class LoginService {
-  private url: string = 'http://localhost:3000/api/v1/usuarios/login';
+  private url: string = '';
   constructor(
     private httpClient: HttpClient,
     private databaseService: DatabaseService
   ) {
+    this.getUrl();
     this.databaseService.setTable('user');
   }
 
-  public loginUser(username: string, password: string): Observable<any> {
+  private async getUrl() {
+    this.databaseService.setTable('server');
+    const url = await this.databaseService.findOne();
+    this.url = `${url}/api/v1`;
+    console.log(this.url);
+  }
+
+  public loginUser(
+    username: string,
+    password: string,
+    server: string
+  ): Observable<any> {
     return this.httpClient.post(this.url, { username, password }).pipe(
       tap((response: any) => {
-        this.addUser(username, password, response.user);
+        this.addUser(username, password, response.user, server);
       })
     );
   }
 
-  private addUser(username: string, password: string, user: any) {
+  private addUser(
+    username: string,
+    password: string,
+    user: any,
+    server: string
+  ) {
     this.databaseService.setTable('config');
     this.databaseService.createOrUpdate(
       {
@@ -36,6 +53,9 @@ export class LoginService {
       },
       'current_user'
     );
+
+    this.databaseService.setTable('server');
+    this.databaseService.createOrUpdate(server, 'server');
   }
 
   public async isLogin(): Promise<boolean> {
