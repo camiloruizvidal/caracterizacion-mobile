@@ -1,6 +1,22 @@
 <ion-content class="ion-padding">
-  Hay {{ registers.length }} registros guardados. Desea enviarlos?
-  <ion-button [disabled]="registers.length === 0" (click)="enviarRegistros()">
-    Enviar
-  </ion-button>
+  <ion-row>
+    <ion-col>
+      <ion-title>
+        Hay {{ registers.length }} registros guardados. Desea enviarlos?
+      </ion-title>
+    </ion-col>
+  </ion-row>
+
+  <ion-row>
+    <ion-col>
+      <ion-button
+        expand="full"
+        color="primary"
+        [disabled]="registers.length === 0"
+        (click)="enviarRegistros()"
+      >
+        Enviar
+      </ion-button>
+    </ion-col>
+  </ion-row>
 </ion-content>

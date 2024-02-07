@@ -39,6 +39,7 @@ export class GPSComponent extends BaseInputComponent {
       });
       this.isLocationCaptured = true;
     } catch (error) {
+      console.trace()
       console.error('Error al obtener la ubicación:', error);
       this.isLocationCaptured = false;
       this.isShowError = true;
