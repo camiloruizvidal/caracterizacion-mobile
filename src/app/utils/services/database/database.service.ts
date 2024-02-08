@@ -37,6 +37,10 @@ export class DatabaseService {
     return data.length - 1;
   }
 
+  public addManyRecords(recods: any[]) {
+    localStorage.setItem(this.getKey(), JSON.stringify(recods));
+  }
+
   public getRecordById(id: number): Promise<any> {
     return new Promise((resolve, reject) => {
       const key = this.getKey();
@@ -53,7 +57,7 @@ export class DatabaseService {
         }
       } else {
         reject('Error retrieving records from localStorage');
-        throw('Error retrieving records from localStorage');
+        throw 'Error retrieving records from localStorage';
       }
     });
   }
@@ -74,7 +78,7 @@ export class DatabaseService {
         resolve(filteredRecords);
       } else {
         reject('Error retrieving records from localStorage');
-        throw('Error retrieving records from localStorage');
+        throw 'Error retrieving records from localStorage';
       }
     });
   }
@@ -89,7 +93,7 @@ export class DatabaseService {
         resolve(records);
       } else {
         reject('Error retrieving records from localStorage');
-        throw('Error retrieving records from localStorage');
+        throw 'Error retrieving records from localStorage';
       }
     });
   }
@@ -161,5 +165,9 @@ export class DatabaseService {
   public delete(id: number): void {
     const data = JSON.parse(localStorage.getItem(this.table) || '');
     localStorage.setItem(this.table, JSON.stringify(data.splice(id, 1)));
+  }
+
+  public truncateTable(tableName: string): void {
+    localStorage.removeItem(tableName);
   }
 }

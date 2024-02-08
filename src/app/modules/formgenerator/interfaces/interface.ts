@@ -105,3 +105,31 @@ export interface IUser {
   codes: ICodes[];
   currentCode: number;
 }
+
+export interface IPaginationResult<T> {
+  data: T;
+  page: number;
+  itemsPerPage: number;
+  totalItems: number;
+  totalPages: number;
+}
+
+export interface IPaciente {
+  id: number;
+  nombre_primero: string;
+  nombre_segundo?: string;
+  apellido_primero: string;
+  apellido_segundo?: string;
+  documento: string;
+  sexo?: string;
+  fecha_nacimiento?: Date;
+  parentesco?: string;
+  ocupacion?: string;
+  aporta_ingresos?: boolean;
+  nivel_escolaridad?: string;
+  afiliacion_salud_tipo?: string;
+  grupo_atencion_especial?: string;
+  tiene_discapacidad?: boolean;
+  created_at: Date;
+  updated_at: Date;
+}

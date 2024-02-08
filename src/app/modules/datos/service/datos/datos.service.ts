@@ -1,10 +1,12 @@
 import { DatabaseService } from 'src/app/utils/services/database/database.service';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, map } from 'rxjs';
 import {
   IFamilyCard,
-  IHttpResponse
+  IHttpResponse,
+  IPaciente,
+  IPaginationResult
 } from 'src/app/modules/formgenerator/interfaces/interface';
 
 @Injectable({
@@ -20,10 +22,9 @@ export class DatosService {
   }
 
   private async getUrl() {
-    this.databaseService.setTable('server')
-    const url = await this.databaseService.findOne()
+    this.databaseService.setTable('server');
+    const url = await this.databaseService.findOne();
     this.URL = `${url}/api/v1`;
-    console.log(this.URL)
   }
 
   public loadDataForm(): Observable<IHttpResponse<IFamilyCard>> {
@@ -31,8 +32,36 @@ export class DatosService {
     return this.httpClient.get<IHttpResponse<IFamilyCard>>(url);
   }
 
+  public loadDataPatients(
+    paginaActual: number = 1,
+    registrosPorPagina = 10
+  ): Observable<IPaginationResult<IPaciente[]>> {
+    const params: HttpParams = new HttpParams()
+      .set('page', paginaActual.toString())
+      .set('perPage', registrosPorPagina.toString());
+
+    return this.httpClient.get<IPaginationResult<IPaciente[]>>(
+      `${this.URL}/pacientes`,
+      { params }
+    );
+  }
+
+  public loadDataAllPatients(): Observable<IPaciente[]> {
+    return this.loadDataPatients(1, 100000000000000).pipe(
+      map((response: IPaginationResult<IPaciente[]>) => {
+        return response.data;
+      })
+    );
+  }
+
   public saveDataForm(data: IFamilyCard): void {
     this.databaseService.setTable('form');
     this.databaseService.createOrUpdate(data, 'version');
+  }
+
+  public saveDataPatient(data: IPaciente[]): void {
+    this.databaseService.setTable('patients');
+    this.databaseService.truncateTable('patients');
+    this.databaseService.addManyRecords(data);
   }
 }

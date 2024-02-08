@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { DatosService } from '../../service/datos/datos.service';
 import {
   IFamilyCard,
-  IHttpResponse
+  IHttpResponse,
+  IPaciente
 } from 'src/app/modules/formgenerator/interfaces/interface';
 import { LoadingController, ToastController } from '@ionic/angular';
 
@@ -38,11 +39,9 @@ export class FormLoadComponent {
   }
 
   public cargarFormulario(): void {
-    //this.startLoading();
     this.datosService.loadDataForm().subscribe(
       (response: IHttpResponse<IFamilyCard>) => {
         this.datosService.saveDataForm(response.data);
-        //this.stopLoading();
         this.setOpen(true);
       },
       async error => {
@@ -53,7 +52,21 @@ export class FormLoadComponent {
           message: 'Se presento un error cuando se intentaba actualizar.'
         });
         await toast.present();
-        //await this.stopLoading();
+      }
+    );
+
+    this.datosService.loadDataAllPatients().subscribe(
+      (pacientes: IPaciente[]) => {
+        this.datosService.saveDataPatient(pacientes);
+      },
+      async error => {
+        const toast = await this.toastController.create({
+          color: 'dark',
+          duration: 5000,
+          position: 'bottom',
+          message: 'Se presento un error cuando se intentaba actualizar.'
+        });
+        await toast.present();
       }
     );
   }
