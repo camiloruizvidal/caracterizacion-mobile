@@ -68,6 +68,7 @@ export class RegistrarComponent implements OnInit {
       dateLastVersion: familyCard.dateLastVersion,
       dateRegister: new Date(),
       code: this.currentCode,
+      userId: this.userDate.id,
       data: {
         familyCard: [],
         personCard: []

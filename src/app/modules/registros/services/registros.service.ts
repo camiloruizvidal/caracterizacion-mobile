@@ -11,10 +11,16 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class RegistrosService {
+  private url: string = '';
+
   constructor(
     private databaseService: DatabaseService,
     private httpClient: HttpClient
-  ) {}
+  ) {
+    this.getUrl().then(url => {
+      this.url = `${url}/api/v1`;
+    })
+  }
 
   private keySaveRegister: string = 'formsSave';
 
@@ -44,13 +50,11 @@ export class RegistrosService {
   }
 
   public saveRegister(data: IFamilyCardSave): Observable<any> {
-    const url = `${this.getUrl()}/api/v1/ficha/save`;
-    return this.httpClient.post<any>(url, data);
+    return this.httpClient.post<any>(`${this.url}/ficha/save`, data);
   }
 
   private async getUrl() {
     this.databaseService.setTable('server');
-    const url = await this.databaseService.findOne();
-    return `${url}/api/v1`;
+    return await this.databaseService.findOne();
   }
 }

@@ -1,6 +1,7 @@
 import { RegistrosService } from 'src/app/modules/registros/services/registros.service';
 import { Component, OnInit } from '@angular/core';
 import { IFamilyCardSave } from 'src/app/modules/formgenerator/interfaces/interface';
+import { forkJoin } from 'rxjs';
 
 @Component({
   selector: 'app-send',
@@ -19,11 +20,20 @@ export class SendComponent implements OnInit {
     this.registers = await this.registrosService.loadAllRegister();
   }
 
-  public async enviarRegistros() {
-    this.registers.forEach((register: IFamilyCardSave) => {
-      this.registrosService.saveRegister(register).subscribe(response => {
-        console.log(response);
+  public enviarRegistros() {
+    const observables = this.registers.map((register: IFamilyCardSave) => {
+      return this.registrosService.saveRegister(register);
+    });
+
+    forkJoin(observables).subscribe(responses => {
+      const ids = responses.map((response, idx) => {
+        return idx;
       });
+
+      this.registers = this.registers.filter(
+        (register, index) => !ids.includes(index)
+      );
+      console.log({ registers: this.registers });
     });
   }
 }
