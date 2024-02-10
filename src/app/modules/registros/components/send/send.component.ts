@@ -21,19 +21,21 @@ export class SendComponent implements OnInit {
   }
 
   public enviarRegistros() {
-    const observables = this.registers.map((register: IFamilyCardSave) => {
-      return this.registrosService.saveRegister(register);
-    });
+    const observables = this.registers.map((register: IFamilyCardSave) =>
+      this.registrosService.saveRegister(register)
+    );
 
     forkJoin(observables).subscribe(responses => {
-      const ids = responses.map((response, idx) => {
-        return idx;
-      });
+      const ids = responses.map((response, id) => id);
 
       this.registers = this.registers.filter(
         (register, index) => !ids.includes(index)
       );
-      console.log({ registers: this.registers });
+      this.registrosService.deleteAllRegister().then(() => {
+        this.registers.forEach(register => {
+          this.registrosService.saveRegister(register);
+        });
+      });
     });
   }
 }

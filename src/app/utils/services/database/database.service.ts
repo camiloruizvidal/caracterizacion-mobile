@@ -170,4 +170,8 @@ export class DatabaseService {
   public truncateTable(tableName: string): void {
     localStorage.removeItem(tableName);
   }
+
+  public deleteAll(): void {
+    localStorage.removeItem(this.table);
+  }
 }

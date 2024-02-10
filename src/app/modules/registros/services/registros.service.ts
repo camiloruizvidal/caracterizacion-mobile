@@ -49,6 +49,10 @@ export class RegistrosService {
     return this.databaseService.findAll();
   }
 
+  public async deleteAllRegister(): Promise<void> {
+    this.databaseService.setTable(this.keySaveRegister);
+    this.databaseService.deleteAll();
+  }
   public saveRegister(data: IFamilyCardSave): Observable<any> {
     return this.httpClient.post<any>(`${this.url}/ficha/save`, data);
   }
