@@ -24,11 +24,11 @@ const routes: Routes = [
     component: RegistrarComponent
   },
   {
-    path: 'actualizar/:id',
+    path: 'actualizar/:indexCard',
     component: ActualizarComponent
   },
   {
-    path: 'actualizar/:id/idPaciente',
+    path: 'actualizar/:indexCard/idPaciente',
     component: ActualizarComponent
   },
   {

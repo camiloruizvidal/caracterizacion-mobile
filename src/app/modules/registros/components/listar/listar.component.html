@@ -1,11 +1,18 @@
 <ion-list>
   <ion-item
     *ngFor="let familiyCard of familiesCards; let indexFamilyCard = index"
-    (click)="(seleccionarRegistro(indexFamilyCard))"
+    (click)="seleccionarRegistro(indexFamilyCard)"
   >
     <ion-grid>
       <ion-row>
-        <ion-col> <strong>Codigo:</strong> {{ familiyCard.code }} </ion-col>
+        <ion-col>
+          <strong>{{ countPersons(familiyCard) }} Personas registradas</strong>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <strong>Codigo de ficha:</strong> {{ familiyCard.code }}
+        </ion-col>
       </ion-row>
       <ion-row>
         <ion-col

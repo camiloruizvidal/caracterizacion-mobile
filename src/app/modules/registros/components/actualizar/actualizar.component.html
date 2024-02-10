@@ -3,16 +3,53 @@
     <ion-title>Tarjeta familiar - {{ currentCode }}</ion-title>
     <app-steper
       (saveDataMethod)="saveData($event)"
-      [dataSteper]="card.familyCard"
+      [dataSteper]="card.data.familyCard"
     >
     </app-steper>
   </div>
-  <div *ngIf="card && estado === estados[1]">
-    <ion-title>Tarjeta personal - {{ currentCode }}</ion-title>
-    <app-steper
-      (saveDataMethod)="saveData($event)"
-      [dataSteper]="card.personCard"
-      [hasManyRegister]="true"
-    ></app-steper>
+
+  <ion-row *ngIf="estado === estados[0]">
+    <ion-col>
+      <ion-button fill="outline" (click)="estado = estados[1]" expand="block">
+        Ver tarjetas personales
+      </ion-button>
+    </ion-col>
+  </ion-row>
+  <div *ngFor="let personCard of card?.data?.personCard">
+    <div *ngIf="card && estado === estados[1]">
+      <ion-title>Tarjeta personal - {{ currentCode }}</ion-title>
+      <app-steper
+        (saveDataMethod)="saveData($event)"
+        [dataSteper]="personCard"
+        [hasManyRegister]="true"
+      ></app-steper>
+    </div>
   </div>
+  <!--
+    <pre>{{ personCard | json }}</pre>
+-->
+
+  <ion-row *ngIf="estado === estados[1]">
+    <ion-col>
+      <ion-button fill="outline" (click)="estado = estados[0]" expand="block">
+        Ver tarjeta familiar
+      </ion-button>
+    </ion-col>
+  </ion-row>
+  <ion-row *ngIf="estado === estados[1]">
+    <ion-col>
+      <ion-button (click)="estado = estados[0]" expand="block">
+        <ion-icon name="arrow-back-outline"></ion-icon>
+        <ion-icon name="accessibility-outline"></ion-icon>
+        Anterior
+      </ion-button>
+    </ion-col>
+    <ion-col>
+      <ion-button (click)="estado = estados[0]" expand="block">
+        Siguiente
+        <ion-icon name="accessibility-outline"></ion-icon>
+        <ion-icon name="arrow-forward-outline"></ion-icon>
+      </ion-button>
+    </ion-col>
+  </ion-row>
 </ion-content>

@@ -16,14 +16,14 @@ import { LoginService } from 'src/app/modules/login/services/login/login.service
   styleUrls: ['./actualizar.component.scss']
 })
 export class ActualizarComponent implements OnInit {
-  public card!: IFamilyCard;
+  public card!: IFamilyCardSave;
   public estados: string[] = ['familyCard', 'personCard'];
   public estado: string = this.estados[0];
   public currentCode: number = 1;
 
-  private myCodes: ICodes[] = [];
   private dataSaveCard!: IFamilyCardSave;
   private idRegister: number;
+  private indexCard: number;
   private userDate: IUser;
 
   constructor(
@@ -45,35 +45,19 @@ export class ActualizarComponent implements OnInit {
       currentCode: 0,
       codes: []
     };
-    this.idRegister =
-      this.route.snapshot.paramMap.get('id') === null
+    this.idRegister = 0;
+    this.indexCard =
+      this.route.snapshot.paramMap.get('indexCard') === null
         ? -1
-        : Number(this.route.snapshot.paramMap.get('id'));
+        : Number(this.route.snapshot.paramMap.get('indexCard'));
   }
 
   async ngOnInit() {
-    this.userDate = await this.loginService.getCurrentUser();
-    this.myCodes = this.userDate.codes;
-    this.currentCode = this.userDate.currentCode;
-
-    this.card = await this.registrosService.loadForms();
     this.cdRef.detectChanges();
-    this.inicialiceCard(this.card);
-    this.loadOldData();
-  }
-
-  private inicialiceCard(familyCard: IFamilyCard): void {
-    this.dataSaveCard = {
-      version: familyCard.version,
-      dateLastVersion: familyCard.dateLastVersion,
-      dateRegister: new Date(),
-      code: this.currentCode,
-      userId: this.userDate.id,
-      data: {
-        familyCard: [],
-        personCard: []
-      }
-    };
+    this.card = await this.registrosService.loadRegister(this.indexCard);
+    this.userDate = await this.loginService.getCurrentUser();
+    this.currentCode = this.card.code;
+    //this.loadOldData();
   }
 
   private async loadOldData(): Promise<void> {
@@ -84,7 +68,6 @@ export class ActualizarComponent implements OnInit {
       this.estado = this.estados[1];
     }
   }
-
 
   public saveData(data: IStepers[]) {
     if (this.estado === this.estados[0]) {

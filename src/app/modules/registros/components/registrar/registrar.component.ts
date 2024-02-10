@@ -85,7 +85,6 @@ export class RegistrarComponent implements OnInit {
     }
   }
 
-
   public saveData(data: IStepers[]) {
     if (this.estado === this.estados[0]) {
       this.dataSaveCard.data.familyCard = data;
@@ -95,9 +94,8 @@ export class RegistrarComponent implements OnInit {
       this.router.navigate(['/registros/nuevo/' + this.idRegister]);
     } else {
       this.dataSaveCard.data.personCard.push(data);
-      console.log({ dataSaveCard: this.dataSaveCard, data });
       this.registrosService.updateRegister(this.idRegister, this.dataSaveCard);
-      this.router.navigate(['/registros/nuevo/'], { replaceUrl: true });
+      location.reload();
     }
   }
 }
