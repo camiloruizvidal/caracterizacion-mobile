@@ -8,9 +8,10 @@ import { RegistrarComponent } from './components/registrar/registrar.component';
 import { IndexComponent } from './components/index/index.component';
 import { FormgeneratorModule } from '../formgenerator/formgenerator.module';
 import { SendComponent } from './components/send/send.component';
+import { ActualizarComponent } from './components/actualizar/actualizar.component';
 
 @NgModule({
-  declarations: [ListarComponent, RegistrarComponent, IndexComponent, SendComponent],
+  declarations: [ListarComponent, RegistrarComponent, ActualizarComponent, IndexComponent, SendComponent],
   imports: [IonicModule, CommonModule, TemplatesModule, RegistrosRoutingModule, FormgeneratorModule]
 })
 export class RegistrosModule {}
