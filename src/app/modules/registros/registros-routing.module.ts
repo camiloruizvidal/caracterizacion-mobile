@@ -4,6 +4,7 @@ import { ListarComponent } from './components/listar/listar.component';
 import { RegistrarComponent } from './components/registrar/registrar.component';
 import { IndexComponent } from './components/index/index.component';
 import { SendComponent } from './components/send/send.component';
+import { ActualizarComponent } from './components/actualizar/actualizar.component';
 
 const routes: Routes = [
   {
@@ -21,6 +22,14 @@ const routes: Routes = [
   {
     path: 'nuevo/:id',
     component: RegistrarComponent
+  },
+  {
+    path: 'actualizar/:id',
+    component: ActualizarComponent
+  },
+  {
+    path: 'actualizar/:id/idPaciente',
+    component: ActualizarComponent
   },
   {
     path: 'enviar',
