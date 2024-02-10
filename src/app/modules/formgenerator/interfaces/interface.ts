@@ -23,7 +23,7 @@ export interface ISteperValues {
   label: string;
   description: string;
   type: ESteperType;
-  options: IOptionsCheck | IOptionsSelect[];
+  options: IOptionsCheck | IOptionsSelect[] | IOptionsSelectFilter;
   default: boolean | string;
   visibility: IOptionsVisibility | boolean | null;
   required: IOptionsRequired | boolean | null;
@@ -132,4 +132,20 @@ export interface IPaciente {
   tiene_discapacidad?: boolean;
   created_at: Date;
   updated_at: Date;
+}
+
+
+export interface IOptionsSelectFilter {
+  label: string;
+  tabla_destino: string;
+  item_busqueda: string;
+  relaciones: IOptionsSelectFilterRelaciones[];
+  formato_listado_mostrar: string;
+  create_new: boolean;
+  label_no_exist?: string;
+}
+
+export interface IOptionsSelectFilterRelaciones {
+  origen: string;
+  destino: string;
 }

@@ -1,3 +1,42 @@
-<p>
-  select-filter works!
-</p>
+<ion-button (click)="abrirModal()"> {{ options.label }} </ion-button>
+
+<ion-modal [isOpen]="modalIsOpen">
+  <ion-modal trigger="open-modal">
+    <ng-template>
+      <ion-header>
+        <ion-toolbar>
+          <ion-buttons slot="start">
+            <ion-button (click)="cancel()">Cancel</ion-button>
+          </ion-buttons>
+          <ion-title>Welcome</ion-title>
+          <ion-buttons slot="end">
+            <ion-button (click)="confirm()" [strong]="true">Confirm</ion-button>
+          </ion-buttons>
+        </ion-toolbar>
+      </ion-header>
+      <ion-content class="ion-padding">
+        <ion-item>
+          <ion-button *ngIf="isNotFound && options.create_new">
+            {{ options.create_new }}
+          </ion-button>
+          <ion-label position="floating">Buscar</ion-label>
+          <ion-input
+            [formControl]="searchControl"
+            placeholder="Ingrese el término de búsqueda"
+          ></ion-input>
+        </ion-item>
+
+        <ion-list>
+          <ion-item *ngFor="let item of resultadosFiltrados">
+            <ion-label>
+              {{ formatItemToShow(item) }}
+            </ion-label>
+          </ion-item>
+        </ion-list>
+        <ion-item class="error" *ngIf="isNotFound">
+          No se encontraron resultados
+        </ion-item>
+      </ion-content>
+    </ng-template>
+  </ion-modal>
+</ion-modal>
