@@ -1,6 +1,10 @@
 import { DatabaseService } from 'src/app/utils/services/database/database.service';
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { IOptionsSelectFilter } from '../../../interfaces/interface';
+import {
+  IOptionsSelectFilter,
+  ISteperValues,
+  IStepers
+} from '../../../interfaces/interface';
 import { BaseInputComponent } from '../base-input/base-input.component';
 import { IonModal, ModalController } from '@ionic/angular';
 import { FormControl } from '@angular/forms';
@@ -32,12 +36,13 @@ export class SelectFilterComponent
     return this.steperValue.options as IOptionsSelectFilter;
   }
 
-  public get isNotFound(): boolean {
+  public get isEmptySearch(): boolean {
     return (
-      this.searchControl.value !== null &&
-      this.searchControl.value.trim() !== '' &&
-      this.resultadosFiltrados.length === 0
+      this.searchControl.value === null || this.searchControl.value.trim() == ''
     );
+  }
+  public get isNotFound(): boolean {
+    return this.isEmptySearch && this.resultadosFiltrados.length === 0;
   }
 
   async ngOnInit() {
@@ -74,12 +79,37 @@ export class SelectFilterComponent
     this.data = await this.databaseService.findAll();
   }
 
+  public agregarNuevo(): void {
+    this.steperValue.value = this.searchControl.value;
+    this.cancel();
+  }
+
   public formatItemToShow(item: any): string {
     const result = this.options.formato_listado_mostrar.replace(
       /\${(.*?)}/g,
       (match, params) => item[params.trim()]
     );
     return result;
+  }
+
+  public seleccionarItem(item: any): void {
+    this.formValue.forEach((element: IStepers, indexForm: number) => {
+      this.updateValues(element, item, indexForm);
+    });
+
+    this.cancel();
+  }
+
+  private updateValues(element: IStepers, item: any, indexForm: number): void {
+    element.values.forEach((value: ISteperValues, indexValue: number) => {
+      const itemValue = this.options.relaciones.find(
+        name => name.origen === value.columnName
+      );
+      if (itemValue) {
+        this.formValue[indexForm].values[indexValue].value =
+          item[itemValue.destino];
+      }
+    });
   }
 
   public abrirModal(): void {

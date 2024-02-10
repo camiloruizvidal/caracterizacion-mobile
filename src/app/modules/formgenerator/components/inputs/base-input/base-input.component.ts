@@ -1,10 +1,5 @@
 import { Input, Output, EventEmitter, Component } from '@angular/core';
-import { Injectable } from '@angular/core';
-import {
-  IOptionsSelectFilter,
-  ISteperValues,
-  IStepers
-} from '../../../interfaces/interface';
+import { ISteperValues, IStepers } from '../../../interfaces/interface';
 
 @Component({
   selector: 'app-base-input',
@@ -56,5 +51,4 @@ export class BaseInputComponent {
 
     return validate;
   }
-
 }

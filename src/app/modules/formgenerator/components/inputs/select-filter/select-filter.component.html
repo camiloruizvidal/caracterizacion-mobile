@@ -1,3 +1,4 @@
+<ion-text>{{ steperValue.label }}</ion-text>
 <ion-button (click)="abrirModal()"> {{ options.label }} </ion-button>
 
 <ion-modal [isOpen]="modalIsOpen">
@@ -6,36 +7,38 @@
       <ion-header>
         <ion-toolbar>
           <ion-buttons slot="start">
-            <ion-button (click)="cancel()">Cancel</ion-button>
+            <ion-button (click)="cancel()">Cancelar</ion-button>
           </ion-buttons>
-          <ion-title>Welcome</ion-title>
-          <ion-buttons slot="end">
-            <ion-button (click)="confirm()" [strong]="true">Confirm</ion-button>
-          </ion-buttons>
+          <ion-title>{{ options.label }}</ion-title>
         </ion-toolbar>
       </ion-header>
       <ion-content class="ion-padding">
         <ion-item>
-          <ion-button *ngIf="isNotFound && options.create_new">
-            {{ options.create_new }}
-          </ion-button>
           <ion-label position="floating">Buscar</ion-label>
           <ion-input
             [formControl]="searchControl"
             placeholder="Ingrese el término de búsqueda"
           ></ion-input>
         </ion-item>
-
+        <ion-item class="error" *ngIf="!isEmptySearch">
+          <div *ngIf="options.create_new">
+            {{ options.label_no_exist }}
+          </div>
+          <ion-button *ngIf="options.create_new" (click)="agregarNuevo()">
+            Agregar
+          </ion-button>
+          <div *ngIf="!options.create_new">No se encontraron resultados</div>
+        </ion-item>
         <ion-list>
-          <ion-item *ngFor="let item of resultadosFiltrados">
+          <ion-item
+            *ngFor="let item of resultadosFiltrados"
+            (click)="seleccionarItem(item)"
+          >
             <ion-label>
               {{ formatItemToShow(item) }}
             </ion-label>
           </ion-item>
         </ion-list>
-        <ion-item class="error" *ngIf="isNotFound">
-          No se encontraron resultados
-        </ion-item>
       </ion-content>
     </ng-template>
   </ion-modal>
