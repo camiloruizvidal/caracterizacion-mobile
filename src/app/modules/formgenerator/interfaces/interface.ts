@@ -134,7 +134,6 @@ export interface IPaciente {
   updated_at: Date;
 }
 
-
 export interface IOptionsSelectFilter {
   label: string;
   tabla_destino: string;
@@ -148,4 +147,14 @@ export interface IOptionsSelectFilter {
 export interface IOptionsSelectFilterRelaciones {
   origen: string;
   destino: string;
+}
+
+export interface IEventSteper {
+  data: IStepers[];
+  status: IEventSteperStatus;
+}
+
+export enum IEventSteperStatus {
+  salir = 'Salir',
+  nuevo = 'Nuevo'
 }

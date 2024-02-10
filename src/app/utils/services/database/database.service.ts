@@ -118,7 +118,6 @@ export class DatabaseService {
   public updateRecord(id: number, updatedData: any): Promise<void> {
     return new Promise((resolve, reject) => {
       const key = this.getKey();
-      console.log({ key });
       const data = localStorage.getItem(key);
 
       if (data) {

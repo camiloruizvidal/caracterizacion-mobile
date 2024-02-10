@@ -1,9 +1,9 @@
 import { ValidationsService } from './../../services/validations/validations.service';
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import {
   ESteperType,
-  IFamilyCard,
-  IFamilyCardSave,
+  IEventSteper,
+  IEventSteperStatus,
   ISteperValues,
   IStepers
 } from '../../interfaces/interface';
@@ -18,7 +18,7 @@ export class SteperComponent {
   @Input() dataSteper!: IStepers[];
   @Input() hasManyRegister: Boolean = false;
   @Input() isUpdate: Boolean = false;
-  @Output() saveDataMethod = new EventEmitter<IStepers[]>();
+  @Output() saveDataMethod = new EventEmitter<IEventSteper>();
   public currentStep: number = 0;
   public isDisabled: boolean = false;
 
@@ -43,11 +43,17 @@ export class SteperComponent {
 
   public guardar(): void {
     this.isDisabled = true;
-    this.saveDataMethod.emit(this.saveData);
+    this.saveDataMethod.emit({
+      data: this.saveData,
+      status: IEventSteperStatus.salir
+    });
   }
 
   public nuevoRegistro(): void {
-    this.saveDataMethod.emit(this.saveData);
+    this.saveDataMethod.emit({
+      data: this.saveData,
+      status: IEventSteperStatus.nuevo
+    });
   }
 
   public isVisibilityInput(itemInputs: ISteperValues, card: IStepers): boolean {

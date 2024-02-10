@@ -1,5 +1,6 @@
 import {
   ICodes,
+  IEventSteperStatus,
   IFamilyCard,
   IFamilyCardSave,
   IStepers,
@@ -85,7 +86,8 @@ export class RegistrarComponent implements OnInit {
     }
   }
 
-  public saveData(data: IStepers[]) {
+  public saveData(event: { data: IStepers[]; status: string }) {
+    const { data, status } = event;
     if (this.estado === this.estados[0]) {
       this.dataSaveCard.data.familyCard = data;
       this.estado = this.estados[1];
@@ -95,7 +97,11 @@ export class RegistrarComponent implements OnInit {
     } else {
       this.dataSaveCard.data.personCard.push(data);
       this.registrosService.updateRegister(this.idRegister, this.dataSaveCard);
-      location.reload();
+      if (status === IEventSteperStatus.salir) {
+        this.router.navigate(['/registros']);
+      } else if (status === IEventSteperStatus.nuevo) {
+        location.reload();
+      }
     }
   }
 }
