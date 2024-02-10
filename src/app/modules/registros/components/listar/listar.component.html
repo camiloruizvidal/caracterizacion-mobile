@@ -1,8 +1,24 @@
 <ion-list>
-  <ion-item *ngFor="let familiyCard of familiesCards; let i = index">
-    {{ i + 1 }})
-    Version:{{ familiyCard.version }},
-    Fecha de registro:
-    {{ familiyCard.dateRegister }}
+  <ion-item
+    *ngFor="let familiyCard of familiesCards; let indexFamilyCard = index"
+    (click)="(seleccionarRegistro(indexFamilyCard))"
+  >
+    <ion-grid>
+      <ion-row>
+        <ion-col> <strong>Codigo:</strong> {{ familiyCard.code }} </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col
+          ><strong>Fecha:</strong>
+          {{ familiyCard.dateRegister | date : 'yyyy-MM-dd' }}</ion-col
+        >
+      </ion-row>
+      <ion-row>
+        <ion-col
+          ><strong>Hora:</strong>
+          {{ familiyCard.dateRegister | date : 'hh:mm a' }}</ion-col
+        >
+      </ion-row>
+    </ion-grid>
   </ion-item>
 </ion-list>

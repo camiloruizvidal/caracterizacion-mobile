@@ -15,4 +15,8 @@ export class ListarComponent implements OnInit {
   async ngOnInit(): Promise<void> {
     this.familiesCards = await this.registrosService.loadAllRegister();
   }
+
+  public seleccionarRegistro(indexFamilyCardSave: number) {
+    console.log({ indexFamilyCardSave: this.familiesCards[indexFamilyCardSave] });
+  }
 }
