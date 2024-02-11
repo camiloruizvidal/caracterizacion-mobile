@@ -29,7 +29,7 @@
     <ion-col>
       <ion-button
         [disabled]="
-          personCardsCurrent + 1 > (card?.data?.personCard?.length || 0) - 1
+          personCardsCurrent + 1 > (cardLength) - 1
         "
         (click)="personCardsCurrent = personCardsCurrent + 1"
         expand="block"

@@ -169,6 +169,7 @@
   <ion-row *ngIf="isShowSave && hasManyRegister">
     <ion-col>
       <ion-button
+        *ngIf="!isUpdate"
         color="danger"
         [disabled]="isNextDisabled && isDisabled"
         expand="block"

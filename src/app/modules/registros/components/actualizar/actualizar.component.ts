@@ -7,6 +7,7 @@ import { RegistrosService } from '../../services/registros.service';
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { LoginService } from 'src/app/modules/login/services/login/login.service';
+import { AlertController } from '@ionic/angular';
 
 @Component({
   selector: 'app-actualizar',
@@ -25,12 +26,17 @@ export class ActualizarComponent implements OnInit {
   private indexCard: number;
   private userDate: IUser;
 
+  public get cardLength(): number {
+    return this.card?.data?.personCard?.length || 0;
+  }
+
   constructor(
     private registrosService: RegistrosService,
     private cdRef: ChangeDetectorRef,
     private route: ActivatedRoute,
     private router: Router,
-    private loginService: LoginService
+    private loginService: LoginService,
+    private alertController: AlertController
   ) {
     this.userDate = {
       id: 0,
@@ -59,18 +65,29 @@ export class ActualizarComponent implements OnInit {
     this.personCardsTotal = this.card.data.personCard.length;
   }
 
-  public saveData(event: IEventSteper) {
+  public async saveData(event: IEventSteper) {
     const { data } = event;
-    debugger;
     if (this.estado === this.estados[0]) {
       this.card.data.familyCard = data;
       this.estado = this.estados[1];
-      this.idRegister = this.registrosService.newRegister(this.card);
-      this.router.navigate(['/registros/nuevo/' + this.idRegister]);
+      this.registrosService.updateRegister(this.indexCard, this.card);
+      await this.presentAlert();
+      this.router.navigate(['/registros/actualizar/' + this.indexCard]);
     } else {
-      this.card.data.personCard.push(data);
-      this.registrosService.updateRegister(this.idRegister, this.card);
-      this.router.navigate(['/registros/nuevo/'], { replaceUrl: true });
+      debugger;
+      this.registrosService.updateRegister(this.indexCard, this.card);
+      await this.presentAlert();
+      this.router.navigate(['/registros']);
     }
+  }
+
+  private async presentAlert() {
+    const alert = await this.alertController.create({
+      header: 'Registro actualizado',
+      message: 'Se han actualizado el registro',
+      buttons: ['Action']
+    });
+
+    await alert.present();
   }
 }
