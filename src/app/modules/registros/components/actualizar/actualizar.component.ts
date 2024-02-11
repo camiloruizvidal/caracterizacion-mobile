@@ -21,7 +21,6 @@ export class ActualizarComponent implements OnInit {
   public personCardsTotal: number = 0;
   public personCardsCurrent: number = 0;
 
-  private dataSaveCard!: IFamilyCardSave;
   private idRegister: number;
   private indexCard: number;
   private userDate: IUser;
@@ -58,20 +57,19 @@ export class ActualizarComponent implements OnInit {
     this.userDate = await this.loginService.getCurrentUser();
     this.currentCode = this.card.code;
     this.personCardsTotal = this.card.data.personCard.length;
-    //this.loadOldData();
   }
 
   public saveData(event: IEventSteper) {
     const { data } = event;
+    debugger;
     if (this.estado === this.estados[0]) {
-      this.dataSaveCard.data.familyCard = data;
+      this.card.data.familyCard = data;
       this.estado = this.estados[1];
-      this.idRegister = this.registrosService.newRegister(this.dataSaveCard);
-      this.loginService.nextCode();
+      this.idRegister = this.registrosService.newRegister(this.card);
       this.router.navigate(['/registros/nuevo/' + this.idRegister]);
     } else {
-      this.dataSaveCard.data.personCard.push(data);
-      this.registrosService.updateRegister(this.idRegister, this.dataSaveCard);
+      this.card.data.personCard.push(data);
+      this.registrosService.updateRegister(this.idRegister, this.card);
       this.router.navigate(['/registros/nuevo/'], { replaceUrl: true });
     }
   }

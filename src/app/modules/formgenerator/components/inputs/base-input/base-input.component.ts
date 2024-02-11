@@ -1,4 +1,4 @@
-import { Input, Output, EventEmitter, Component } from '@angular/core';
+import { Input, Output, EventEmitter, Component, OnInit } from '@angular/core';
 import { ISteperValues, IStepers } from '../../../interfaces/interface';
 
 @Component({
@@ -6,7 +6,11 @@ import { ISteperValues, IStepers } from '../../../interfaces/interface';
   template: ''
 })
 export class BaseInputComponent {
-  constructor() {}
+  constructor() {
+    setTimeout(() => {
+      this.start();
+    }, 300);
+  }
 
   @Input() steperValue!: ISteperValues;
   @Input() formValue!: IStepers[];
@@ -16,6 +20,11 @@ export class BaseInputComponent {
 
   public valueData: any = '';
   public isValid: boolean = true;
+
+  public start(): void {
+    const detail = { value: this.steperValue.value };
+    this.saveInput({ detail });
+  }
 
   public saveInput(value: any): void {
     this.valueData = value.detail.value;
