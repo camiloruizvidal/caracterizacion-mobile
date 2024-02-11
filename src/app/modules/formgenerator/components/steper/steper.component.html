@@ -161,7 +161,8 @@
         (click)="nuevoRegistro()"
       >
         <ion-icon name="save-outline"></ion-icon>
-        &nbsp; Nuevo registro
+        &nbsp;
+        {{ isUpdate ? 'Actualizar' : 'Nuevo' }} registro
       </ion-button>
     </ion-col>
   </ion-row>
