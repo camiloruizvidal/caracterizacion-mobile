@@ -1,9 +1,6 @@
 import {
-  ICodes,
   IEventSteper,
-  IFamilyCard,
   IFamilyCardSave,
-  IStepers,
   IUser
 } from 'src/app/modules/formgenerator/interfaces/interface';
 import { RegistrosService } from '../../services/registros.service';
@@ -21,6 +18,8 @@ export class ActualizarComponent implements OnInit {
   public estados: string[] = ['familyCard', 'personCard'];
   public estado: string = this.estados[0];
   public currentCode: number = 1;
+  public personCardsTotal: number = 0;
+  public personCardsCurrent: number = 0;
 
   private dataSaveCard!: IFamilyCardSave;
   private idRegister: number;
@@ -58,16 +57,8 @@ export class ActualizarComponent implements OnInit {
     this.card = await this.registrosService.loadRegister(this.indexCard);
     this.userDate = await this.loginService.getCurrentUser();
     this.currentCode = this.card.code;
+    this.personCardsTotal = this.card.data.personCard.length;
     //this.loadOldData();
-  }
-
-  private async loadOldData(): Promise<void> {
-    if (this.idRegister > -1) {
-      this.dataSaveCard = await this.registrosService.loadRegister(
-        this.idRegister
-      );
-      this.estado = this.estados[1];
-    }
   }
 
   public saveData(event: IEventSteper) {

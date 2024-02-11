@@ -1,13 +1,4 @@
 <ion-content [fullscreen]="true">
-  <div *ngIf="card && estado === estados[0]">
-    <ion-title>Tarjeta familiar - {{ currentCode }}</ion-title>
-    <app-steper
-      (saveDataMethod)="saveData($event)"
-      [dataSteper]="card.data.familyCard"
-    >
-    </app-steper>
-  </div>
-
   <ion-row *ngIf="estado === estados[0]">
     <ion-col>
       <ion-button fill="outline" (click)="estado = estados[1]" expand="block">
@@ -15,16 +6,6 @@
       </ion-button>
     </ion-col>
   </ion-row>
-  <div *ngFor="let personCard of card?.data?.personCard">
-    <div *ngIf="card && estado === estados[1]">
-      <ion-title>Tarjeta personal - {{ currentCode }}</ion-title>
-      <app-steper
-        (saveDataMethod)="saveData($event)"
-        [dataSteper]="personCard"
-        [hasManyRegister]="true"
-      ></app-steper>
-    </div>
-  </div>
 
   <ion-row *ngIf="estado === estados[1]">
     <ion-col>
@@ -35,18 +16,52 @@
   </ion-row>
   <ion-row *ngIf="estado === estados[1]">
     <ion-col>
-      <ion-button (click)="estado = estados[0]" expand="block">
+      <ion-button
+        (click)="personCardsCurrent = personCardsCurrent - 1"
+        [disabled]="personCardsCurrent < 1"
+        expand="block"
+      >
         <ion-icon name="arrow-back-outline"></ion-icon>
         <ion-icon name="accessibility-outline"></ion-icon>
         Anterior
       </ion-button>
     </ion-col>
     <ion-col>
-      <ion-button (click)="estado = estados[0]" expand="block">
+      <ion-button
+        [disabled]="
+          personCardsCurrent + 1 > (card?.data?.personCard?.length || 0) - 1
+        "
+        (click)="personCardsCurrent = personCardsCurrent + 1"
+        expand="block"
+      >
         Siguiente
         <ion-icon name="accessibility-outline"></ion-icon>
         <ion-icon name="arrow-forward-outline"></ion-icon>
       </ion-button>
     </ion-col>
   </ion-row>
+  <div *ngIf="card && estado === estados[0]">
+    <ion-title>Tarjeta familiar - {{ currentCode }}</ion-title>
+    <app-steper
+      [isUpdate]="true"
+      (saveDataMethod)="saveData($event)"
+      [dataSteper]="card.data.familyCard"
+    >
+    </app-steper>
+  </div>
+
+  <div *ngFor="let personCard of card?.data?.personCard; let i = index">
+    <div *ngIf="card && estado === estados[1] && personCardsCurrent === i">
+      <ion-title
+        >Tarjeta personal - {{ currentCode }}. Registro {{ i + 1 }} de
+        {{ personCardsTotal }}
+      </ion-title>
+      <app-steper
+        [isUpdate]="true"
+        (saveDataMethod)="saveData($event)"
+        [dataSteper]="personCard"
+        [hasManyRegister]="true"
+      ></app-steper>
+    </div>
+  </div>
 </ion-content>
