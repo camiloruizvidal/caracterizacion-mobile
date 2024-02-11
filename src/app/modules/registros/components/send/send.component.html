@@ -2,7 +2,9 @@
   <ion-row>
     <ion-col>
       <ion-title>
-        Hay {{ registers.length }} registros guardados. Desea enviarlos?
+        Hay {{ registers.length }}
+        registro{{ registers.length ? 's' : '' }}
+        guardado{{ registers.length ? 's' : '' }}. Desea enviarlos?
       </ion-title>
     </ion-col>
   </ion-row>

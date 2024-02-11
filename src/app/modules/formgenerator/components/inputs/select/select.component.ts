@@ -1,5 +1,5 @@
-import { Component, Input } from '@angular/core';
-import { IOptionsSelect, ISteperValues } from '../../../interfaces/interface';
+import { Component } from '@angular/core';
+import { IOptionsSelect } from '../../../interfaces/interface';
 import { BaseInputComponent } from '../base-input/base-input.component';
 
 @Component({
