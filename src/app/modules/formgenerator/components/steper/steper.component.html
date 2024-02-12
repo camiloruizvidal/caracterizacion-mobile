@@ -90,6 +90,14 @@
               >
               </app-select>
             </ion-col>
+            <ion-col *ngSwitchCase="SteperType.selectMultiple" class="ion-input-line">
+              <app-select-multiple
+                [steperValue]="itemInputs"
+                (saveInputData)="saveValueColumn($event)"
+                [formValue]="dataSteper"
+              >
+              </app-select-multiple>
+            </ion-col>
             <ion-col
               *ngSwitchCase="SteperType.SelectFilter"
               class="ion-input-line"

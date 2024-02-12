@@ -17,6 +17,7 @@ import { TextAreaComponent } from './components/inputs/text-area/text-area.compo
 import { PhotoComponent } from './components/inputs/photo/photo.component';
 import { GPSComponent } from './components/inputs/gps/gps.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { SelectMultipleComponent } from './components/inputs/select-multiple/select-multiple.component';
 
 @NgModule({
   declarations: [
@@ -30,6 +31,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     PhoneComponent,
     RelationshipComponent,
     SelectComponent,
+    SelectMultipleComponent,
     SelectFilterComponent,
     TextComponent,
     TextAreaComponent,
@@ -47,6 +49,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     PhoneComponent,
     RelationshipComponent,
     SelectComponent,
+    SelectMultipleComponent,
     SelectFilterComponent,
     TextComponent,
     TextAreaComponent,

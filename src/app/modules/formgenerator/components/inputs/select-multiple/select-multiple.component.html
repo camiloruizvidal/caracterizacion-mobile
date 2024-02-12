@@ -1,0 +1,15 @@
+<ion-text>
+  <span *ngIf="isRequired" class="required-input">*</span>
+  {{ steperValue.label }}
+</ion-text>
+<ion-select
+  [id]="steperValue.columnName"
+  (ionChange)="handlerClic($event)"
+  labelPlacement="floating"
+  [value]="steperValue.value"
+  [multiple]="true"
+>
+  <ion-select-option *ngFor="let option of options" [value]="option.value">
+    {{ option.option }}
+  </ion-select-option>
+</ion-select>

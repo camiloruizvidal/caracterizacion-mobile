@@ -44,7 +44,9 @@ export enum ESteperType {
   Select = 'select',
   SelectFilter = 'selectFilter',
   Text = 'text',
-  TextArea = 'textarea'
+  TextArea = 'textarea',
+  Ruta = 'ruta_atencion',
+  selectMultiple = 'select_multiple'
 }
 
 export interface IOptionsCheck {
