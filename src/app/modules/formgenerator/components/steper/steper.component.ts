@@ -65,6 +65,7 @@ export class SteperComponent {
   }
 
   public get isNextDisabled(): boolean {
+    return false;
     let requireds = this.dataSteper[this.currentStep].values.filter(
       value =>
         value.required && (value.value == null || value.value.trim() === '')

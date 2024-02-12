@@ -2,3 +2,9 @@
   border: 1px solid #cccccc2e;
   padding: 10px;
 }
+
+.alert-checkbox-group.sc-ion-alert-md::-webkit-scrollbar,
+  .alert-radio-group.sc-ion-alert-md::-webkit-scrollbar,
+  .alert-message.sc-ion-alert-md::-webkit-scrollbar {
+  /* display: none; */
+}
