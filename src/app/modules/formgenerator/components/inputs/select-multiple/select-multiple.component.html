@@ -6,10 +6,13 @@
   [id]="steperValue.columnName"
   (ionChange)="handlerClic($event)"
   labelPlacement="floating"
-  [value]="steperValue.value"
+  [value]="getValueArray"
   [multiple]="true"
 >
   <ion-select-option *ngFor="let option of options" [value]="option.value">
     {{ option.option }}
   </ion-select-option>
 </ion-select>
+<ion-item class="values" *ngFor="let values of getValueArray">
+  {{ values }}
+</ion-item>

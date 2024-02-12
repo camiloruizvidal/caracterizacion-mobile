@@ -18,9 +18,15 @@ export class SelectMultipleComponent extends BaseInputComponent {
 
   public handlerClic(event: any) {
     this.saveInput({
-      value: {
-        detail: event.detail.value.join('. ')
+      detail: {
+        value: event.detail.value.join('; ')
       }
     });
+  }
+
+  public get getValueArray(): string[] {
+    return null === this.steperValue.value
+      ? []
+      : this.steperValue.value.split('; ');
   }
 }
