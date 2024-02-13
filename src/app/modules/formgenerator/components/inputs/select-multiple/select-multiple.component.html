@@ -2,17 +2,24 @@
   <span *ngIf="isRequired" class="required-input">*</span>
   {{ steperValue.label }}
 </ion-text>
-<ion-select
-  [id]="steperValue.columnName"
-  (ionChange)="handlerClic($event)"
-  labelPlacement="floating"
-  [value]="getValueArray"
-  [multiple]="true"
->
-  <ion-select-option *ngFor="let option of options" [value]="option.value">
-    {{ option.option }}
-  </ion-select-option>
-</ion-select>
-<ion-item class="values" *ngFor="let values of getValueArray">
-  {{ values }}
-</ion-item>
+<ion-row *ngFor="let item of options; let i = index">
+  <ion-col size="auto">
+    <div class="size-switch">
+      <div class="container">
+        <label class="switch" [for]="steperValue.columnName + i.toString()">
+          <input
+            type="checkbox"
+            (click)="handlerClic($event, i)"
+            [id]="steperValue.columnName + i.toString()"
+          />
+          <div class="slider round"></div>
+        </label>
+      </div>
+    </div>
+  </ion-col>
+  <ion-col>
+    <ion-text>
+      {{ item.value }}
+    </ion-text>
+  </ion-col>
+</ion-row>

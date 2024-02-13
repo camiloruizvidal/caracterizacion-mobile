@@ -11,22 +11,28 @@ export class SelectMultipleComponent extends BaseInputComponent {
   constructor() {
     super();
   }
+  private optionsSelect: string[] = [];
 
   public get options(): IOptionsSelect[] {
     return this.steperValue.options as IOptionsSelect[];
   }
 
-  public handlerClic(event: any) {
+  public handlerClic(event: any, index: number) {
+    const options = this.options;
+    const selectedOption = options[index];
+    if (event.target.checked) {
+      this.optionsSelect.push(selectedOption.value);
+    } else {
+      const indexToRemove = this.optionsSelect.indexOf(selectedOption.value);
+      if (indexToRemove !== -1) {
+        this.optionsSelect.splice(indexToRemove, 1);
+      }
+    }
+
     this.saveInput({
       detail: {
-        value: event.detail.value.join('; ')
+        value: this.optionsSelect.join('; ')
       }
     });
-  }
-
-  public get getValueArray(): string[] {
-    return null === this.steperValue.value
-      ? []
-      : this.steperValue.value.split('; ');
   }
 }
