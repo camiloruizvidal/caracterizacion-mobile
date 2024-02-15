@@ -19,7 +19,7 @@ export interface IStepers {
 
 export interface ISteperValues {
   columnName: string;
-  order: number;
+  orden: number;
   label: string;
   description: string;
   type: ESteperType;
@@ -45,6 +45,8 @@ export enum ESteperType {
   SelectFilter = 'selectFilter',
   Text = 'text',
   TextArea = 'textarea',
+  Title = 'title',
+  SubTitle = 'subtitle',
   Ruta = 'ruta_atencion',
   selectMultiple = 'select_multiple'
 }

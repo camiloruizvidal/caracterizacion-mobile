@@ -18,6 +18,8 @@ import { PhotoComponent } from './components/inputs/photo/photo.component';
 import { GPSComponent } from './components/inputs/gps/gps.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SelectMultipleComponent } from './components/inputs/select-multiple/select-multiple.component';
+import { TitleComponent } from './components/inputs/title/title.component';
+import { SubtitleComponent } from './components/inputs/subtitle/subtitle.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +38,9 @@ import { SelectMultipleComponent } from './components/inputs/select-multiple/sel
     TextComponent,
     TextAreaComponent,
     PhotoComponent,
-    GPSComponent
+    GPSComponent,
+    TitleComponent,
+    SubtitleComponent
   ],
   exports: [
     SteperComponent,
@@ -54,7 +58,9 @@ import { SelectMultipleComponent } from './components/inputs/select-multiple/sel
     TextComponent,
     TextAreaComponent,
     PhotoComponent,
-    GPSComponent
+    GPSComponent,
+    TitleComponent,
+    SubtitleComponent
   ],
   imports: [
     CommonModule,

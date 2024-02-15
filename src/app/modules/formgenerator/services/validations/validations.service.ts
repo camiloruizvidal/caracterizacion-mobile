@@ -14,11 +14,16 @@ export class ValidationsService {
 
   public isVisibility(itemInputs: ISteperValues, card: IStepers): boolean {
     let isVisibility: boolean = true;
-    if(typeof itemInputs.visibility === 'boolean') {
+    if (typeof itemInputs.visibility === 'boolean') {
       return itemInputs.visibility;
-    }
-    else if (itemInputs.visibility && itemInputs.visibility?.rules) {
+    } else if (itemInputs.visibility && itemInputs.visibility?.rules) {
       isVisibility = this.isValidatedRules(itemInputs.visibility, card);
+    }
+    if (itemInputs.visibility) {
+      console.log({
+        isVisibility,
+        itemInputs: itemInputs.columnName
+      });
     }
     return isVisibility;
   }
@@ -36,7 +41,7 @@ export class ValidationsService {
           break;
       }
     });
-    
+
     return isVisilty;
   }
 
