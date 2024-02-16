@@ -19,13 +19,6 @@ export class ValidationsService {
     } else if (itemInputs.visibility && itemInputs.visibility?.rules) {
       isVisibility = this.isValidatedRules(itemInputs.visibility, card);
     }
-    if (itemInputs.visibility) {
-      console.log({
-        isVisibility,
-        itemInputs,
-        columnnName: itemInputs.columnName
-      });
-    }
     return isVisibility;
   }
 

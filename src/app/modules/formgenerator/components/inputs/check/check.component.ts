@@ -32,7 +32,7 @@ export class CheckComponent extends BaseInputComponent implements OnInit {
       this.value === this.valueOption?.valueTrue
         ? this.valueOption?.valueFalse
         : this.valueOption?.valueTrue;
-    this.valueCheck = this.value == this.valueOption?.valueTrue;
+    this.valueCheck = this.value === this.valueOption?.valueTrue;
     this.saveInput({ detail: { value: this.value } });
   }
 }
