@@ -14,18 +14,22 @@
           *ngFor="let itemInputs of card.values"
           [ngSwitch]="itemInputs.type"
         >
-          <app-title
-            *ngSwitchCase="SteperType.Title"
-            [steperValue]="itemInputs"
-            [formValue]="dataSteper"
-          >
-          </app-title>
-          <app-subtitle
-            *ngSwitchCase="SteperType.SubTitle"
-            [steperValue]="itemInputs"
-            [formValue]="dataSteper"
-          >
-          </app-subtitle>
+          <div *ngSwitchCase="SteperType.Title">
+            <app-title
+              *ngIf="isVisibilityInput(itemInputs, card)"
+              [steperValue]="itemInputs"
+              [formValue]="dataSteper"
+            >
+            </app-title>
+          </div>
+          <div *ngSwitchCase="SteperType.SubTitle">
+            <app-subtitle
+              *ngIf="isVisibilityInput(itemInputs, card)"
+              [steperValue]="itemInputs"
+              [formValue]="dataSteper"
+            >
+            </app-subtitle>
+          </div>
           <ion-row *ngIf="isVisibilityInput(itemInputs, card)">
             <ion-col *ngSwitchCase="SteperType.Address" class="ion-input-line">
               <app-address
