@@ -22,7 +22,8 @@ export class ValidationsService {
     if (itemInputs.visibility) {
       console.log({
         isVisibility,
-        itemInputs: itemInputs.columnName
+        itemInputs,
+        columnnName: itemInputs.columnName
       });
     }
     return isVisibility;
