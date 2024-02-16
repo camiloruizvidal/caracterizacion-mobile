@@ -26,7 +26,6 @@
             [formValue]="dataSteper"
           >
           </app-subtitle>
-          order: <i>{{ itemInputs.orden | json }}</i>
           <ion-row *ngIf="isVisibilityInput(itemInputs, card)">
             <ion-col *ngSwitchCase="SteperType.Address" class="ion-input-line">
               <app-address
