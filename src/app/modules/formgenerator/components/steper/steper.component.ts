@@ -75,10 +75,8 @@ export class SteperComponent {
     );
   }
 
-  public get isLastDisabled(): boolean {return false;
-    return (
-      this.currentStep === 0 || this.currentStep < this.dataSteper.length - 1
-    );
+  public get isLastDisabled(): boolean {
+    return this.currentStep === 0;
   }
 
   public get isShowSave(): boolean {

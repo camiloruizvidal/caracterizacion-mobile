@@ -74,7 +74,6 @@ export class ActualizarComponent implements OnInit {
       await this.presentAlert();
       this.router.navigate(['/registros/actualizar/' + this.indexCard]);
     } else {
-      debugger;
       this.registrosService.updateRegister(this.indexCard, this.card);
       await this.presentAlert();
       this.router.navigate(['/registros']);

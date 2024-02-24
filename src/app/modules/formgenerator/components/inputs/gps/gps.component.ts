@@ -20,8 +20,22 @@ export class GPSComponent extends BaseInputComponent {
   ) {
     super();
     this.locationForm = this.formBuilder.group({
-      longitud: [{ value: '', disabled: true }, Validators.required],
-      latitud: [{ value: '', disabled: true }, Validators.required]
+      lng: [{ value: '', disabled: true }, Validators.required],
+      lat: [{ value: '', disabled: true }, Validators.required]
+    });
+    this.locationForm.get('lng')?.valueChanges.subscribe(newLongitud => {
+      setTimeout(() => {
+        this.saveInput({
+          detail: { value: JSON.stringify(this.locationForm.value) }
+        });
+      }, 300);
+    });
+    this.locationForm.get('lat')?.valueChanges.subscribe(newLatitud => {
+      setTimeout(() => {
+        this.saveInput({
+          detail: { value: JSON.stringify(this.locationForm.value) }
+        });
+      }, 300);
     });
   }
 
@@ -38,10 +52,9 @@ export class GPSComponent extends BaseInputComponent {
 
       const position: GeolocationPosition =
         await Geolocation.getCurrentPosition();
-      console.log({ position });
       this.locationForm.patchValue({
-        longitud: position.coords.longitude,
-        latitud: position.coords.latitude
+        lng: position.coords.longitude,
+        lat: position.coords.latitude
       });
       this.isLocationCaptured = true;
     } catch (error) {

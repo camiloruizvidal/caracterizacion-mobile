@@ -1,8 +1,9 @@
 import { LoginService } from './../../services/login/login.service';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { LoadingController } from '@ionic/angular';
+import { LoadingController, ToastController } from '@ionic/angular';
 import { Router } from '@angular/router';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-login',
@@ -14,6 +15,7 @@ export class LoginComponent implements OnInit {
   public loginForm: FormGroup;
 
   constructor(
+    private toastController: ToastController,
     private loadingCtrl: LoadingController,
     private formBuilder: FormBuilder,
     private loginService: LoginService,
@@ -27,8 +29,13 @@ export class LoginComponent implements OnInit {
     this.startLoading();
   }
 
-  public ngOnInit(): void {
-    this.loginService.closeLogin();
+  public async ngOnInit(): Promise<void> {
+    return;
+    if (await this.loginService.isLogin()) {
+      this.router.navigate(['/registros'], { replaceUrl: true });
+    } else {
+      this.loginService.closeLogin();
+    }
   }
 
   private async startLoading(): Promise<void> {
@@ -47,9 +54,19 @@ export class LoginComponent implements OnInit {
           this.loginForm.value['password'],
           this.loginForm.value['server']
         )
-        .subscribe(response => {
-          this.router.navigate(['/load'], { replaceUrl: true });
-        });
+        .subscribe(
+          response => {
+            this.router.navigate(['/load'], { replaceUrl: true });
+          },
+          async (error: HttpErrorResponse) => {
+            const toast = await this.toastController.create({
+              message: error.error.message,
+              duration: 2000,
+              position: 'top'
+            });
+            toast.present();
+          }
+        );
     }
     this.loading.dismiss();
   }
