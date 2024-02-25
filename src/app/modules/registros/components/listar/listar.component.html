@@ -1,3 +1,7 @@
+<ion-text>Se han registrado un total de {{ familiesCards.length }}.</ion-text>
+<br>
+<i>Recuerde que los registros que ya fueron enviados no se cuentan.</i>
+<hr>
 <ion-list>
   <ion-item
     *ngFor="let familiyCard of familiesCards; let indexFamilyCard = index"
@@ -5,13 +9,15 @@
   >
     <ion-grid>
       <ion-row>
+        <ion-row>
+          <ion-col>
+            <i> {{ indexFamilyCard + 1 }}) </i>
+            <strong>C&oacute;digo de ficha:</strong>
+            {{ familiyCard.code }}
+          </ion-col>
+        </ion-row>
         <ion-col>
           <strong>{{ countPersons(familiyCard) }} Personas registradas</strong>
-        </ion-col>
-      </ion-row>
-      <ion-row>
-        <ion-col>
-          <strong>Codigo de ficha:</strong> {{ familiyCard.code }}
         </ion-col>
       </ion-row>
       <ion-row>
