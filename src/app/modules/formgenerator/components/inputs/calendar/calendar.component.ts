@@ -24,9 +24,9 @@ export class CalendarComponent extends BaseInputComponent {
     const fechaNac = moment(fechaNacimiento, 'YYYY-MM-DDTHH:mm:ss');
 
     const anios = hoy.diff(fechaNac, 'years');
-    fechaNac.add(anios, 'years'); // Restar años de la fecha de nacimiento
+    fechaNac.add(anios, 'years');
     const meses = hoy.diff(fechaNac, 'months');
-    fechaNac.add(meses, 'months'); // Restar meses de la fecha de nacimiento
+    fechaNac.add(meses, 'months');
     const dias = hoy.diff(fechaNac, 'days');
 
     let resultado = '';
@@ -48,7 +48,7 @@ export class CalendarComponent extends BaseInputComponent {
     return resultado.length > 0 ? resultado : 'Recién nacido';
   }
 
-  public get defaultDate(): Date {
-    return moment().toDate();
+  public get defaultDate(): any {
+    return moment().format('YYYY-MM-DDTHH:mm:ss');
   }
 }
