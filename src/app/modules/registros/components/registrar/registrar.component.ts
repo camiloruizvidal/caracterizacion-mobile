@@ -11,6 +11,7 @@ import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { LoginService } from 'src/app/modules/login/services/login/login.service';
 import { NavController } from '@ionic/angular';
+import { LoadingController } from '@ionic/angular';
 
 @Component({
   selector: 'app-registrar',
@@ -31,6 +32,7 @@ export class RegistrarComponent implements OnInit {
 
   constructor(
     private registrosService: RegistrosService,
+    private loadingCtrl: LoadingController,
     private loginService: LoginService,
     private cdRef: ChangeDetectorRef,
     private navCtrl: NavController,
@@ -101,7 +103,12 @@ export class RegistrarComponent implements OnInit {
     }
   }
 
-  public saveData(event: { data: IStepers[]; status: string }) {
+  public async saveData(event: { data: IStepers[]; status: string }) {
+    const loading = await this.loadingCtrl.create({
+      message: 'Guardando',
+      duration: 1000
+    });
+    loading.present();
     const { data, status } = event;
     if (this.estado === this.estados[0]) {
       this.dataSaveCard.data.familyCard = data;

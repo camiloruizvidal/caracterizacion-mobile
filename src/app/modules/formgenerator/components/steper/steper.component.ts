@@ -8,7 +8,6 @@ import {
   IStepers
 } from '../../interfaces/interface';
 import { RegistrosService } from 'src/app/modules/registros/services/registros.service';
-import { LoadingController } from '@ionic/angular';
 
 @Component({
   selector: 'app-steper',
@@ -27,17 +26,11 @@ export class SteperComponent implements OnInit {
 
   constructor(
     private validationsService: ValidationsService,
-    private registrosService: RegistrosService,
-    private loadingCtrl: LoadingController
+    private registrosService: RegistrosService
   ) {}
 
   async ngOnInit(): Promise<void> {
     if (!this.isUpdate) {
-      const loading = await this.loadingCtrl.create({
-        message: 'Cargando',
-        duration: 1000
-      });
-      loading.present();
       this.clearValues(this.dataSteper);
     }
   }
