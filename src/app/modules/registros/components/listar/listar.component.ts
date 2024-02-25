@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { RegistrosService } from '../../services/registros.service';
 import { IFamilyCardSave } from 'src/app/modules/formgenerator/interfaces/interface';
 import { Router } from '@angular/router';
-import { timeInterval } from 'rxjs';
 
 @Component({
   selector: 'app-listar',

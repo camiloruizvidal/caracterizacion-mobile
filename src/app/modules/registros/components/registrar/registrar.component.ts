@@ -7,11 +7,18 @@ import {
   IUser
 } from 'src/app/modules/formgenerator/interfaces/interface';
 import { RegistrosService } from './../../services/registros.service';
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import {
+  ChangeDetectorRef,
+  Component,
+  ElementRef,
+  OnInit,
+  ViewChild
+} from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { LoginService } from 'src/app/modules/login/services/login/login.service';
 import { NavController } from '@ionic/angular';
 import { LoadingController } from '@ionic/angular';
+import { jsPDF } from 'jspdf';
 
 @Component({
   selector: 'app-registrar',
@@ -19,16 +26,17 @@ import { LoadingController } from '@ionic/angular';
   styleUrls: ['./registrar.component.scss']
 })
 export class RegistrarComponent implements OnInit {
+  @ViewChild('tarjetas', { static: false }) elementRef!: ElementRef;
   public card!: IFamilyCard;
   public estados: string[] = ['familyCard', 'personCard'];
   public estado: string = this.estados[0];
   public currentCode: number = 1;
   public reload: boolean = true;
+  public dataSaveCard!: IFamilyCardSave;
+  public userDate: IUser;
 
   private myCodes: ICodes[] = [];
-  private dataSaveCard!: IFamilyCardSave;
   private idRegister: number;
-  private userDate: IUser;
 
   constructor(
     private registrosService: RegistrosService,
@@ -120,7 +128,7 @@ export class RegistrarComponent implements OnInit {
       this.dataSaveCard.data.personCard.push(data);
       this.registrosService.updateRegister(this.idRegister, this.dataSaveCard);
       if (status === IEventSteperStatus.salir) {
-        this.router.navigate(['/registros']);
+        this.generatePDF();
       } else if (status === IEventSteperStatus.nuevo) {
         this.reload = false;
         setTimeout(() => {
@@ -129,5 +137,17 @@ export class RegistrarComponent implements OnInit {
         }, 200);
       }
     }
+  }
+
+  public generatePDF() {
+    let pdf = new jsPDF('p', 'pt', 'letter');
+    pdf.setLanguage('es-CO');
+    pdf.html(this.elementRef.nativeElement, {
+      callback: pdf => {
+        pdf.save('Tarjeta Familiar - ' + this.dataSaveCard.code + '.pdf');
+        this.router.navigate(['/registros']);
+      },
+      margin: [30, 0, 30, 0]
+    });
   }
 }

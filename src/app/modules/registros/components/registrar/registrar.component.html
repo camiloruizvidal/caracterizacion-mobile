@@ -1,4 +1,71 @@
 <ion-content [fullscreen]="true">
+  <div style="display: none">
+    <div
+      id="tarjetas"
+      #tarjetas
+      style="max-width: 300px; padding: 20px; font-size: 10px"
+    >
+      <table style="border: 1px solid #000">
+        <tr style="border: 1px solid #000">
+          <th style="border: 1px solid #000">version</th>
+          <th style="border: 1px solid #000">dateLastVersion</th>
+          <th style="border: 1px solid #000">dateRegister</th>
+          <th style="border: 1px solid #000">code</th>
+          <th style="border: 1px solid #000">user</th>
+        </tr>
+        <tr style="border: 1px solid #000">
+          <td style="border: 1px solid #000">{{ dataSaveCard.version }}</td>
+          <td style="border: 1px solid #000">
+            {{ dataSaveCard.dateLastVersion }}
+          </td>
+          <td style="border: 1px solid #000">
+            {{ dataSaveCard.dateRegister }}
+          </td>
+          <td style="border: 1px solid #000">{{ dataSaveCard.code }}</td>
+          <td style="border: 1px solid #000">
+            {{ userDate.documento }} <br>
+            {{ userDate.nombrePrimero }}
+            {{ userDate.nombreSegundo }}
+            {{ userDate.apellidoPrimero }}
+            {{ userDate.apellidoSegundo }}
+          </td>
+        </tr>
+      </table>
+      <div style="min-width: 300px" *ngFor="let familyCard of dataSaveCard.data.familyCard">
+        <h1>{{ familyCard.title }}</h1>
+        <div *ngFor="let valuesFamily of familyCard.values">
+          <p>
+            {{ valuesFamily?.id }})
+            <strong>{{ valuesFamily.label }}:</strong>
+            {{
+              valuesFamily.value === null || valuesFamily.value === ''
+                ? '-'
+                : valuesFamily.value
+            }}
+          </p>
+        </div>
+      </div>
+      <div
+        style="min-width: 300px"
+        *ngFor="let persons of dataSaveCard.data.personCard; let i = index"
+      >
+        <h1>
+          {{ i + 1 }} de {{ dataSaveCard.data.personCard.length }}) Datos
+          personales
+        </h1>
+        <div *ngFor="let person of persons">
+          <h1>{{ person.title }}</h1>
+          <div *ngFor="let item of person.values">
+            <p>
+              {{ item?.id }})
+              <strong>{{ item.label }}:</strong>
+              {{ item.value === null || item.value === '' ? '-' : item.value }}
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
   <div *ngIf="card && estado === estados[0]">
     <ion-title>Tarjeta familiar - {{ currentCode }}</ion-title>
     <app-steper

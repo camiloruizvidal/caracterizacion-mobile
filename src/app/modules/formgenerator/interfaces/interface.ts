@@ -18,6 +18,7 @@ export interface IStepers {
 }
 
 export interface ISteperValues {
+  id?: number;
   columnName: string;
   orden: number;
   label: string;
