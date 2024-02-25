@@ -34,6 +34,18 @@ export class RegistrarComponent implements OnInit {
     private router: Router,
     private loginService: LoginService
   ) {
+    this.dataSaveCard = {
+      version: '',
+      dateLastVersion: new Date(),
+      dateRegister: new Date(),
+      code: 0,
+      userId: 0,
+      data: {
+        familyCard: [],
+        personCard: []
+      }
+    };
+
     this.userDate = {
       id: 0,
       username: '',
@@ -58,9 +70,9 @@ export class RegistrarComponent implements OnInit {
     this.currentCode = this.userDate.currentCode;
 
     this.card = await this.registrosService.loadForms();
-    this.cdRef.detectChanges();
     this.inicialiceCard(this.card);
     this.loadOldData();
+    this.cdRef.detectChanges();
   }
 
   private inicialiceCard(familyCard: IFamilyCard): void {

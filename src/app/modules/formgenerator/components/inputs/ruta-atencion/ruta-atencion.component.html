@@ -1,0 +1,14 @@
+<ng-container *ngFor="let getOptions of getOptions">
+  <ion-text>
+    Su edad es de {{ edad }} años. <br />
+    Su rango de edad:
+    {{ getOptions.edad_inicial }} años a los {{ getOptions.edad_final }} años.
+  </ion-text>
+  <ion-card-title>{{ getOptions.categoria }}</ion-card-title>
+  <ion-card-subtitle>{{ getOptions.descripcion }}</ion-card-subtitle>
+  <ul>
+    <li *ngFor="let examen of getOptions.examenes_medicos_recomendados">
+      {{ examen }}
+    </li>
+  </ul>
+</ng-container>

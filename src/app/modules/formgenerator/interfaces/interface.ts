@@ -162,3 +162,12 @@ export enum IEventSteperStatus {
   salir = 'Salir',
   nuevo = 'Nuevo'
 }
+
+export interface IRutasAtencion {
+  genero: string;
+  edad_inicial: number;
+  edad_final: number;
+  categoria: string;
+  descripcion: string;
+  examenes_medicos_recomendados: string[];
+}

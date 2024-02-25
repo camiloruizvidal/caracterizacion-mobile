@@ -160,6 +160,14 @@
               >
               </app-gps>
             </ion-col>
+            <ion-col *ngSwitchCase="SteperType.Ruta" class="ion-input-line">
+              <app-ruta-atencion
+                [steperValue]="itemInputs"
+                (saveInputData)="saveValueColumn($event)"
+                [formValue]="dataSteper"
+              >
+              </app-ruta-atencion>
+            </ion-col>
           </ion-row>
         </ng-container>
       </ion-grid>

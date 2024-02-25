@@ -20,6 +20,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SelectMultipleComponent } from './components/inputs/select-multiple/select-multiple.component';
 import { TitleComponent } from './components/inputs/title/title.component';
 import { SubtitleComponent } from './components/inputs/subtitle/subtitle.component';
+import { RutaAtencionComponent } from './components/inputs/ruta-atencion/ruta-atencion.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +41,8 @@ import { SubtitleComponent } from './components/inputs/subtitle/subtitle.compone
     PhotoComponent,
     GPSComponent,
     TitleComponent,
-    SubtitleComponent
+    SubtitleComponent,
+    RutaAtencionComponent
   ],
   exports: [
     SteperComponent,
@@ -60,7 +62,8 @@ import { SubtitleComponent } from './components/inputs/subtitle/subtitle.compone
     PhotoComponent,
     GPSComponent,
     TitleComponent,
-    SubtitleComponent
+    SubtitleComponent,
+    RutaAtencionComponent
   ],
   imports: [
     CommonModule,
