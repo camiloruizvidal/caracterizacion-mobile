@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { RegistrosService } from '../../services/registros.service';
 import { IFamilyCardSave } from 'src/app/modules/formgenerator/interfaces/interface';
 import { Router } from '@angular/router';
+import { timeInterval } from 'rxjs';
 
 @Component({
   selector: 'app-listar',
@@ -20,10 +21,10 @@ export class ListarComponent implements OnInit {
     return familiyCard.data.personCard.length;
   }
 
-  async ngOnInit(): Promise<void> {
+  ngOnInit() {
     this.loadData();
-    setTimeout(() => {
-      this.loadData();
+    setInterval(async () => {
+      await this.loadData();
     }, 3000);
   }
 

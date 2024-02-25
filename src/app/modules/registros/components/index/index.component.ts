@@ -1,19 +1,12 @@
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-index',
   templateUrl: './index.component.html',
-  styleUrls: ['./index.component.scss']
+  styleUrls: ['./index.component.scss'],
 })
-export class IndexComponent implements OnInit {
-  constructor(private router: Router) {}
+export class IndexComponent {
 
-  ngOnInit(): void {
-    console.log('Entro');
-  }
+  constructor() { }
 
-  public nuevoRegistro() {
-    this.router.navigate(['/registros/nuevo'], { replaceUrl: true });
-  }
 }
