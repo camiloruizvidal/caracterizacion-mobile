@@ -48,14 +48,14 @@ export class GPSComponent extends BaseInputComponent {
       await loading.present();
 
       const permisos = await Geolocation.checkPermissions();
-      console.log({ permisos });
 
       const position: GeolocationPosition =
         await Geolocation.getCurrentPosition();
-      this.locationForm.patchValue({
+      this.locationForm.setValue({
         lng: position.coords.longitude,
         lat: position.coords.latitude
       });
+
       this.isLocationCaptured = true;
     } catch (error) {
       console.trace();

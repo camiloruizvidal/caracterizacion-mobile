@@ -1,5 +1,5 @@
 import { ValidationsService } from './../../services/validations/validations.service';
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import {
   ESteperType,
   IEventSteper,
@@ -8,13 +8,14 @@ import {
   IStepers
 } from '../../interfaces/interface';
 import { RegistrosService } from 'src/app/modules/registros/services/registros.service';
+import { LoadingController } from '@ionic/angular';
 
 @Component({
   selector: 'app-steper',
   templateUrl: './steper.component.html',
   styleUrls: ['./steper.component.scss']
 })
-export class SteperComponent {
+export class SteperComponent implements OnInit {
   @Input() dataSteper!: IStepers[];
   @Input() hasManyRegister: Boolean = false;
   @Input() isUpdate: Boolean = false;
@@ -26,8 +27,29 @@ export class SteperComponent {
 
   constructor(
     private validationsService: ValidationsService,
-    private registrosService: RegistrosService
+    private registrosService: RegistrosService,
+    private loadingCtrl: LoadingController
   ) {}
+
+  async ngOnInit(): Promise<void> {
+    if (!this.isUpdate) {
+      const loading = await this.loadingCtrl.create({
+        message: 'Cargando',
+        duration: 1000
+      });
+      loading.present();
+      this.clearValues(this.dataSteper);
+    }
+  }
+
+  private clearValues(datasSteper: IStepers[]) {
+    datasSteper.forEach((dataSteper: IStepers, keyDataSteper: number) => {
+      dataSteper.values.forEach((values: ISteperValues, keyValues: number) => {
+        datasSteper[keyDataSteper].values[keyValues].value = null;
+      });
+    });
+    this.dataSteper = datasSteper;
+  }
 
   public saveValueColumn(value: IStepers[]): void {
     this.saveData = value;
@@ -65,7 +87,7 @@ export class SteperComponent {
   }
 
   public get isNextDisabled(): boolean {
-    return false;
+    return false; //TODO Solo para probar. Eliminar antes de entregar
     let requireds = this.dataSteper[this.currentStep].values.filter(
       value =>
         value.required && (value.value == null || value.value.trim() === '')

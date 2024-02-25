@@ -6,10 +6,9 @@ import * as moment from 'moment';
 @Component({
   selector: 'app-calendar',
   templateUrl: './calendar.component.html',
-  styleUrls: ['./calendar.component.scss'],
+  styleUrls: ['./calendar.component.scss']
 })
 export class CalendarComponent extends BaseInputComponent {
-
   constructor() {
     super();
   }
@@ -17,7 +16,7 @@ export class CalendarComponent extends BaseInputComponent {
   public get edadTexto(): string {
     const fechaNacimiento: string = this.valueData;
 
-    if (fechaNacimiento.trim() === '') {
+    if (fechaNacimiento && fechaNacimiento.trim() === '') {
       return '';
     }
 
@@ -49,8 +48,7 @@ export class CalendarComponent extends BaseInputComponent {
     return resultado.length > 0 ? resultado : 'Recién nacido';
   }
 
-  public get defaultDate(): string {
-    return moment().format('YYYY-MM-DDTHH:mm:ss');
+  public get defaultDate(): Date {
+    return moment().toDate();
   }
-
 }

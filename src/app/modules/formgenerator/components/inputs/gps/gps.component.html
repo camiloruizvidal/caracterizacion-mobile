@@ -6,12 +6,12 @@
 
   <ion-item>
     <ion-label position="floating">Longitud</ion-label>
-    <ion-input formControlName="longitud" [disabled]="!isShowError"></ion-input>
+    <ion-input formControlName="lng" [disabled]="!isShowError"></ion-input>
   </ion-item>
 
   <ion-item>
     <ion-label position="floating">Latitud</ion-label>
-    <ion-input formControlName="latitud" [disabled]="!isShowError"></ion-input>
+    <ion-input formControlName="lat" [disabled]="!isShowError"></ion-input>
   </ion-item>
 
   <ion-text color="danger" *ngIf="isShowError">

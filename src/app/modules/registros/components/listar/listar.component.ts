@@ -21,13 +21,14 @@ export class ListarComponent implements OnInit {
   }
 
   async ngOnInit(): Promise<void> {
-    this.familiesCards = await this.registrosService.loadAllRegister();
-    this.familiesCards /*.sort((registro1, registro2) => {
-      const fecha1 = new Date(registro1?.dateRegister || new Date()).getTime();
-      const fecha2 = new Date(registro2?.dateRegister || new Date()).getTime();
+    this.loadData();
+    setTimeout(() => {
+      this.loadData();
+    }, 3000);
+  }
 
-      return fecha2 - fecha1;
-    })*/;
+  private async loadData() {
+    this.familiesCards = await this.registrosService.loadAllRegister();
   }
 
   public seleccionarRegistro(indexFamilyCardSave: number) {

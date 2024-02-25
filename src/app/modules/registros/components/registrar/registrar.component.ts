@@ -10,6 +10,7 @@ import { RegistrosService } from './../../services/registros.service';
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { LoginService } from 'src/app/modules/login/services/login/login.service';
+import { NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-registrar',
@@ -21,6 +22,7 @@ export class RegistrarComponent implements OnInit {
   public estados: string[] = ['familyCard', 'personCard'];
   public estado: string = this.estados[0];
   public currentCode: number = 1;
+  public reload: boolean = true;
 
   private myCodes: ICodes[] = [];
   private dataSaveCard!: IFamilyCardSave;
@@ -29,10 +31,11 @@ export class RegistrarComponent implements OnInit {
 
   constructor(
     private registrosService: RegistrosService,
+    private loginService: LoginService,
     private cdRef: ChangeDetectorRef,
+    private navCtrl: NavController,
     private route: ActivatedRoute,
-    private router: Router,
-    private loginService: LoginService
+    private router: Router
   ) {
     this.dataSaveCard = {
       version: '',
@@ -112,7 +115,11 @@ export class RegistrarComponent implements OnInit {
       if (status === IEventSteperStatus.salir) {
         this.router.navigate(['/registros']);
       } else if (status === IEventSteperStatus.nuevo) {
-        location.reload();
+        this.reload = false;
+        setTimeout(() => {
+          this.router.navigateByUrl('/registros/nuevo/' + this.idRegister);
+          this.reload = true;
+        }, 200);
       }
     }
   }

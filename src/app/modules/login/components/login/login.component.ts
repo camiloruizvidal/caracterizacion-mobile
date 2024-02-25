@@ -30,7 +30,6 @@ export class LoginComponent implements OnInit {
   }
 
   public async ngOnInit(): Promise<void> {
-    return;
     if (await this.loginService.isLogin()) {
       this.router.navigate(['/registros'], { replaceUrl: true });
     } else {

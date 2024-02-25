@@ -7,7 +7,7 @@
     >
     </app-steper>
   </div>
-  <div *ngIf="card && estado === estados[1]">
+  <div *ngIf="card && estado === estados[1] && reload">
     <ion-title>Tarjeta personal - {{ currentCode }}</ion-title>
     <app-steper
       (saveDataMethod)="saveData($event)"
