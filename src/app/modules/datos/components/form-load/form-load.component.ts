@@ -1,3 +1,7 @@
+import {
+  IPaciente,
+  IPaginationResult
+} from './../../../formgenerator/interfaces/interface';
 import { Component } from '@angular/core';
 import { DatosService } from '../../service/datos/datos.service';
 import {
@@ -5,6 +9,7 @@ import {
   LoadingController,
   ToastController
 } from '@ionic/angular';
+import { concatMap, range } from 'rxjs';
 
 @Component({
   selector: 'app-form-load',
@@ -16,7 +21,7 @@ export class FormLoadComponent {
 
   public isAlertOpen: boolean = false;
   public alertButtons = ['Aceptar'];
-
+  public isLoadPatients = false;
   public modalAbierto: boolean = false;
   public pacientesActualizados = 0;
   public infoRegistros: {
@@ -110,6 +115,7 @@ export class FormLoadComponent {
             {
               text: 'Sí',
               handler: () => {
+                this.isLoadPatients = true;
                 this.actualizarRegistrosPacientes();
               }
             }
@@ -120,7 +126,34 @@ export class FormLoadComponent {
       });
   }
 
-  private actualizarRegistrosPacientes() {}
+  private actualizarRegistrosPacientes() {
+    range(1, this.infoRegistros.totalPages - 1)
+      .pipe(
+        concatMap((pageNumber: number) =>
+          this.datosService.loadDataPatients(pageNumber, 100)
+        )
+      )
+      .subscribe(
+        (pacientes: IPaginationResult<IPaciente[]>) => {
+          console.log(pacientes);
+          this.pacientesActualizados += pacientes.data.length;
+          this.datosService.saveDataPatient(pacientes.data);
+        },
+        async (error: any) => {
+          console.error({ error });
+          const toast = await this.toastController.create({
+            color: 'dark',
+            duration: 5000,
+            position: 'bottom',
+            message: 'Se presento un error cuando se intentaba actualizar.'
+          });
+          await toast.present();
+        },
+        () => {
+          this.isLoadPatients = false;
+        }
+      );
+  }
 
   public setOpen(isOpen: boolean) {
     this.isAlertOpen = isOpen;

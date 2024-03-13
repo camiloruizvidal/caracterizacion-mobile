@@ -1,4 +1,10 @@
-<ion-card-content>
+<ion-card-content *ngIf="isLoadPatients">
+  <h1>
+    Cargando {{ pacientesActualizados }} registros de
+    {{ infoRegistros.totalItems }} registros.
+  </h1>
+</ion-card-content>
+<ion-card-content *ngIf="!isLoadPatients">
   <ion-text>
     Vamos a cargar el formulario. Por favor mantener la aplicación abierta
   </ion-text>

@@ -46,36 +46,6 @@ export class DatosService {
     );
   }
 
-  public loadDataAllPatients(): Observable<IPaciente[]> {
-    const pageSize = 200;
-
-    // Realiza una llamada inicial para obtener el total de registros
-    return this.loadDataPatients(1, pageSize).pipe(
-      concatMap((firstPageResult: IPaginationResult<IPaciente[]>) => {
-        const totalPages = Math.ceil(firstPageResult.totalItems / pageSize);
-
-        // Genera un array de observables para cada página, excluyendo la primera llamada
-        const observables: Observable<IPaginationResult<IPaciente[]>>[] = [];
-        for (let i = 2; i <= totalPages; i++) {
-          observables.push(this.loadDataPatients(i, pageSize));
-        }
-
-        // Combina todas las llamadas, incluida la primera
-        return forkJoin([of(firstPageResult), ...observables]);
-      }),
-      // Usa concatMap para combinar los resultados en un solo array
-      concatMap((results: IPaginationResult<IPaciente[]>[]) => {
-        // Extrae la propiedad 'data' de cada resultado y combínalos en un solo array
-        const allPatients: IPaciente[] = results.reduce(
-          (acc: any, result: any) => acc.concat(result.data),
-          []
-        );
-
-        return of(allPatients); // Convierte el resultado en un observable
-      })
-    );
-  }
-
   public saveDataForm(data: IFamilyCard): void {
     this.databaseService.setTable('form');
     this.databaseService.createOrUpdate(data, 'version');
