@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { DatosService } from '../../service/datos/datos.service';
 import {
+  AlertController,
   LoadingController,
-  ModalController,
   ToastController
 } from '@ionic/angular';
 
@@ -18,6 +18,7 @@ export class FormLoadComponent {
   public alertButtons = ['Aceptar'];
 
   public modalAbierto: boolean = false;
+  public pacientesActualizados = 0;
   public infoRegistros: {
     currentPage: number;
     totalItems: number;
@@ -32,7 +33,7 @@ export class FormLoadComponent {
     private datosService: DatosService,
     private loadingCtrl: LoadingController,
     private toastController: ToastController,
-    private modalController: ModalController
+    private alertController: AlertController
   ) {}
 
   private async startLoading(): Promise<void> {
@@ -92,21 +93,34 @@ export class FormLoadComponent {
         this.infoRegistros.totalItems = response.totalItems;
         this.infoRegistros.totalPages = response.totalPages;
         console.log({ infoRegistros: this.infoRegistros });
-        this.modalAbierto = true;
+        const alert = await this.alertController.create({
+          header:
+            'Se van a agregar ' +
+            this.infoRegistros.totalItems.toLocaleString('es-CO') +
+            ' registros',
+          message: '¿Desea continuar?',
+          buttons: [
+            {
+              text: 'No',
+              role: 'cancel',
+              handler: () => {
+                console.log('Usuario ha seleccionado No');
+              }
+            },
+            {
+              text: 'Sí',
+              handler: () => {
+                this.actualizarRegistrosPacientes();
+              }
+            }
+          ]
+        });
+
+        await alert.present();
       });
   }
 
-  cerrarModal(respuesta: boolean) {
-    this.modalAbierto = false;
-    // Aquí puedes manejar la respuesta del modal según tu necesidad
-    if (respuesta) {
-      console.log('El usuario ha confirmado.');
-      // Realiza acciones adicionales según la confirmación
-    } else {
-      console.log('El usuario ha cancelado.');
-      // Realiza acciones adicionales según la cancelación
-    }
-  }
+  private actualizarRegistrosPacientes() {}
 
   public setOpen(isOpen: boolean) {
     this.isAlertOpen = isOpen;
