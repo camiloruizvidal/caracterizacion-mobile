@@ -58,7 +58,9 @@ ng build
 4. Ejecuta el siguiente comando para generar el APK:
 
 ```
+ionic capacitor build
 npx cap build android
+npx cap open android
 ```
 
 **Ejecutando el APK**
@@ -68,6 +70,13 @@ npx cap build android
 3. En el dispositivo, abre el administrador de archivos y busca el APK.
 4. Toca el APK para instalarlo.
 5. Abre la aplicación en tu dispositivo.
+
+Abriendo el archivo en Android Studio
+
+```
+npx cap open android
+npx cap open ios
+```
 
 **Notas**
 

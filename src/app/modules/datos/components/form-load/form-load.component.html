@@ -14,3 +14,26 @@
     (didDismiss)="setOpen(false)"
   ></ion-alert>
 </ion-card-content>
+
+<ion-modal isOpen="{{ modalAbierto }}">
+  <ng-template>
+    <ion-header>
+      <ion-toolbar>
+        <ion-buttons slot="start">
+          <ion-button>Cancelar</ion-button>
+        </ion-buttons>
+        <ion-title>Notificación</ion-title>
+        <ion-buttons slot="end">
+          <ion-button [strong]="true">Guardar</ion-button>
+        </ion-buttons>
+      </ion-toolbar>
+    </ion-header>
+    <ion-content class="ion-padding">
+      <ion-text>
+        Se van a cargar
+        {{ infoRegistros.totalItems.toLocaleString('es-CO') }} pacientes. Este proceso
+        puede tardar un poco. ¿Desea continuar?
+      </ion-text>
+    </ion-content>
+  </ng-template>
+</ion-modal>
