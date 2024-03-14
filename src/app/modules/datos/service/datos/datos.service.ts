@@ -62,13 +62,17 @@ export class DatosService {
   }
 
   public addPatients(data: IPaciente[]): void {
-    const key = 'patients';
-    let patientsString = localStorage.getItem(key);
-    let patients: IPaciente[] = [];
+    try {
+      const key = 'patients';
+      let patientsString = localStorage.getItem(key);
+      let patients: IPaciente[] = [];
 
-    if (patientsString) {
-      patients = JSON.parse(patientsString) as IPaciente[];
+      if (patientsString) {
+        patients = JSON.parse(patientsString) as IPaciente[];
+      }
+      localStorage.setItem(key, JSON.stringify([...patients, ...data]));
+    } catch (error) {
+      throw error;
     }
-    localStorage.setItem(key, JSON.stringify([...patients, ...data]));
   }
 }
