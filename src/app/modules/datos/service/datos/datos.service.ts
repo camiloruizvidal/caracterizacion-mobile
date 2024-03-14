@@ -56,4 +56,19 @@ export class DatosService {
     this.databaseService.truncateTable('patients');
     this.databaseService.addManyRecords(data);
   }
+
+  public borrarPacientes(): void {
+    this.databaseService.truncateTable('patients');
+  }
+
+  public addPatients(data: IPaciente[]): void {
+    const key = 'patients';
+    let patientsString = localStorage.getItem(key);
+    let patients: IPaciente[] = [];
+
+    if (patientsString) {
+      patients = JSON.parse(patientsString) as IPaciente[];
+    }
+    localStorage.setItem(key, JSON.stringify([...patients, ...data]));
+  }
 }

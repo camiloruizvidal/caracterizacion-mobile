@@ -126,6 +126,7 @@ export class FormLoadComponent {
   }
 
   private actualizarRegistrosPacientes() {
+    this.datosService.borrarPacientes();
     range(1, this.infoRegistros.totalPages - 1)
       .pipe(
         concatMap((pageNumber: number) =>
@@ -135,7 +136,7 @@ export class FormLoadComponent {
       .subscribe(
         (pacientes: IPaginationResult<IPaciente[]>) => {
           this.pacientesActualizados += pacientes.data.length;
-          this.datosService.saveDataPatient(pacientes.data);
+          this.datosService.addPatients(pacientes.data);
         },
         async (error: any) => {
           const toast = await this.toastController.create({
