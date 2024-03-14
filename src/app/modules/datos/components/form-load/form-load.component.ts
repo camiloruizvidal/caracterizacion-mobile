@@ -98,7 +98,12 @@ export class FormLoadComponent {
           if (this.infoRegistros.totalItems === pageNumber) {
             this.showToastSuccess();
           }
-          return this.datosService.loadDataPatients(pageNumber, 100);
+          try {
+            return this.datosService.loadDataPatients(pageNumber, 100);
+          } catch (error) {
+            this.showToastError();
+            throw error;
+          }
         })
       )
       .subscribe(
@@ -107,16 +112,20 @@ export class FormLoadComponent {
           this.datosService.addPatients(pacientes.data);
         },
         async (error: any) => {
-          const toast = await this.toastController.create({
-            color: 'dark',
-            duration: 30000,
-            position: 'bottom',
-            message: 'Se presento un error cuando se intentaba actualizar.'
-          });
-          await toast.present();
-          this.isLoadPatients = false;
+          this.showToastError();
         }
       );
+  }
+
+  private async showToastError() {
+    const toast = await this.toastController.create({
+      color: 'dark',
+      duration: 30000,
+      position: 'bottom',
+      message: 'Se presento un error cuando se intentaba actualizar.'
+    });
+    await toast.present();
+    this.isLoadPatients = false;
   }
 
   private async showToastSuccess() {
