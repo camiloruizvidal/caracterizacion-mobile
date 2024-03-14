@@ -55,41 +55,6 @@ export class FormLoadComponent {
     this.loading.dismiss();
   }
 
-  //public cargarFormulario(): void {
-  //  this.startLoading();
-  //  this.datosService.loadDataForm().subscribe(
-  //    (response: IHttpResponse<IFamilyCard>) => {
-  //      this.datosService.saveDataForm(response.data);
-  //      this.setOpen(true);
-  //      this.stopLoading();
-  //    },
-  //    async error => {
-  //      const toast = await this.toastController.create({
-  //        color: 'dark',
-  //        duration: 5000,
-  //        position: 'bottom',
-  //        message: 'Se presento un error cuando se intentaba actualizar.'
-  //      });
-  //      await toast.present();
-  //    }
-  //  );
-
-  //  this.datosService.loadDataAllPatients().subscribe(
-  //    (pacientes: IPaciente[]) => {
-  //      this.datosService.saveDataPatient(pacientes);
-  //    },
-  //    async error => {
-  //      const toast = await this.toastController.create({
-  //        color: 'dark',
-  //        duration: 5000,
-  //        position: 'bottom',
-  //        message: 'Se presento un error cuando se intentaba actualizar.'
-  //      });
-  //      await toast.present();
-  //    }
-  //  );
-  //}
-
   public async cargarFormulario(): Promise<void> {
     this.datosService
       .loadDataPatients(1, 100)
@@ -129,9 +94,12 @@ export class FormLoadComponent {
     this.datosService.borrarPacientes();
     range(1, this.infoRegistros.totalPages - 1)
       .pipe(
-        concatMap((pageNumber: number) =>
-          this.datosService.loadDataPatients(pageNumber, 100)
-        )
+        concatMap((pageNumber: number) => {
+          if (this.infoRegistros.totalItems === pageNumber) {
+            this.showToastSuccess();
+          }
+          return this.datosService.loadDataPatients(pageNumber, 100);
+        })
       )
       .subscribe(
         (pacientes: IPaginationResult<IPaciente[]>) => {
@@ -141,16 +109,24 @@ export class FormLoadComponent {
         async (error: any) => {
           const toast = await this.toastController.create({
             color: 'dark',
-            duration: 5000,
+            duration: 30000,
             position: 'bottom',
             message: 'Se presento un error cuando se intentaba actualizar.'
           });
           await toast.present();
-        },
-        () => {
           this.isLoadPatients = false;
         }
       );
+  }
+
+  private async showToastSuccess() {
+    const toast = await this.toastController.create({
+      color: 'success',
+      duration: 30000,
+      position: 'top',
+      message: 'Se ha guardado con éxito.'
+    });
+    await toast.present();
   }
 
   public setOpen(isOpen: boolean) {
