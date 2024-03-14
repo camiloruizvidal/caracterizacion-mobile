@@ -8,6 +8,7 @@ import { FormLoadComponent } from './components/form-load/form-load.component';
 import { PersonsLoadComponent } from './components/persons-load/persons-load.component';
 import { HttpClientModule } from '@angular/common/http';
 import { DatabaseService } from 'src/app/utils/services/database/database.service';
+import { NgCircleProgressModule } from 'ng-circle-progress';
 
 
 @NgModule({
@@ -18,7 +19,15 @@ import { DatabaseService } from 'src/app/utils/services/database/database.servic
     IonicModule,
     ReactiveFormsModule,
     DatosRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    NgCircleProgressModule.forRoot({
+      radius: 100,
+      outerStrokeWidth: 16,
+      innerStrokeWidth: 8,
+      outerStrokeColor: "#78C000",
+      innerStrokeColor: "#C7E596",
+      animationDuration: 300,
+    })
   ],
   providers: [DatosService, DatabaseService],
 })

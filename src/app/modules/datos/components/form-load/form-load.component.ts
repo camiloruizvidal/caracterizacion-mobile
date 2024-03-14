@@ -102,13 +102,14 @@ export class FormLoadComponent {
             'Se van a agregar ' +
             this.infoRegistros.totalItems.toLocaleString('es-CO') +
             ' registros',
-          message: '¿Desea continuar?',
+          message:
+            'Este proceso puede demorar dependiendo su conexión de ' +
+            'internet y la cantidad de registros. ¿Desea continuar?',
           buttons: [
             {
               text: 'No',
               role: 'cancel',
-              handler: () => {
-              }
+              handler: () => {}
             },
             {
               text: 'Sí',

@@ -1,8 +1,23 @@
-<ion-card-content *ngIf="isLoadPatients">
+<ion-card-content *ngIf="isLoadPatients" id="progress">
   <h1>
-    Cargando {{ pacientesActualizados }} registros de
-    {{ infoRegistros.totalItems }} registros.
+    Cargando {{ pacientesActualizados.toLocaleString('es-CO') }} registros de
+    {{ infoRegistros.totalItems.toLocaleString('es-CO') }} registros.
   </h1>
+  <circle-progress
+    [percent]="(pacientesActualizados / infoRegistros.totalItems) * 100"
+    [radius]="100"
+    [outerStrokeWidth]="16"
+    [innerStrokeWidth]="8"
+    outerStrokeColor="#78C000"
+    innerStrokeColor="#C7E596"
+    [animation]="true"
+    [animationDuration]="1"
+    [subtitleFontSize]="'20'"
+    subtitle="Cargando"
+  ></circle-progress>
+  <br>
+    Por favor espere a que termine de cargar todos los pacientes.
+    Por favor no cierre la aplicación.
 </ion-card-content>
 <ion-card-content *ngIf="!isLoadPatients">
   <ion-text>
