@@ -97,7 +97,6 @@ export class FormLoadComponent {
         this.infoRegistros.currentPage = response.currentPage;
         this.infoRegistros.totalItems = response.totalItems;
         this.infoRegistros.totalPages = response.totalPages;
-        console.log({ infoRegistros: this.infoRegistros });
         const alert = await this.alertController.create({
           header:
             'Se van a agregar ' +
@@ -109,7 +108,6 @@ export class FormLoadComponent {
               text: 'No',
               role: 'cancel',
               handler: () => {
-                console.log('Usuario ha seleccionado No');
               }
             },
             {
@@ -135,12 +133,10 @@ export class FormLoadComponent {
       )
       .subscribe(
         (pacientes: IPaginationResult<IPaciente[]>) => {
-          console.log(pacientes);
           this.pacientesActualizados += pacientes.data.length;
           this.datosService.saveDataPatient(pacientes.data);
         },
         async (error: any) => {
-          console.error({ error });
           const toast = await this.toastController.create({
             color: 'dark',
             duration: 5000,
