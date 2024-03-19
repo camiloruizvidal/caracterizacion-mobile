@@ -8,6 +8,7 @@ import {
   IPaciente,
   IPaginationResult
 } from 'src/app/modules/formgenerator/interfaces/interface';
+import { PatientsPersistenceService } from '../persistence/patients/patients-persistence.service';
 
 @Injectable({
   providedIn: 'root'
@@ -16,7 +17,8 @@ export class DatosService {
   private URL: string = '';
   constructor(
     private httpClient: HttpClient,
-    private databaseService: DatabaseService
+    private databaseService: DatabaseService,
+    private readonly patientsPersistenceService: PatientsPersistenceService
   ) {
     this.getUrl();
   }
@@ -50,12 +52,11 @@ export class DatosService {
     this.databaseService.setTable('form');
     this.databaseService.createOrUpdate(data, 'version');
   }
-
-  public saveDataPatient(data: IPaciente[]): void {
-    this.databaseService.setTable('patients');
-    this.databaseService.truncateTable('patients');
-    this.databaseService.addManyRecords(data);
-  }
+  //public saveDataPatient(data: IPaciente[]): void {
+  //  this.databaseService.setTable('patients');
+  //  this.databaseService.truncateTable('patients');
+  //  this.databaseService.addManyRecords(data);
+  //}
 
   public borrarPacientes(): void {
     this.databaseService.truncateTable('patients');
@@ -63,14 +64,9 @@ export class DatosService {
 
   public addPatients(data: IPaciente[]): void {
     try {
-      const key = 'patients';
-      let patientsString = localStorage.getItem(key);
-      let patients: IPaciente[] = [];
-
-      if (patientsString) {
-        patients = JSON.parse(patientsString) as IPaciente[];
-      }
-      localStorage.setItem(key, JSON.stringify([...patients, ...data]));
+      this.patientsPersistenceService.addPatients(data).then(response => {
+        console.log('Termino', { response });
+      });
     } catch (error) {
       throw error;
     }
