@@ -1,7 +1,7 @@
 import { DatabaseService } from 'src/app/utils/services/database/database.service';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, concatMap, forkJoin, map, of } from 'rxjs';
+import { Observable } from 'rxjs';
 import {
   IFamilyCard,
   IHttpResponse,
@@ -52,14 +52,9 @@ export class DatosService {
     this.databaseService.setTable('form');
     this.databaseService.createOrUpdate(data, 'version');
   }
-  //public saveDataPatient(data: IPaciente[]): void {
-  //  this.databaseService.setTable('patients');
-  //  this.databaseService.truncateTable('patients');
-  //  this.databaseService.addManyRecords(data);
-  //}
 
-  public borrarPacientes(): void {
-    this.databaseService.truncateTable('patients');
+  public async borrarPacientes(): Promise<void> {
+    await this.patientsPersistenceService.clearPatients()
   }
 
   public addPatients(data: IPaciente[]): void {

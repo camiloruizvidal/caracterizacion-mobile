@@ -19,7 +19,7 @@ export class PatientsPersistenceService {
 
     request.onupgradeneeded = (event: any) => {
       const db = event.target.result;
-      db.createObjectStore(this.key, { keyPath: 'id', autoIncrement: true });
+      db.createObjectStore(this.key, { keyPath: 'documento_numero', autoIncrement: false });
     };
 
     request.onsuccess = (event: any) => {
@@ -48,6 +48,7 @@ export class PatientsPersistenceService {
 
   public async addPatients(data: IPaciente[]): Promise<void> {
     try {
+      this.initDB();
       await this.waitForDB();
       if (this.db) {
         const transaction = this.db.transaction([this.key], 'readwrite');
@@ -61,6 +62,23 @@ export class PatientsPersistenceService {
       }
     } catch (error) {
       console.error('Error saving data to IndexedDB:', error);
+      throw error;
+    }
+  }
+
+  public async clearPatients(): Promise<void> {
+    try {
+      await this.waitForDB();
+      if (this.db) {
+        const transaction = this.db.transaction([this.key], 'readwrite');
+        const store = transaction.objectStore(this.key);
+        store.clear();
+        console.log('All patients cleared successfully.');
+      } else {
+        console.error('IndexedDB is not initialized.');
+      }
+    } catch (error) {
+      console.error('Error clearing patients from IndexedDB:', error);
       throw error;
     }
   }

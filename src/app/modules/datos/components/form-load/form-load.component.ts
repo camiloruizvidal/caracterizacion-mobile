@@ -56,9 +56,8 @@ export class FormLoadComponent {
   }
 
   public async cargarFormulario(): Promise<void> {
-    this.datosService
-      .loadDataPatients(1, 100)
-      .subscribe(async (response: any) => {
+    this.datosService.loadDataPatients(1, 100).subscribe(
+      async (response: any) => {
         this.infoRegistros.currentPage = response.currentPage;
         this.infoRegistros.totalItems = response.totalItems;
         this.infoRegistros.totalPages = response.totalPages;
@@ -78,21 +77,25 @@ export class FormLoadComponent {
             },
             {
               text: 'Sí',
-              handler: () => {
+              handler: async () => {
                 this.isLoadPatients = true;
-                this.actualizarRegistrosPacientes();
+                await this.actualizarRegistrosPacientes();
               }
             }
           ]
         });
 
         await alert.present();
-      });
+      },
+      async (error: any) => {
+        await this.showToastError();
+      }
+    );
   }
 
-  private actualizarRegistrosPacientes() {
-    this.datosService.borrarPacientes();
-    range(1, this.infoRegistros.totalPages - 1)
+  private async actualizarRegistrosPacientes() {
+    await this.datosService.borrarPacientes();
+    range(1, this.infoRegistros.totalPages)
       .pipe(
         concatMap((pageNumber: number) => {
           if (this.infoRegistros.totalItems === pageNumber) {
