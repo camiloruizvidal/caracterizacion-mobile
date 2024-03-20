@@ -59,9 +59,7 @@ export class DatosService {
 
   public addPatients(data: IPaciente[]): void {
     try {
-      this.patientsPersistenceService.addPatients(data).then(response => {
-        console.log('Termino', { response });
-      });
+      this.patientsPersistenceService.addPatients(data)
     } catch (error) {
       throw error;
     }

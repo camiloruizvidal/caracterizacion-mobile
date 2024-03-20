@@ -56,7 +56,6 @@ export class PatientsPersistenceService {
         data.forEach(patient => {
           store.add(patient);
         });
-        console.log('Data saved successfully.');
       } else {
         console.error('IndexedDB is not initialized.');
       }
@@ -73,7 +72,6 @@ export class PatientsPersistenceService {
         const transaction = this.db.transaction([this.key], 'readwrite');
         const store = transaction.objectStore(this.key);
         store.clear();
-        console.log('All patients cleared successfully.');
       } else {
         console.error('IndexedDB is not initialized.');
       }
