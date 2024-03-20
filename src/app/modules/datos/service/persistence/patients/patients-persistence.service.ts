@@ -19,7 +19,10 @@ export class PatientsPersistenceService {
 
     request.onupgradeneeded = (event: any) => {
       const db = event.target.result;
-      db.createObjectStore(this.key, { keyPath: 'documento_numero', autoIncrement: false });
+      db.createObjectStore(this.key, {
+        keyPath: 'documento_numero',
+        autoIncrement: false
+      });
     };
 
     request.onsuccess = (event: any) => {
@@ -77,6 +80,30 @@ export class PatientsPersistenceService {
       }
     } catch (error) {
       console.error('Error clearing patients from IndexedDB:', error);
+      throw error;
+    }
+  }
+  public async getAll(): Promise<IPaciente[]> {
+    try {
+      await this.waitForDB();
+      if (this.db) {
+        const transaction = this.db.transaction([this.key], 'readonly');
+        const store = transaction.objectStore(this.key);
+        const request = store.getAll();
+        return new Promise<IPaciente[]>((resolve, reject) => {
+          request.onsuccess = (event: any) => {
+            resolve(event.target.result);
+          };
+          request.onerror = (event: any) => {
+            reject(event.target.error);
+          };
+        });
+      } else {
+        console.error('IndexedDB is not initialized.');
+        return [];
+      }
+    } catch (error) {
+      console.error('Error getting patients from IndexedDB:', error);
       throw error;
     }
   }

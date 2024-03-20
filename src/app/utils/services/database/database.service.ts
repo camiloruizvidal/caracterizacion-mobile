@@ -1,9 +1,14 @@
+import { PatientsPersistenceService } from './../../../modules/datos/service/persistence/patients/patients-persistence.service';
 import { Injectable } from '@angular/core';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DatabaseService {
+  constructor(
+    private readonly patientsPersistenceService: PatientsPersistenceService
+  ) {}
+
   private table: string = '';
 
   public setTable(tableName: string): void {
@@ -83,19 +88,22 @@ export class DatabaseService {
     });
   }
 
-  public findAll(): Promise<any[]> {
-    return new Promise((resolve, reject) => {
-      const key = this.getKey();
-      const data = localStorage.getItem(key);
-
-      if (data) {
-        const records = JSON.parse(data);
-        resolve(records);
-      } else {
-        reject('Error retrieving records from localStorage');
-        throw 'Error retrieving records from localStorage';
-      }
-    });
+  public async findAll(): Promise<any[]> {
+    const key = this.getKey();
+    if (key === 'patients') {
+      return this.patientsPersistenceService.getAll();
+    } else {
+      return new Promise((resolve, reject) => {
+        const data = localStorage.getItem(key);
+        if (data) {
+          const records = JSON.parse(data);
+          resolve(records);
+        } else {
+          reject('Error retrieving records from localStorage');
+          throw 'Error retrieving records from localStorage';
+        }
+      });
+    }
   }
 
   public async findOne(params?: {
