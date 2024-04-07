@@ -1,4 +1,6 @@
 import {
+  IFamilyCard,
+  IHttpResponse,
   IPaciente,
   IPaginationResult
 } from './../../../formgenerator/interfaces/interface';
@@ -79,6 +81,7 @@ export class FormLoadComponent {
               text: 'Sí',
               handler: async () => {
                 this.isLoadPatients = true;
+                this.actualizarFormulario();
                 await this.actualizarRegistrosPacientes();
               }
             }
@@ -118,6 +121,14 @@ export class FormLoadComponent {
           this.showToastError();
         }
       );
+  }
+
+  private actualizarFormulario() {
+    this.datosService
+      .loadDataForm()
+      .subscribe((respuesta: IHttpResponse<IFamilyCard>) => {
+        this.datosService.saveDataForm(respuesta.data);
+      });
   }
 
   private async showToastError() {

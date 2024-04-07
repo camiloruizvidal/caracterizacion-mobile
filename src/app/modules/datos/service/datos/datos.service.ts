@@ -48,7 +48,7 @@ export class DatosService {
     );
   }
 
-  public saveDataForm(data: IFamilyCard): void {
+  public saveDataForm(data: IFamilyCard): void {//Aqui se cargan
     this.databaseService.setTable('form');
     this.databaseService.createOrUpdate(data, 'version');
   }
