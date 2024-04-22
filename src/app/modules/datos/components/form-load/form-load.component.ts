@@ -146,7 +146,7 @@ export class FormLoadComponent {
     const toast = await this.toastController.create({
       color: 'success',
       duration: 30000,
-      position: 'top',
+      position: 'bottom',
       message: 'Se ha guardado con éxito.'
     });
     await toast.present();

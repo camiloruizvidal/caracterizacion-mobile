@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { LoadingController, ToastController } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { HttpErrorResponse } from '@angular/common/http';
+import { DatabaseService } from 'src/app/utils/services/database/database.service';
 
 @Component({
   selector: 'app-login',
@@ -19,12 +20,13 @@ export class LoginComponent implements OnInit {
     private loadingCtrl: LoadingController,
     private formBuilder: FormBuilder,
     private loginService: LoginService,
+    private databaseService: DatabaseService,
     private router: Router
   ) {
     this.loginForm = this.formBuilder.group({
       username: ['admin', Validators.required],
       password: ['admin', Validators.required],
-      server: ['http://localhost:3000', Validators.required]
+      server: ['', Validators.required]
     });
     this.startLoading();
   }
@@ -38,6 +40,9 @@ export class LoginComponent implements OnInit {
   }
 
   private async startLoading(): Promise<void> {
+    this.databaseService.setTable('server');
+    const url = await this.databaseService.findOne();
+    this.loginForm.get('server')?.setValue(url);
     this.loading = await this.loadingCtrl.create({
       message: 'Cargando, por favor espere',
       spinner: 'circles'
@@ -46,6 +51,12 @@ export class LoginComponent implements OnInit {
 
   onSubmit() {
     if (this.loginForm.valid) {
+      this.databaseService.setTable('server');
+      this.databaseService.createOrUpdate(
+        this.loginForm.value['server'],
+        'server'
+      );
+
       this.loading.present();
       this.loginService
         .loginUser(
