@@ -15,6 +15,7 @@ export class TemplateComponent {
   ) {}
 
   public redirectTo(url: string): void {
+    localStorage.setItem('isActive', 'false')
     this.menuController.close();
     this.router.navigate([url], { replaceUrl: true });
   }
