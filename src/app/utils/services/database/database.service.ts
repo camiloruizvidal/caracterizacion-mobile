@@ -99,8 +99,7 @@ export class DatabaseService {
           const records = JSON.parse(data);
           resolve(records);
         } else {
-          reject('Error retrieving records from localStorage');
-          throw 'Error retrieving records from localStorage';
+          resolve([]);
         }
       });
     }
@@ -152,12 +151,12 @@ export class DatabaseService {
     if (existingData) {
       data = JSON.parse(existingData);
 
-      const existingRecord = data.find(
+      const index = data.findIndex(
         (r: any) => r[searchColumn] === record[searchColumn]
       );
 
-      if (existingRecord) {
-        Object.assign(existingRecord, record);
+      if (index) {
+        data[index] = record;
       } else {
         data.push(record);
       }
@@ -170,8 +169,12 @@ export class DatabaseService {
   }
 
   public delete(id: number): void {
-    const data = JSON.parse(localStorage.getItem(this.table) || '');
-    localStorage.setItem(this.table, JSON.stringify(data.splice(id, 1)));
+    const table = localStorage.getItem(this.table);
+
+    if (table) {
+      const data = JSON.parse(table);
+      localStorage.setItem(this.table, JSON.stringify(data.splice(id, 1)));
+    }
   }
 
   public truncateTable(tableName: string): void {

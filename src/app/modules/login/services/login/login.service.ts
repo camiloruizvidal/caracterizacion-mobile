@@ -67,7 +67,9 @@ export class LoginService {
     this.databaseService.setTable('config');
     const user = await this.databaseService.findAll();
     const id = user.findIndex(u => u.name === 'current_user');
-    this.databaseService.delete(id);
+    if (id >= 0) {
+      this.databaseService.delete(id);
+    }
   }
 
   public async getCurrentUser(): Promise<IUser> {

@@ -23,10 +23,13 @@ export class LoginComponent implements OnInit {
     private databaseService: DatabaseService,
     private router: Router
   ) {
+    const username = '123456';
+    const password = '123456';
+    const server = 'https://api.crvtest.online';
     this.loginForm = this.formBuilder.group({
-      username: ['admin', Validators.required],
-      password: ['admin', Validators.required],
-      server: ['', Validators.required]
+      username: [username, Validators.required],
+      password: [password, Validators.required],
+      server: [server, Validators.required]
     });
     this.startLoading();
   }
