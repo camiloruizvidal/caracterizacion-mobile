@@ -44,8 +44,10 @@ export class LoginComponent implements OnInit {
 
   private async startLoading(): Promise<void> {
     this.databaseService.setTable('server');
-    const url = await this.databaseService.findOne();
-    this.loginForm.get('server')?.setValue(url);
+    let url = await this.databaseService.findOne();
+    if(url.trim() !== '') {
+      this.loginForm.get('server')?.setValue(url);
+    }
     this.loading = await this.loadingCtrl.create({
       message: 'Cargando, por favor espere',
       spinner: 'circles'
