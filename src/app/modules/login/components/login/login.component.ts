@@ -45,6 +45,7 @@ export class LoginComponent implements OnInit {
   private async startLoading(): Promise<void> {
     this.databaseService.setTable('server');
     let url = await this.databaseService.findOne();
+    console.log({url})
     if(url.trim() !== '') {
       this.loginForm.get('server')?.setValue(url);
     }
