@@ -69,6 +69,7 @@ export class LoginComponent implements OnInit {
         )
         .subscribe(
           response => {
+            localStorage.setItem('isActive', 'true');
             this.router.navigate(['/load'], { replaceUrl: true });
           },
           async (error: HttpErrorResponse) => {

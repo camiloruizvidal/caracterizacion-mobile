@@ -155,7 +155,7 @@ export class DatabaseService {
         (r: any) => r[searchColumn] === record[searchColumn]
       );
 
-      if (index) {
+      if (index > -1) {
         data[index] = record;
       } else {
         data.push(record);

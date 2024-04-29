@@ -58,18 +58,13 @@ export class LoginService {
   }
 
   public async isLogin(): Promise<boolean> {
-    this.databaseService.setTable('config');
-    const user = await this.databaseService.findAll();
-    return user.find(u => u.name === 'current_user') !== undefined;
+    let isActive = localStorage.getItem('isActive');
+    return isActive === null ? false : JSON.parse(isActive);
   }
 
   public async closeLogin(): Promise<void> {
-    this.databaseService.setTable('config');
-    const user = await this.databaseService.findAll();
-    const id = user.findIndex(u => u.name === 'current_user');
-    if (id >= 0) {
-      this.databaseService.delete(id);
-    }
+    localStorage.setItem('isActive', 'false')
+    window.localStorage.removeItem('isActive')
   }
 
   public async getCurrentUser(): Promise<IUser> {
