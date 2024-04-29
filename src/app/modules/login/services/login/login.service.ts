@@ -33,11 +33,13 @@ export class LoginService {
     server: string
   ): Observable<any> {
     this.addServer(server);
-    return this.httpClient.post(this.url, { username, password }).pipe(
-      tap((response: any) => {
-        this.addUser(username, password, response.user);
-      })
-    );
+    return this.httpClient
+      .post(`${server}/api/v1/usuarios/login`, { username, password })
+      .pipe(
+        tap((response: any) => {
+          this.addUser(username, password, response.user);
+        })
+      );
   }
 
   private async addServer(server: string) {
@@ -63,8 +65,8 @@ export class LoginService {
   }
 
   public async closeLogin(): Promise<void> {
-    localStorage.setItem('isActive', 'false')
-    window.localStorage.removeItem('isActive')
+    localStorage.setItem('isActive', 'false');
+    window.localStorage.removeItem('isActive');
   }
 
   public async getCurrentUser(): Promise<IUser> {
