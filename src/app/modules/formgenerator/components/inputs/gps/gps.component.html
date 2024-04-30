@@ -3,14 +3,13 @@
 </ion-text>
 
 <form [formGroup]="locationForm">
-
   <ion-item>
-    <ion-label position="floating">Longitud</ion-label>
+    <ion-label aria-label="lng" position="floating">Longitud</ion-label>
     <ion-input formControlName="lng" [disabled]="!isShowError"></ion-input>
   </ion-item>
 
   <ion-item>
-    <ion-label position="floating">Latitud</ion-label>
+    <ion-label aria-label="lat" position="floating">Latitud</ion-label>
     <ion-input formControlName="lat" [disabled]="!isShowError"></ion-input>
   </ion-item>
 
