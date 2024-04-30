@@ -10,17 +10,23 @@
     <ion-card-content>
       <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
         <ion-item>
-          <ion-label position="floating">Nombre de Usuario</ion-label>
+          <ion-label aria-label="username" position="floating">
+            Nombre de Usuario
+          </ion-label>
           <ion-input formControlName="username" type="text"></ion-input>
         </ion-item>
 
         <ion-item>
-          <ion-label position="floating">Contraseña</ion-label>
+          <ion-label aria-label="password" position="floating">
+            Contraseña
+          </ion-label>
           <ion-input formControlName="password" type="password"></ion-input>
         </ion-item>
 
         <ion-item>
-          <ion-label position="floating">Server</ion-label>
+          <ion-label aria-label="server" position="floating">
+            Server
+          </ion-label>
           <ion-input formControlName="server" type="text"></ion-input>
         </ion-item>
 

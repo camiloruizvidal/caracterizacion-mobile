@@ -3,6 +3,7 @@
   {{ steperValue.label }}
 </ion-text>
 <ion-input
+  [ariaLabel]="steperValue.columnName"
   [id]="steperValue.columnName"
   [value]="steperValue.value"
   [required]="isRequired"
