@@ -1,10 +1,14 @@
 <ion-content class="ion-padding">
   <ion-row>
     <ion-col>
-      <ion-title>
-        Hay {{ registers.length }}
-        registro{{ registers.length ? 's' : '' }}
-        guardado{{ registers.length ? 's' : '' }}. Desea enviarlos?
+      <ion-title style="text-align: center">
+        Hay {{ registers.length }} registro{{
+          registers.length !== 1 ? 's' : ''
+        }}
+        guardado{{ registers.length !== 1 ? 's' : '' }}.
+        <ion-content *ngIf="registers.length > 0">
+          <br />¿Desea enviarlos?
+        </ion-content>
       </ion-title>
     </ion-col>
   </ion-row>
