@@ -28,9 +28,7 @@
     </ion-col>
     <ion-col>
       <ion-button
-        [disabled]="
-          personCardsCurrent + 1 > (cardLength) - 1
-        "
+        [disabled]="personCardsCurrent + 1 > cardLength - 1"
         (click)="personCardsCurrent = personCardsCurrent + 1"
         expand="block"
       >
@@ -45,12 +43,14 @@
     <app-steper
       [isUpdate]="true"
       (saveDataMethod)="saveData($event)"
-      [dataSteper]="card.data.familyCard"
+      [dataSteper]="card.data.grupalNombre"
     >
     </app-steper>
   </div>
 
-  <div *ngFor="let personCard of card?.data?.personCard; let i = index">
+  <div
+    *ngFor="let individualNombre of card?.data?.individualNombre; let i = index"
+  >
     <div *ngIf="card && estado === estados[1] && personCardsCurrent === i">
       <ion-title
         >Tarjeta personal - {{ currentCode }}. Registro {{ i + 1 }} de
@@ -59,7 +59,7 @@
       <app-steper
         [isUpdate]="true"
         (saveDataMethod)="saveData($event)"
-        [dataSteper]="personCard"
+        [dataSteper]="individualNombre"
         [hasManyRegister]="true"
       ></app-steper>
     </div>

@@ -6,8 +6,8 @@ export interface IHttpResponse<T> {
 export interface IFamilyCard {
   version: string;
   dateLastVersion: Date;
-  familyCard: IStepers[];
-  personCard: IStepers[];
+  grupalNombre: IStepers[];
+  individualNombre: IStepers[];
 }
 
 export interface IStepers {
@@ -94,8 +94,8 @@ export interface IFamilyCardSave {
   data: IDataFamilyCard;
 }
 export interface IDataFamilyCard {
-  familyCard: IStepers[];
-  personCard: IStepers[][];
+  grupalNombre: IStepers[];
+  individualNombre: IStepers[][];
 }
 
 export interface IUser {

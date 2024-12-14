@@ -16,7 +16,7 @@ import { AlertController } from '@ionic/angular';
 })
 export class ActualizarComponent implements OnInit {
   public card!: IFamilyCardSave;
-  public estados: string[] = ['familyCard', 'personCard'];
+  public estados: string[] = ['grupalNombre', 'individualNombre'];
   public estado: string = this.estados[0];
   public currentCode: number = 1;
   public personCardsTotal: number = 0;
@@ -27,7 +27,7 @@ export class ActualizarComponent implements OnInit {
   private userDate: IUser;
 
   public get cardLength(): number {
-    return this.card?.data?.personCard?.length || 0;
+    return this.card?.data?.individualNombre?.length || 0;
   }
 
   constructor(
@@ -62,13 +62,13 @@ export class ActualizarComponent implements OnInit {
     this.card = await this.registrosService.loadRegister(this.indexCard);
     this.userDate = await this.loginService.getCurrentUser();
     this.currentCode = this.card.code;
-    this.personCardsTotal = this.card.data.personCard.length;
+    this.personCardsTotal = this.card.data.individualNombre.length;
   }
 
   public async saveData(event: IEventSteper) {
     const { data } = event;
     if (this.estado === this.estados[0]) {
-      this.card.data.familyCard = data;
+      this.card.data.grupalNombre = data;
       this.estado = this.estados[1];
       this.registrosService.updateRegister(this.indexCard, this.card);
       await this.presentAlert();

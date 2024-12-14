@@ -28,7 +28,7 @@ import { jsPDF } from 'jspdf';
 export class RegistrarComponent implements OnInit {
   @ViewChild('tarjetas', { static: false }) elementRef!: ElementRef;
   public card!: IFamilyCard;
-  public estados: string[] = ['familyCard', 'personCard'];
+  public estados: string[] = ['grupalNombre', 'individualNombre'];
   public estado: string = this.estados[0];
   public currentCode: number = 1;
   public reload: boolean = true;
@@ -54,8 +54,8 @@ export class RegistrarComponent implements OnInit {
       code: 0,
       userId: 0,
       data: {
-        familyCard: [],
-        personCard: []
+        grupalNombre: [],
+        individualNombre: []
       }
     };
 
@@ -88,16 +88,16 @@ export class RegistrarComponent implements OnInit {
     this.cdRef.detectChanges();
   }
 
-  private inicialiceCard(familyCard: IFamilyCard): void {
+  private inicialiceCard(grupalNombre: IFamilyCard): void {
     this.dataSaveCard = {
-      version: familyCard.version,
-      dateLastVersion: familyCard.dateLastVersion,
+      version: grupalNombre.version,
+      dateLastVersion: grupalNombre.dateLastVersion,
       dateRegister: new Date(),
       code: this.currentCode,
       userId: this.userDate.id,
       data: {
-        familyCard: [],
-        personCard: []
+        grupalNombre: [],
+        individualNombre: []
       }
     };
   }
@@ -119,13 +119,13 @@ export class RegistrarComponent implements OnInit {
     loading.present();
     const { data, status } = event;
     if (this.estado === this.estados[0]) {
-      this.dataSaveCard.data.familyCard = data;
+      this.dataSaveCard.data.grupalNombre = data;
       this.estado = this.estados[1];
       this.idRegister = this.registrosService.newRegister(this.dataSaveCard);
       this.loginService.nextCode();
       this.router.navigate(['/registros/nuevo/' + this.idRegister]);
     } else {
-      this.dataSaveCard.data.personCard.push(data);
+      this.dataSaveCard.data.individualNombre.push(data);
       this.registrosService.updateRegister(this.idRegister, this.dataSaveCard);
       if (status === IEventSteperStatus.salir) {
         this.generatePDF();

@@ -23,7 +23,7 @@
           </td>
           <td style="border: 1px solid #000">{{ dataSaveCard.code }}</td>
           <td style="border: 1px solid #000">
-            {{ userDate.documento }} <br>
+            {{ userDate.documento }} <br />
             {{ userDate.nombrePrimero }}
             {{ userDate.nombreSegundo }}
             {{ userDate.apellidoPrimero }}
@@ -31,9 +31,12 @@
           </td>
         </tr>
       </table>
-      <div style="min-width: 300px" *ngFor="let familyCard of dataSaveCard.data.familyCard">
-        <h1>{{ familyCard.title }}</h1>
-        <div *ngFor="let valuesFamily of familyCard.values">
+      <div
+        style="min-width: 300px"
+        *ngFor="let grupalNombre of dataSaveCard.data.grupalNombre"
+      >
+        <h1>{{ grupalNombre.title }}</h1>
+        <div *ngFor="let valuesFamily of grupalNombre.values">
           <p>
             {{ valuesFamily?.id }})
             <strong>{{ valuesFamily.label }}:</strong>
@@ -47,10 +50,13 @@
       </div>
       <div
         style="min-width: 300px"
-        *ngFor="let persons of dataSaveCard.data.personCard; let i = index"
+        *ngFor="
+          let persons of dataSaveCard.data.individualNombre;
+          let i = index
+        "
       >
         <h1>
-          {{ i + 1 }} de {{ dataSaveCard.data.personCard.length }}) Datos
+          {{ i + 1 }} de {{ dataSaveCard.data.individualNombre.length }}) Datos
           personales
         </h1>
         <div *ngFor="let person of persons">
@@ -70,7 +76,7 @@
     <ion-title>Tarjeta familiar - {{ currentCode }}</ion-title>
     <app-steper
       (saveDataMethod)="saveData($event)"
-      [dataSteper]="card.familyCard"
+      [dataSteper]="card.grupalNombre"
     >
     </app-steper>
   </div>
@@ -78,7 +84,7 @@
     <ion-title>Tarjeta personal - {{ currentCode }}</ion-title>
     <app-steper
       (saveDataMethod)="saveData($event)"
-      [dataSteper]="card.personCard"
+      [dataSteper]="card.individualNombre"
       [hasManyRegister]="true"
     ></app-steper>
   </div>

@@ -17,7 +17,7 @@ export class ListarComponent implements OnInit {
   public familiesCards: IFamilyCardSave[] = [];
 
   public countPersons(familiyCard: IFamilyCardSave): number {
-    return familiyCard.data.personCard.length;
+    return familiyCard.data.individualNombre.length;
   }
 
   ngOnInit() {
