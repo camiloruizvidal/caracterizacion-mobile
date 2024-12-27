@@ -1,7 +1,7 @@
 import { ESteperType } from './../interfaces/interface';
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
-import { IFamilyCard } from '../interfaces/interface';
+import { IGrupalCard } from '../interfaces/interface';
 
 @Injectable({
   providedIn: 'root'
@@ -9,13 +9,13 @@ import { IFamilyCard } from '../interfaces/interface';
 export class TestService {
   constructor() {}
 
-  getDataTest(): Observable<IFamilyCard> {
-    const data: IFamilyCard = {
+  getDataTest(): Observable<IGrupalCard> {
+    const data: IGrupalCard = {
       version: '1.0.0',
       dateLastVersion: new Date(),
       grupalNombre: [
         {
-          title: 'Tarjeta Familiar step 1',
+          title: 'Tarjeta Grupal step 1',
           values: [
             {
               columnName: 'prueba_1_texto',
@@ -108,7 +108,7 @@ export class TestService {
           ]
         },
         {
-          title: 'Tarjeta Familiar step 2',
+          title: 'Tarjeta Grupal step 2',
           values: [
             {
               columnName: 'prueba_5_texto',

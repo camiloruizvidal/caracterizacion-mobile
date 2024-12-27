@@ -1,8 +1,8 @@
 import { DatabaseService } from 'src/app/utils/services/database/database.service';
 import { Injectable } from '@angular/core';
 import {
-  IFamilyCard,
-  IFamilyCardSave
+  IGrupalCard,
+  IGrupalCardSave
 } from '../../formgenerator/interfaces/interface';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
@@ -19,32 +19,32 @@ export class RegistrosService {
   ) {
     this.getUrl().then(url => {
       this.url = `${url}/api/v1`;
-    })
+    });
   }
 
   private keySaveRegister: string = 'formsSave';
 
-  public async loadForms(): Promise<IFamilyCard> {
+  public async loadForms(): Promise<IGrupalCard> {
     this.databaseService.setTable('form');
     return await this.databaseService.findOne({ last: true });
   }
 
-  public newRegister(newCard: IFamilyCardSave): number {
+  public newRegister(newCard: IGrupalCardSave): number {
     this.databaseService.setTable(this.keySaveRegister);
     return this.databaseService.addRecord(newCard);
   }
 
-  public updateRegister(id: number, updateCard: IFamilyCardSave) {
+  public updateRegister(id: number, updateCard: IGrupalCardSave) {
     this.databaseService.setTable(this.keySaveRegister);
     this.databaseService.updateRecord(id, updateCard);
   }
 
-  public async loadRegister(id: number): Promise<IFamilyCardSave> {
+  public async loadRegister(id: number): Promise<IGrupalCardSave> {
     this.databaseService.setTable(this.keySaveRegister);
     return this.databaseService.findOne({ id });
   }
 
-  public async loadAllRegister(): Promise<IFamilyCardSave[]> {
+  public async loadAllRegister(): Promise<IGrupalCardSave[]> {
     this.databaseService.setTable(this.keySaveRegister);
     return this.databaseService.findAll();
   }
@@ -53,7 +53,7 @@ export class RegistrosService {
     this.databaseService.setTable(this.keySaveRegister);
     this.databaseService.deleteAll();
   }
-  public saveRegister(data: IFamilyCardSave): Observable<any> {
+  public saveRegister(data: IGrupalCardSave): Observable<any> {
     return this.httpClient.post<any>(`${this.url}/ficha/save`, data);
   }
 

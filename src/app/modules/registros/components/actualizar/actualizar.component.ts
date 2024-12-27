@@ -1,6 +1,6 @@
 import {
   IEventSteper,
-  IFamilyCardSave,
+  IGrupalCardSave,
   IUser
 } from 'src/app/modules/formgenerator/interfaces/interface';
 import { RegistrosService } from '../../services/registros.service';
@@ -15,7 +15,7 @@ import { AlertController } from '@ionic/angular';
   styleUrls: ['./actualizar.component.scss']
 })
 export class ActualizarComponent implements OnInit {
-  public card!: IFamilyCardSave;
+  public card!: IGrupalCardSave;
   public estados: string[] = ['grupalNombre', 'individualNombre'];
   public estado: string = this.estados[0];
   public currentCode: number = 1;

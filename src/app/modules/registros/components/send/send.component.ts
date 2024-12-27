@@ -1,6 +1,6 @@
 import { RegistrosService } from 'src/app/modules/registros/services/registros.service';
 import { Component, OnInit } from '@angular/core';
-import { IFamilyCardSave } from 'src/app/modules/formgenerator/interfaces/interface';
+import { IGrupalCardSave } from 'src/app/modules/formgenerator/interfaces/interface';
 import { forkJoin } from 'rxjs';
 
 @Component({
@@ -9,7 +9,7 @@ import { forkJoin } from 'rxjs';
   styleUrls: ['./send.component.scss']
 })
 export class SendComponent implements OnInit {
-  public registers: IFamilyCardSave[] = [];
+  public registers: IGrupalCardSave[] = [];
   constructor(private registrosService: RegistrosService) {}
 
   ngOnInit() {
@@ -21,7 +21,7 @@ export class SendComponent implements OnInit {
   }
 
   public enviarRegistros() {
-    const observables = this.registers.map((register: IFamilyCardSave) =>
+    const observables = this.registers.map((register: IGrupalCardSave) =>
       this.registrosService.saveRegister(register)
     );
 

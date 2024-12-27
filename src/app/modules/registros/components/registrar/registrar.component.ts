@@ -1,8 +1,8 @@
 import {
   ICodes,
   IEventSteperStatus,
-  IFamilyCard,
-  IFamilyCardSave,
+  IGrupalCard,
+  IGrupalCardSave,
   IStepers,
   IUser
 } from 'src/app/modules/formgenerator/interfaces/interface';
@@ -27,12 +27,12 @@ import { jsPDF } from 'jspdf';
 })
 export class RegistrarComponent implements OnInit {
   @ViewChild('tarjetas', { static: false }) elementRef!: ElementRef;
-  public card!: IFamilyCard;
+  public card!: IGrupalCard;
   public estados: string[] = ['grupalNombre', 'individualNombre'];
   public estado: string = this.estados[0];
   public currentCode: number = 1;
   public reload: boolean = true;
-  public dataSaveCard!: IFamilyCardSave;
+  public dataSaveCard!: IGrupalCardSave;
   public userDate: IUser;
 
   private myCodes: ICodes[] = [];
@@ -88,7 +88,7 @@ export class RegistrarComponent implements OnInit {
     this.cdRef.detectChanges();
   }
 
-  private inicialiceCard(grupalNombre: IFamilyCard): void {
+  private inicialiceCard(grupalNombre: IGrupalCard): void {
     this.dataSaveCard = {
       version: grupalNombre.version,
       dateLastVersion: grupalNombre.dateLastVersion,
@@ -144,7 +144,7 @@ export class RegistrarComponent implements OnInit {
     pdf.setLanguage('es-CO');
     pdf.html(this.elementRef.nativeElement, {
       callback: pdf => {
-        pdf.save('Tarjeta Familiar - ' + this.dataSaveCard.code + '.pdf');
+        pdf.save('Tarjeta Grupal - ' + this.dataSaveCard.code + '.pdf');
         this.router.navigate(['/registros']);
       },
       margin: [30, 0, 30, 0]

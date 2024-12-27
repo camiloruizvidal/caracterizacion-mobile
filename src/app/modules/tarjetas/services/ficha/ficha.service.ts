@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import {
-  IFamilyCard,
+  IGrupalCard,
   IHttpResponse
 } from 'src/app/modules/formgenerator/interfaces/interface';
 import { DatabaseService } from 'src/app/utils/services/database/database.service';
@@ -17,7 +17,9 @@ export class FichaService {
     private http: HttpClient,
     private databaseService: DatabaseService
   ) {
-    this.url = this.getUrl();
+    this.getUrl().then(url => {
+      this.url = url;
+    });
   }
 
   private async getUrl() {
@@ -26,8 +28,8 @@ export class FichaService {
     return `${url}/api/v1`;
   }
 
-  public getFicha(): Observable<IHttpResponse<IFamilyCard>> {
-    return this.http.get<IHttpResponse<IFamilyCard>>(
+  public getFicha(): Observable<IHttpResponse<IGrupalCard>> {
+    return this.http.get<IHttpResponse<IGrupalCard>>(
       this.url + '/formato_ficha'
     );
   }

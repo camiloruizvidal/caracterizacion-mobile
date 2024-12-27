@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { FamiliarService } from './familiar.service';
+import { GrupalService } from './grupal.service';
 
-describe('FamiliarService', () => {
-  let service: FamiliarService;
+describe('GrupalService', () => {
+  let service: GrupalService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(FamiliarService);
+    service = TestBed.inject(GrupalService);
   });
 
   it('should be created', () => {

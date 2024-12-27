@@ -3,7 +3,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import {
-  IFamilyCard,
+  IGrupalCard,
   IHttpResponse,
   IPaciente,
   IPaginationResult
@@ -29,9 +29,9 @@ export class DatosService {
     this.URL = `${url}/api/v1`;
   }
 
-  public loadDataForm(): Observable<IHttpResponse<IFamilyCard>> {
+  public loadDataForm(): Observable<IHttpResponse<IGrupalCard>> {
     const url = `${this.URL}/ficha/formato_ficha`;
-    return this.httpClient.get<IHttpResponse<IFamilyCard>>(url);
+    return this.httpClient.get<IHttpResponse<IGrupalCard>>(url);
   }
 
   public loadDataPatients(
@@ -48,18 +48,19 @@ export class DatosService {
     );
   }
 
-  public saveDataForm(data: IFamilyCard): void {//Aqui se cargan
+  public saveDataForm(data: IGrupalCard): void {
+    //Aqui se cargan
     this.databaseService.setTable('form');
     this.databaseService.createOrUpdate(data, 'version');
   }
 
   public async borrarPacientes(): Promise<void> {
-    await this.patientsPersistenceService.clearPatients()
+    await this.patientsPersistenceService.clearPatients();
   }
 
   public addPatients(data: IPaciente[]): void {
     try {
-      this.patientsPersistenceService.addPatients(data)
+      this.patientsPersistenceService.addPatients(data);
     } catch (error) {
       throw error;
     }
