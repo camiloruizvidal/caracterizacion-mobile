@@ -40,17 +40,16 @@
   </ion-row>
   <div *ngIf="card && estado === estados[0]">
     <ion-title>Tarjeta familiar - {{ currentCode }}</ion-title>
+    {{ card.data | json }}
     <app-steper
       [isUpdate]="true"
       (saveDataMethod)="saveData($event)"
-      [dataSteper]="card.data.grupalNombre"
+      [dataSteper]="card.data.grupalData"
     >
     </app-steper>
   </div>
 
-  <div
-    *ngFor="let individualNombre of card?.data?.individualNombre; let i = index"
-  >
+  <div *ngFor="let individualData of card?.data?.individualData; let i = index">
     <div *ngIf="card && estado === estados[1] && personCardsCurrent === i">
       <ion-title
         >Tarjeta personal - {{ currentCode }}. Registro {{ i + 1 }} de
@@ -59,7 +58,7 @@
       <app-steper
         [isUpdate]="true"
         (saveDataMethod)="saveData($event)"
-        [dataSteper]="individualNombre"
+        [dataSteper]="individualData"
         [hasManyRegister]="true"
       ></app-steper>
     </div>

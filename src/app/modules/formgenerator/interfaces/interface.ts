@@ -6,8 +6,10 @@ export interface IHttpResponse<T> {
 export interface IGrupalCard {
   version: string;
   dateLastVersion: Date;
-  grupalNombre: IStepers[];
-  individualNombre: IStepers[];
+  individualNombre: string;
+  grupalNombre: string;
+  grupalData: IStepers[];
+  individualData: IStepers[];
 }
 
 export interface IStepers {
@@ -94,8 +96,8 @@ export interface IGrupalCardSave {
   data: IDataGrupalCard;
 }
 export interface IDataGrupalCard {
-  grupalNombre: IStepers[];
-  individualNombre: IStepers[][];
+  grupalData: IStepers[];
+  individualData: IStepers[][];
 }
 
 export interface IUser {

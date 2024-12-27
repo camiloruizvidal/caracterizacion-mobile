@@ -33,10 +33,10 @@
       </table>
       <div
         style="min-width: 300px"
-        *ngFor="let grupalNombre of dataSaveCard.data.grupalNombre"
+        *ngFor="let grupalData of dataSaveCard.data.grupalData"
       >
-        <h1>{{ grupalNombre.title }}</h1>
-        <div *ngFor="let valuesFamily of grupalNombre.values">
+        <h1>{{ grupalData.title }}</h1>
+        <div *ngFor="let valuesFamily of grupalData.values">
           <p>
             {{ valuesFamily?.id }})
             <strong>{{ valuesFamily.label }}:</strong>
@@ -50,13 +50,10 @@
       </div>
       <div
         style="min-width: 300px"
-        *ngFor="
-          let persons of dataSaveCard.data.individualNombre;
-          let i = index
-        "
+        *ngFor="let persons of dataSaveCard.data.individualData; let i = index"
       >
         <h1>
-          {{ i + 1 }} de {{ dataSaveCard.data.individualNombre.length }}) Datos
+          {{ i + 1 }} de {{ dataSaveCard.data.individualData.length }}) Datos
           personales
         </h1>
         <div *ngFor="let person of persons">
@@ -76,7 +73,7 @@
     <ion-title>Tarjeta familiar - {{ currentCode }}</ion-title>
     <app-steper
       (saveDataMethod)="saveData($event)"
-      [dataSteper]="card.grupalNombre"
+      [dataSteper]="card.grupalData"
     >
     </app-steper>
   </div>
@@ -84,7 +81,7 @@
     <ion-title>Tarjeta personal - {{ currentCode }}</ion-title>
     <app-steper
       (saveDataMethod)="saveData($event)"
-      [dataSteper]="card.individualNombre"
+      [dataSteper]="card.individualData"
       [hasManyRegister]="true"
     ></app-steper>
   </div>

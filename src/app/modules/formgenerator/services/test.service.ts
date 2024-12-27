@@ -13,7 +13,7 @@ export class TestService {
     const data: IGrupalCard = {
       version: '1.0.0',
       dateLastVersion: new Date(),
-      grupalNombre: [
+      grupalData: [
         {
           title: 'Tarjeta Grupal step 1',
           values: [
@@ -201,7 +201,7 @@ export class TestService {
           ]
         }
       ],
-      individualNombre: [
+      individualData: [
         {
           title: 'Tarjeta persona',
           values: [

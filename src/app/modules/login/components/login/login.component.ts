@@ -25,7 +25,7 @@ export class LoginComponent implements OnInit {
   ) {
     const username = '123456';
     const password = '123456';
-    const server = 'https://api.crvtest.online';
+    const server = 'http://localhost:3000'; //'https://api.crvtest.online';
     this.loginForm = this.formBuilder.group({
       username: [username, Validators.required],
       password: [password, Validators.required],
@@ -45,7 +45,7 @@ export class LoginComponent implements OnInit {
   private async startLoading(): Promise<void> {
     this.databaseService.setTable('server');
     let url = await this.databaseService.findOne();
-    if(url && url.trim() !== '') {
+    if (url && url.trim() !== '') {
       this.loginForm.get('server')?.setValue(url);
     }
     this.loading = await this.loadingCtrl.create({
