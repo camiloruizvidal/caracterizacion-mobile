@@ -70,7 +70,7 @@
     </div>
   </div>
   <div *ngIf="card && estado === estados[0]">
-    <ion-title>Tarjeta familiar - {{ currentCode }}</ion-title>
+    <ion-title>{{ card.grupalNombre }} - {{ currentCode }}</ion-title>
     <app-steper
       (saveDataMethod)="saveData($event)"
       [dataSteper]="card.grupalData"
@@ -78,7 +78,7 @@
     </app-steper>
   </div>
   <div *ngIf="card && estado === estados[1] && reload">
-    <ion-title>Tarjeta personal - {{ currentCode }}</ion-title>
+    <ion-title>{{ card.individualNombre }} - {{ currentCode }}</ion-title>
     <app-steper
       (saveDataMethod)="saveData($event)"
       [dataSteper]="card.individualData"

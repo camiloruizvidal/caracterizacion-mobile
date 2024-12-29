@@ -19,8 +19,8 @@ export class ActualizarComponent implements OnInit {
   public estados: string[] = ['grupalData', 'individualData'];
   public estado: string = this.estados[0];
   public currentCode: number = 1;
-  public personCardsTotal: number = 0;
-  public personCardsCurrent: number = 0;
+  public individualCardsTotal: number = 0;
+  public individualCardsCurrent: number = 0;
 
   private idRegister: number;
   private indexCard: number;
@@ -63,7 +63,7 @@ export class ActualizarComponent implements OnInit {
     this.userDate = await this.loginService.getCurrentUser();
     console.log({ card: this.card });
     this.currentCode = this.card.code;
-    this.personCardsTotal = this.card.data.individualData.length;
+    this.individualCardsTotal = this.card.data.individualData.length;
   }
 
   public async saveData(event: IEventSteper) {
