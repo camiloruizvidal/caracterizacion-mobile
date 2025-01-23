@@ -61,7 +61,6 @@ export class ActualizarComponent implements OnInit {
     this.cdRef.detectChanges();
     this.card = await this.registrosService.loadRegister(this.indexCard);
     this.userDate = await this.loginService.getCurrentUser();
-    console.log({ card: this.card });
     this.currentCode = this.card.code;
     this.individualCardsTotal = this.card.data.individualData.length;
   }
