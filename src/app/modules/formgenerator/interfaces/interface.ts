@@ -32,7 +32,7 @@ export interface ISteperValues {
   required: IOptionsRequired | boolean | null;
   value?: any;
   ficha_grupo_id?: string | number | null;
-  nombrePadre?: string; //Para selectDependiente;
+  nombrePadreDependiente?: string; //Para selectDependiente
   createdAt?: string | Date;
   updatedAt?: string | Date;
 }
@@ -63,6 +63,12 @@ export enum ESteperType {
 export interface IOptionsCheck {
   valueTrue: string;
   valueFalse: string;
+}
+
+export interface IOptionsSelectDependient {
+  valueDependiente: string;
+  value: string;
+  option: string;
 }
 
 export interface IOptionsSelect {

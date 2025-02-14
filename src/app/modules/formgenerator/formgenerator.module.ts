@@ -21,6 +21,7 @@ import { SelectMultipleComponent } from './components/inputs/select-multiple/sel
 import { TitleComponent } from './components/inputs/title/title.component';
 import { SubtitleComponent } from './components/inputs/subtitle/subtitle.component';
 import { RutaAtencionComponent } from './components/inputs/ruta-atencion/ruta-atencion.component';
+import { SelectDependienteComponent } from './components/inputs/select-dependiente/select-dependiente.component';
 
 @NgModule({
   declarations: [
@@ -42,7 +43,8 @@ import { RutaAtencionComponent } from './components/inputs/ruta-atencion/ruta-at
     GPSComponent,
     TitleComponent,
     SubtitleComponent,
-    RutaAtencionComponent
+    RutaAtencionComponent,
+    SelectDependienteComponent
   ],
   exports: [
     SteperComponent,
@@ -63,13 +65,9 @@ import { RutaAtencionComponent } from './components/inputs/ruta-atencion/ruta-at
     GPSComponent,
     TitleComponent,
     SubtitleComponent,
-    RutaAtencionComponent
+    RutaAtencionComponent,
+    SelectDependienteComponent
   ],
-  imports: [
-    CommonModule,
-    IonicModule,
-    FormsModule,
-    ReactiveFormsModule
-  ]
+  imports: [CommonModule, IonicModule, FormsModule, ReactiveFormsModule]
 })
-export class FormgeneratorModule { }
+export class FormgeneratorModule {}

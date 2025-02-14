@@ -36,24 +36,24 @@ export class RutaAtencionComponent extends BaseInputComponent {
     const valuesToFilter = ['genero', 'fecha_nacimiento'];
     const persona =
       this.formValue.find(card => card.table === 'pacientes')?.values ?? [];
-
-    persona
-      .filter(value => valuesToFilter.includes(value.columnName))
-      .forEach(value => {
-        opcions[value.columnName] = value.value;
-      });
-
-    this.edad = this.calcularEdad(opcions['fecha_nacimiento']);
-    delete opcions['fecha_nacimiento'];
-
-    return optionsValues.filter((objeto: any) => {
-      return (
-        Object.entries(opcions).every(
-          ([key, value]) => objeto[key] === value
-        ) &&
-        objeto.edad_inicial <= this.edad &&
-        objeto.edad_final >= this.edad
-      );
-    });
+    return [];
+    //persona
+    //  .filter(value => valuesToFilter.includes(value.columnName))
+    //  .forEach(value => {
+    //    opcions[value.columnName] = value.value;
+    //  });
+    //
+    //this.edad = this.calcularEdad(opcions['fecha_nacimiento']);
+    //delete opcions['fecha_nacimiento'];
+    //
+    //return optionsValues.filter((objeto: any) => {
+    //  return (
+    //    Object.entries(opcions).every(
+    //      ([key, value]) => objeto[key] === value
+    //    ) &&
+    //    objeto.edad_inicial <= this.edad &&
+    //    objeto.edad_final >= this.edad
+    //  );
+    //});
   }
 }

@@ -2,11 +2,13 @@
   <span *ngIf="isRequired" class="required-input">*</span>
   {{ steperValue.label }}
 </ion-text>
-<ion-input
-  [ariaLabel]="steperValue.columnName"
+<ion-select
   [id]="steperValue.columnName"
-  [value]="steperValue.value"
-  [required]="isRequired"
   (ionChange)="saveInput($event)"
   labelPlacement="floating"
-></ion-input>
+  [value]="steperValue.value"
+>
+  <ion-select-option *ngFor="let option of options" [value]="option.value">
+    {{ option.option }}
+  </ion-select-option>
+</ion-select>

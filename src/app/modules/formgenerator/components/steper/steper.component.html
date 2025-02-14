@@ -106,6 +106,19 @@
               >
               </app-select>
             </ion-col>
+
+            <ion-col
+              *ngSwitchCase="SteperType.SelectDependiente"
+              class="ion-input-line"
+            >
+              <app-select-dependiente
+                [steperValue]="itemInputs"
+                (saveInputData)="saveValueColumn($event)"
+                [formValue]="dataSteper"
+              >
+              </app-select-dependiente>
+            </ion-col>
+
             <ion-col
               *ngSwitchCase="SteperType.selectMultiple"
               class="ion-input-line"
