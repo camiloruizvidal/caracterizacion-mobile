@@ -1,5 +1,5 @@
 import { Input, Output, EventEmitter, Component, OnInit } from '@angular/core';
-import { ISteperValues, IStepers } from '../../../interfaces/interface';
+import { IPregunta, ICategoria } from '../../../interfaces/interface';
 
 @Component({
   selector: 'app-base-input',
@@ -12,10 +12,10 @@ export class BaseInputComponent {
     }, 300);
   }
 
-  @Input() steperValue!: ISteperValues;
-  @Input() formValue!: IStepers[];
+  @Input() steperValue!: IPregunta;
+  @Input() formValue!: ICategoria[];
 
-  @Output() saveInputData = new EventEmitter<IStepers[]>();
+  @Output() saveInputData = new EventEmitter<ICategoria[]>();
   @Output() isValidated = new EventEmitter<boolean>();
 
   public valueData: any = '';
@@ -31,7 +31,7 @@ export class BaseInputComponent {
 
     for (const step of this.formValue) {
       const matchingValue = step.values.find(
-        (steperValue: ISteperValues) =>
+        (steperValue: IPregunta) =>
           steperValue.columnName === this.steperValue.columnName
       );
       if (matchingValue) {

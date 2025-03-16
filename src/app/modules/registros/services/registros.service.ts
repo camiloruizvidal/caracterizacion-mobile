@@ -2,7 +2,7 @@ import { DatabaseService } from 'src/app/utils/services/database/database.servic
 import { Injectable } from '@angular/core';
 import {
   IGrupalCard,
-  IGrupalCardSave
+  IGuardarFormularioGrupal
 } from '../../formgenerator/interfaces/interface';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
@@ -29,22 +29,22 @@ export class RegistrosService {
     return await this.databaseService.findOne({ last: true });
   }
 
-  public newRegister(newCard: IGrupalCardSave): number {
+  public newRegister(newCard: IGuardarFormularioGrupal): number {
     this.databaseService.setTable(this.keySaveRegister);
     return this.databaseService.addRecord(newCard);
   }
 
-  public updateRegister(id: number, updateCard: IGrupalCardSave) {
+  public updateRegister(id: number, updateCard: IGuardarFormularioGrupal) {
     this.databaseService.setTable(this.keySaveRegister);
     this.databaseService.updateRecord(id, updateCard);
   }
 
-  public async loadRegister(id: number): Promise<IGrupalCardSave> {
+  public async loadRegister(id: number): Promise<IGuardarFormularioGrupal> {
     this.databaseService.setTable(this.keySaveRegister);
     return this.databaseService.findOne({ id });
   }
 
-  public async loadAllRegister(): Promise<IGrupalCardSave[]> {
+  public async loadAllRegister(): Promise<IGuardarFormularioGrupal[]> {
     this.databaseService.setTable(this.keySaveRegister);
     return this.databaseService.findAll();
   }
@@ -53,7 +53,7 @@ export class RegistrosService {
     this.databaseService.setTable(this.keySaveRegister);
     this.databaseService.deleteAll();
   }
-  public saveRegister(data: IGrupalCardSave): Observable<any> {
+  public saveRegister(data: IGuardarFormularioGrupal): Observable<any> {
     return this.httpClient.post<any>(`${this.url}/ficha/save`, data);
   }
 

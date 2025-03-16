@@ -8,24 +8,24 @@ export interface IGrupalCard {
   dateLastVersion: Date;
   individualNombre: string;
   grupalNombre: string;
-  grupalData: IStepers[];
-  individualData: IStepers[];
+  grupalData: ICategoria[];
+  individualData: ICategoria[];
 }
 
-export interface IStepers {
+export interface ICategoria {
   title: string;
   subtitle?: string;
   table: string;
-  values: ISteperValues[];
+  values: IPregunta[];
 }
 
-export interface ISteperValues {
+export interface IPregunta {
   id?: number;
   columnName?: string;
   orden?: number;
   label: string;
   description?: string | null;
-  type: ESteperType | string;
+  type: ETipoPregunta | string;
   options?:
     | IOptionsCheck
     | IOptionsSelect[]
@@ -44,7 +44,7 @@ export interface ISteperValues {
   alerta?: IAlertaConfig;
 }
 
-export enum ESteperType {
+export enum ETipoPregunta {
   Address = 'address',
   Calendar = 'calendar',
   Photo = 'photo',
@@ -100,23 +100,23 @@ export interface IOptionsRule {
   rule: string;
   value: string;
 }
-export interface ICodes {
+export interface ICodigos {
   id?: number;
   user_id?: number;
   start: number;
   finish: number;
 }
-export interface IGrupalCardSave {
+export interface IGuardarFormularioGrupal {
   version: string;
   dateLastVersion: Date;
   dateRegister?: Date;
   code: number;
   userId?: number;
-  data: IDataGrupalCard;
+  data: IDatosFormularioGrupal;
 }
-export interface IDataGrupalCard {
-  grupalData: IStepers[];
-  individualData: IStepers[][];
+export interface IDatosFormularioGrupal {
+  grupalData: ICategoria[];
+  individualData: ICategoria[][];
 }
 
 export interface IUser {
@@ -128,7 +128,7 @@ export interface IUser {
   apellidoSegundo: null;
   documento: string;
   documentoTipoId: number;
-  codes: ICodes[];
+  codes: ICodigos[];
   currentCode: number;
 }
 
@@ -176,7 +176,7 @@ export interface IOptionsSelectFilterRelaciones {
 }
 
 export interface IEventSteper {
-  data: IStepers[];
+  data: ICategoria[];
   status: IEventSteperStatus;
 }
 

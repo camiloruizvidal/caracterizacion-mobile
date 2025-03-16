@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { IOptionsCheck, ISteperValues } from '../../../interfaces/interface';
+import { IOptionsCheck, IPregunta } from '../../../interfaces/interface';
 import { BaseInputComponent } from '../base-input/base-input.component';
 
 @Component({

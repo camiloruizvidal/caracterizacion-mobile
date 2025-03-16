@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { RegistrosService } from '../../services/registros.service';
-import { IGrupalCardSave } from 'src/app/modules/formgenerator/interfaces/interface';
+import { IGuardarFormularioGrupal } from 'src/app/modules/formgenerator/interfaces/interface';
 import { Router } from '@angular/router';
 
 @Component({
@@ -14,9 +14,9 @@ export class ListarComponent implements OnInit {
     private router: Router
   ) {}
 
-  public familiesCards: IGrupalCardSave[] = [];
+  public familiesCards: IGuardarFormularioGrupal[] = [];
 
-  public countPersons(familiyCard: IGrupalCardSave): number {
+  public countPersons(familiyCard: IGuardarFormularioGrupal): number {
     return familiyCard.data.individualData.length;
   }
 

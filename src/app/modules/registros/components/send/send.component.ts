@@ -1,6 +1,6 @@
 import { RegistrosService } from 'src/app/modules/registros/services/registros.service';
 import { Component, OnInit } from '@angular/core';
-import { IGrupalCardSave } from 'src/app/modules/formgenerator/interfaces/interface';
+import { IGuardarFormularioGrupal } from 'src/app/modules/formgenerator/interfaces/interface';
 import { forkJoin } from 'rxjs';
 
 @Component({
@@ -9,7 +9,7 @@ import { forkJoin } from 'rxjs';
   styleUrls: ['./send.component.scss']
 })
 export class SendComponent implements OnInit {
-  public registers: IGrupalCardSave[] = [];
+  public registers: IGuardarFormularioGrupal[] = [];
   constructor(private registrosService: RegistrosService) {}
 
   ngOnInit() {
@@ -21,8 +21,9 @@ export class SendComponent implements OnInit {
   }
 
   public enviarRegistros() {
-    const observables = this.registers.map((register: IGrupalCardSave) =>
-      this.registrosService.saveRegister(register)
+    const observables = this.registers.map(
+      (register: IGuardarFormularioGrupal) =>
+        this.registrosService.saveRegister(register)
     );
 
     forkJoin(observables).subscribe(responses => {

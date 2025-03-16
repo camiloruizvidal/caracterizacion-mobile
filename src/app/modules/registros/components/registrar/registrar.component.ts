@@ -1,9 +1,9 @@
 import {
-  ICodes,
+  ICodigos,
   IEventSteperStatus,
   IGrupalCard,
-  IGrupalCardSave,
-  IStepers,
+  IGuardarFormularioGrupal,
+  ICategoria,
   IUser
 } from 'src/app/modules/formgenerator/interfaces/interface';
 import { RegistrosService } from './../../services/registros.service';
@@ -32,10 +32,10 @@ export class RegistrarComponent implements OnInit {
   public estado: string = this.estados[0];
   public currentCode: number = 1;
   public reload: boolean = true;
-  public dataSaveCard!: IGrupalCardSave;
+  public dataSaveCard!: IGuardarFormularioGrupal;
   public userDate: IUser;
 
-  private myCodes: ICodes[] = [];
+  private myCodes: ICodigos[] = [];
   private idRegister: number;
 
   constructor(
@@ -111,7 +111,7 @@ export class RegistrarComponent implements OnInit {
     }
   }
 
-  public async saveData(event: { data: IStepers[]; status: string }) {
+  public async saveData(event: { data: ICategoria[]; status: string }) {
     const loading = await this.loadingCtrl.create({
       message: 'Guardando',
       duration: 1000

@@ -2,8 +2,8 @@ import { Injectable } from '@angular/core';
 import {
   IOptionsRule,
   IOptionsVisibility,
-  ISteperValues,
-  IStepers
+  IPregunta,
+  ICategoria
 } from '../../interfaces/interface';
 
 @Injectable({
@@ -12,7 +12,7 @@ import {
 export class ValidationsService {
   constructor() {}
 
-  public isVisibility(itemInputs: ISteperValues, card: IStepers): boolean {
+  public isVisibility(itemInputs: IPregunta, card: ICategoria): boolean {
     let isVisibility: boolean = true;
     if (typeof itemInputs.visibility === 'boolean') {
       return itemInputs.visibility;
@@ -24,7 +24,7 @@ export class ValidationsService {
 
   private isValidatedRules(
     visibility: IOptionsVisibility,
-    card: IStepers
+    card: ICategoria
   ): boolean {
     let isVisilty = true;
     visibility?.rules?.forEach((rule: any) => {
@@ -39,9 +39,9 @@ export class ValidationsService {
     return isVisilty;
   }
 
-  private searchValueFromColumn(columnName: string, card: IStepers) {
+  private searchValueFromColumn(columnName: string, card: ICategoria) {
     return card.values.find(
-      (values: ISteperValues) => values.columnName === columnName
+      (values: IPregunta) => values.columnName === columnName
     );
   }
 }

@@ -3,7 +3,7 @@ import { DatabaseService } from 'src/app/utils/services/database/database.servic
 import { Injectable, OnInit } from '@angular/core';
 import { Observable, tap } from 'rxjs';
 import {
-  ICodes,
+  ICodigos,
   IUser
 } from 'src/app/modules/formgenerator/interfaces/interface';
 
@@ -79,7 +79,7 @@ export class LoginService {
   public async nextCode(): Promise<number> {
     let found = false;
     const user: IUser = await this.getCurrentUser();
-    const myCodes: ICodes[] = user.codes;
+    const myCodes: ICodigos[] = user.codes;
 
     let currentCode = Number(`${user.currentCode}`);
     for (const codeRange of myCodes) {

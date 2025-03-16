@@ -1,4 +1,4 @@
-import { ESteperType } from './../interfaces/interface';
+import { ETipoPregunta } from './../interfaces/interface';
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { IGrupalCard } from '../interfaces/interface';
@@ -23,7 +23,7 @@ export class TestService {
               label: 'Campo de prueba 1',
               description:
                 'Este campo es de prueba, asi que no tiene nada que ver',
-              type: ESteperType.Text,
+              type: ETipoPregunta.Text,
               options: null,
               default: '',
               visibility: {
@@ -43,7 +43,7 @@ export class TestService {
               label: 'Campo de prueba 2',
               description:
                 'Este campo es de prueba para un texto largo, asi que no tiene nada que ver',
-              type: ESteperType.TextArea,
+              type: ETipoPregunta.TextArea,
               options: null,
               default: '',
               visibility: {
@@ -63,7 +63,7 @@ export class TestService {
               label: 'Campo de prueba 3',
               description:
                 'Este campo es de prueba para un texto largo, asi que no tiene nada que ver',
-              type: ESteperType.Check,
+              type: ETipoPregunta.Check,
               options: { valueTrue: 'Sí', valueFalse: 'No' },
               default: true,
               visibility: {
@@ -83,7 +83,7 @@ export class TestService {
               label: 'Campo de prueba 4, campo dependiente de 3',
               description:
                 'Este campo es de prueba para un texto largo, asi que no tiene nada que ver',
-              type: ESteperType.TextArea,
+              type: ETipoPregunta.TextArea,
               options: null,
               default: true,
               visibility: {
@@ -116,7 +116,7 @@ export class TestService {
               label: 'Campo de prueba 5',
               description:
                 'Este campo es de prueba, asi que no tiene nada que ver',
-              type: ESteperType.Text,
+              type: ETipoPregunta.Text,
               options: null,
               default: '',
               visibility: {
@@ -136,7 +136,7 @@ export class TestService {
               label: 'Campo de prueba 6',
               description:
                 'Este campo es de prueba para un texto largo, asi que no tiene nada que ver',
-              type: ESteperType.TextArea,
+              type: ETipoPregunta.TextArea,
               options: null,
               default: '',
               visibility: {
@@ -156,7 +156,7 @@ export class TestService {
               label: 'Campo de prueba 7',
               description:
                 'Este campo es de prueba para un texto largo, asi que no tiene nada que ver',
-              type: ESteperType.Check,
+              type: ETipoPregunta.Check,
               options: { valueTrue: 'Sí', valueFalse: 'No' },
               default: true,
               visibility: {
@@ -176,7 +176,7 @@ export class TestService {
               label: 'Campo de prueba 8, campo dependiente de 7',
               description:
                 'Este campo es de prueba para un texto largo, asi que no tiene nada que ver',
-              type: ESteperType.TextArea,
+              type: ETipoPregunta.TextArea,
               options: null,
               default: true,
               visibility: {
@@ -211,7 +211,7 @@ export class TestService {
               label: 'Campo de prueba 1',
               description:
                 'Este campo es de prueba, asi que no tiene nada que ver',
-              type: ESteperType.Text,
+              type: ETipoPregunta.Text,
               options: null,
               default: '',
               visibility: {
@@ -230,7 +230,7 @@ export class TestService {
               order: 2,
               label: 'Calendario',
               description: 'Calendar',
-              type: ESteperType.Calendar,
+              type: ETipoPregunta.Calendar,
               options: null,
               default: '',
               visibility: {
@@ -249,7 +249,7 @@ export class TestService {
               order: 2,
               label: 'Capturar con la camara',
               description: 'Camara',
-              type: ESteperType.Photo,
+              type: ETipoPregunta.Photo,
               options: null,
               default: '',
               visibility: {
@@ -269,7 +269,7 @@ export class TestService {
               label: 'Campo de prueba 2',
               description:
                 'Este campo es de prueba para un texto largo, asi que no tiene nada que ver',
-              type: ESteperType.TextArea,
+              type: ETipoPregunta.TextArea,
               options: null,
               default: '',
               visibility: {
@@ -289,7 +289,7 @@ export class TestService {
               label: 'Campo de prueba 3',
               description:
                 'Este campo es de prueba para un texto largo, asi que no tiene nada que ver',
-              type: ESteperType.Check,
+              type: ETipoPregunta.Check,
               options: { valueTrue: 'Sí', valueFalse: 'No' },
               default: true,
               visibility: {
@@ -309,7 +309,7 @@ export class TestService {
               label: 'Campo de prueba 4, campo dependiente de 3',
               description:
                 'Este campo es de prueba para un texto largo, asi que no tiene nada que ver',
-              type: ESteperType.TextArea,
+              type: ETipoPregunta.TextArea,
               options: null,
               default: true,
               visibility: {
@@ -337,7 +337,7 @@ export class TestService {
               label: 'Campo de GPS',
               description:
                 'Este campo es de prueba para un texto largo, asi que no tiene nada que ver',
-              type: ESteperType.GPS,
+              type: ETipoPregunta.GPS,
               options: null,
               default: true,
               visibility: {
@@ -364,7 +364,7 @@ export class TestService {
               order: 4,
               label: 'Campo de SELECT',
               description: 'Este campo muestra un simple select',
-              type: ESteperType.Select,
+              type: ETipoPregunta.Select,
               options: null,
               default: true,
               visibility: {

@@ -2,8 +2,8 @@ import { DatabaseService } from 'src/app/utils/services/database/database.servic
 import { Component, OnInit, ViewChild } from '@angular/core';
 import {
   IOptionsSelectFilter,
-  ISteperValues,
-  IStepers
+  IPregunta,
+  ICategoria
 } from '../../../interfaces/interface';
 import { BaseInputComponent } from '../base-input/base-input.component';
 import { IonModal, ModalController } from '@ionic/angular';
@@ -93,15 +93,19 @@ export class SelectFilterComponent
   }
 
   public seleccionarItem(item: any): void {
-    this.formValue.forEach((element: IStepers, indexForm: number) => {
+    this.formValue.forEach((element: ICategoria, indexForm: number) => {
       this.updateValues(element, item, indexForm);
     });
 
     this.cancel();
   }
 
-  private updateValues(element: IStepers, item: any, indexForm: number): void {
-    element.values.forEach((value: ISteperValues, indexValue: number) => {
+  private updateValues(
+    element: ICategoria,
+    item: any,
+    indexForm: number
+  ): void {
+    element.values.forEach((value: IPregunta, indexValue: number) => {
       const itemValue = this.options.relaciones.find(
         name => name.origen === value.columnName
       );

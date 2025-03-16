@@ -1,11 +1,11 @@
 import { ValidationsService } from './../../services/validations/validations.service';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import {
-  ESteperType,
+  ETipoPregunta,
   IEventSteper,
   IEventSteperStatus,
-  ISteperValues,
-  IStepers
+  IPregunta,
+  ICategoria
 } from '../../interfaces/interface';
 import { RegistrosService } from 'src/app/modules/registros/services/registros.service';
 
@@ -15,14 +15,14 @@ import { RegistrosService } from 'src/app/modules/registros/services/registros.s
   styleUrls: ['./steper.component.scss']
 })
 export class SteperComponent implements OnInit {
-  @Input() dataSteper!: IStepers[];
+  @Input() dataSteper!: ICategoria[];
   @Input() hasManyRegister: Boolean = false;
   @Input() isUpdate: Boolean = false;
   @Output() saveDataMethod = new EventEmitter<IEventSteper>();
   public currentStep: number = 0;
   public isDisabled: boolean = false;
 
-  private saveData: IStepers[] = [];
+  private saveData: ICategoria[] = [];
 
   constructor(
     private validationsService: ValidationsService,
@@ -35,16 +35,16 @@ export class SteperComponent implements OnInit {
     }
   }
 
-  private clearValues(datasSteper: IStepers[]) {
-    datasSteper.forEach((dataSteper: IStepers, keyDataSteper: number) => {
-      dataSteper.values.forEach((values: ISteperValues, keyValues: number) => {
+  private clearValues(datasSteper: ICategoria[]) {
+    datasSteper.forEach((dataSteper: ICategoria, keyDataSteper: number) => {
+      dataSteper.values.forEach((values: IPregunta, keyValues: number) => {
         datasSteper[keyDataSteper].values[keyValues].value = null;
       });
     });
     this.dataSteper = datasSteper;
   }
 
-  public saveValueColumn(value: IStepers[]): void {
+  public saveValueColumn(value: ICategoria[]): void {
     this.saveData = value;
   }
 
@@ -71,12 +71,12 @@ export class SteperComponent implements OnInit {
     });
   }
 
-  public isVisibilityInput(itemInputs: ISteperValues, card: IStepers): boolean {
+  public isVisibilityInput(itemInputs: IPregunta, card: ICategoria): boolean {
     return this.validationsService.isVisibility(itemInputs, card);
   }
 
-  public get SteperType(): typeof ESteperType {
-    return ESteperType;
+  public get SteperType(): typeof ETipoPregunta {
+    return ETipoPregunta;
   }
 
   public get isNextDisabled(): boolean {
