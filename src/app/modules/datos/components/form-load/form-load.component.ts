@@ -1,5 +1,5 @@
 import {
-  IGrupalCard,
+  IGuardarFormularioGrupal,
   IHttpResponse,
   IPaciente,
   IPaginationResult
@@ -126,7 +126,7 @@ export class FormLoadComponent {
   private actualizarFormulario() {
     this.datosService
       .loadDataForm()
-      .subscribe((respuesta: IHttpResponse<IGrupalCard>) => {
+      .subscribe((respuesta: IHttpResponse<IGuardarFormularioGrupal[]>) => {
         this.datosService.saveDataForm(respuesta.data);
       });
   }

@@ -6,7 +6,8 @@ import {
   IGrupalCard,
   IHttpResponse,
   IPaciente,
-  IPaginationResult
+  IPaginationResult,
+  IGuardarFormularioGrupal
 } from 'src/app/modules/formgenerator/interfaces/interface';
 import { PatientsPersistenceService } from '../persistence/patients/patients-persistence.service';
 
@@ -29,9 +30,9 @@ export class DatosService {
     this.URL = `${url}/api/v1`;
   }
 
-  public loadDataForm(): Observable<IHttpResponse<IGrupalCard>> {
+  public loadDataForm(): Observable<IHttpResponse<IGuardarFormularioGrupal[]>> {
     const url = `${this.URL}/ficha/formato_ficha`;
-    return this.httpClient.get<IHttpResponse<IGrupalCard>>(url);
+    return this.httpClient.get<IHttpResponse<IGuardarFormularioGrupal[]>>(url);
   }
 
   public loadDataPatients(
@@ -48,10 +49,13 @@ export class DatosService {
     );
   }
 
-  public saveDataForm(data: IGrupalCard): void {
+  public saveDataForm(data: IGuardarFormularioGrupal[]): void {
     //Aqui se cargan
     this.databaseService.setTable('form');
-    this.databaseService.createOrUpdate(data, 'version');
+    // Guardamos el primer elemento del array ya que es el más reciente
+    if (data && data.length > 0) {
+      this.databaseService.createOrUpdate(data[0], 'version');
+    }
   }
 
   public async borrarPacientes(): Promise<void> {
