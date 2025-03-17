@@ -6,14 +6,6 @@ export interface IHttpResponse<T> {
 
 export type tipoAlertas = 'individual' | 'grupal';
 
-export interface IGruposFicha {
-  id: number;
-  title: string;
-  subtitle?: string | null;
-  orden: number;
-  ficha_tipo_id?: number;
-}
-
 export interface IFormulario {
   isFinish: boolean;
   version?: string;
@@ -104,6 +96,7 @@ export interface IOptionsSelectDependient {
   show: { table: string; dependiente: string };
   value: string;
   option: string;
+  valueDependiente?: string;
 }
 
 export interface IOptionsSelect {
