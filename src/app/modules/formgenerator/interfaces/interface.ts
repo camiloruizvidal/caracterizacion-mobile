@@ -14,7 +14,7 @@ export interface IGruposFicha {
   ficha_tipo_id?: number;
 }
 
-export interface IFamilyCard {
+export interface IFormulario {
   isFinish: boolean;
   version?: string;
   dateLastVersion?: Date;
