@@ -56,6 +56,9 @@ export class PatientsPersistenceService {
       if (this.db) {
         const transaction = this.db.transaction([this.key], 'readwrite');
         const store = transaction.objectStore(this.key);
+        if (!data) {
+          return;
+        }
         data.forEach(patient => {
           store.add(patient);
         });

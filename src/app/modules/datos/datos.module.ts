@@ -9,7 +9,9 @@ import { PersonsLoadComponent } from './components/persons-load/persons-load.com
 import { HttpClientModule } from '@angular/common/http';
 import { DatabaseService } from 'src/app/utils/services/database/database.service';
 import { NgCircleProgressModule } from 'ng-circle-progress';
-
+import { IonicStorageModule } from '@ionic/storage-angular';
+import { PatientsPersistenceService } from './service/patients-persistence/patients-persistence.service';
+import { StorageService } from './service/storage/storage.service';
 
 @NgModule({
   declarations: [FormLoadComponent, PersonsLoadComponent],
@@ -24,11 +26,17 @@ import { NgCircleProgressModule } from 'ng-circle-progress';
       radius: 100,
       outerStrokeWidth: 16,
       innerStrokeWidth: 8,
-      outerStrokeColor: "#78C000",
-      innerStrokeColor: "#C7E596",
-      animationDuration: 300,
-    })
+      outerStrokeColor: '#78C000',
+      innerStrokeColor: '#C7E596',
+      animationDuration: 300
+    }),
+    IonicStorageModule.forRoot()
   ],
-  providers: [DatosService, DatabaseService],
+  providers: [
+    DatosService,
+    DatabaseService,
+    PatientsPersistenceService,
+    StorageService
+  ]
 })
-export class DatosModule { }
+export class DatosModule {}

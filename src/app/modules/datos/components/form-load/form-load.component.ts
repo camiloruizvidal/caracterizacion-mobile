@@ -60,9 +60,9 @@ export class FormLoadComponent {
   public async cargarFormulario(): Promise<void> {
     this.datosService.loadDataPatients(1, 100).subscribe(
       async (response: any) => {
-        this.infoRegistros.currentPage = response.currentPage;
-        this.infoRegistros.totalItems = response.totalItems;
-        this.infoRegistros.totalPages = response.totalPages;
+        this.infoRegistros.currentPage = response?.currentPage || 0;
+        this.infoRegistros.totalItems = response?.totalItems || 0;
+        this.infoRegistros.totalPages = response?.totalPages || 0;
         const alert = await this.alertController.create({
           header:
             'Se van a agregar ' +
@@ -98,10 +98,14 @@ export class FormLoadComponent {
 
   private async actualizarRegistrosPacientes() {
     await this.datosService.borrarPacientes();
-    range(1, this.infoRegistros.totalPages)
+    range(1, this.infoRegistros.totalPages || 1)
       .pipe(
         concatMap((pageNumber: number) => {
-          if (this.infoRegistros.totalItems === pageNumber) {
+          debugger;
+          if (this.infoRegistros.totalPages <= pageNumber) {
+            setTimeout(() => {
+              this.stopLoading();
+            }, 3000);
             this.showToastSuccess();
           }
           try {
@@ -114,7 +118,7 @@ export class FormLoadComponent {
       )
       .subscribe(
         (pacientes: IPaginationResult<IPaciente[]>) => {
-          this.pacientesActualizados += pacientes.data.length;
+          this.pacientesActualizados += (pacientes.data as any[])?.length || 0;
           this.datosService.addPatients(pacientes.data);
         },
         async (error: any) => {
@@ -123,33 +127,29 @@ export class FormLoadComponent {
       );
   }
 
-  private actualizarFormulario() {
-    this.datosService
-      .loadDataForm()
-      .subscribe((respuesta: IHttpResponse<IGuardarFormularioGrupal[]>) => {
-        this.datosService.saveDataForm(respuesta.data);
-      });
+  private async actualizarFormulario() {
+    this.loading = await this.loadingCtrl.create({
+      message: 'Actualizando formulario...'
+    });
+    await this.loading.present();
   }
 
   private async showToastError() {
     const toast = await this.toastController.create({
-      color: 'dark',
-      duration: 30000,
-      position: 'bottom',
-      message: 'Se presento un error cuando se intentaba actualizar.'
+      message: 'Error al cargar los datos',
+      duration: 2000,
+      color: 'danger'
     });
-    await toast.present();
-    this.isLoadPatients = false;
+    toast.present();
   }
 
   private async showToastSuccess() {
     const toast = await this.toastController.create({
-      color: 'success',
-      duration: 3000,
-      position: 'bottom',
-      message: 'Se ha guardado con éxito.'
+      message: 'Datos cargados con éxito',
+      duration: 2000,
+      color: 'success'
     });
-    await toast.present();
+    toast.present();
   }
 
   public setOpen(isOpen: boolean) {
