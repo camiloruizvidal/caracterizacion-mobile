@@ -36,10 +36,17 @@ export class SteperComponent implements OnInit {
   }
 
   private clearValues(datasSteper: ICategoria[]) {
+    if (!datasSteper) return;
+
     datasSteper.forEach((dataSteper: ICategoria, keyDataSteper: number) => {
-      dataSteper.values.forEach((values: IPregunta, keyValues: number) => {
-        datasSteper[keyDataSteper].values[keyValues].value = null;
-      });
+      const values = datasSteper[keyDataSteper]?.values;
+      if (values) {
+        values.forEach((_, keyValues: number) => {
+          if (values[keyValues]) {
+            values[keyValues].value = null;
+          }
+        });
+      }
     });
     this.dataSteper = datasSteper;
   }
@@ -81,13 +88,12 @@ export class SteperComponent implements OnInit {
 
   public get isNextDisabled(): boolean {
     return false; //TODO Solo para probar. Eliminar antes de entregar
-    let requireds = this.dataSteper[this.currentStep].values.filter(
-      value =>
-        value.required && (value.value == null || value.value.trim() === '')
-    );
-    return (
-      this.currentStep >= this.dataSteper.length - 1 || requireds.length > 0
-    );
+    let requireds =
+      this.dataSteper[this.currentStep]?.values?.filter(
+        value =>
+          value.required && (value.value == null || value.value.trim() === '')
+      ) || [];
+    return requireds.length > 0;
   }
 
   public get isLastDisabled(): boolean {

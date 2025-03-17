@@ -19,7 +19,7 @@ export class SelectDependienteComponent extends BaseInputComponent {
     let option = '';
 
     for (const values of this.formValue) {
-      const options = values.values.find(
+      const options = values?.values?.find(
         value => value.columnName === this.steperValue.nombrePadreDependiente
       );
       if (options) {

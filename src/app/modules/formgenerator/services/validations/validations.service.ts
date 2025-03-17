@@ -40,8 +40,8 @@ export class ValidationsService {
   }
 
   private searchValueFromColumn(columnName: string, card: ICategoria) {
-    return card.values.find(
-      (values: IPregunta) => values.columnName === columnName
+    return card?.values?.find(
+      (value: IPregunta) => value.columnName === columnName
     );
   }
 }

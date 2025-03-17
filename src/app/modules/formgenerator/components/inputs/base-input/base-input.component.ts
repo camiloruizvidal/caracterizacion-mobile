@@ -30,7 +30,7 @@ export class BaseInputComponent {
     this.valueData = value.detail.value;
 
     for (const step of this.formValue) {
-      const matchingValue = step.values.find(
+      const matchingValue = step?.values?.find(
         (steperValue: IPregunta) =>
           steperValue.columnName === this.steperValue.columnName
       );

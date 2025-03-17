@@ -105,13 +105,13 @@ export class SelectFilterComponent
     item: any,
     indexForm: number
   ): void {
-    element.values.forEach((value: IPregunta, indexValue: number) => {
+    element?.values?.forEach((value: IPregunta, indexValue: number) => {
       const itemValue = this.options.relaciones.find(
         name => name.origen === value.columnName
       );
-      if (itemValue) {
-        this.formValue[indexForm].values[indexValue].value =
-          item[itemValue.destino];
+      const values = this.formValue[indexForm]?.values;
+      if (itemValue && values?.[indexValue]) {
+        values[indexValue].value = item[itemValue.destino];
       }
     });
   }
