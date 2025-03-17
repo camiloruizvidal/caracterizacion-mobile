@@ -37,6 +37,7 @@ export interface ICategoria {
   values?: IPregunta[];
   createdAt?: Date | string;
   updatedAt?: Date | string;
+  alerta?: IConfiguracionAlertaCategoria;
 }
 
 export interface IPregunta {
@@ -288,27 +289,15 @@ export interface IAlertaConfig {
   peso?: number;
 }
 
-export interface IConfiguracionAlertaCategoria {
-  genera_alerta: boolean;
-  clasificaciones: IClasificacionAlerta[];
-  nivel_calculado?: number;
-}
-
 export interface IClasificacionAlerta {
-  nombre: string;
-  rango_minimo: number;
-  rango_maximo: number;
-  color?: string;
-}
-
-export interface IAlertaClasificacion {
   nombre: string;
   rango_minimo: number;
   rango_maximo: number;
   color: string;
 }
 
-export interface IAlerta {
+export interface IConfiguracionAlertaCategoria {
   genera_alerta: boolean;
-  clasificaciones: IAlertaClasificacion[];
+  clasificaciones: IClasificacionAlerta[];
+  nivel_calculado?: number;
 }

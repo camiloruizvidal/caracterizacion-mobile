@@ -22,6 +22,7 @@ import { TitleComponent } from './components/inputs/title/title.component';
 import { SubtitleComponent } from './components/inputs/subtitle/subtitle.component';
 import { RutaAtencionComponent } from './components/inputs/ruta-atencion/ruta-atencion.component';
 import { SelectDependienteComponent } from './components/inputs/select-dependiente/select-dependiente.component';
+import { PonderadoCategoriaComponent } from './components/ponderado-categoria/ponderado-categoria.component';
 
 @NgModule({
   declarations: [
@@ -44,7 +45,8 @@ import { SelectDependienteComponent } from './components/inputs/select-dependien
     TitleComponent,
     SubtitleComponent,
     RutaAtencionComponent,
-    SelectDependienteComponent
+    SelectDependienteComponent,
+    PonderadoCategoriaComponent
   ],
   exports: [
     SteperComponent,
@@ -66,7 +68,8 @@ import { SelectDependienteComponent } from './components/inputs/select-dependien
     TitleComponent,
     SubtitleComponent,
     RutaAtencionComponent,
-    SelectDependienteComponent
+    SelectDependienteComponent,
+    PonderadoCategoriaComponent
   ],
   imports: [CommonModule, IonicModule, FormsModule, ReactiveFormsModule]
 })
