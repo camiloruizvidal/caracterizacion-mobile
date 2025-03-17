@@ -1,5 +1,4 @@
 import {
-  IGuardarFormularioGrupal,
   IHttpResponse,
   IPaciente,
   IPaginationResult
@@ -101,7 +100,6 @@ export class FormLoadComponent {
     range(1, this.infoRegistros.totalPages || 1)
       .pipe(
         concatMap((pageNumber: number) => {
-          debugger;
           if (this.infoRegistros.totalPages <= pageNumber) {
             setTimeout(() => {
               this.stopLoading();
@@ -128,10 +126,12 @@ export class FormLoadComponent {
   }
 
   private async actualizarFormulario() {
-    this.loading = await this.loadingCtrl.create({
-      message: 'Actualizando formulario...'
-    });
-    await this.loading.present();
+    this.datosService
+      .loadDataForm()
+      .subscribe((respuesta: IHttpResponse<any>) => {
+        console.log({ data: respuesta.data });
+        this.datosService.saveDataForm(respuesta.data);
+      });
   }
 
   private async showToastError() {
