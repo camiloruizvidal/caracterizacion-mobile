@@ -25,6 +25,7 @@ export class RegistrosService {
   private keySaveRegister: string = 'formsSave';
 
   public async loadForms(): Promise<IGrupalCard> {
+    return JSON.parse(localStorage.getItem('form') || '{}');
     this.databaseService.setTable('form');
     return await this.databaseService.findOne({ last: true });
   }

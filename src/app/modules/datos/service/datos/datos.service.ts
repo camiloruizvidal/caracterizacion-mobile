@@ -9,7 +9,7 @@ import {
   IPaginationResult,
   IGuardarFormularioGrupal
 } from 'src/app/modules/formgenerator/interfaces/interface';
-import { PatientsPersistenceService } from '../persistence/patients/patients-persistence.service';
+import { PatientsPersistenceService } from '../patients-persistence/patients-persistence.service';
 
 @Injectable({
   providedIn: 'root'
@@ -63,10 +63,6 @@ export class DatosService {
   }
 
   public addPatients(data: IPaciente[]): void {
-    try {
-      this.patientsPersistenceService.addPatients(data);
-    } catch (error) {
-      throw error;
-    }
+    this.patientsPersistenceService.addPatients(data);
   }
 }

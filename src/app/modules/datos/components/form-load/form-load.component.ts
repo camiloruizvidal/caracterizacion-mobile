@@ -130,7 +130,8 @@ export class FormLoadComponent {
       .loadDataForm()
       .subscribe((respuesta: IHttpResponse<any>) => {
         console.log({ data: respuesta.data });
-        this.datosService.saveDataForm(respuesta.data);
+        localStorage.setItem('form', JSON.stringify(respuesta.data));
+        //        this.datosService.saveDataForm(respuesta.data);
       });
   }
 

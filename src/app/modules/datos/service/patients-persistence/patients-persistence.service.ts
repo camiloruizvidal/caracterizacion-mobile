@@ -1,58 +1,112 @@
 import { Injectable } from '@angular/core';
 import { IPaciente } from 'src/app/modules/formgenerator/interfaces/interface';
-import { StorageService } from '../storage/storage.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PatientsPersistenceService {
-  private readonly STORAGE_KEY = 'patients';
+  private dbName: string = 'patientDB';
+  private key: string = 'patients';
+  private dbVersion: number = 1;
+  private db: IDBDatabase | null = null;
 
-  constructor(private storageService: StorageService) {}
+  constructor() {
+    this.initDB();
+  }
+
+  private initDB(): void {
+    const request = indexedDB.open(this.dbName, this.dbVersion);
+
+    request.onupgradeneeded = (event: any) => {
+      const db = event.target.result;
+      db.createObjectStore(this.key, {
+        keyPath: 'documento_numero',
+        autoIncrement: false
+      });
+    };
+
+    request.onsuccess = (event: any) => {
+      this.db = event.target.result;
+    };
+
+    request.onerror = (event: any) => {
+      console.error('Error opening indexedDB', event.target.error);
+    };
+  }
+
+  private waitForDB(): Promise<void> {
+    return new Promise<void>((resolve, reject) => {
+      if (this.db) {
+        resolve();
+      } else {
+        const interval = setInterval(() => {
+          if (this.db) {
+            clearInterval(interval);
+            resolve();
+          }
+        }, 100);
+      }
+    });
+  }
 
   public async addPatients(data: IPaciente[]): Promise<void> {
     try {
-      if (!data || !Array.isArray(data)) {
-        console.log('No hay datos para actualizar o el formato es inválido');
-        return;
-      }
-
-      if (data.length === 0) {
-        console.log('Array de pacientes está vacío');
-        return;
-      }
-
-      const existingData = await this.getPatients();
-      const patients = existingData || [];
-
-      data.forEach((patient: IPaciente) => {
-        if (patient && typeof patient === 'object') {
-          patients.push(patient);
+      await this.waitForDB();
+      if (this.db) {
+        const transaction = this.db.transaction([this.key], 'readwrite');
+        const store = transaction.objectStore(this.key);
+        if (!data) {
+          return;
         }
-      });
-
-      await this.storageService.set(this.STORAGE_KEY, patients);
+        data.forEach(patient => {
+          store.add(patient);
+        });
+      } else {
+        console.error('IndexedDB is not initialized.');
+      }
     } catch (error) {
-      console.error('Error al guardar datos en IndexedDB:', error);
+      console.error('Error saving data to IndexedDB:', error);
       throw error;
-    }
-  }
-
-  public async getPatients(): Promise<IPaciente[]> {
-    try {
-      const patients = await this.storageService.get(this.STORAGE_KEY);
-      return patients || [];
-    } catch (error) {
-      console.error('Error al obtener datos de IndexedDB:', error);
-      return [];
     }
   }
 
   public async clearPatients(): Promise<void> {
     try {
-      await this.storageService.remove(this.STORAGE_KEY);
+      await this.waitForDB();
+      if (this.db) {
+        const transaction = this.db.transaction([this.key], 'readwrite');
+        const store = transaction.objectStore(this.key);
+        store.clear();
+      } else {
+        console.error('IndexedDB is not initialized.');
+      }
     } catch (error) {
-      console.error('Error al limpiar datos de IndexedDB:', error);
+      console.error('Error clearing patients from IndexedDB:', error);
+      throw error;
+    }
+  }
+
+  public async getAll(): Promise<IPaciente[]> {
+    try {
+      await this.waitForDB();
+      if (this.db) {
+        const transaction = this.db.transaction([this.key], 'readonly');
+        const store = transaction.objectStore(this.key);
+        const request = store.getAll();
+        return new Promise<IPaciente[]>((resolve, reject) => {
+          request.onsuccess = (event: any) => {
+            resolve(event.target.result);
+          };
+          request.onerror = (event: any) => {
+            reject(event.target.error);
+          };
+        });
+      } else {
+        console.error('IndexedDB is not initialized.');
+        return [];
+      }
+    } catch (error) {
+      console.error('Error getting patients from IndexedDB:', error);
       throw error;
     }
   }
