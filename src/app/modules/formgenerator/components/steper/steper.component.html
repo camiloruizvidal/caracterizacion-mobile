@@ -187,6 +187,7 @@
     </ion-card-content>
 
     <app-ponderado-categoria
+      *ngIf="machetazo % 2 === 0"
       [categoria]="saveData[i]"
     ></app-ponderado-categoria>
   </ion-card>
