@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 import {
   ICategoria,
   IPregunta,
@@ -11,13 +11,16 @@ import {
   templateUrl: './ponderado-categoria.component.html',
   styleUrls: ['./ponderado-categoria.component.scss']
 })
-export class PonderadoCategoriaComponent implements OnInit {
+export class PonderadoCategoriaComponent implements OnChanges {
   @Input() categoria!: ICategoria;
   public ponderado: number = 0;
   public color: string = '';
 
-  ngOnInit() {
-    this.calcularPonderado();
+  ngOnChanges(changes: SimpleChanges) {
+    console.log({ changes });
+    if (changes['categoria']) {
+      this.calcularPonderado();
+    }
   }
 
   private calcularPonderado() {

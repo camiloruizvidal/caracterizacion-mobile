@@ -7,7 +7,6 @@
       <ion-card-subtitle>
         {{ card?.subtitle }}
       </ion-card-subtitle>
-      <app-ponderado-categoria [categoria]="card"></app-ponderado-categoria>
     </ion-card-header>
     <ion-card-content>
       <ion-grid class="line">
@@ -186,6 +185,10 @@
         </ng-container>
       </ion-grid>
     </ion-card-content>
+
+    <app-ponderado-categoria
+      [categoria]="saveData[i]"
+    ></app-ponderado-categoria>
   </ion-card>
 </div>
 <ion-grid>

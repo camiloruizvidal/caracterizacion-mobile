@@ -21,8 +21,7 @@ export class SteperComponent implements OnInit {
   @Output() saveDataMethod = new EventEmitter<IEventSteper>();
   public currentStep: number = 0;
   public isDisabled: boolean = false;
-
-  private saveData: ICategoria[] = [];
+  public saveData: ICategoria[] = [];
 
   constructor(
     private validationsService: ValidationsService,
@@ -51,8 +50,8 @@ export class SteperComponent implements OnInit {
     this.dataSteper = datasSteper;
   }
 
-  public saveValueColumn(value: ICategoria[]): void {
-    this.saveData = value;
+  public saveValueColumn(categoriaActualizada: ICategoria[]): void {
+    this.saveData = categoriaActualizada;
   }
 
   public goNext(): void {
