@@ -56,10 +56,11 @@ export class PonderadoCategoriaComponent implements OnChanges {
           typeof pregunta.value === 'boolean'
         ) {
           valor =
-            pregunta.alerta.valores_alerta[pregunta.value.toString()] || 0;
+            pregunta.alerta.valores_alerta[pregunta.value.toString()]?.valor ||
+            0;
         } else if (Array.isArray(pregunta.value)) {
           const valores = pregunta.value.map(
-            v => pregunta.alerta?.valores_alerta?.[v] || 0
+            v => pregunta.alerta?.valores_alerta?.[v]?.valor || 0
           );
           valor = Math.max(...valores);
         }

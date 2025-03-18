@@ -281,10 +281,20 @@ export interface IAlertas {
   rango_minimo: number;
 }
 
+export interface IPlanCuidado {
+  nombre: string;
+  descripcion: string;
+  tipo: 'individual' | 'categoria';
+}
+
 export interface IAlertaConfig {
   genera_alerta: boolean;
   valores_alerta?: {
-    [key: string]: number;
+    [key: string]: {
+      valor: number;
+      genera_plan: boolean;
+      planes_cuidado?: IPlanCuidado[];
+    };
   };
   peso?: number;
 }
@@ -294,10 +304,18 @@ export interface IClasificacionAlerta {
   rango_minimo: number;
   rango_maximo: number;
   color: string;
+  planes_cuidado?: IPlanCuidado[];
 }
 
 export interface IConfiguracionAlertaCategoria {
   genera_alerta: boolean;
   clasificaciones: IClasificacionAlerta[];
   nivel_calculado?: number;
+  planes_cuidado?: IPlanCuidado[];
+}
+
+export interface IPlanesCuidadoProcesados {
+  porCategoria: IPlanCuidado[];
+  porPregunta: IPlanCuidado[];
+  total: IPlanCuidado[];
 }
