@@ -15,11 +15,24 @@ export class PonderadoCategoriaComponent implements OnChanges {
   @Input() categoria!: ICategoria;
   public ponderado: number = 0;
   public color: string = '';
+  public nivelRiesgo: string = '';
+  public mostrarPonderado: boolean = false;
 
   ngOnChanges(changes: SimpleChanges) {
-    console.log({ changes });
     if (changes['categoria']) {
+      this.verificarAlertas();
       this.calcularPonderado();
+    }
+  }
+
+  private verificarAlertas() {
+    this.mostrarPonderado =
+      this.categoria?.alerta?.genera_alerta === true &&
+      Array.isArray(this.categoria?.alerta?.clasificaciones) &&
+      this.categoria.alerta.clasificaciones.length > 0;
+
+    if (this.mostrarPonderado) {
+      this.asignarColorYNivel();
     }
   }
 
@@ -38,16 +51,13 @@ export class PonderadoCategoriaComponent implements OnChanges {
         const peso = pregunta.alerta.peso || 1;
         let valor = 0;
 
-        // Para preguntas tipo select o check
         if (
           typeof pregunta.value === 'string' ||
           typeof pregunta.value === 'boolean'
         ) {
           valor =
             pregunta.alerta.valores_alerta[pregunta.value.toString()] || 0;
-        }
-        // Para preguntas tipo select múltiple
-        else if (Array.isArray(pregunta.value)) {
+        } else if (Array.isArray(pregunta.value)) {
           const valores = pregunta.value.map(
             v => pregunta.alerta?.valores_alerta?.[v] || 0
           );
@@ -61,16 +71,24 @@ export class PonderadoCategoriaComponent implements OnChanges {
 
     if (cantidadPreguntas > 0) {
       this.ponderado = Math.round(sumaPonderados / cantidadPreguntas);
-      this.asignarColor();
     }
+    this.asignarColorYNivel();
   }
 
-  private asignarColor() {
+  private asignarColorYNivel() {
     const clasificaciones = this.categoria.alerta?.clasificaciones || [];
     const clasificacion = clasificaciones.find(
-      (c: IClasificacionAlerta) =>
-        this.ponderado >= c.rango_minimo && this.ponderado <= c.rango_maximo
+      (clasificacion: IClasificacionAlerta) =>
+        this.ponderado >= clasificacion.rango_minimo &&
+        this.ponderado <= clasificacion.rango_maximo
     );
-    this.color = clasificacion?.color || '#CCCCCC';
+
+    if (clasificacion) {
+      this.color = clasificacion.color;
+      this.nivelRiesgo = clasificacion.nombre;
+    } else {
+      this.color = '#CCCCCC';
+      this.nivelRiesgo = 'Sin clasificar';
+    }
   }
 }

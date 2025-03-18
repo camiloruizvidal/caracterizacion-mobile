@@ -1,8 +1,8 @@
-<div class="ponderado-container">
+<div class="ponderado-container" *ngIf="mostrarPonderado">
   <div class="ponderado-text">
-    Ponderado =
-    <span class="ponderado-value" [style.background-color]="color">{{
-      ponderado
-    }}</span>
+    Ponderado:
+    <span class="ponderado-value" [style.background-color]="color">
+      {{ ponderado }}% {{ nivelRiesgo }}
+    </span>
   </div>
 </div>
