@@ -5,4 +5,11 @@
       {{ ponderado }}% {{ nivelRiesgo }}
     </span>
   </div>
+  <pre>{{ planesCuidado | json }}</pre>
+  <div class="planes-cuidado" *ngIf="planesCuidado && planesCuidado.length > 0">
+    <h4>Planes de Cuidado:</h4>
+    <ul>
+      <li *ngFor="let plan of planesCuidado">{{ plan | json }}</li>
+    </ul>
+  </div>
 </div>

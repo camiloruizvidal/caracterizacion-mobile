@@ -17,19 +17,23 @@ export class PonderadoCategoriaComponent implements OnChanges {
   public color: string = '';
   public nivelRiesgo: string = '';
   public mostrarPonderado: boolean = false;
+  public planesCuidado: string[] = [];
 
   ngOnChanges(changes: SimpleChanges) {
-    if (changes['categoria']) {
-      this.verificarAlertas();
-      this.calcularPonderado();
-    }
+    this.verificarAlertas();
+    this.calcularPonderado();
   }
 
   private verificarAlertas() {
-    this.mostrarPonderado =
-      this.categoria?.alerta?.genera_alerta === true &&
-      Array.isArray(this.categoria?.alerta?.clasificaciones) &&
-      this.categoria.alerta.clasificaciones.length > 0;
+    const tieneClasificaciones = Boolean(
+      this.categoria?.alerta?.clasificaciones &&
+        Array.isArray(this.categoria?.alerta?.clasificaciones) &&
+        this.categoria?.alerta?.clasificaciones.length > 0
+    );
+
+    this.mostrarPonderado = Boolean(
+      this.categoria?.alerta?.genera_alerta === true && tieneClasificaciones
+    );
 
     if (this.mostrarPonderado) {
       this.asignarColorYNivel();
@@ -87,9 +91,11 @@ export class PonderadoCategoriaComponent implements OnChanges {
     if (clasificacion) {
       this.color = clasificacion.color;
       this.nivelRiesgo = clasificacion.nombre;
+      this.planesCuidado = clasificacion.planes_cuidado || [];
     } else {
       this.color = '#CCCCCC';
       this.nivelRiesgo = 'Sin clasificar';
+      this.planesCuidado = [];
     }
   }
 }
