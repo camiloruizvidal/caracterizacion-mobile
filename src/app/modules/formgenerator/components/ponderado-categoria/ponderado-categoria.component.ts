@@ -22,6 +22,7 @@ export class PonderadoCategoriaComponent implements OnChanges {
   ngOnChanges(changes: SimpleChanges) {
     this.verificarAlertas();
     this.calcularPonderado();
+    this.obtenerPlanesCuidado();
   }
 
   private verificarAlertas() {
@@ -80,6 +81,57 @@ export class PonderadoCategoriaComponent implements OnChanges {
     this.asignarColorYNivel();
   }
 
+  private obtenerPlanesCuidado() {
+    const todosLosPlanes: string[] = [];
+
+    // 1. Obtener planes de cuidado de la clasificación actual
+    const clasificaciones = this.categoria.alerta?.clasificaciones || [];
+    const clasificacionActual = clasificaciones.find(
+      (clasificacion: IClasificacionAlerta) =>
+        this.ponderado >= clasificacion.rango_minimo &&
+        this.ponderado <= clasificacion.rango_maximo
+    );
+
+    if (clasificacionActual?.planes_cuidado) {
+      todosLosPlanes.push(...clasificacionActual.planes_cuidado);
+    }
+
+    // 2. Obtener planes de cuidado de las preguntas individuales
+    if (this.categoria.values) {
+      this.categoria.values.forEach((pregunta: IPregunta) => {
+        if (
+          pregunta.alerta?.genera_alerta &&
+          pregunta.alerta?.valores_alerta &&
+          pregunta.value
+        ) {
+          // Para preguntas con respuesta única
+          if (
+            typeof pregunta.value === 'string' ||
+            typeof pregunta.value === 'boolean'
+          ) {
+            const valorAlerta =
+              pregunta.alerta.valores_alerta[pregunta.value.toString()];
+            if (valorAlerta?.planes_cuidado) {
+              todosLosPlanes.push(...valorAlerta.planes_cuidado);
+            }
+          }
+          // Para preguntas con respuesta múltiple
+          else if (Array.isArray(pregunta.value)) {
+            pregunta.value.forEach(valor => {
+              const valorAlerta = pregunta.alerta?.valores_alerta?.[valor];
+              if (valorAlerta?.planes_cuidado) {
+                todosLosPlanes.push(...valorAlerta.planes_cuidado);
+              }
+            });
+          }
+        }
+      });
+    }
+
+    // Eliminar duplicados y actualizar los planes de cuidado
+    this.planesCuidado = [...new Set(todosLosPlanes)];
+  }
+
   private asignarColorYNivel() {
     const clasificaciones = this.categoria.alerta?.clasificaciones || [];
     const clasificacion = clasificaciones.find(
@@ -91,11 +143,9 @@ export class PonderadoCategoriaComponent implements OnChanges {
     if (clasificacion) {
       this.color = clasificacion.color;
       this.nivelRiesgo = clasificacion.nombre;
-      this.planesCuidado = clasificacion.planes_cuidado || [];
     } else {
       this.color = '#CCCCCC';
       this.nivelRiesgo = 'Sin clasificar';
-      this.planesCuidado = [];
     }
   }
 }
