@@ -1,15 +1,34 @@
-<div class="ponderado-container" *ngIf="mostrarPonderado">
-  <div class="ponderado-text">
-    Ponderado:
-    <span class="ponderado-value" [style.background-color]="color">
-      {{ ponderado }}% {{ nivelRiesgo }}
-    </span>
+<div *ngIf="mostrarPonderado" class="ponderado-container">
+  <div class="ponderado-header" [style.background-color]="color">
+    <span class="ponderado-value">{{ ponderado }}</span>
+    <span class="nivel-riesgo">{{ nivelRiesgo }}</span>
   </div>
-  <pre>{{ planesCuidado | json }}</pre>
-  <div class="planes-cuidado" *ngIf="planesCuidado && planesCuidado.length > 0">
-    <h4>Planes de Cuidado:</h4>
-    <ul>
-      <li *ngFor="let plan of planesCuidado">{{ plan | json }}</li>
-    </ul>
+
+  <!-- Planes de cuidado -->
+  <div class="planes-cuidado-container">
+    <h3>Planes de Cuidado</h3>
+
+    <div class="planes-list">
+      <div *ngFor="let plan of planesCuidado; let i = index" class="plan-item">
+        <div class="plan-content">
+          <textarea
+            [value]="plan"
+            (input)="onPlanChange(i, $event)"
+            rows="3"
+            placeholder="Escriba el plan de cuidado"
+            class="plan-textarea"
+          >
+          </textarea>
+          <button class="btn-delete" (click)="borrarPlan(i)">
+            <i class="fas fa-trash"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <button class="btn-add" (click)="agregarPlan()">
+      <i class="fas fa-plus"></i>
+      Agregar Plan de Cuidado
+    </button>
   </div>
 </div>

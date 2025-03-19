@@ -1,4 +1,11 @@
-import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
+import {
+  Component,
+  Input,
+  OnChanges,
+  SimpleChanges,
+  Output,
+  EventEmitter
+} from '@angular/core';
 import {
   ICategoria,
   IPregunta,
@@ -13,6 +20,8 @@ import {
 })
 export class PonderadoCategoriaComponent implements OnChanges {
   @Input() categoria!: ICategoria;
+  @Output() planesChange = new EventEmitter<string[]>();
+
   public ponderado: number = 0;
   public color: string = '';
   public nivelRiesgo: string = '';
@@ -104,7 +113,6 @@ export class PonderadoCategoriaComponent implements OnChanges {
           pregunta.alerta?.valores_alerta &&
           pregunta.value
         ) {
-          // Para preguntas con respuesta única
           if (
             typeof pregunta.value === 'string' ||
             typeof pregunta.value === 'boolean'
@@ -114,9 +122,7 @@ export class PonderadoCategoriaComponent implements OnChanges {
             if (valorAlerta?.planes_cuidado) {
               todosLosPlanes.push(...valorAlerta.planes_cuidado);
             }
-          }
-          // Para preguntas con respuesta múltiple
-          else if (Array.isArray(pregunta.value)) {
+          } else if (Array.isArray(pregunta.value)) {
             pregunta.value.forEach(valor => {
               const valorAlerta = pregunta.alerta?.valores_alerta?.[valor];
               if (valorAlerta?.planes_cuidado) {
@@ -126,6 +132,11 @@ export class PonderadoCategoriaComponent implements OnChanges {
           }
         }
       });
+    }
+
+    // 3. Agregar planes de cuidado adicionales si existen
+    if (this.categoria.planes_cuidado?.length) {
+      todosLosPlanes.push(...this.categoria.planes_cuidado);
     }
 
     // Eliminar duplicados y actualizar los planes de cuidado
@@ -146,6 +157,37 @@ export class PonderadoCategoriaComponent implements OnChanges {
     } else {
       this.color = '#CCCCCC';
       this.nivelRiesgo = 'Sin clasificar';
+    }
+  }
+
+  // Método para manejar cambios en el textarea
+  public onPlanChange(index: number, event: any): void {
+    const valor = event.target.value.trim();
+    this.planesCuidado[index] = valor;
+    this.emitirCambios();
+  }
+
+  // Métodos públicos para la UI
+  public agregarPlan(): void {
+    this.planesCuidado.push('');
+    this.emitirCambios();
+  }
+
+  public borrarPlan(index: number): void {
+    this.planesCuidado.splice(index, 1);
+    this.emitirCambios();
+  }
+
+  private emitirCambios(): void {
+    // Filtrar planes vacíos antes de emitir
+    const planesFiltrados = this.planesCuidado.filter(
+      plan => plan.trim() !== ''
+    );
+    this.planesChange.emit(planesFiltrados);
+
+    // Actualizar la categoría directamente
+    if (this.categoria) {
+      this.categoria.planes_cuidado = planesFiltrados;
     }
   }
 }
