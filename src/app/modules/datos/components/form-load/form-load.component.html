@@ -1,10 +1,10 @@
-<ion-card-content *ngIf="isLoadPatients" id="progress">
+<ion-card-content *ngIf="isLoadRegistros" id="progress">
   <h1>
-    Cargando {{ pacientesActualizados.toLocaleString('es-CO') }} registros de
+    Cargando {{ registrosActualizados.toLocaleString('es-CO') }} registros de
     {{ infoRegistros.totalItems.toLocaleString('es-CO') }} registros.
   </h1>
   <circle-progress
-    [percent]="(pacientesActualizados / infoRegistros.totalItems) * 100"
+    [percent]="(registrosActualizados / infoRegistros.totalItems) * 100"
     [radius]="100"
     [outerStrokeWidth]="16"
     [innerStrokeWidth]="8"
@@ -15,22 +15,28 @@
     [subtitleFontSize]="'20'"
     subtitle="Cargando"
   ></circle-progress>
-  <br>
-    Por favor espere a que termine de cargar todos los pacientes.
-    Por favor no cierre la aplicación.
+  <br />
+  <i *ngIf="(registrosActualizados / infoRegistros.totalItems) * 100 < 100">
+    Por favor espere a que termine de cargar todos los registros. Por favor no
+    cierre la aplicación.
+  </i>
+  <i *ngIf="(registrosActualizados / infoRegistros.totalItems) * 100 >= 100">
+    Cargado correctamente.
+  </i>
 </ion-card-content>
-<ion-card-content *ngIf="!isLoadPatients">
+
+<ion-card-content *ngIf="!isLoadRegistros">
   <ion-text>
-    Vamos a cargar el formulario. Por favor mantener la aplicación abierta
+    Vamos a cargar los registros. Por favor mantener la aplicación abierta
   </ion-text>
-  <ion-button expand="full" color="primary" (click)="cargarFormulario()">
+  <ion-button expand="full" color="primary" (click)="cargarRegistros(8)">
     Cargar
   </ion-button>
 
   <ion-alert
     [isOpen]="isAlertOpen"
     header="Datos cargados con éxito"
-    message="Se ha actualizado a la ultima versión."
+    message="Se han cargado todos los registros correctamente."
     [buttons]="alertButtons"
     (didDismiss)="setOpen(false)"
   ></ion-alert>

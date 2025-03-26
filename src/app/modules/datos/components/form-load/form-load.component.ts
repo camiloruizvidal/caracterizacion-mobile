@@ -1,7 +1,9 @@
 import {
+  IGrupalCard,
   IHttpResponse,
   IPaciente,
-  IPaginationResult
+  IPaginationResult,
+  IRespuestaRegistrosCarga
 } from './../../../formgenerator/interfaces/interface';
 import { Component } from '@angular/core';
 import { DatosService } from '../../service/datos/datos.service';
@@ -10,7 +12,7 @@ import {
   LoadingController,
   ToastController
 } from '@ionic/angular';
-import { concatMap, range } from 'rxjs';
+import { concatMap, range, tap } from 'rxjs';
 
 @Component({
   selector: 'app-form-load',
@@ -22,14 +24,10 @@ export class FormLoadComponent {
 
   public isAlertOpen: boolean = false;
   public alertButtons = ['Aceptar'];
-  public isLoadPatients = false;
+  public isLoadRegistros = false;
   public modalAbierto: boolean = false;
-  public pacientesActualizados = 0;
-  public infoRegistros: {
-    currentPage: number;
-    totalItems: number;
-    totalPages: number;
-  } = {
+  public registrosActualizados = 0;
+  public infoRegistros = {
     currentPage: 0,
     totalItems: 0,
     totalPages: 0
@@ -108,7 +106,7 @@ export class FormLoadComponent {
 
   private async showToastSuccess() {
     const toast = await this.toastController.create({
-      message: 'Datos cargados con éxito',
+      message: 'Registros guardados exitosamente',
       duration: 2000,
       color: 'success'
     });
@@ -127,5 +125,83 @@ export class FormLoadComponent {
 
   public setOpen(isOpen: boolean) {
     this.isAlertOpen = isOpen;
+  }
+
+  public async cargarRegistros(fichaId: number): Promise<void> {
+    // Obtenemos el conteo total con limit=1
+    this.datosService.obtenerRegistrosCarga(fichaId, 1, 1).subscribe(
+      async (respuesta: IHttpResponse<IRespuestaRegistrosCarga>) => {
+        this.infoRegistros = {
+          currentPage: 1,
+          totalItems: respuesta.data.count,
+          totalPages: respuesta.data.totalPages
+        };
+
+        const alert = await this.alertController.create({
+          header: 'Carga de Registros',
+          message: `Se cargarán ${this.infoRegistros.totalItems.toLocaleString(
+            'es-CO'
+          )} registros. Este proceso puede tardar varios minutos. ¿Desea continuar?`,
+          buttons: [
+            {
+              text: 'No',
+              role: 'cancel'
+            },
+            {
+              text: 'Sí',
+              handler: async () => {
+                this.isLoadRegistros = true;
+                await this.actualizarRegistros(fichaId);
+              }
+            }
+          ]
+        });
+
+        await alert.present();
+      },
+      async (error: any) => {
+        await this.showToastError();
+      }
+    );
+  }
+
+  private async actualizarRegistros(fichaId: number) {
+    try {
+      await this.datosService.borrarRegistros();
+
+      const limite = 100;
+      const totalPages = Math.ceil(this.infoRegistros.totalItems / limite);
+
+      // Usamos range y concatMap para procesar página por página
+      range(1, totalPages)
+        .pipe(
+          concatMap(pagina =>
+            this.datosService
+              .obtenerRegistrosCarga(fichaId, pagina, limite)
+              .pipe(
+                tap((respuesta: IHttpResponse<IRespuestaRegistrosCarga>) => {
+                  if (respuesta?.data?.rows) {
+                    this.registrosActualizados += respuesta.data.rows.length;
+                    this.datosService.guardarRegistros(respuesta.data.rows);
+                  }
+                })
+              )
+          )
+        )
+        .subscribe(
+          () => {
+            this.showToastSuccess();
+          },
+          async (error: any) => {
+            console.error('Error al actualizar registros:', error);
+            await this.showToastError();
+            this.isLoadRegistros = false;
+          }
+        );
+    } catch (error) {
+      console.error('Error al borrar registros:', error);
+      await this.showToastError();
+      this.isLoadRegistros = false;
+    }
   }
 }

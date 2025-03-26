@@ -1,7 +1,7 @@
 import { DatabaseService } from 'src/app/utils/services/database/database.service';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, tap, switchMap, from } from 'rxjs';
 import {
   IHttpResponse,
   IPaciente,
@@ -10,7 +10,8 @@ import {
   IFormatoMapeoExcel,
   IRespuestaRegistrosCarga
 } from 'src/app/modules/formgenerator/interfaces/interface';
-import { PatientsPersistenceService } from '../patients-persistence/patients-persistence.service';
+import { PatientsPersistenceService } from '../persistence/patients/patients-persistence.service';
+import { DynamicPersistenceService as RegistrosPersistenceService } from '../persistence/registros/registros-persistence.service';
 
 @Injectable({
   providedIn: 'root'
@@ -20,7 +21,8 @@ export class DatosService {
   constructor(
     private httpClient: HttpClient,
     private databaseService: DatabaseService,
-    private readonly patientsPersistenceService: PatientsPersistenceService
+    private readonly patientsPersistenceService: PatientsPersistenceService,
+    private readonly registrosPersistenceService: RegistrosPersistenceService
   ) {
     this.getUrl();
   }
@@ -44,10 +46,14 @@ export class DatosService {
   }
 
   public obtenerRegistrosCarga(
-    fichaId: number
+    fichaId: number,
+    pagina: number = 1,
+    limite: number = 100
   ): Observable<IHttpResponse<IRespuestaRegistrosCarga>> {
     const url = `${this.URL}/carga/${fichaId}/registros`;
-    return this.httpClient.get<IHttpResponse<IRespuestaRegistrosCarga>>(url);
+    return this.httpClient.get<IHttpResponse<IRespuestaRegistrosCarga>>(
+      `${url}?limit=${limite}&page=${pagina}`
+    );
   }
 
   public loadDataPatients(
@@ -77,5 +83,17 @@ export class DatosService {
 
   public addPatients(data: IPaciente[]): void {
     this.patientsPersistenceService.addPatients(data);
+  }
+
+  public async borrarRegistros(): Promise<void> {
+    await this.registrosPersistenceService.clearRecords();
+  }
+
+  public guardarRegistros(registros: any[]): void {
+    this.registrosPersistenceService.addRecords(registros);
+  }
+
+  public async buscarRegistroPorCampo(valor: string): Promise<any> {
+    return await this.registrosPersistenceService.searchByField(valor);
   }
 }
