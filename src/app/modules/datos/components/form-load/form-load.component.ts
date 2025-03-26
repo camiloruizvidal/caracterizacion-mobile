@@ -153,6 +153,7 @@ export class FormLoadComponent {
                 handler: async () => {
                   this.isLoadRegistros = true;
                   await this.actualizarRegistros(fichaId);
+                  await this.actualizarFormulario();
                 }
               }
             ]
