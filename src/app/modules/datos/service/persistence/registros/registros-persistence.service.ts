@@ -11,18 +11,41 @@ export class DynamicPersistenceService {
   private searchField: string = ''; // Este será el campo de búsqueda dinámico
 
   constructor() {
+    const mapeoExcel = localStorage.getItem('mapeo_excel');
+    if (!mapeoExcel) {
+      throw new Error('No se encontró el mapeo de Excel en localStorage');
+    }
     this.initDB();
   }
 
   // Inicializa la base de datos
   private initDB(): void {
-    const request = indexedDB.open(this.dbName, this.dbVersion);
+    const mapeoExcel: any = JSON.parse(
+      localStorage.getItem('mapeo_excel') || '{}'
+    );
+    const busqueda = mapeoExcel?.data?.mapeo?.find(
+      (mapeo: any) => mapeo.esBusqueda
+    );
 
+    if (!busqueda?.columnaExcel) {
+      throw new Error('No se encontró el campo de búsqueda en el mapeo');
+    }
+
+    this.searchField = busqueda.columnaExcel;
+    console.log('Campo de búsqueda configurado:', this.searchField);
+
+    const request = indexedDB.open(this.dbName, this.dbVersion);
     request.onupgradeneeded = (event: any) => {
       const db = event.target.result;
 
-      // Si no existe, crea un store para registros
-      const store = db.createObjectStore(this.key, { autoIncrement: true });
+      // Si no existe, crea un store para registros. Usamos el searchField como keyPath si está definido
+      const store = db.createObjectStore(
+        this.key,
+        this.searchField
+          ? { keyPath: this.searchField }
+          : { autoIncrement: true }
+      );
+
       if (this.searchField) {
         // Crear un índice para el campo de búsqueda
         store.createIndex('by-search-field', this.searchField, {
@@ -54,13 +77,6 @@ export class DynamicPersistenceService {
         }, 100);
       }
     });
-  }
-
-  // Configura el campo de búsqueda dinámico
-  public async setSearchField(field: string): Promise<void> {
-    this.searchField = field;
-    this.dbVersion++; // Incrementamos la versión de la DB para realizar cambios
-    await this.initDB();
   }
 
   // Agregar registros con un campo dinámico de búsqueda
@@ -95,7 +111,7 @@ export class DynamicPersistenceService {
         const transaction = this.db.transaction([this.key], 'readonly');
         const store = transaction.objectStore(this.key);
         const index = store.index('by-search-field');
-        const request = index.getAll(value); // Usamos getAll para obtener todos los registros que coinciden
+        const request = index.getAll(value);
 
         return new Promise<any[]>((resolve, reject) => {
           request.onsuccess = (event: any) => {

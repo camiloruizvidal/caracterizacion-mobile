@@ -77,18 +77,7 @@ export class FormLoadComponent {
       const mapeoResponse = await this.datosService
         .obtenerMapeoExcel(respuestaFicha?.data?.id || 0)
         .toPromise();
-      console.log('Mapeo Excel cargado:', mapeoResponse);
       localStorage.setItem('mapeo_excel', JSON.stringify(mapeoResponse));
-
-      // 3. Cargar los registros de carga masiva
-      const registrosResponse = await this.datosService
-        .obtenerRegistrosCarga(respuestaFicha?.data?.id || 0)
-        .toPromise();
-      console.log('Registros de carga masiva cargados:', registrosResponse);
-      localStorage.setItem(
-        'registros_carga',
-        JSON.stringify(registrosResponse)
-      );
     } catch (error) {
       console.error('Error al actualizar formulario:', error);
       await this.showToastError();
@@ -128,48 +117,64 @@ export class FormLoadComponent {
   }
 
   public async cargarRegistros(fichaId: number): Promise<void> {
-    // Obtenemos el conteo total con limit=1
-    this.datosService.obtenerRegistrosCarga(fichaId, 1, 1).subscribe(
-      async (respuesta: IHttpResponse<IRespuestaRegistrosCarga>) => {
-        this.infoRegistros = {
-          currentPage: 1,
-          totalItems: respuesta.data.count,
-          totalPages: respuesta.data.totalPages
-        };
+    try {
+      // Primero actualizamos el mapeo
+      const mapeoResponse = await this.datosService
+        .obtenerMapeoExcel(fichaId)
+        .toPromise();
+      console.log('Mapeo Excel actualizado:', mapeoResponse);
+      localStorage.setItem('mapeo_excel', JSON.stringify(mapeoResponse));
 
-        const alert = await this.alertController.create({
-          header: 'Carga de Registros',
-          message: `Se cargarán ${this.infoRegistros.totalItems.toLocaleString(
-            'es-CO'
-          )} registros. Este proceso puede tardar varios minutos. ¿Desea continuar?`,
-          buttons: [
-            {
-              text: 'No',
-              role: 'cancel'
-            },
-            {
-              text: 'Sí',
-              handler: async () => {
-                this.isLoadRegistros = true;
-                await this.actualizarRegistros(fichaId);
+      // Inicializamos el servicio de persistencia
+      await this.datosService.initializePersistenceService();
+      console.log('Servicio de persistencia inicializado');
+
+      // Luego obtenemos el conteo total con limit=1
+      this.datosService.obtenerRegistrosCarga(fichaId, 1, 1).subscribe(
+        async (respuesta: IHttpResponse<IRespuestaRegistrosCarga>) => {
+          this.infoRegistros = {
+            currentPage: 1,
+            totalItems: respuesta.data.count,
+            totalPages: respuesta.data.totalPages
+          };
+
+          const alert = await this.alertController.create({
+            header: 'Carga de Registros',
+            message: `Se cargarán ${this.infoRegistros.totalItems.toLocaleString(
+              'es-CO'
+            )} registros. Este proceso puede tardar varios minutos. ¿Desea continuar?`,
+            buttons: [
+              {
+                text: 'No',
+                role: 'cancel'
+              },
+              {
+                text: 'Sí',
+                handler: async () => {
+                  this.isLoadRegistros = true;
+                  await this.actualizarRegistros(fichaId);
+                }
               }
-            }
-          ]
-        });
+            ]
+          });
 
-        await alert.present();
-      },
-      async (error: any) => {
-        await this.showToastError();
-      }
-    );
+          await alert.present();
+        },
+        async (error: any) => {
+          await this.showToastError();
+        }
+      );
+    } catch (error) {
+      console.error('Error al actualizar mapeo:', error);
+      await this.showToastError();
+    }
   }
 
   private async actualizarRegistros(fichaId: number) {
     try {
       await this.datosService.borrarRegistros();
 
-      const limite = 100;
+      const limite = 1;
       const totalPages = Math.ceil(this.infoRegistros.totalItems / limite);
 
       // Usamos range y concatMap para procesar página por página

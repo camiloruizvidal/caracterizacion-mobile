@@ -11,18 +11,19 @@ import {
   IRespuestaRegistrosCarga
 } from 'src/app/modules/formgenerator/interfaces/interface';
 import { PatientsPersistenceService } from '../persistence/patients/patients-persistence.service';
-import { DynamicPersistenceService as RegistrosPersistenceService } from '../persistence/registros/registros-persistence.service';
+import { DynamicPersistenceService } from '../persistence/registros/registros-persistence.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DatosService {
   private URL: string = '';
+  private registrosPersistenceService!: DynamicPersistenceService;
+
   constructor(
     private httpClient: HttpClient,
     private databaseService: DatabaseService,
-    private readonly patientsPersistenceService: PatientsPersistenceService,
-    private readonly registrosPersistenceService: RegistrosPersistenceService
+    private readonly patientsPersistenceService: PatientsPersistenceService
   ) {
     this.getUrl();
   }
@@ -95,5 +96,15 @@ export class DatosService {
 
   public async buscarRegistroPorCampo(valor: string): Promise<any> {
     return await this.registrosPersistenceService.searchByField(valor);
+  }
+
+  public async initializePersistenceService() {
+    try {
+      this.registrosPersistenceService = new DynamicPersistenceService();
+      console.log('Servicio de persistencia inicializado');
+    } catch (error) {
+      console.error('Error al inicializar el servicio de persistencia:', error);
+      throw error;
+    }
   }
 }
