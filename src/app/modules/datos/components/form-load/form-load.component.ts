@@ -57,82 +57,44 @@ export class FormLoadComponent {
   }
 
   public async cargarFormulario(): Promise<void> {
-    this.datosService.loadDataPatients(1, 100).subscribe(
-      async (response: any) => {
-        this.infoRegistros.currentPage = response?.currentPage || 0;
-        this.infoRegistros.totalItems = response?.totalItems || 0;
-        this.infoRegistros.totalPages = response?.totalPages || 0;
-        const alert = await this.alertController.create({
-          header:
-            'Se van a agregar ' +
-            this.infoRegistros.totalItems.toLocaleString('es-CO') +
-            ' registros',
-          message:
-            'Este proceso puede demorar dependiendo su conexión de ' +
-            'internet y la cantidad de registros. ¿Desea continuar?',
-          buttons: [
-            {
-              text: 'No',
-              role: 'cancel',
-              handler: () => {}
-            },
-            {
-              text: 'Sí',
-              handler: async () => {
-                this.isLoadPatients = true;
-                this.actualizarFormulario();
-                await this.actualizarRegistrosPacientes();
-              }
-            }
-          ]
-        });
-
-        await alert.present();
-      },
-      async (error: any) => {
-        await this.showToastError();
-      }
-    );
-  }
-
-  private async actualizarRegistrosPacientes() {
-    await this.datosService.borrarPacientes();
-    range(1, this.infoRegistros.totalPages || 1)
-      .pipe(
-        concatMap((pageNumber: number) => {
-          if (this.infoRegistros.totalPages <= pageNumber) {
-            setTimeout(() => {
-              this.stopLoading();
-            }, 3000);
-            this.showToastSuccess();
-          }
-          try {
-            return this.datosService.loadDataPatients(pageNumber, 100);
-          } catch (error) {
-            this.showToastError();
-            throw error;
-          }
-        })
-      )
-      .subscribe(
-        (pacientes: IPaginationResult<IPaciente[]>) => {
-          this.pacientesActualizados += (pacientes.data as any[])?.length || 0;
-          this.datosService.addPatients(pacientes.data);
-        },
-        async (error: any) => {
-          this.showToastError();
-        }
-      );
+    try {
+      await this.actualizarFormulario();
+    } catch (error) {
+      console.error('Error al cargar formulario:', error);
+      await this.showToastError();
+    }
   }
 
   private async actualizarFormulario() {
-    this.datosService
-      .loadDataForm()
-      .subscribe((respuesta: IHttpResponse<any>) => {
-        console.log({ data: respuesta.data });
-        localStorage.setItem('form', JSON.stringify(respuesta.data));
-        //        this.datosService.saveDataForm(respuesta.data);
-      });
+    try {
+      // 1. Cargar el formato de la ficha
+      //TODO revisar interface
+      const respuestaFicha: any = await this.datosService
+        .loadDataForm()
+        .toPromise();
+      console.log('Formato ficha cargado:', respuestaFicha?.data);
+      localStorage.setItem('form', JSON.stringify(respuestaFicha?.data));
+
+      // 2. Cargar el mapeo de Excel
+      const mapeoResponse = await this.datosService
+        .obtenerMapeoExcel(respuestaFicha?.data?.id || 0)
+        .toPromise();
+      console.log('Mapeo Excel cargado:', mapeoResponse);
+      localStorage.setItem('mapeo_excel', JSON.stringify(mapeoResponse));
+
+      // 3. Cargar los registros de carga masiva
+      const registrosResponse = await this.datosService
+        .obtenerRegistrosCarga(respuestaFicha?.data?.id || 0)
+        .toPromise();
+      console.log('Registros de carga masiva cargados:', registrosResponse);
+      localStorage.setItem(
+        'registros_carga',
+        JSON.stringify(registrosResponse)
+      );
+    } catch (error) {
+      console.error('Error al actualizar formulario:', error);
+      await this.showToastError();
+    }
   }
 
   private async showToastError() {
@@ -151,6 +113,16 @@ export class FormLoadComponent {
       color: 'success'
     });
     toast.present();
+  }
+
+  private async iniciarCarga(): Promise<void> {
+    this.loading = null;
+    this.loading = await this.loadingCtrl
+      .create({
+        message: 'Cargando, por favor espere',
+        spinner: 'circles'
+      })
+      .then(loading => loading.present());
   }
 
   public setOpen(isOpen: boolean) {

@@ -3,11 +3,11 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import {
-  IGrupalCard,
   IHttpResponse,
   IPaciente,
   IPaginationResult,
-  IGuardarFormularioGrupal
+  IGuardarFormularioGrupal,
+  IFormatoMapeoExcel
 } from 'src/app/modules/formgenerator/interfaces/interface';
 import { PatientsPersistenceService } from '../patients-persistence/patients-persistence.service';
 
@@ -35,6 +35,20 @@ export class DatosService {
     return this.httpClient.get<IHttpResponse<IGuardarFormularioGrupal[]>>(url);
   }
 
+  public obtenerMapeoExcel(
+    fichaId: number
+  ): Observable<IHttpResponse<IFormatoMapeoExcel>> {
+    const url = `${this.URL}/ficha/encabezados-excel/${fichaId}`;
+    return this.httpClient.get<IHttpResponse<IFormatoMapeoExcel>>(url);
+  }
+
+  public obtenerRegistrosCarga(
+    fichaId: number
+  ): Observable<IHttpResponse<any>> {
+    const url = `${this.URL}/carga/${fichaId}/registros`;
+    return this.httpClient.get<IHttpResponse<any>>(url);
+  }
+
   public loadDataPatients(
     paginaActual: number = 1,
     registrosPorPagina = 10
@@ -49,10 +63,8 @@ export class DatosService {
     );
   }
 
-  public saveDataForm(data: IGuardarFormularioGrupal[]): void {
-    //Aqui se cargan
+  public guardarFormatoFicha(data: IGuardarFormularioGrupal[]): void {
     this.databaseService.setTable('form');
-    // Guardamos el primer elemento del array ya que es el más reciente
     if (data && data.length > 0) {
       this.databaseService.createOrUpdate(data[0], 'version');
     }
