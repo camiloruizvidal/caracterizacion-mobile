@@ -174,7 +174,7 @@ export class FormLoadComponent {
     try {
       await this.datosService.borrarRegistros();
 
-      const limite = 1;
+      const limite = 100;
       const totalPages = Math.ceil(this.infoRegistros.totalItems / limite);
 
       // Usamos range y concatMap para procesar página por página
