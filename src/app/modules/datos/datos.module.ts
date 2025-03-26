@@ -9,7 +9,6 @@ import { PersonsLoadComponent } from './components/persons-load/persons-load.com
 import { HttpClientModule } from '@angular/common/http';
 import { DatabaseService } from 'src/app/utils/services/database/database.service';
 import { NgCircleProgressModule } from 'ng-circle-progress';
-import { PatientsPersistenceService } from './service/patients-persistence/patients-persistence.service';
 
 @NgModule({
   declarations: [FormLoadComponent, PersonsLoadComponent],
@@ -29,6 +28,6 @@ import { PatientsPersistenceService } from './service/patients-persistence/patie
       animationDuration: 300
     })
   ],
-  providers: [DatosService, DatabaseService, PatientsPersistenceService]
+  providers: [DatosService, DatabaseService]
 })
 export class DatosModule {}

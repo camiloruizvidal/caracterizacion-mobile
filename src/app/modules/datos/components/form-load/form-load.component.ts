@@ -65,19 +65,18 @@ export class FormLoadComponent {
 
   private async actualizarFormulario() {
     try {
-      // 1. Cargar el formato de la ficha
-      //TODO revisar interface
       const respuestaFicha: any = await this.datosService
         .loadDataForm()
         .toPromise();
       console.log('Formato ficha cargado:', respuestaFicha?.data);
       localStorage.setItem('form', JSON.stringify(respuestaFicha?.data));
 
-      // 2. Cargar el mapeo de Excel
       const mapeoResponse = await this.datosService
-        .obtenerMapeoExcel(respuestaFicha?.data?.id || 0)
+        .obtenerMapeoExcel(respuestaFicha?.data?.id)
         .toPromise();
+      console.log('Mapeo Excel actualizado:', mapeoResponse);
       localStorage.setItem('mapeo_excel', JSON.stringify(mapeoResponse));
+      return respuestaFicha?.data?.id;
     } catch (error) {
       console.error('Error al actualizar formulario:', error);
       await this.showToastError();
@@ -116,14 +115,9 @@ export class FormLoadComponent {
     this.isAlertOpen = isOpen;
   }
 
-  public async cargarRegistros(fichaId: number): Promise<void> {
+  public async cargarRegistros(): Promise<void> {
     try {
-      // Primero actualizamos el mapeo
-      const mapeoResponse = await this.datosService
-        .obtenerMapeoExcel(fichaId)
-        .toPromise();
-      console.log('Mapeo Excel actualizado:', mapeoResponse);
-      localStorage.setItem('mapeo_excel', JSON.stringify(mapeoResponse));
+      const fichaId = await this.actualizarFormulario();
 
       // Inicializamos el servicio de persistencia
       await this.datosService.initializePersistenceService();
