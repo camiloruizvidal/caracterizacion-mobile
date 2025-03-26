@@ -7,7 +7,8 @@ import {
   IPaciente,
   IPaginationResult,
   IGuardarFormularioGrupal,
-  IFormatoMapeoExcel
+  IFormatoMapeoExcel,
+  IRespuestaRegistrosCarga
 } from 'src/app/modules/formgenerator/interfaces/interface';
 import { PatientsPersistenceService } from '../patients-persistence/patients-persistence.service';
 
@@ -44,9 +45,9 @@ export class DatosService {
 
   public obtenerRegistrosCarga(
     fichaId: number
-  ): Observable<IHttpResponse<any>> {
+  ): Observable<IHttpResponse<IRespuestaRegistrosCarga>> {
     const url = `${this.URL}/carga/${fichaId}/registros`;
-    return this.httpClient.get<IHttpResponse<any>>(url);
+    return this.httpClient.get<IHttpResponse<IRespuestaRegistrosCarga>>(url);
   }
 
   public loadDataPatients(

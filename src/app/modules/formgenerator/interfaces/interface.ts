@@ -4,6 +4,19 @@ export interface IHttpResponse<T> {
   code: number;
 }
 
+export interface IRegistroCarga {
+  id: number;
+  carga_id: number;
+  ficha_id: number;
+  [key: string]: any; // Para los campos dinámicos que vienen del Excel
+}
+
+export interface IRespuestaRegistrosCarga {
+  count: number;
+  totalPages: number;
+  rows: IRegistroCarga[];
+}
+
 export type tipoAlertas = 'individual' | 'grupal';
 
 export interface IFormulario {
