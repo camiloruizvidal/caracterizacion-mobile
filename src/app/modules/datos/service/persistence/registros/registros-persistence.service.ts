@@ -38,7 +38,6 @@ export class DynamicPersistenceService {
     request.onupgradeneeded = (event: any) => {
       const db = event.target.result;
 
-      // Si no existe, crea un store para registros. Usamos el searchField como keyPath si está definido
       const store = db.createObjectStore(
         this.key,
         this.searchField

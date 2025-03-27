@@ -119,10 +119,6 @@ export class FormLoadComponent {
     try {
       const fichaId = await this.actualizarFormulario();
 
-      // Inicializamos el servicio de persistencia
-      await this.datosService.initializePersistenceService();
-      console.log('Servicio de persistencia inicializado');
-
       // Luego obtenemos el conteo total con limit=1
       this.datosService.obtenerRegistrosCarga(fichaId, 1, 1).subscribe(
         async (respuesta: IHttpResponse<IRespuestaRegistrosCarga>) => {
@@ -146,6 +142,9 @@ export class FormLoadComponent {
                 text: 'Sí',
                 handler: async () => {
                   this.isLoadRegistros = true;
+                  // Inicializamos el servicio de persistencia antes de actualizar registros
+                  await this.datosService.initializePersistenceService();
+                  console.log('Servicio de persistencia inicializado');
                   await this.actualizarRegistros(fichaId);
                   await this.actualizarFormulario();
                 }

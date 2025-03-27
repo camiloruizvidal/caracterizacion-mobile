@@ -10,7 +10,6 @@ import {
   IFormatoMapeoExcel,
   IRespuestaRegistrosCarga
 } from 'src/app/modules/formgenerator/interfaces/interface';
-import { PatientsPersistenceService } from '../persistence/patients/patients-persistence.service';
 import { DynamicPersistenceService } from '../persistence/registros/registros-persistence.service';
 
 @Injectable({
@@ -22,8 +21,7 @@ export class DatosService {
 
   constructor(
     private httpClient: HttpClient,
-    private databaseService: DatabaseService,
-    private readonly patientsPersistenceService: PatientsPersistenceService
+    private databaseService: DatabaseService
   ) {
     this.getUrl();
   }
@@ -78,14 +76,6 @@ export class DatosService {
     }
   }
 
-  public async borrarPacientes(): Promise<void> {
-    await this.patientsPersistenceService.clearPatients();
-  }
-
-  public addPatients(data: IPaciente[]): void {
-    this.patientsPersistenceService.addPatients(data);
-  }
-
   public async borrarRegistros(): Promise<void> {
     await this.registrosPersistenceService.clearRecords();
   }
@@ -100,6 +90,10 @@ export class DatosService {
 
   public async initializePersistenceService() {
     try {
+      console.log(
+        'Mapeo en localStorage:',
+        localStorage.getItem('mapeo_excel')
+      );
       this.registrosPersistenceService = new DynamicPersistenceService();
       console.log('Servicio de persistencia inicializado');
     } catch (error) {

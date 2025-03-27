@@ -1,13 +1,10 @@
-import { PatientsPersistenceService } from './../../../modules/datos/service/persistence/patients/patients-persistence.service';
 import { Injectable } from '@angular/core';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DatabaseService {
-  constructor(
-    private readonly patientsPersistenceService: PatientsPersistenceService
-  ) {}
+  constructor() {}
 
   private table: string = '';
 
@@ -91,7 +88,7 @@ export class DatabaseService {
   public async findAll(): Promise<any[]> {
     const key = this.getKey();
     if (key === 'patients') {
-      return this.patientsPersistenceService.getAll();
+      return [];
     } else {
       return new Promise((resolve, reject) => {
         const data = localStorage.getItem(key);
