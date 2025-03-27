@@ -3,12 +3,14 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import {
   IOptionsSelectFilter,
   IPregunta,
-  ICategoria
+  ICategoria,
+  IFormatoMapeoExcel
 } from '../../../interfaces/interface';
 import { BaseInputComponent } from '../base-input/base-input.component';
 import { IonModal, ModalController } from '@ionic/angular';
 import { FormControl } from '@angular/forms';
 import { debounceTime, distinctUntilChanged } from 'rxjs';
+import { DynamicPersistenceService } from 'src/app/modules/datos/service/persistence/registros/registros-persistence.service';
 
 @Component({
   selector: 'app-select-filter',
@@ -21,7 +23,8 @@ export class SelectFilterComponent
 {
   constructor(
     private modalCtrl: ModalController,
-    private databaseService: DatabaseService
+    private databaseService: DatabaseService,
+    private dynamicPersistenceService: DynamicPersistenceService
   ) {
     super();
   }
@@ -30,6 +33,7 @@ export class SelectFilterComponent
   public searchControl = new FormControl();
   private data: any[] = [];
   public resultadosFiltrados: any[] = [];
+  private mapeoExcel!: IFormatoMapeoExcel;
   @ViewChild(IonModal) modal!: IonModal;
 
   public get options(): IOptionsSelectFilter {
@@ -46,6 +50,7 @@ export class SelectFilterComponent
   }
 
   async ngOnInit() {
+    this.mapeoExcel = this.databaseService.getMapeoExcel();
     await this.loadData();
 
     this.searchControl.valueChanges
@@ -60,9 +65,30 @@ export class SelectFilterComponent
       this.resultadosFiltrados = [];
       return;
     }
-    this.resultadosFiltrados = this.data
-      .filter((item, index) => this.cumpleCriterio(item, valorBusqueda))
-      .slice(0, 10);
+
+    try {
+      const columnasPermitidas = this.mapeoExcel.columnasExcel;
+
+      this.dynamicPersistenceService
+        .searchByField(valorBusqueda)
+        .then(result => {
+          debounceTime;
+          this.resultadosFiltrados = result.map(item => {
+            const itemFiltrado: any = {};
+            columnasPermitidas.forEach(columna => {
+              if (item[columna] !== undefined) {
+                itemFiltrado[columna] = item[columna];
+              }
+            });
+            return itemFiltrado;
+          });
+        })
+        .catch(error => {
+          console.error('Error en la búsqueda:', error);
+        });
+    } catch (error) {
+      console.error('Error al obtener el mapeo:', error);
+    }
   }
 
   public cumpleCriterio(item: any, valorBusqueda: string): boolean {

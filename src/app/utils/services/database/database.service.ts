@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { IFormatoMapeoExcel } from 'src/app/modules/formgenerator/interfaces/interface';
 
 @Injectable({
   providedIn: 'root'
@@ -180,5 +181,13 @@ export class DatabaseService {
 
   public deleteAll(): void {
     localStorage.removeItem(this.table);
+  }
+
+  public getMapeoExcel(): IFormatoMapeoExcel {
+    const mapeoExcel = localStorage.getItem('mapeo_excel');
+    if (mapeoExcel) {
+      return JSON.parse(mapeoExcel).data;
+    }
+    throw new Error('No se encontró el mapeo de Excel en localStorage');
   }
 }

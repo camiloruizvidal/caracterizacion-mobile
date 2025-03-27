@@ -94,7 +94,7 @@ export class PonderadoCategoriaComponent implements OnChanges {
     const todosLosPlanes: string[] = [];
 
     // 1. Obtener planes de cuidado de la clasificación actual
-    const clasificaciones = this.categoria.alerta?.clasificaciones || [];
+    const clasificaciones = this.categoria?.alerta?.clasificaciones || [];
     const clasificacionActual = clasificaciones.find(
       (clasificacion: IClasificacionAlerta) =>
         this.ponderado >= clasificacion.rango_minimo &&
@@ -106,7 +106,7 @@ export class PonderadoCategoriaComponent implements OnChanges {
     }
 
     // 2. Obtener planes de cuidado de las preguntas individuales
-    if (this.categoria.values) {
+    if (this.categoria?.values) {
       this.categoria.values.forEach((pregunta: IPregunta) => {
         if (
           pregunta.alerta?.genera_alerta &&
@@ -135,7 +135,7 @@ export class PonderadoCategoriaComponent implements OnChanges {
     }
 
     // 3. Agregar planes de cuidado adicionales si existen
-    if (this.categoria.planes_cuidado?.length) {
+    if (this.categoria?.planes_cuidado?.length) {
       todosLosPlanes.push(...this.categoria.planes_cuidado);
     }
 
@@ -144,7 +144,7 @@ export class PonderadoCategoriaComponent implements OnChanges {
   }
 
   private asignarColorYNivel() {
-    const clasificaciones = this.categoria.alerta?.clasificaciones || [];
+    const clasificaciones = this.categoria?.alerta?.clasificaciones || [];
     const clasificacion = clasificaciones.find(
       (clasificacion: IClasificacionAlerta) =>
         this.ponderado >= clasificacion.rango_minimo &&
