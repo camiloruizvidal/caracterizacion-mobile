@@ -22,8 +22,9 @@
           ></ion-input>
         </ion-item>
         <ion-item class="error" *ngIf="!isEmptySearch">
-          <div *ngIf="options.create_new">
-            {{ options.label_no_exist }}
+          <div>
+            Dele <strong>agregar</strong> si desea un nuevo registro o
+            seleccione uno de la lista
           </div>
           <ion-button *ngIf="options.create_new" (click)="agregarNuevo()">
             Agregar

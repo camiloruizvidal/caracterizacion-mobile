@@ -111,14 +111,30 @@ export class SelectFilterComponent
   }
 
   public formatItemToShow(item: any): string {
-    const result = this.options.formato_listado_mostrar.replace(
-      /\${(.*?)}/g,
-      (match, params) => item[params.trim()]
+    console.log({ item });
+
+    // Buscamos la columna de búsqueda en el mapeo
+    const columnaBusqueda =
+      this.mapeoExcel.mapeo.find((mapeo: any) => mapeo.esBusqueda)
+        ?.columnaExcel || '';
+
+    // Separamos las columnas en la de búsqueda y el resto
+    const restoColumnas = this.mapeoExcel.columnasExcel.filter(
+      col => col !== columnaBusqueda
     );
-    return result;
+
+    // Construimos el string con el campo de búsqueda primero
+    const campoBusqueda = item[columnaBusqueda] || '';
+    const restoCampos = restoColumnas
+      .map(columna => item[columna])
+      .filter(valor => valor !== undefined)
+      .join(' ');
+
+    return `${campoBusqueda}) ${restoCampos}`;
   }
 
   public seleccionarItem(item: any): void {
+    debugger;
     this.formValue.forEach((element: ICategoria, indexForm: number) => {
       this.updateValues(element, item, indexForm);
     });
@@ -126,6 +142,7 @@ export class SelectFilterComponent
     this.cancel();
   }
 
+  //TODO Borrar
   private updateValues(
     element: ICategoria,
     item: any,
