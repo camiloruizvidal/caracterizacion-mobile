@@ -90,12 +90,7 @@ export class DatosService {
 
   public async initializePersistenceService() {
     try {
-      console.log(
-        'Mapeo en localStorage:',
-        localStorage.getItem('mapeo_excel')
-      );
       this.registrosPersistenceService = new DynamicPersistenceService();
-      console.log('Servicio de persistencia inicializado');
     } catch (error) {
       console.error('Error al inicializar el servicio de persistencia:', error);
       throw error;

@@ -93,7 +93,6 @@ export class PonderadoCategoriaComponent implements OnChanges {
   private obtenerPlanesCuidado() {
     const todosLosPlanes: string[] = [];
 
-    // 1. Obtener planes de cuidado de la clasificación actual
     const clasificaciones = this.categoria?.alerta?.clasificaciones || [];
     const clasificacionActual = clasificaciones.find(
       (clasificacion: IClasificacionAlerta) =>
@@ -105,7 +104,6 @@ export class PonderadoCategoriaComponent implements OnChanges {
       todosLosPlanes.push(...clasificacionActual.planes_cuidado);
     }
 
-    // 2. Obtener planes de cuidado de las preguntas individuales
     if (this.categoria?.values) {
       this.categoria.values.forEach((pregunta: IPregunta) => {
         if (
@@ -134,12 +132,10 @@ export class PonderadoCategoriaComponent implements OnChanges {
       });
     }
 
-    // 3. Agregar planes de cuidado adicionales si existen
     if (this.categoria?.planes_cuidado?.length) {
       todosLosPlanes.push(...this.categoria.planes_cuidado);
     }
 
-    // Eliminar duplicados y actualizar los planes de cuidado
     this.planesCuidado = [...new Set(todosLosPlanes)];
   }
 
@@ -160,14 +156,12 @@ export class PonderadoCategoriaComponent implements OnChanges {
     }
   }
 
-  // Método para manejar cambios en el textarea
   public onPlanChange(index: number, event: any): void {
     const valor = event.target.value.trim();
     this.planesCuidado[index] = valor;
     this.emitirCambios();
   }
 
-  // Métodos públicos para la UI
   public agregarPlan(): void {
     this.planesCuidado.push('');
     this.emitirCambios();
@@ -179,13 +173,11 @@ export class PonderadoCategoriaComponent implements OnChanges {
   }
 
   private emitirCambios(): void {
-    // Filtrar planes vacíos antes de emitir
     const planesFiltrados = this.planesCuidado.filter(
       plan => plan.trim() !== ''
     );
     this.planesChange.emit(planesFiltrados);
 
-    // Actualizar la categoría directamente
     if (this.categoria) {
       this.categoria.planes_cuidado = planesFiltrados;
     }

@@ -68,13 +68,12 @@ export class FormLoadComponent {
       const respuestaFicha: any = await this.datosService
         .loadDataForm()
         .toPromise();
-      console.log('Formato ficha cargado:', respuestaFicha?.data);
       localStorage.setItem('form', JSON.stringify(respuestaFicha?.data));
 
       const mapeoResponse = await this.datosService
         .obtenerMapeoExcel(respuestaFicha?.data?.id)
         .toPromise();
-      console.log('Mapeo Excel actualizado:', mapeoResponse);
+
       localStorage.setItem('mapeo_excel', JSON.stringify(mapeoResponse));
       return respuestaFicha?.data?.id;
     } catch (error) {
@@ -119,7 +118,6 @@ export class FormLoadComponent {
     try {
       const fichaId = await this.actualizarFormulario();
 
-      // Luego obtenemos el conteo total con limit=1
       this.datosService.obtenerRegistrosCarga(fichaId, 1, 1).subscribe(
         async (respuesta: IHttpResponse<IRespuestaRegistrosCarga>) => {
           this.infoRegistros = {
@@ -142,9 +140,8 @@ export class FormLoadComponent {
                 text: 'Sí',
                 handler: async () => {
                   this.isLoadRegistros = true;
-                  // Inicializamos el servicio de persistencia antes de actualizar registros
+
                   await this.datosService.initializePersistenceService();
-                  console.log('Servicio de persistencia inicializado');
                   await this.actualizarRegistros(fichaId);
                   await this.actualizarFormulario();
                 }
@@ -171,7 +168,6 @@ export class FormLoadComponent {
       const limite = 100;
       const totalPages = Math.ceil(this.infoRegistros.totalItems / limite);
 
-      // Usamos range y concatMap para procesar página por página
       range(1, totalPages)
         .pipe(
           concatMap(pagina =>

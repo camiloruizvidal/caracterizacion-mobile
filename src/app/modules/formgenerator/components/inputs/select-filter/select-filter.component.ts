@@ -111,19 +111,14 @@ export class SelectFilterComponent
   }
 
   public formatItemToShow(item: any): string {
-    console.log({ item });
-
-    // Buscamos la columna de búsqueda en el mapeo
     const columnaBusqueda =
       this.mapeoExcel.mapeo.find((mapeo: any) => mapeo.esBusqueda)
         ?.columnaExcel || '';
 
-    // Separamos las columnas en la de búsqueda y el resto
     const restoColumnas = this.mapeoExcel.columnasExcel.filter(
       col => col !== columnaBusqueda
     );
 
-    // Construimos el string con el campo de búsqueda primero
     const campoBusqueda = item[columnaBusqueda] || '';
     const restoCampos = restoColumnas
       .map(columna => item[columna])
@@ -136,7 +131,7 @@ export class SelectFilterComponent
   public seleccionarItem(item: any): void {
     debugger;
     this.formValue.forEach((element: ICategoria, indexForm: number) => {
-      this.updateValues(element, item, indexForm);
+      this.updateValues2(element, item, indexForm);
     });
 
     this.cancel();
@@ -157,6 +152,31 @@ export class SelectFilterComponent
         values[indexValue].value = item[itemValue.destino];
       }
     });
+  }
+
+  private updateValues2(
+    element: ICategoria,
+    item: any,
+    indexForm: number
+  ): void {
+    try {
+      const mapeoExcel = this.databaseService.getMapeoExcel();
+
+      element?.values?.forEach((value: IPregunta, indexValue: number) => {
+        const mapeoItem = mapeoExcel.mapeo.find(
+          mapeo => mapeo.preguntaId === value.columnName
+        );
+
+        if (mapeoItem) {
+          const values = this.formValue[indexForm]?.values;
+          if (values?.[indexValue]) {
+            values[indexValue].value = item[mapeoItem.columnaExcel];
+          }
+        }
+      });
+    } catch (error) {
+      console.error('Error al actualizar valores:', error);
+    }
   }
 
   public abrirModal(): void {

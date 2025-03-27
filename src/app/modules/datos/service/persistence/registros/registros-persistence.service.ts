@@ -8,7 +8,7 @@ export class DynamicPersistenceService {
   private key: string = 'records';
   private dbVersion: number = 1;
   private db: IDBDatabase | null = null;
-  private searchField: string = ''; // Este será el campo de búsqueda dinámico
+  private searchField: string = '';
 
   constructor() {
     const mapeoExcel = localStorage.getItem('mapeo_excel');
@@ -18,7 +18,6 @@ export class DynamicPersistenceService {
     this.initDB();
   }
 
-  // Inicializa la base de datos
   private initDB(): void {
     const mapeoExcel: any = JSON.parse(
       localStorage.getItem('mapeo_excel') || '{}'
@@ -32,7 +31,6 @@ export class DynamicPersistenceService {
     }
 
     this.searchField = busqueda.columnaExcel;
-    console.log('Campo de búsqueda configurado:', this.searchField);
 
     const request = indexedDB.open(this.dbName, this.dbVersion);
     request.onupgradeneeded = (event: any) => {
@@ -46,7 +44,6 @@ export class DynamicPersistenceService {
       );
 
       if (this.searchField) {
-        // Crear un índice para el campo de búsqueda
         store.createIndex('by-search-field', this.searchField, {
           unique: false
         });
@@ -62,7 +59,6 @@ export class DynamicPersistenceService {
     };
   }
 
-  // Espera que la base de datos se haya inicializado
   private waitForDB(): Promise<void> {
     return new Promise<void>((resolve, reject) => {
       if (this.db) {
@@ -78,7 +74,6 @@ export class DynamicPersistenceService {
     });
   }
 
-  // Agregar registros con un campo dinámico de búsqueda
   public async addRecords(records: any[]): Promise<void> {
     try {
       await this.waitForDB();
@@ -102,7 +97,6 @@ export class DynamicPersistenceService {
     }
   }
 
-  // Buscar registros por el campo de búsqueda dinámico
   public async searchByField(value: string): Promise<any[]> {
     try {
       await this.waitForDB();
@@ -132,7 +126,6 @@ export class DynamicPersistenceService {
     }
   }
 
-  // Limpiar todos los registros de la base de datos
   public async clearRecords(): Promise<void> {
     try {
       await this.waitForDB();

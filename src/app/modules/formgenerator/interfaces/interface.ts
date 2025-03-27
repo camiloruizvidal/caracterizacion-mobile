@@ -8,7 +8,8 @@ export interface IRegistroCarga {
   id: number;
   carga_id: number;
   ficha_id: number;
-  [key: string]: any; // Para los campos dinámicos que vienen del Excel
+  // Para los campos dinámicos que vienen del Excel
+  [key: string]: any;
 }
 
 export interface IRespuestaRegistrosCarga {

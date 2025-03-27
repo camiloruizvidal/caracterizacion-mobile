@@ -14,9 +14,7 @@ export class DatabaseService {
     this.initializeDatabase();
   }
 
-  private initializeDatabase(): void {
-    // En el caso de localStorage, no es necesario una inicialización
-  }
+  private initializeDatabase(): void {}
 
   private getKey(): string {
     if (!this.table) {
