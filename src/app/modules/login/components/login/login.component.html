@@ -33,7 +33,9 @@
         <ion-button expand="full" type="submit" [disabled]="!loginForm.valid"
           >Iniciar Sesión</ion-button
         >
-        <span style="color: #FFF; background-color: brown;">MODO PRUEBAS</span>
+        <span *ngIf="esTest" style="color: #fff; background-color: brown"
+          >MODO PRUEBAS</span
+        >
       </form>
     </ion-card-content>
   </ion-card>

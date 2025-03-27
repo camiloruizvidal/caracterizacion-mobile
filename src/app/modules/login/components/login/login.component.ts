@@ -5,6 +5,7 @@ import { LoadingController, ToastController } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { HttpErrorResponse } from '@angular/common/http';
 import { DatabaseService } from 'src/app/utils/services/database/database.service';
+import { Constantes } from 'src/app/core/constantes';
 
 @Component({
   selector: 'app-login',
@@ -14,6 +15,7 @@ import { DatabaseService } from 'src/app/utils/services/database/database.servic
 export class LoginComponent implements OnInit {
   private loading: any;
   public loginForm: FormGroup;
+  public esTest = Constantes.esTest;
 
   constructor(
     private toastController: ToastController,
@@ -23,8 +25,8 @@ export class LoginComponent implements OnInit {
     private databaseService: DatabaseService,
     private router: Router
   ) {
-    const username = '123456';
-    const password = '123456';
+    const username = Constantes.esTest ? '123456' : '';
+    const password = Constantes.esTest ? '123456' : '';
     const server = 'http://localhost:3000'; //'https://api.crvtest.online';
     this.loginForm = this.formBuilder.group({
       username: [username, Validators.required],
