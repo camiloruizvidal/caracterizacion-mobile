@@ -77,8 +77,23 @@ export class LoginComponent implements OnInit {
             this.router.navigate(['/load'], { replaceUrl: true });
           },
           async (error: HttpErrorResponse) => {
+            console.log({ error });
+            if ([0, 504].includes(error.status)) {
+              const offlineSuccess = await this.loginService.loginOffline(
+                this.loginForm.value['username'],
+                this.loginForm.value['password']
+              );
+
+              if (offlineSuccess) {
+                this.router.navigate(['/load'], { replaceUrl: true });
+                return;
+              }
+            }
+
             const toast = await this.toastController.create({
-              message: error.error.message,
+              message:
+                error.error?.message ||
+                'Error de conexión. Verifique su conexión a internet.',
               duration: 2000,
               position: 'top'
             });

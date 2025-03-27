@@ -42,6 +42,29 @@ export class LoginService {
       );
   }
 
+  public async loginOffline(
+    username: string,
+    password: string
+  ): Promise<boolean> {
+    try {
+      this.databaseService.setTable('config');
+      const data = await this.databaseService.findAll();
+      const user = data.find(u => u.name === 'current_user');
+
+      if (
+        user &&
+        user.value.username === username &&
+        user.value.password === password
+      ) {
+        localStorage.setItem('isActive', 'true');
+        return true;
+      }
+      return false;
+    } catch (error) {
+      return false;
+    }
+  }
+
   private async addServer(server: string) {
     this.databaseService.setTable('server');
     this.databaseService.createOrUpdate(server, 'server');
