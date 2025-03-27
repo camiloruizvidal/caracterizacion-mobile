@@ -8,6 +8,7 @@ import {
   ICategoria
 } from '../../interfaces/interface';
 import { RegistrosService } from 'src/app/modules/registros/services/registros.service';
+import { Constantes } from 'src/app/core/constantes';
 
 @Component({
   selector: 'app-steper',
@@ -23,6 +24,7 @@ export class SteperComponent implements OnInit {
   public isDisabled: boolean = false;
   public machetazo: number = 0;
   public saveData: ICategoria[] = [];
+  public esTest = Constantes.esTest;
 
   constructor(
     private validationsService: ValidationsService,
@@ -91,12 +93,54 @@ export class SteperComponent implements OnInit {
   }
 
   public get isNextDisabled(): boolean {
-    return false; //TODO Solo para probar. Eliminar antes de entregar
+    if (this.esTest) {
+      console.log('MODO TEST: No se validan campos requeridos');
+      return false;
+    }
+    //let requireds =
+    //this.dataSteper[this.currentStep]?.values?.filter(
+    //  value =>
+    //    value.required && (value.value == null || value.value.trim() === '')
+    //) || [];
     let requireds =
-      this.dataSteper[this.currentStep]?.values?.filter(
-        value =>
-          value.required && (value.value == null || value.value.trim() === '')
-      ) || [];
+      this.dataSteper[this.currentStep]?.values?.filter(value => {
+        if (!this.isVisibilityInput(value, this.dataSteper[this.currentStep])) {
+          return false;
+        }
+
+        if (!value.required) {
+          return false;
+        }
+
+        if (value.value == null) {
+          return true;
+        }
+
+        let isValid = false;
+        switch (value.type) {
+          case ETipoPregunta.Check:
+          case ETipoPregunta.CheckSiNo:
+            isValid = value.value === false || value.value === null;
+            break;
+          case ETipoPregunta.Numbers:
+            isValid = value.value === 0 || value.value === null;
+            break;
+          case ETipoPregunta.Select:
+          case ETipoPregunta.SelectFilter:
+          case ETipoPregunta.SelectDependiente:
+          case ETipoPregunta.SelectMultiple:
+            isValid = Array.isArray(value.value)
+              ? value.value.length === 0
+              : !value.value;
+            break;
+          default:
+            isValid = value.value.toString().trim() === '';
+        }
+
+        return isValid;
+      }) || [];
+
+    console.log({ requireds });
     return requireds.length > 0;
   }
 
