@@ -13,15 +13,15 @@
         <div class="plan-content">
           <textarea
             [value]="plan"
-            (input)="onPlanChange(i, $event)"
+            (ionInput)="cambiarPlan(i, $event)"
             rows="3"
             placeholder="Escriba el plan de cuidado"
             class="plan-textarea"
           >
           </textarea>
-          <button class="btn-delete" (click)="borrarPlan(i)">
-            <i class="fas fa-trash"></i>
-          </button>
+          <ion-button (click)="borrarPlan(i)" color="danger">
+            <ion-icon name="trash-bin-outline"></ion-icon>
+          </ion-button>
         </div>
       </div>
     </div>

@@ -156,10 +156,11 @@ export class PonderadoCategoriaComponent implements OnChanges {
     }
   }
 
-  public onPlanChange(index: number, event: any): void {
-    const valor = event.target.value.trim();
-    this.planesCuidado[index] = valor;
-    this.emitirCambios();
+  public cambiarPlan(index: number, event: any): void {
+    if (event && event.detail && event.detail.value !== undefined) {
+      this.planesCuidado[index] = event.detail.value;
+      this.emitirCambios();
+    }
   }
 
   public agregarPlan(): void {
