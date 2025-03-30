@@ -189,6 +189,7 @@
     <app-ponderado-categoria
       *ngIf="machetazo % 2 === 0"
       [categoria]="saveData[i]"
+      (planesChange)="capturarPlanes($event)"
     ></app-ponderado-categoria>
   </ion-card>
 </div>

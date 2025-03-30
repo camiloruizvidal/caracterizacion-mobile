@@ -9,7 +9,6 @@ import {
 import {
   ICategoria,
   IPregunta,
-  IAlertaConfig,
   IClasificacionAlerta
 } from '../../interfaces/interface';
 import { FormBuilder, FormGroup, FormArray } from '@angular/forms';
@@ -206,7 +205,6 @@ export class PonderadoCategoriaComponent implements OnChanges {
     const planesFiltrados = this.planesCuidado.filter(
       plan => plan.trim() !== ''
     );
-    console.log({ planesFiltrados });
     this.planesChange.emit(planesFiltrados);
 
     if (this.categoria) {

@@ -150,4 +150,8 @@ export class SteperComponent implements OnInit {
   public get isShowSave(): boolean {
     return this.currentStep === this.dataSteper.length - 1;
   }
+
+  public capturarPlanes(planes: string[]): void {
+    console.log({ planes });
+  }
 }

@@ -40,7 +40,6 @@
   </ion-row>
   <div *ngIf="card && estado === estados[0]">
     <ion-title>Tarjeta familiar - {{ currentCode }}</ion-title>
-    {{ card.data | json }}
     <app-steper
       [isUpdate]="true"
       (saveDataMethod)="saveData($event)"
