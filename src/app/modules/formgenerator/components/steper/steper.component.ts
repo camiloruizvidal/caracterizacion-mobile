@@ -139,7 +139,6 @@ export class SteperComponent implements OnInit {
         return isValid;
       }) || [];
 
-    console.log({ requireds });
     return requireds.length > 0;
   }
 
@@ -152,6 +151,6 @@ export class SteperComponent implements OnInit {
   }
 
   public capturarPlanes(planes: string[]): void {
-    console.log({ planes });
+    console.log({ planes, saveData: this.saveData });
   }
 }
