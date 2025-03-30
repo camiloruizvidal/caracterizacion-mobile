@@ -202,9 +202,18 @@ export class PonderadoCategoriaComponent implements OnChanges {
   }
 
   private emitirCambios(): void {
-    const planesFiltrados = this.planesCuidado.filter(
-      plan => plan.trim() !== ''
-    );
+    const planesFiltrados = this.planesCuidado
+      .filter(
+        plan => plan && (typeof plan === 'string' ? plan.trim() !== '' : true)
+      )
+      .map(plan => {
+        if (plan && typeof plan === 'object') {
+          const valor = Object.values(plan)[0];
+          return typeof valor === 'string' ? valor : String(valor);
+        }
+        return String(plan);
+      });
+
     this.planesChange.emit(planesFiltrados);
 
     if (this.categoria) {
