@@ -12,6 +12,7 @@ import {
   IAlertaConfig,
   IClasificacionAlerta
 } from '../../interfaces/interface';
+import { FormBuilder, FormGroup, FormArray } from '@angular/forms';
 
 @Component({
   selector: 'app-ponderado-categoria',
@@ -27,11 +28,42 @@ export class PonderadoCategoriaComponent implements OnChanges {
   public nivelRiesgo: string = '';
   public mostrarPonderado: boolean = false;
   public planesCuidado: string[] = [];
+  public formularioPlanes: FormGroup;
+
+  constructor(private formBuilder: FormBuilder) {
+    this.formularioPlanes = this.formBuilder.group({
+      planes: this.formBuilder.array([])
+    });
+
+    this.formularioPlanes.get('planes')?.valueChanges.subscribe(values => {
+      if (values) {
+        this.planesCuidado = values;
+        this.emitirCambios();
+      }
+    });
+  }
+
+  public get planes(): FormArray {
+    return this.formularioPlanes.get('planes') as FormArray;
+  }
 
   ngOnChanges(changes: SimpleChanges) {
-    this.verificarAlertas();
-    this.calcularPonderado();
-    this.obtenerPlanesCuidado();
+    if (changes['categoria']) {
+      this.verificarAlertas();
+      this.calcularPonderado();
+      this.obtenerPlanesCuidado();
+      this.actualizarFormulario();
+    }
+  }
+
+  private actualizarFormulario(): void {
+    const planes = this.formularioPlanes.get('planes') as FormArray;
+    planes.clear();
+    if (this.planesCuidado && this.planesCuidado.length > 0) {
+      this.planesCuidado.forEach(plan => {
+        planes.push(this.formBuilder.control(plan));
+      });
+    }
   }
 
   private verificarAlertas() {
@@ -156,19 +188,16 @@ export class PonderadoCategoriaComponent implements OnChanges {
     }
   }
 
-  public cambiarPlan(index: number, event: any): void {
-    if (event && event.detail && event.detail.value !== undefined) {
-      this.planesCuidado[index] = event.detail.value;
-      this.emitirCambios();
-    }
-  }
-
   public agregarPlan(): void {
+    const planes = this.formularioPlanes.get('planes') as FormArray;
+    planes.push(this.formBuilder.control(''));
     this.planesCuidado.push('');
     this.emitirCambios();
   }
 
   public borrarPlan(index: number): void {
+    const planes = this.formularioPlanes.get('planes') as FormArray;
+    planes.removeAt(index);
     this.planesCuidado.splice(index, 1);
     this.emitirCambios();
   }
@@ -177,6 +206,7 @@ export class PonderadoCategoriaComponent implements OnChanges {
     const planesFiltrados = this.planesCuidado.filter(
       plan => plan.trim() !== ''
     );
+    console.log({ planesFiltrados });
     this.planesChange.emit(planesFiltrados);
 
     if (this.categoria) {

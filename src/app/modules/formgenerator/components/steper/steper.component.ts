@@ -94,7 +94,6 @@ export class SteperComponent implements OnInit {
 
   public get isNextDisabled(): boolean {
     if (this.esTest) {
-      console.log('MODO TEST: No se validan campos requeridos');
       return false;
     }
     //let requireds =

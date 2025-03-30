@@ -9,21 +9,27 @@
     <h3>Planes de Cuidado</h3>
 
     <div class="planes-list">
-      <div *ngFor="let plan of planesCuidado; let i = index" class="plan-item">
-        <div class="plan-content">
-          <textarea
-            [value]="plan"
-            (ionInput)="cambiarPlan(i, $event)"
-            rows="3"
-            placeholder="Escriba el plan de cuidado"
-            class="plan-textarea"
+      <form [formGroup]="formularioPlanes">
+        <div formArrayName="planes">
+          <div
+            *ngFor="let plan of planes.controls; let i = index"
+            class="plan-item"
           >
-          </textarea>
-          <ion-button (click)="borrarPlan(i)" color="danger">
-            <ion-icon name="trash-bin-outline"></ion-icon>
-          </ion-button>
+            <div class="plan-content">
+              <textarea
+                [formControlName]="i"
+                rows="3"
+                placeholder="Escriba el plan de cuidado"
+                class="plan-textarea"
+              >
+              </textarea>
+              <ion-button (click)="borrarPlan(i)" color="danger">
+                <ion-icon name="trash-bin-outline"></ion-icon>
+              </ion-button>
+            </div>
+          </div>
         </div>
-      </div>
+      </form>
     </div>
 
     <button class="btn-add" (click)="agregarPlan()">
