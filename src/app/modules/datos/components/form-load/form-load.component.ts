@@ -75,6 +75,14 @@ export class FormLoadComponent {
         .toPromise();
 
       localStorage.setItem('mapeo_excel', JSON.stringify(mapeoResponse));
+
+      const toast = await this.toastController.create({
+        message: 'Ficha actualizada',
+        duration: 2000,
+        color: 'success'
+      });
+      await toast.present();
+
       return respuestaFicha?.data?.id;
     } catch (error) {
       console.error('Error al actualizar formulario:', error);
@@ -117,6 +125,15 @@ export class FormLoadComponent {
   public async cargarRegistros(): Promise<void> {
     try {
       const fichaId = await this.actualizarFormulario();
+      if (!fichaId) {
+        const toast = await this.toastController.create({
+          message: 'Esta ficha no tiene datos que cargar',
+          duration: 3000,
+          color: 'warning'
+        });
+        await toast.present();
+        return;
+      }
 
       this.datosService.obtenerRegistrosCarga(fichaId, 1, 1).subscribe(
         async (respuesta: IHttpResponse<IRespuestaRegistrosCarga>) => {
@@ -152,7 +169,17 @@ export class FormLoadComponent {
           await alert.present();
         },
         async (error: any) => {
-          await this.showToastError();
+          if (error.status === 404) {
+            const toast = await this.toastController.create({
+              message:
+                'No hay ficha activa disponible. Por favor, contacte al administrador.',
+              duration: 3000,
+              color: 'danger'
+            });
+            await toast.present();
+          } else {
+            await this.showToastError();
+          }
         }
       );
     } catch (error) {

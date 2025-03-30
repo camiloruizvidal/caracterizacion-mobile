@@ -21,8 +21,9 @@ export class CheckComponent extends BaseInputComponent implements OnInit {
     this.value = this.steperValue.value;
     this.valueOption = this.steperValue.options as IOptionsCheck;
 
-    if (this.value === undefined) {
+    if (!this.value) {
       this.value = this.valueOption?.valueFalse;
+      this.saveInput({ detail: { value: this.value } });
     }
     this.valueCheck = this.value == this.valueOption?.valueTrue;
   }
