@@ -16,13 +16,13 @@
             class="plan-item"
           >
             <div class="plan-content">
-              <textarea
+              <ion-textarea
                 [formControlName]="i"
                 rows="3"
                 placeholder="Escriba el plan de cuidado"
                 class="plan-textarea"
               >
-              </textarea>
+              </ion-textarea>
               <ion-button (click)="borrarPlan(i)" color="danger">
                 <ion-icon name="trash-bin-outline"></ion-icon>
               </ion-button>
@@ -33,7 +33,7 @@
     </div>
 
     <button class="btn-add" (click)="agregarPlan()">
-      <i class="fas fa-plus"></i>
+      <ion-icon name="bag-add-outline"></ion-icon>
       Agregar Plan de Cuidado
     </button>
   </div>
