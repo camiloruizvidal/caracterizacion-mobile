@@ -44,44 +44,30 @@
       margin-bottom: 1rem;
 
       .plan-content {
-        display: flex;
-        gap: 0.5rem;
-        align-items: flex-start;
+        --padding-start: 0;
+        --padding-end: 0;
+        --inner-padding-end: 0;
+        --background: transparent;
 
-        .plan-textarea {
-          flex: 1;
-          padding: 0.5rem;
+        ion-textarea {
+          --padding-start: 0.5rem;
+          --padding-end: 0.5rem;
           border: 1px solid #ddd;
           border-radius: 4px;
-          resize: vertical;
-          font-family: inherit;
-          font-size: 0.9rem;
-          line-height: 1.4;
-          min-height: 60px;
+          margin-right: 8px;
 
-          &:focus {
-            outline: none;
-            border-color: #007bff;
-            box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
+          &.ion-touched.ion-invalid {
+            border-color: var(--ion-color-danger);
+          }
+
+          &.ion-touched.ion-valid {
+            border-color: var(--ion-color-success);
           }
         }
 
-        .btn-delete {
-          background-color: #dc3545;
-          color: white;
-          border: none;
-          border-radius: 4px;
-          padding: 0.5rem;
-          cursor: pointer;
-          transition: background-color 0.2s;
-
-          &:hover {
-            background-color: #c82333;
-          }
-
-          i {
-            font-size: 1rem;
-          }
+        ion-button {
+          margin: 0;
+          height: auto;
         }
       }
     }

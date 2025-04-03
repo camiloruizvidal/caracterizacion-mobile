@@ -15,7 +15,7 @@
             *ngFor="let plan of planes.controls; let i = index"
             class="plan-item"
           >
-            <div class="plan-content">
+            <ion-item lines="none" class="plan-content">
               <ion-textarea
                 [formControlName]="i"
                 autoGrow="true"
@@ -23,18 +23,28 @@
                 class="plan-textarea"
               >
               </ion-textarea>
-              <ion-button (click)="borrarPlan(i)" color="danger">
+              <ion-button
+                slot="end"
+                (click)="borrarPlan(i)"
+                color="danger"
+                fill="clear"
+              >
                 <ion-icon name="trash-bin-outline"></ion-icon>
               </ion-button>
-            </div>
+            </ion-item>
           </div>
         </div>
       </form>
     </div>
 
-    <button class="btn-add" (click)="agregarPlan()">
-      <ion-icon name="bag-add-outline"></ion-icon>
+    <ion-button
+      expand="block"
+      color="warning"
+      (click)="agregarPlan()"
+      class="ion-margin-top"
+    >
+      <ion-icon name="bag-add-outline" slot="start"></ion-icon>
       Agregar Plan de Cuidado
-    </button>
+    </ion-button>
   </div>
 </div>
