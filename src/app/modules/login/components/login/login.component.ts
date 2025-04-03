@@ -1,7 +1,11 @@
 import { LoginService } from './../../services/login/login.service';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { LoadingController, ToastController } from '@ionic/angular';
+import {
+  LoadingController,
+  ToastController,
+  AlertController
+} from '@ionic/angular';
 import { Router } from '@angular/router';
 import { HttpErrorResponse } from '@angular/common/http';
 import { DatabaseService } from 'src/app/utils/services/database/database.service';
@@ -16,6 +20,7 @@ export class LoginComponent implements OnInit {
   private loading: any;
   public loginForm: FormGroup;
   public esTest = Constantes.esTest;
+  public siInicioSesion = false;
 
   constructor(
     private toastController: ToastController,
@@ -23,6 +28,7 @@ export class LoginComponent implements OnInit {
     private formBuilder: FormBuilder,
     private loginService: LoginService,
     private databaseService: DatabaseService,
+    private alertController: AlertController,
     private router: Router
   ) {
     const username = Constantes.esTest ? '123456' : '';
@@ -37,6 +43,7 @@ export class LoginComponent implements OnInit {
   }
 
   public async ngOnInit(): Promise<void> {
+    this.siInicioSesion = await this.loginService.siInicioSesion();
     if (await this.loginService.isLogin()) {
       this.router.navigate(['/registros'], { replaceUrl: true });
     } else {
@@ -77,30 +84,29 @@ export class LoginComponent implements OnInit {
             this.router.navigate(['/load'], { replaceUrl: true });
           },
           async (error: HttpErrorResponse) => {
-            console.log({ error });
-            if ([0, 504].includes(error.status)) {
-              const offlineSuccess = await this.loginService.loginOffline(
-                this.loginForm.value['username'],
-                this.loginForm.value['password']
-              );
-
-              if (offlineSuccess) {
-                this.router.navigate(['/load'], { replaceUrl: true });
-                return;
-              }
+            if ([0, 504].includes(error.status) && !this.siInicioSesion) {
+              const alert = await this.alertController.create({
+                header: 'Error de conexión',
+                subHeader: 'Primer inicio de sesión',
+                message:
+                  'Para iniciar sesión por primera vez necesita tener conexión a internet. Por favor verifique su conexión e intente nuevamente.',
+                buttons: ['Entendido']
+              });
+              await alert.present();
+            } else {
+              const toast = await this.toastController.create({
+                message:
+                  error.error?.message ||
+                  'Error de conexión. Verifique su conexión a internet.',
+                duration: 2000,
+                position: 'top'
+              });
+              toast.present();
             }
-
-            const toast = await this.toastController.create({
-              message:
-                error.error?.message ||
-                'Error de conexión. Verifique su conexión a internet.',
-              duration: 2000,
-              position: 'top'
-            });
-            toast.present();
           }
         );
+
+      this.loading.dismiss();
     }
-    this.loading.dismiss();
   }
 }

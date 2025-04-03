@@ -147,4 +147,15 @@ export class LoginService {
     config[idx].value.user = user;
     localStorage.setItem('config', JSON.stringify(config));
   }
+
+  public async siInicioSesion(): Promise<boolean> {
+    try {
+      this.databaseService.setTable('config');
+      const datos = await this.databaseService.findAll();
+      const usuario = datos.find(registro => registro.name === 'current_user');
+      return !!usuario;
+    } catch (error) {
+      return false;
+    }
+  }
 }

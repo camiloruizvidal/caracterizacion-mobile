@@ -59,6 +59,7 @@ export class FormLoadComponent {
       await this.actualizarFormulario();
     } catch (error) {
       console.error('Error al cargar formulario:', error);
+      console.log('aqui 5');
       await this.showToastError();
     }
   }
@@ -70,15 +71,21 @@ export class FormLoadComponent {
         .toPromise();
       localStorage.setItem('form', JSON.stringify(respuestaFicha?.data));
 
-      const mapeoResponse = await this.datosService
-        .obtenerMapeoExcel(respuestaFicha?.data?.id)
-        .toPromise();
-
-      localStorage.setItem('mapeo_excel', JSON.stringify(mapeoResponse));
+      try {
+        const mapeoResponse = await this.datosService
+          .obtenerMapeoExcel(respuestaFicha?.data?.id)
+          .toPromise();
+        localStorage.setItem('mapeo_excel', JSON.stringify(mapeoResponse));
+      } catch (error: any) {
+        if (error?.status !== 404) {
+          console.log('aqui no deberia entrar');
+          throw error;
+        }
+      }
 
       const toast = await this.toastController.create({
-        message: 'Ficha actualizada',
-        duration: 2000,
+        message: 'Ficha actualizada con éxito',
+        duration: 5000,
         color: 'success'
       });
       await toast.present();
@@ -126,12 +133,11 @@ export class FormLoadComponent {
     try {
       const fichaId = await this.actualizarFormulario();
       if (!fichaId) {
-        const toast = await this.toastController.create({
-          message: 'Esta ficha no tiene datos que cargar',
-          duration: 3000,
-          color: 'warning'
-        });
-        await toast.present();
+        return;
+      }
+
+      const mapeoExcel = localStorage.getItem('mapeo_excel');
+      if (!mapeoExcel) {
         return;
       }
 
@@ -216,12 +222,14 @@ export class FormLoadComponent {
           },
           async (error: any) => {
             console.error('Error al actualizar registros:', error);
+            console.log('aqui 3');
             await this.showToastError();
             this.isLoadRegistros = false;
           }
         );
     } catch (error) {
       console.error('Error al borrar registros:', error);
+      console.log('aqui 4');
       await this.showToastError();
       this.isLoadRegistros = false;
     }
