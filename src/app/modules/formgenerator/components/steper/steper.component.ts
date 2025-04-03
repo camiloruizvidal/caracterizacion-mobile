@@ -151,6 +151,6 @@ export class SteperComponent implements OnInit {
   }
 
   public capturarPlanes(planes: string[]): void {
-    console.log({ planes, saveData: this.saveData });
+    //console.log({ planes, saveData: this.saveData });
   }
 }

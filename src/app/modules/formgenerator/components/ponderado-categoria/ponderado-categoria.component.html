@@ -1,7 +1,9 @@
 <div *ngIf="mostrarPonderado" class="ponderado-container">
-  <div class="ponderado-header" [style.background-color]="color">
-    <span class="ponderado-value">{{ ponderado }}</span>
-    <span class="nivel-riesgo">{{ nivelRiesgo }}</span>
+  <div class="alerta-header">
+    <div class="color-indicator" [style.background-color]="color"></div>
+    <ion-badge color="light" class="ion-padding">
+      {{ nivelRiesgo }}: {{ ponderado }}
+    </ion-badge>
   </div>
 
   <!-- Planes de cuidado -->
