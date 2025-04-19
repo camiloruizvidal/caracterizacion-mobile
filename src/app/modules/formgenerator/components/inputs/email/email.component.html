@@ -1,3 +1,19 @@
-<p>
-  email works!
-</p>
+<ion-text>
+  <span *ngIf="isRequired" class="required-input">*</span>
+  {{ steperValue.label }}
+</ion-text>
+<ion-input
+  [ariaLabel]="steperValue.columnName"
+  [id]="steperValue.columnName"
+  [formControl]="emailControl"
+  [required]="isRequired"
+  (ionChange)="saveInput($event)"
+  type="email"
+  labelPlacement="floating"
+  [errorText]="'Por favor ingrese un correo electrónico válido'"
+  [class.ion-valid]="emailControl.valid && emailControl.value"
+  [class.ion-invalid]="
+    emailControl.invalid && (emailControl.dirty || emailControl.touched)
+  "
+  [class.ion-touched]="emailControl.touched"
+></ion-input>

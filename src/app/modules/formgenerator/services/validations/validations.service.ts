@@ -3,8 +3,10 @@ import {
   IOptionsRule,
   IOptionsVisibility,
   IPregunta,
-  ICategoria
+  ICategoria,
+  EConditions
 } from '../../interfaces/interface';
+import * as moment from 'moment';
 
 @Injectable({
   providedIn: 'root'
@@ -27,11 +29,39 @@ export class ValidationsService {
     card: ICategoria
   ): boolean {
     let isVisilty = true;
-    visibility?.rules?.forEach((rule: any) => {
+    visibility?.rules?.forEach((rule: IOptionsRule) => {
       const valueForm = this.searchValueFromColumn(rule.columnDepend, card);
+
       switch (rule.rule) {
-        case '=':
+        case EConditions.IGUAL_QUE:
           isVisilty = valueForm?.value === rule.value;
+          break;
+        case EConditions.OR:
+          if (Array.isArray(rule.value)) {
+            const fechaSeleccionada = moment(valueForm?.value);
+            const fechaActual = moment();
+            const edadEnMeses = fechaActual.diff(
+              fechaSeleccionada,
+              'months',
+              true
+            );
+
+            isVisilty = rule.value.some(rangeString => {
+              try {
+                const rangeConfig = JSON.parse(rangeString);
+
+                if (rangeConfig.type === 'relative') {
+                  let mesInicio = rangeConfig.months || 0;
+                  let mesFin =
+                    rangeConfig.endMonths || rangeConfig.endYears * 12 || 0;
+                  return edadEnMeses >= mesInicio && edadEnMeses <= mesFin;
+                }
+                return false;
+              } catch (error) {
+                return false;
+              }
+            });
+          }
           break;
       }
     });
