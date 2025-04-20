@@ -179,6 +179,10 @@ export interface IUser {
   documentoTipoId: number;
   codes: ICodigos[];
   currentCode: number;
+  rolId?: number;
+  numeroIdentificacionEBS?: string;
+  prestadorPrimarioEBS?: string;
+  perfilEvaluador?: string;
 }
 
 export interface IPaginationResult<T> {
