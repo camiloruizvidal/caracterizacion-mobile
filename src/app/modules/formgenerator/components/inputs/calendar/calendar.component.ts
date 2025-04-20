@@ -48,7 +48,7 @@ export class CalendarComponent extends BaseInputComponent {
     return resultado.length > 0 ? resultado : '';
   }
 
-  public get defaultDate(): any {
-    return moment().format('YYYY-MM-DDTHH:mm:ss');
+  public get defaultDate(): string {
+    return this.valueData || moment().format('YYYY-MM-DDTHH:mm:ss');
   }
 }

@@ -13,15 +13,27 @@ import * as moment from 'moment';
   providedIn: 'root'
 })
 export class ValidationsService {
+  private _formValue: ICategoria[] = [];
+
   constructor() {}
+
+  public setFormValue(formValue: ICategoria[]) {
+    this._formValue = formValue;
+  }
+
+  public get formValue(): ICategoria[] {
+    return this._formValue;
+  }
 
   public isVisibility(itemInputs: IPregunta, card: ICategoria): boolean {
     let isVisibility: boolean = true;
+
     if (typeof itemInputs.visibility === 'boolean') {
       return itemInputs.visibility;
     } else if (itemInputs.visibility && itemInputs.visibility?.rules) {
       isVisibility = this.isValidatedRules(itemInputs.visibility, card);
     }
+
     return isVisibility;
   }
 
@@ -52,7 +64,35 @@ export class ValidationsService {
     return isVisilty;
   }
 
+  private searchValueFromColumn(columnName: string, card: ICategoria) {
+    // Primero buscar en todos los cards del formulario
+    for (const formCard of this._formValue || []) {
+      if (formCard?.values) {
+        for (const value of formCard.values) {
+          if (value.columnName === columnName) {
+            return value;
+          }
+        }
+      }
+    }
+
+    // Si no se encuentra en formValue, buscar en el card actual
+    if (card?.values) {
+      for (const value of card.values) {
+        if (value.columnName === columnName) {
+          return value;
+        }
+      }
+    }
+
+    return null;
+  }
+
   private validateDateRanges(selectedDate: string, ranges: string[]): boolean {
+    if (!selectedDate) {
+      return false;
+    }
+
     const fechaSeleccionada = moment(selectedDate).startOf('day');
     const fechaActual = moment().startOf('day');
 
@@ -61,7 +101,17 @@ export class ValidationsService {
         const rangeConfig = JSON.parse(rangeString);
 
         if (rangeConfig.type === 'relative') {
-          if (rangeConfig.endMonths) {
+          if (rangeConfig.endYears) {
+            const edadEnAnios = fechaActual.diff(
+              fechaSeleccionada,
+              'years',
+              false
+            );
+            return (
+              edadEnAnios >= rangeConfig.years &&
+              edadEnAnios <= rangeConfig.endYears
+            );
+          } else if (rangeConfig.endMonths) {
             const edadEnMeses = fechaActual.diff(
               fechaSeleccionada,
               'months',
@@ -116,15 +166,9 @@ export class ValidationsService {
           }
         }
         return false;
-      } catch {
+      } catch (error) {
         return false;
       }
     });
-  }
-
-  private searchValueFromColumn(columnName: string, card: ICategoria) {
-    return card?.values?.find(
-      (value: IPregunta) => value.columnName === columnName
-    );
   }
 }

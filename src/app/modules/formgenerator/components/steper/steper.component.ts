@@ -1,5 +1,12 @@
 import { ValidationsService } from './../../services/validations/validations.service';
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnInit,
+  Output,
+  OnChanges
+} from '@angular/core';
 import {
   ETipoPregunta,
   IEventSteper,
@@ -15,7 +22,7 @@ import { Constantes } from 'src/app/core/constantes';
   templateUrl: './steper.component.html',
   styleUrls: ['./steper.component.scss']
 })
-export class SteperComponent implements OnInit {
+export class SteperComponent implements OnInit, OnChanges {
   @Input() dataSteper!: ICategoria[];
   @Input() hasManyRegister: Boolean = false;
   @Input() isUpdate: Boolean = false;
@@ -34,6 +41,13 @@ export class SteperComponent implements OnInit {
   async ngOnInit(): Promise<void> {
     if (!this.isUpdate) {
       this.clearValues(this.dataSteper);
+    }
+    this.validationsService.setFormValue(this.dataSteper);
+  }
+
+  ngOnChanges(changes: any): void {
+    if (changes.dataSteper && changes.dataSteper.currentValue) {
+      this.validationsService.setFormValue(changes.dataSteper.currentValue);
     }
   }
 
@@ -55,10 +69,12 @@ export class SteperComponent implements OnInit {
 
   public saveValueColumn(categoriaActualizada: ICategoria[]): void {
     this.saveData = categoriaActualizada;
-    this.machetazo = this.machetazo + 1;
-    setTimeout(() => {
+    Promise.resolve().then(() => {
       this.machetazo = this.machetazo + 1;
-    }, 300);
+      setTimeout(() => {
+        this.machetazo = this.machetazo + 1;
+      }, 300);
+    });
   }
 
   public goNext(): void {
@@ -150,7 +166,5 @@ export class SteperComponent implements OnInit {
     return this.currentStep === this.dataSteper.length - 1;
   }
 
-  public capturarPlanes(planes: string[]): void {
-    //console.log({ planes, saveData: this.saveData });
-  }
+  public capturarPlanes(planes: string[]): void {}
 }
