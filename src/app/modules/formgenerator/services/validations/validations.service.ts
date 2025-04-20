@@ -65,7 +65,7 @@ export class ValidationsService {
             const edadEnMeses = fechaActual.diff(
               fechaSeleccionada,
               'months',
-              true
+              false
             );
             return (
               edadEnMeses >= rangeConfig.months &&
