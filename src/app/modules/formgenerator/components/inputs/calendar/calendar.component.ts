@@ -45,7 +45,7 @@ export class CalendarComponent extends BaseInputComponent {
       resultado += `${dias === 1 ? '1 día' : `${dias} días`}`;
     }
 
-    return resultado.length > 0 ? resultado : 'Recién nacido';
+    return resultado.length > 0 ? resultado : '';
   }
 
   public get defaultDate(): any {
