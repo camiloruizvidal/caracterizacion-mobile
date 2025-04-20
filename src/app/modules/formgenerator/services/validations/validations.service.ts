@@ -77,14 +77,42 @@ export class ValidationsService {
               'years',
               false
             );
-            return edadEnAnios === rangeConfig.years;
+
+            switch (rangeConfig.condition) {
+              case EConditions.MENOR_QUE:
+                return edadEnAnios < rangeConfig.years;
+              case EConditions.MENOR_O_IGUAL_QUE:
+                return edadEnAnios <= rangeConfig.years;
+              case EConditions.MAYOR_QUE:
+                return edadEnAnios > rangeConfig.years;
+              case EConditions.MAYOR_O_IGUAL_QUE:
+                return edadEnAnios >= rangeConfig.years;
+              case EConditions.IGUAL_QUE:
+                return edadEnAnios === rangeConfig.years;
+              default:
+                return edadEnAnios === rangeConfig.years;
+            }
           } else if (rangeConfig.months) {
             const edadEnMeses = fechaActual.diff(
               fechaSeleccionada,
               'months',
               false
             );
-            return edadEnMeses === rangeConfig.months;
+
+            switch (rangeConfig.condition) {
+              case EConditions.MENOR_QUE:
+                return edadEnMeses < rangeConfig.months;
+              case EConditions.MENOR_O_IGUAL_QUE:
+                return edadEnMeses <= rangeConfig.months;
+              case EConditions.MAYOR_QUE:
+                return edadEnMeses > rangeConfig.months;
+              case EConditions.MAYOR_O_IGUAL_QUE:
+                return edadEnMeses >= rangeConfig.months;
+              case EConditions.IGUAL_QUE:
+                return edadEnMeses === rangeConfig.months;
+              default:
+                return edadEnMeses === rangeConfig.months;
+            }
           }
         }
         return false;
