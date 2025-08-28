@@ -1,3 +1,1188 @@
+/* ========================================
+   🏥 SISTEMA DE VARIABLES MÉDICAS PREMIUM 
+   ======================================== */
+
+:root {
+  /* 🔵 Medical Blue Palette */
+  --medical-blue-50: #eff6ff;
+  --medical-blue-100: #dbeafe;
+  --medical-blue-200: #bfdbfe;
+  --medical-blue-300: #93c5fd;
+  --medical-blue-400: #60a5fa;
+  --medical-blue-500: #3b82f6;
+  --medical-blue-600: #2563eb;
+  --medical-blue-700: #1d4ed8;
+  --medical-blue-800: #1e40af;
+  --medical-blue-900: #1e3a8a;
+
+  /* 🟢 Medical Green Palette */
+  --medical-green-50: #f0fdf4;
+  --medical-green-100: #dcfce7;
+  --medical-green-200: #bbf7d0;
+  --medical-green-300: #86efac;
+  --medical-green-400: #4ade80;
+  --medical-green-500: #22c55e;
+  --medical-green-600: #16a34a;
+  --medical-green-700: #15803d;
+  --medical-green-800: #166534;
+  --medical-green-900: #14532d;
+
+  /* 🔴 Medical Red Palette */
+  --medical-red-50: #fef2f2;
+  --medical-red-100: #fee2e2;
+  --medical-red-200: #fecaca;
+  --medical-red-300: #fca5a5;
+  --medical-red-400: #f87171;
+  --medical-red-500: #ef4444;
+  --medical-red-600: #dc2626;
+  --medical-red-700: #b91c1c;
+  --medical-red-800: #991b1b;
+  --medical-red-900: #7f1d1d;
+
+  /* 🟡 Medical Yellow Palette */
+  --medical-yellow-50: #fefce8;
+  --medical-yellow-100: #fef3c7;
+  --medical-yellow-200: #fde68a;
+  --medical-yellow-300: #fcd34d;
+  --medical-yellow-400: #fbbf24;
+  --medical-yellow-500: #f59e0b;
+  --medical-yellow-600: #d97706;
+  --medical-yellow-700: #b45309;
+  --medical-yellow-800: #92400e;
+  --medical-yellow-900: #78350f;
+
+  /* ⚫ Medical Gray Palette */
+  --medical-gray-50: #f9fafb;
+  --medical-gray-100: #f3f4f6;
+  --medical-gray-200: #e5e7eb;
+  --medical-gray-300: #d1d5db;
+  --medical-gray-400: #9ca3af;
+  --medical-gray-500: #6b7280;
+  --medical-gray-600: #4b5563;
+  --medical-gray-700: #374151;
+  --medical-gray-800: #1f2937;
+  --medical-gray-900: #111827;
+
+  /* 💎 Glassmorphism Effects */
+  --glass-background: rgba(255, 255, 255, 0.1);
+  --glass-border: rgba(255, 255, 255, 0.2);
+  --glass-shadow: 0 8px 32px rgba(59, 130, 246, 0.12);
+  --glass-backdrop: blur(20px) saturate(120%);
+
+  /* ✨ Medical Gradients */
+  --gradient-medical-primary: linear-gradient(135deg, 
+    var(--medical-blue-500) 0%, 
+    var(--medical-blue-600) 50%, 
+    var(--medical-blue-700) 100%);
+  
+  --gradient-medical-card: linear-gradient(145deg, 
+    rgba(255, 255, 255, 0.1) 0%, 
+    rgba(255, 255, 255, 0.05) 100%);
+  
+  --gradient-medical-background: linear-gradient(180deg,
+    var(--medical-blue-50) 0%,
+    rgba(59, 130, 246, 0.05) 50%,
+    var(--medical-blue-50) 100%);
+
+  /* 🎭 Shadows Premium */
+  --shadow-medical-soft: 0 4px 20px rgba(59, 130, 246, 0.08);
+  --shadow-medical-medium: 0 8px 25px rgba(59, 130, 246, 0.12);
+  --shadow-medical-strong: 0 12px 35px rgba(59, 130, 246, 0.15);
+  --shadow-medical-glow: 0 0 20px rgba(59, 130, 246, 0.3);
+
+  /* ⚡ Transitions Premium */
+  --transition-medical: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-medical-slow: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-medical-fast: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* 🎯 Required Input Style */
 .required-input {
-  color: red;
+  color: var(--medical-red-500) !important;
+  font-weight: 500;
+}
+
+/* 🏥 Medical Theme Overrides for Ionic */
+ion-app {
+  --ion-color-primary: var(--medical-blue-500);
+  --ion-color-primary-rgb: 59, 130, 246;
+  --ion-color-primary-contrast: #ffffff;
+  --ion-color-primary-contrast-rgb: 255, 255, 255;
+  --ion-color-primary-shade: var(--medical-blue-600);
+  --ion-color-primary-tint: var(--medical-blue-400);
+
+  --ion-color-secondary: var(--medical-green-500);
+  --ion-color-secondary-rgb: 34, 197, 94;
+  --ion-color-secondary-contrast: #ffffff;
+  --ion-color-secondary-contrast-rgb: 255, 255, 255;
+  --ion-color-secondary-shade: var(--medical-green-600);
+  --ion-color-secondary-tint: var(--medical-green-400);
+
+  --ion-color-tertiary: var(--medical-blue-300);
+  --ion-color-tertiary-rgb: 147, 197, 253;
+  --ion-color-tertiary-contrast: var(--medical-blue-900);
+  --ion-color-tertiary-contrast-rgb: 30, 58, 138;
+  --ion-color-tertiary-shade: var(--medical-blue-400);
+  --ion-color-tertiary-tint: var(--medical-blue-200);
+
+  --ion-color-success: var(--medical-green-500);
+  --ion-color-success-rgb: 34, 197, 94;
+  --ion-color-success-contrast: #ffffff;
+  --ion-color-success-contrast-rgb: 255, 255, 255;
+  --ion-color-success-shade: var(--medical-green-600);
+  --ion-color-success-tint: var(--medical-green-400);
+
+  --ion-color-warning: var(--medical-yellow-500);
+  --ion-color-warning-rgb: 245, 158, 11;
+  --ion-color-warning-contrast: #ffffff;
+  --ion-color-warning-contrast-rgb: 255, 255, 255;
+  --ion-color-warning-shade: var(--medical-yellow-600);
+  --ion-color-warning-tint: var(--medical-yellow-400);
+
+  --ion-color-danger: var(--medical-red-500);
+  --ion-color-danger-rgb: 239, 68, 68;
+  --ion-color-danger-contrast: #ffffff;
+  --ion-color-danger-contrast-rgb: 255, 255, 255;
+  --ion-color-danger-shade: var(--medical-red-600);
+  --ion-color-danger-tint: var(--medical-red-400);
+}
+
+/* 💎 Premium Animations */
+@keyframes heartbeat {
+  0%, 100% { 
+    transform: scale(1); 
+  }
+  50% { 
+    transform: scale(1.05); 
+  }
+}
+
+@keyframes pulse-medical {
+  0% { 
+    box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.7); 
+  }
+  70% { 
+    box-shadow: 0 0 0 10px rgba(59, 130, 246, 0); 
+  }
+  100% { 
+    box-shadow: 0 0 0 0 rgba(59, 130, 246, 0); 
+  }
+}
+
+@keyframes medical-glow {
+  0%, 100% {
+    filter: drop-shadow(0 0 5px rgba(59, 130, 246, 0.3));
+  }
+  50% {
+    filter: drop-shadow(0 0 20px rgba(59, 130, 246, 0.6));
+  }
+}
+
+@keyframes medical-shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+/* 🎨 Utility Classes */
+.medical-gradient {
+  background: var(--gradient-medical-primary);
+}
+
+.medical-glass {
+  background: var(--glass-background);
+  backdrop-filter: var(--glass-backdrop);
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--glass-shadow);
+}
+
+.medical-shadow {
+  box-shadow: var(--shadow-medical-medium);
+}
+
+.medical-transition {
+  transition: var(--transition-medical);
+}
+
+.medical-heartbeat {
+  animation: heartbeat 2s ease-in-out infinite;
+}
+
+.medical-pulse {
+  animation: pulse-medical 2s infinite;
+}
+
+.medical-glow {
+  animation: medical-glow 3s ease-in-out infinite;
+}
+
+/* 💎 COMPONENTES GLASSMORPHISM MÉDICOS */
+
+/* 🏥 Tarjetas premium con efecto cristal */
+ion-card {
+  --background: linear-gradient(145deg,
+    rgba(255, 255, 255, 0.25) 0%,
+    rgba(255, 255, 255, 0.1) 100%
+  ) !important;
+  backdrop-filter: blur(20px) saturate(120%) !important;
+  border: 1px solid rgba(255, 255, 255, 0.3) !important;
+  border-radius: 16px !important;
+  box-shadow: 
+    0 8px 32px rgba(59, 130, 246, 0.12),
+    0 4px 16px rgba(37, 99, 235, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 0.4) !important;
+  transition: var(--transition-medical) !important;
+  overflow: hidden !important;
+  position: relative;
+
+  /* ✨ Brillo superior */
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg,
+      transparent 0%,
+      rgba(255, 255, 255, 0.8) 50%,
+      transparent 100%
+    );
+    z-index: 1;
+  }
+
+  /* 🌟 Efecto hover premium */
+  &:hover {
+    transform: translateY(-4px) scale(1.02);
+    box-shadow: 
+      0 12px 40px rgba(59, 130, 246, 0.18),
+      0 8px 25px rgba(37, 99, 235, 0.12),
+      inset 0 1px 0 rgba(255, 255, 255, 0.5) !important;
+    border-color: rgba(255, 255, 255, 0.4) !important;
+  }
+
+  /* 🎯 Header de tarjeta premium */
+  ion-card-header {
+    background: linear-gradient(135deg,
+      rgba(59, 130, 246, 0.08) 0%,
+      rgba(37, 99, 235, 0.04) 100%
+    ) !important;
+    border-bottom: 1px solid rgba(59, 130, 246, 0.1) !important;
+    backdrop-filter: blur(10px) !important;
+    position: relative;
+    z-index: 2;
+
+    ion-card-title {
+      color: var(--medical-blue-800) !important;
+      font-weight: 700 !important;
+      font-size: 1.3rem !important;
+      letter-spacing: 0.5px;
+      text-shadow: 0 1px 2px rgba(59, 130, 246, 0.1);
+      background: var(--gradient-medical-primary);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    ion-card-subtitle {
+      color: var(--medical-gray-600) !important;
+      font-weight: 500 !important;
+      font-size: 0.95rem !important;
+      opacity: 0.9;
+      margin-top: 0.5rem;
+    }
+  }
+
+  /* 📝 Contenido de tarjeta premium */
+  ion-card-content {
+    position: relative;
+    z-index: 2;
+    background: transparent !important;
+    
+    /* 🌟 Patrón sutil de fondo */
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-image: 
+        radial-gradient(circle at 25% 25%, rgba(59, 130, 246, 0.02) 1px, transparent 1px),
+        radial-gradient(circle at 75% 75%, rgba(37, 99, 235, 0.02) 1px, transparent 1px);
+      background-size: 30px 30px, 45px 45px;
+      pointer-events: none;
+      opacity: 0.5;
+    }
+  }
+}
+
+/* 🚀 Botones premium médicos */
+ion-button {
+  --background: var(--gradient-medical-primary) !important;
+  --color: white !important;
+  --border-radius: 12px !important;
+  --padding-top: 12px !important;
+  --padding-bottom: 12px !important;
+  --padding-start: 20px !important;
+  --padding-end: 20px !important;
+  --box-shadow: var(--shadow-medical-medium) !important;
+  font-weight: 600 !important;
+  font-size: 1rem !important;
+  letter-spacing: 0.3px;
+  text-transform: none !important;
+  position: relative;
+  overflow: hidden;
+  transition: var(--transition-medical) !important;
+
+  /* ✨ Efecto shimmer */
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg,
+      transparent 0%,
+      rgba(255, 255, 255, 0.3) 50%,
+      transparent 100%
+    );
+    transition: var(--transition-medical);
+  }
+
+  /* 🎯 Estados premium */
+  &:not([disabled]):hover {
+    --box-shadow: var(--shadow-medical-strong) !important;
+    transform: translateY(-2px) scale(1.05);
+    
+    &::before {
+      animation: medical-shimmer 1s ease-out;
+    }
+  }
+
+  &:not([disabled]):active {
+    transform: translateY(0px) scale(1.02);
+  }
+
+  /* 💎 Variantes de colores médicos */
+  &[color="secondary"] {
+    --background: linear-gradient(135deg,
+      var(--medical-green-500) 0%,
+      var(--medical-green-600) 100%
+    ) !important;
+  }
+
+  &[color="danger"] {
+    --background: linear-gradient(135deg,
+      var(--medical-red-500) 0%,
+      var(--medical-red-600) 100%
+    ) !important;
+  }
+
+  &[color="warning"] {
+    --background: linear-gradient(135deg,
+      var(--medical-yellow-500) 0%,
+      var(--medical-yellow-600) 100%
+    ) !important;
+  }
+
+  /* 🔲 Botón outline médico */
+  &[fill="outline"] {
+    --background: rgba(255, 255, 255, 0.1) !important;
+    --color: var(--medical-blue-600) !important;
+    --border-width: 2px !important;
+    --border-style: solid !important;
+    --border-color: var(--medical-blue-500) !important;
+    backdrop-filter: blur(10px);
+
+    &:hover {
+      --background: rgba(59, 130, 246, 0.1) !important;
+      --border-color: var(--medical-blue-600) !important;
+    }
+  }
+
+  /* ⭕ Botón clear médico */
+  &[fill="clear"] {
+    --background: transparent !important;
+    --color: var(--medical-blue-600) !important;
+
+    &:hover {
+      --background: rgba(59, 130, 246, 0.1) !important;
+    }
+  }
+
+  /* 🔴 Botón deshabilitado */
+  &[disabled] {
+    --background: var(--medical-gray-300) !important;
+    --color: var(--medical-gray-500) !important;
+    --box-shadow: none !important;
+    opacity: 0.6;
+  }
+}
+
+/* 🏷️ Badges médicos premium */
+ion-badge {
+  --background: var(--glass-background) !important;
+  --color: var(--medical-blue-700) !important;
+  backdrop-filter: var(--glass-backdrop) !important;
+  border: 1px solid var(--glass-border) !important;
+  border-radius: 8px !important;
+  padding: 0.5rem 0.75rem !important;
+  font-weight: 600 !important;
+  font-size: 0.8rem !important;
+  letter-spacing: 0.3px;
+  box-shadow: var(--shadow-medical-soft) !important;
+  transition: var(--transition-medical) !important;
+
+  /* 🟢 Badge success */
+  &[color="success"] {
+    --background: linear-gradient(135deg,
+      rgba(34, 197, 94, 0.1) 0%,
+      rgba(22, 163, 74, 0.05) 100%
+    ) !important;
+    --color: var(--medical-green-700) !important;
+    border-color: rgba(34, 197, 94, 0.3) !important;
+  }
+
+  /* 🟡 Badge warning */
+  &[color="warning"] {
+    --background: linear-gradient(135deg,
+      rgba(245, 158, 11, 0.1) 0%,
+      rgba(217, 119, 6, 0.05) 100%
+    ) !important;
+    --color: var(--medical-yellow-700) !important;
+    border-color: rgba(245, 158, 11, 0.3) !important;
+  }
+
+  /* 🔴 Badge danger */
+  &[color="danger"] {
+    --background: linear-gradient(135deg,
+      rgba(239, 68, 68, 0.1) 0%,
+      rgba(220, 38, 38, 0.05) 100%
+    ) !important;
+    --color: var(--medical-red-700) !important;
+    border-color: rgba(239, 68, 68, 0.3) !important;
+  }
+}
+
+/* 📋 Lista médica premium */
+ion-list {
+  background: transparent !important;
+  
+  ion-item {
+    --background: rgba(255, 255, 255, 0.05) !important;
+    --border-radius: 12px !important;
+    --padding-start: 16px !important;
+    --padding-end: 16px !important;
+    --inner-padding-end: 16px !important;
+    --min-height: 48px !important;
+    margin-bottom: 0.5rem;
+    border: 1px solid rgba(59, 130, 246, 0.1) !important;
+    backdrop-filter: blur(10px) !important;
+    transition: var(--transition-medical) !important;
+
+    &:hover {
+      --background: rgba(59, 130, 246, 0.08) !important;
+      transform: translateX(4px);
+      border-color: rgba(59, 130, 246, 0.2) !important;
+    }
+
+    ion-label {
+      color: var(--medical-gray-700) !important;
+      font-weight: 500 !important;
+    }
+
+    ion-icon {
+      color: var(--medical-blue-600) !important;
+      filter: drop-shadow(0 1px 2px rgba(59, 130, 246, 0.2));
+    }
+  }
+}
+
+/* 📝 FORMULARIOS MÉDICOS PREMIUM */
+
+/* 🎯 Inputs médicos con efectos flotantes */
+ion-item {
+  --background: rgba(255, 255, 255, 0.1) !important;
+  --border-radius: 12px !important;
+  --border-width: 1px !important;
+  --border-style: solid !important;
+  --border-color: rgba(59, 130, 246, 0.2) !important;
+  --inner-padding-end: 16px !important;
+  --inner-padding-start: 16px !important;
+  --padding-start: 0 !important;
+  --padding-end: 0 !important;
+  --min-height: 56px !important;
+  margin-bottom: 1rem;
+  backdrop-filter: blur(10px) !important;
+  transition: var(--transition-medical) !important;
+  position: relative;
+  overflow: hidden;
+
+  /* ✨ Brillo superior sutil */
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg,
+      transparent 0%,
+      rgba(255, 255, 255, 0.3) 50%,
+      transparent 100%
+    );
+    z-index: 1;
+  }
+
+  /* 🌟 Estados de focus premium */
+  &.item-has-focus {
+    --border-color: var(--medical-blue-500) !important;
+    --background: rgba(59, 130, 246, 0.05) !important;
+    box-shadow: 
+      0 0 0 3px rgba(59, 130, 246, 0.1),
+      var(--shadow-medical-soft) !important;
+    transform: translateY(-2px) scale(1.02);
+    
+    /* 💫 Efecto shimmer en focus */
+    &::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg,
+        transparent 0%,
+        rgba(59, 130, 246, 0.1) 50%,
+        transparent 100%
+      );
+      animation: medical-shimmer 1s ease-out;
+      z-index: 1;
+    }
+  }
+
+  /* 🎯 Estados de hover */
+  &:hover:not(.item-has-focus) {
+    --border-color: rgba(59, 130, 246, 0.3) !important;
+    --background: rgba(59, 130, 246, 0.03) !important;
+    transform: translateY(-1px);
+  }
+
+  /* 🏷️ Labels flotantes premium */
+  ion-label {
+    color: var(--medical-blue-700) !important;
+    font-weight: 600 !important;
+    font-size: 0.9rem !important;
+    letter-spacing: 0.3px;
+    transition: var(--transition-medical) !important;
+    position: relative;
+    z-index: 2;
+
+    /* ✨ Efecto brillo en labels */
+    &::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: var(--gradient-medical-primary);
+      transform: scaleX(0);
+      transition: var(--transition-medical);
+    }
+  }
+
+  /* 📝 Inputs premium */
+  ion-input, ion-textarea, ion-select {
+    --color: var(--medical-gray-800) !important;
+    --placeholder-color: var(--medical-gray-500) !important;
+    font-weight: 500 !important;
+    font-size: 1rem !important;
+    position: relative;
+    z-index: 2;
+  }
+
+  /* 🎯 Estado válido */
+  &.item-valid {
+    --border-color: var(--medical-green-500) !important;
+    --background: rgba(34, 197, 94, 0.03) !important;
+
+    ion-label {
+      color: var(--medical-green-700) !important;
+    }
+
+    /* ✅ Icono de válido */
+    &::after {
+      content: '✓';
+      position: absolute;
+      right: 16px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--medical-green-500);
+      font-weight: bold;
+      font-size: 1.2rem;
+      z-index: 3;
+    }
+  }
+
+  /* ❌ Estado inválido */
+  &.item-invalid {
+    --border-color: var(--medical-red-500) !important;
+    --background: rgba(239, 68, 68, 0.03) !important;
+    animation: medical-shake 0.5s ease-in-out;
+
+    ion-label {
+      color: var(--medical-red-700) !important;
+    }
+
+    /* ❌ Icono de error */
+    &::after {
+      content: '❌';
+      position: absolute;
+      right: 16px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 1rem;
+      z-index: 3;
+    }
+  }
+}
+
+/* 📋 Selects médicos premium */
+ion-select {
+  --placeholder-color: var(--medical-gray-500) !important;
+  
+  /* 🔽 Icono personalizado */
+  &::part(icon) {
+    color: var(--medical-blue-600) !important;
+    opacity: 0.8;
+  }
+}
+
+/* 📝 Textareas médicas premium */
+ion-textarea {
+  --padding-top: 16px !important;
+  --padding-bottom: 16px !important;
+  min-height: 120px !important;
+}
+
+/* 🔘 Checkboxes y radios médicos */
+ion-checkbox, ion-radio {
+  --color: var(--medical-blue-500) !important;
+  --color-checked: var(--medical-blue-600) !important;
+  --border-radius: 6px;
+  --size: 20px;
+  margin-right: 12px;
+  
+  &::part(container) {
+    border: 2px solid var(--medical-blue-400) !important;
+    transition: var(--transition-medical);
+  }
+  
+  &.checkbox-checked::part(container),
+  &.radio-checked::part(container) {
+    background: var(--gradient-medical-primary) !important;
+    border-color: var(--medical-blue-600) !important;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
+  }
+}
+
+/* 🎚️ Range sliders médicos */
+ion-range {
+  --bar-background: var(--medical-gray-200) !important;
+  --bar-background-active: var(--gradient-medical-primary) !important;
+  --bar-height: 6px;
+  --bar-border-radius: 3px;
+  --knob-background: var(--medical-blue-500) !important;
+  --knob-size: 24px;
+  --knob-border-radius: 50%;
+  --knob-box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+  padding: 16px 0;
+}
+
+/* 🔄 Toggle switches médicos */
+ion-toggle {
+  --background: var(--medical-gray-300) !important;
+  --background-checked: var(--gradient-medical-primary) !important;
+  --handle-background: white !important;
+  --handle-background-checked: white !important;
+  --handle-box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  --handle-width: 24px;
+  --handle-height: 24px;
+  --track-width: 48px;
+  --track-height: 28px;
+}
+
+/* 🎯 Grupos de formulario */
+.form-group {
+  margin-bottom: 2rem;
+  
+  .form-title {
+    color: var(--medical-blue-800) !important;
+    font-weight: 700 !important;
+    font-size: 1.2rem !important;
+    margin-bottom: 1rem;
+    letter-spacing: 0.5px;
+    background: var(--gradient-medical-primary);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  
+  .form-description {
+    color: var(--medical-gray-600) !important;
+    font-size: 0.9rem !important;
+    margin-bottom: 1.5rem;
+    font-weight: 500;
+    opacity: 0.9;
+  }
+}
+
+/* ⚠️ Mensajes de validación médicos */
+.validation-message {
+  background: linear-gradient(135deg,
+    rgba(239, 68, 68, 0.1) 0%,
+    rgba(220, 38, 38, 0.05) 100%
+  );
+  border: 1px solid rgba(239, 68, 68, 0.3);
+  border-radius: 8px;
+  padding: 0.75rem 1rem;
+  margin-top: 0.5rem;
+  color: var(--medical-red-700) !important;
+  font-size: 0.85rem !important;
+  font-weight: 500;
+  backdrop-filter: blur(10px);
+  display: flex;
+  align-items: center;
+  animation: medical-fade-in 0.3s ease-out;
+
+  ion-icon {
+    margin-right: 0.5rem;
+    color: var(--medical-red-500) !important;
+    font-size: 1rem;
+  }
+}
+
+/* ✅ Mensajes de éxito médicos */
+.success-message {
+  background: linear-gradient(135deg,
+    rgba(34, 197, 94, 0.1) 0%,
+    rgba(22, 163, 74, 0.05) 100%
+  );
+  border: 1px solid rgba(34, 197, 94, 0.3);
+  border-radius: 8px;
+  padding: 0.75rem 1rem;
+  margin-top: 0.5rem;
+  color: var(--medical-green-700) !important;
+  font-size: 0.85rem !important;
+  font-weight: 500;
+  backdrop-filter: blur(10px);
+  display: flex;
+  align-items: center;
+  animation: medical-fade-in 0.3s ease-out;
+
+  ion-icon {
+    margin-right: 0.5rem;
+    color: var(--medical-green-500) !important;
+    font-size: 1rem;
+  }
+}
+
+/* 🎭 Animaciones adicionales para formularios */
+@keyframes medical-shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-5px); }
+  75% { transform: translateX(5px); }
+}
+
+@keyframes medical-fade-in {
+  0% { 
+    opacity: 0; 
+    transform: translateY(-10px); 
+  }
+  100% { 
+    opacity: 1; 
+    transform: translateY(0); 
+  }
+}
+
+/* 🎭 ANIMACIONES Y MICRO-INTERACCIONES MÉDICAS */
+
+/* 🌟 Animaciones de entrada para páginas */
+.page-enter {
+  animation: medical-page-enter 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes medical-page-enter {
+  0% {
+    opacity: 0;
+    transform: translateX(100%) scale(0.95);
+  }
+  60% {
+    opacity: 0.8;
+    transform: translateX(0%) scale(1.02);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0%) scale(1);
+  }
+}
+
+/* 💫 Animación de carga médica */
+.medical-loading {
+  display: inline-block;
+  width: 40px;
+  height: 40px;
+  border: 3px solid var(--medical-blue-200);
+  border-top: 3px solid var(--medical-blue-600);
+  border-radius: 50%;
+  animation: medical-spin 1s linear infinite;
+  filter: drop-shadow(0 2px 4px rgba(59, 130, 246, 0.3));
+}
+
+@keyframes medical-spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* 💓 Animación de latido cardíaco para elementos críticos */
+.medical-critical {
+  animation: medical-heartbeat-critical 1.5s ease-in-out infinite;
+}
+
+@keyframes medical-heartbeat-critical {
+  0%, 100% { 
+    transform: scale(1);
+    filter: drop-shadow(0 0 5px rgba(239, 68, 68, 0.3));
+  }
+  25% { 
+    transform: scale(1.05);
+    filter: drop-shadow(0 0 15px rgba(239, 68, 68, 0.5));
+  }
+  50% { 
+    transform: scale(1.1);
+    filter: drop-shadow(0 0 20px rgba(239, 68, 68, 0.7));
+  }
+  75% { 
+    transform: scale(1.05);
+    filter: drop-shadow(0 0 15px rgba(239, 68, 68, 0.5));
+  }
+}
+
+/* 🌊 Animación de ondas para elementos de sincronización */
+.medical-sync {
+  position: relative;
+  overflow: hidden;
+}
+
+.medical-sync::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg,
+    transparent 0%,
+    rgba(59, 130, 246, 0.3) 50%,
+    transparent 100%
+  );
+  animation: medical-wave 2s ease-in-out infinite;
+}
+
+@keyframes medical-wave {
+  0% { left: -100%; }
+  100% { left: 100%; }
+}
+
+/* ✨ Efecto de brillo para elementos destacados */
+.medical-highlight {
+  position: relative;
+  overflow: hidden;
+}
+
+.medical-highlight::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: conic-gradient(from 0deg,
+    transparent 0deg,
+    rgba(59, 130, 246, 0.1) 45deg,
+    transparent 90deg,
+    transparent 270deg,
+    rgba(59, 130, 246, 0.1) 315deg,
+    transparent 360deg
+  );
+  animation: medical-highlight-rotate 4s linear infinite;
+  pointer-events: none;
+}
+
+@keyframes medical-highlight-rotate {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* 🎯 Animación de éxito médico */
+.medical-success {
+  animation: medical-success-bounce 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+@keyframes medical-success-bounce {
+  0% {
+    transform: scale(0.3) rotate(-10deg);
+    opacity: 0;
+  }
+  50% {
+    transform: scale(1.1) rotate(5deg);
+    opacity: 0.8;
+  }
+  100% {
+    transform: scale(1) rotate(0deg);
+    opacity: 1;
+  }
+}
+
+/* ⚠️ Animación de advertencia médica */
+.medical-warning {
+  animation: medical-warning-wiggle 0.5s ease-in-out 3;
+}
+
+@keyframes medical-warning-wiggle {
+  0%, 100% { transform: rotate(0deg); }
+  25% { transform: rotate(-3deg); }
+  75% { transform: rotate(3deg); }
+}
+
+/* 📊 Animación de progreso médico */
+.medical-progress {
+  position: relative;
+  background: var(--medical-gray-200);
+  border-radius: 10px;
+  overflow: hidden;
+  height: 8px;
+}
+
+.medical-progress-fill {
+  height: 100%;
+  background: var(--gradient-medical-primary);
+  border-radius: 10px;
+  position: relative;
+  overflow: hidden;
+  animation: medical-progress-shimmer 2s linear infinite;
+}
+
+.medical-progress-fill::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.4) 50%,
+    transparent 100%
+  );
+  animation: medical-progress-wave 1.5s ease-in-out infinite;
+}
+
+@keyframes medical-progress-shimmer {
+  0% { filter: brightness(1); }
+  50% { filter: brightness(1.2); }
+  100% { filter: brightness(1); }
+}
+
+@keyframes medical-progress-wave {
+  0% { left: -100%; }
+  100% { left: 100%; }
+}
+
+/* 🔔 Animación de notificación médica */
+.medical-notification {
+  animation: medical-notification-slide 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+@keyframes medical-notification-slide {
+  0% {
+    transform: translateX(100%) scale(0.8);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0%) scale(1);
+    opacity: 1;
+  }
+}
+
+/* 🎨 Efectos hover para iconos médicos */
+ion-icon {
+  transition: var(--transition-medical) !important;
+  
+  &:hover {
+    transform: scale(1.1) rotate(5deg);
+    filter: drop-shadow(0 4px 8px rgba(59, 130, 246, 0.3));
+  }
+  
+  &.medical-icon-critical:hover {
+    transform: scale(1.15) rotate(-5deg);
+    filter: drop-shadow(0 4px 8px rgba(239, 68, 68, 0.4));
+    animation: medical-heartbeat-critical 1s ease-in-out 2;
+  }
+  
+  &.medical-icon-success:hover {
+    transform: scale(1.1);
+    filter: drop-shadow(0 4px 8px rgba(34, 197, 94, 0.4));
+    animation: medical-success-bounce 0.6s ease-out;
+  }
+}
+
+/* 🎭 Efectos de entrada escalonados para listas */
+.medical-list-item {
+  animation: medical-list-enter 0.4s ease-out;
+  animation-fill-mode: both;
+}
+
+.medical-list-item:nth-child(1) { animation-delay: 0.1s; }
+.medical-list-item:nth-child(2) { animation-delay: 0.2s; }
+.medical-list-item:nth-child(3) { animation-delay: 0.3s; }
+.medical-list-item:nth-child(4) { animation-delay: 0.4s; }
+.medical-list-item:nth-child(5) { animation-delay: 0.5s; }
+
+@keyframes medical-list-enter {
+  0% {
+    opacity: 0;
+    transform: translateY(20px) scale(0.9);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* 🌟 Efecto de resplandor para elementos activos */
+.medical-active-glow {
+  position: relative;
+  
+  &::before {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    background: var(--gradient-medical-primary);
+    border-radius: inherit;
+    z-index: -1;
+    opacity: 0;
+    animation: medical-active-pulse 2s ease-in-out infinite;
+  }
+}
+
+@keyframes medical-active-pulse {
+  0%, 100% {
+    opacity: 0;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.3;
+    transform: scale(1.02);
+  }
+}
+
+/* 💫 Partículas flotantes para fondos médicos */
+.medical-particles {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.medical-particle {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  background: var(--medical-blue-400);
+  border-radius: 50%;
+  opacity: 0.6;
+  animation: medical-particle-float 8s linear infinite;
+}
+
+.medical-particle:nth-child(1) { left: 10%; animation-delay: 0s; }
+.medical-particle:nth-child(2) { left: 20%; animation-delay: 1s; }
+.medical-particle:nth-child(3) { left: 30%; animation-delay: 2s; }
+.medical-particle:nth-child(4) { left: 40%; animation-delay: 3s; }
+.medical-particle:nth-child(5) { left: 50%; animation-delay: 4s; }
+.medical-particle:nth-child(6) { left: 60%; animation-delay: 5s; }
+.medical-particle:nth-child(7) { left: 70%; animation-delay: 6s; }
+.medical-particle:nth-child(8) { left: 80%; animation-delay: 7s; }
+.medical-particle:nth-child(9) { left: 90%; animation-delay: 8s; }
+
+@keyframes medical-particle-float {
+  0% {
+    transform: translateY(100vh) rotate(0deg);
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.6;
+  }
+  90% {
+    opacity: 0.6;
+  }
+  100% {
+    transform: translateY(-100px) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+/* 🎯 Clases utilitarias para animaciones */
+.medical-animate-in { animation: medical-fade-in 0.5s ease-out; }
+.medical-animate-out { animation: medical-fade-out 0.3s ease-in; }
+.medical-animate-bounce { animation: medical-success-bounce 0.6s ease-out; }
+.medical-animate-shake { animation: medical-shake 0.5s ease-in-out; }
+.medical-animate-pulse { animation: pulse-medical 2s infinite; }
+.medical-animate-glow { animation: medical-glow 3s ease-in-out infinite; }
+.medical-animate-heartbeat { animation: heartbeat 2s ease-in-out infinite; }
+
+@keyframes medical-fade-out {
+  0% { 
+    opacity: 1; 
+    transform: translateY(0); 
+  }
+  100% { 
+    opacity: 0; 
+    transform: translateY(-10px); 
+  }
+}
+
+/* 🔧 Modal Styles - Server Config */
+.server-config-modal {
+  --width: 90% !important;
+  --max-width: 500px !important;
+  --height: auto !important;
+  --max-height: 90vh !important;
+  --border-radius: 20px !important;
+  --box-shadow: 0 20px 60px rgba(59, 130, 246, 0.2) !important;
+  --backdrop-opacity: 0.6 !important;
+
+  .modal-wrapper {
+    border-radius: 20px !important;
+    overflow: hidden;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+  }
+
+  @media (max-width: 768px) {
+    --width: 95% !important;
+    --max-width: none !important;
+    --height: auto !important;
+    --border-radius: 16px !important;
+  }
 }

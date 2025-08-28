@@ -1,29 +1,38 @@
 <ion-menu contentId="main-content">
   <ion-header>
     <ion-toolbar>
-      <ion-title>Menu</ion-title>
+      <ion-title>Sistema Médico</ion-title>
     </ion-toolbar>
   </ion-header>
   <ion-content class="ion-padding">
     <ion-list class="menu-list">
+      <!-- 📝 Registros médicos -->
       <ion-item (click)="redirectTo('/registros')">
-        <ion-icon slot="start" name="list-sharp"></ion-icon>
-        <ion-label>Registros</ion-label>
+        <ion-icon slot="start" name="medical"></ion-icon>
+        <ion-label>Registros Médicos</ion-label>
       </ion-item>
+      
+      <!-- 📤 Enviar datos -->
       <ion-item (click)="redirectTo('/registros/enviar')">
-        <ion-icon slot="start" name="send-sharp"></ion-icon>
-        <ion-label>Enviar registros</ion-label>
+        <ion-icon slot="start" name="cloud-upload"></ion-icon>
+        <ion-label>Sincronizar Datos</ion-label>
       </ion-item>
+      
+      <!-- 🔄 Actualizar sistema -->
       <ion-item (click)="redirectTo('/load')">
-        <ion-icon slot="start" name="cloud-download-sharp"></ion-icon>
-        <ion-label>Actualizar</ion-label>
+        <ion-icon slot="start" name="refresh-circle"></ion-icon>
+        <ion-label>Actualizar Sistema</ion-label>
       </ion-item>
+      
+      <!-- 👤 Perfil (oculto) -->
       <ion-item (click)="redirectTo('/profile')" *ngIf="false">
-        <ion-icon slot="start" name="person-sharp"></ion-icon>
-        <ion-label>Perfil</ion-label>
+        <ion-icon slot="start" name="person-circle"></ion-icon>
+        <ion-label>Mi Perfil</ion-label>
       </ion-item>
+      
+      <!-- 🚪 Cerrar sesión -->
       <ion-item (click)="redirectTo('/login')" button class="cerrar-sesion">
-        <ion-icon slot="start" name="log-out-sharp"></ion-icon>
+        <ion-icon slot="start" name="log-out"></ion-icon>
         <ion-label>Cerrar Sesión</ion-label>
       </ion-item>
     </ion-list>

@@ -4,14 +4,24 @@
     &nbsp; Nuevo Registro
   </ion-button>
   <div class="ion-text-center ion-margin-top" *ngIf="!tieneFichas">
-    <ion-badge
-      color="warning"
-      style="white-space: normal; width: 100%; display: block"
-      class="ion-padding"
-    >
-      <ion-icon name="warning-outline"></ion-icon>
-      Aún no ha cargado la ficha. Por favor vaya a "Actualizar" en el menú.
-    </ion-badge>
+    <ion-card class="warning-card">
+      <ion-card-content class="ion-padding">
+        <div class="warning-content">
+          <ion-icon name="warning-outline" class="warning-icon"></ion-icon>
+          <p class="warning-text">
+            Aún no ha cargado la ficha. Por favor actualice los formularios para continuar.
+          </p>
+          <ion-button 
+            routerLink="/load" 
+            color="warning" 
+            fill="solid" 
+            class="update-button">
+            <ion-icon name="refresh-circle" slot="start"></ion-icon>
+            Ir a Actualizar
+          </ion-button>
+        </div>
+      </ion-card-content>
+    </ion-card>
   </div>
   <ion-card>
     <ion-card-header>

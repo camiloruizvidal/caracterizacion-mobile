@@ -1,8 +1,378 @@
+/* 🏥 LOGIN MÉDICO ULTRA PREMIUM */
 #login {
-  background: linear-gradient(to bottom, #FFF, #0E7AB4, #26AAE1);
-  height: 100%;
+  /* 🌟 Fondo con gradiente médico animado */
+  background: 
+    radial-gradient(circle at 20% 50%, rgba(59, 130, 246, 0.3) 0%, transparent 50%),
+    radial-gradient(circle at 80% 20%, rgba(37, 99, 235, 0.3) 0%, transparent 50%),
+    radial-gradient(circle at 40% 80%, rgba(59, 130, 246, 0.2) 0%, transparent 50%),
+    linear-gradient(135deg, 
+      var(--medical-blue-50) 0%,
+      rgba(59, 130, 246, 0.1) 25%,
+      rgba(37, 99, 235, 0.05) 50%,
+      rgba(59, 130, 246, 0.1) 75%,
+      var(--medical-blue-50) 100%
+    );
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  position: relative;
+  overflow: hidden;
+
+  /* ✨ Partículas médicas flotantes */
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: 
+      radial-gradient(circle at 25% 25%, var(--medical-blue-200) 1px, transparent 1px),
+      radial-gradient(circle at 75% 75%, var(--medical-blue-300) 1px, transparent 1px);
+    background-size: 50px 50px, 80px 80px;
+    opacity: 0.1;
+    animation: medical-float 20s linear infinite;
+    pointer-events: none;
+  }
+
+  /* 🌊 Ondas médicas de fondo */
+  &::after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: 
+      conic-gradient(from 0deg, 
+        transparent 0deg, 
+        rgba(59, 130, 246, 0.05) 60deg, 
+        transparent 120deg
+      );
+    animation: medical-rotate 30s linear infinite;
+    pointer-events: none;
+  }
 }
+
+/* 💎 Tarjeta de login premium */
 #card-login {
-  margin: 10%;
-  margin-top: 50%;
+  width: 100%;
+  max-width: 400px;
+  margin: 0;
+  position: relative;
+  z-index: 10;
+  
+  /* 🏥 Efecto glassmorphism médico */
+  background: linear-gradient(145deg,
+    rgba(255, 255, 255, 0.25) 0%,
+    rgba(255, 255, 255, 0.1) 100%
+  );
+  backdrop-filter: blur(20px) saturate(120%);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 24px !important;
+  box-shadow: 
+    0 20px 40px rgba(59, 130, 246, 0.15),
+    0 8px 25px rgba(37, 99, 235, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.4);
+  
+  transition: var(--transition-medical-slow);
+  overflow: hidden;
+
+  /* ✨ Brillo superior */
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg,
+      transparent 0%,
+      rgba(255, 255, 255, 0.8) 50%,
+      transparent 100%
+    );
+  }
+
+  /* 🌟 Efecto hover premium */
+  &:hover {
+    transform: translateY(-5px) scale(1.02);
+    box-shadow: 
+      0 25px 50px rgba(59, 130, 246, 0.2),
+      0 15px 35px rgba(37, 99, 235, 0.15),
+      inset 0 1px 0 rgba(255, 255, 255, 0.5);
+  }
+}
+
+/* 🎯 Header de la tarjeta */
+ion-card-header {
+  text-align: center;
+  padding: 2rem 1.5rem 1rem;
+  background: transparent;
+  
+  /* 🏥 Contenedor del icono médico */
+  .medical-icon-container {
+    position: relative;
+    display: inline-block;
+    margin-bottom: 1rem;
+    
+    .medical-icon {
+      font-size: 3rem;
+      color: var(--medical-blue-500);
+      filter: drop-shadow(0 4px 8px rgba(59, 130, 246, 0.3));
+      animation: medical-glow 3s ease-in-out infinite;
+      z-index: 2;
+      position: relative;
+    }
+    
+    .medical-pulse-ring {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 60px;
+      height: 60px;
+      border: 2px solid var(--medical-blue-400);
+      border-radius: 50%;
+      animation: pulse-medical 2s infinite;
+      opacity: 0.6;
+    }
+  }
+  
+  ion-card-title {
+    font-size: 1.6rem !important;
+    font-weight: 700 !important;
+    background: var(--gradient-medical-primary);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 0.5rem;
+    text-shadow: 0 2px 4px rgba(59, 130, 246, 0.1);
+    position: relative;
+    letter-spacing: 0.5px;
+
+    /* ✨ Efecto brillo en el título */
+    &::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg,
+        transparent 0%,
+        rgba(255, 255, 255, 0.4) 50%,
+        transparent 100%
+      );
+      animation: medical-shimmer 4s infinite;
+    }
+  }
+
+  ion-card-subtitle {
+    color: var(--medical-gray-600) !important;
+    font-size: 0.9rem !important;
+    font-weight: 500;
+    opacity: 0.9;
+    letter-spacing: 0.3px;
+    margin-top: 0.5rem;
+  }
+}
+
+/* 📝 Contenido de la tarjeta */
+ion-card-content {
+  padding: 0 1.5rem 2rem;
+  
+  /* 🎨 Formulario premium */
+  form {
+    ion-item {
+      --background: rgba(255, 255, 255, 0.1);
+      --border-radius: 12px;
+      --border-width: 1px;
+      --border-style: solid;
+      --border-color: rgba(59, 130, 246, 0.2);
+      --inner-padding-end: 16px;
+      --inner-padding-start: 16px;
+      --padding-start: 0;
+      --padding-end: 0;
+      margin-bottom: 1rem;
+      transition: var(--transition-medical);
+      backdrop-filter: blur(10px);
+      
+      /* 🌟 Efecto focus premium */
+      &.item-has-focus {
+        --border-color: var(--medical-blue-500);
+        --background: rgba(59, 130, 246, 0.05);
+        box-shadow: 
+          0 0 0 3px rgba(59, 130, 246, 0.1),
+          var(--shadow-medical-soft);
+        transform: translateY(-2px);
+      }
+
+      ion-label {
+        color: var(--medical-blue-700) !important;
+        font-weight: 600 !important;
+        font-size: 0.9rem !important;
+      }
+
+      ion-input {
+        --color: var(--medical-gray-800) !important;
+        --placeholder-color: var(--medical-gray-500) !important;
+        font-weight: 500;
+      }
+    }
+
+    /* 🚀 Botón premium con efecto médico */
+    ion-button {
+      --background: var(--gradient-medical-primary);
+      --color: white;
+      --border-radius: 12px;
+      --padding-top: 14px;
+      --padding-bottom: 14px;
+      --box-shadow: var(--shadow-medical-medium);
+      margin-top: 1.5rem;
+      font-weight: 600 !important;
+      font-size: 1.1rem !important;
+      letter-spacing: 0.5px;
+      text-transform: none !important;
+      position: relative;
+      overflow: hidden;
+      transition: var(--transition-medical);
+
+      /* ✨ Efecto shimmer */
+      &::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg,
+          transparent 0%,
+          rgba(255, 255, 255, 0.3) 50%,
+          transparent 100%
+        );
+        transition: var(--transition-medical);
+      }
+
+      /* 🎯 Estados premium */
+      &:not([disabled]):hover {
+        --box-shadow: var(--shadow-medical-strong);
+        transform: translateY(-2px);
+        
+        &::before {
+          animation: medical-shimmer 1.5s ease-out;
+        }
+      }
+
+      &:not([disabled]):active {
+        transform: translateY(0px) scale(0.98);
+      }
+
+      /* 💓 Efecto heartbeat cuando está activo */
+      &.button-activated {
+        animation: heartbeat 1.5s ease-in-out infinite;
+      }
+    }
+
+    /* 🏷️ Badges médicos premium */
+    ion-badge {
+      --background: var(--glass-background);
+      --color: var(--medical-blue-700);
+      backdrop-filter: var(--glass-backdrop);
+      border: 1px solid var(--glass-border);
+      border-radius: 12px !important;
+      padding: 0.75rem 1rem !important;
+      font-weight: 500 !important;
+      font-size: 0.85rem !important;
+      box-shadow: var(--shadow-medical-soft);
+      transition: var(--transition-medical);
+
+      ion-icon {
+        margin-right: 0.5rem;
+        filter: drop-shadow(0 1px 2px rgba(59, 130, 246, 0.3));
+      }
+
+      /* 🟡 Warning badge */
+      &[color="warning"] {
+        --background: linear-gradient(135deg,
+          rgba(245, 158, 11, 0.1) 0%,
+          rgba(217, 119, 6, 0.05) 100%
+        );
+        --color: var(--medical-yellow-700);
+        border-color: rgba(245, 158, 11, 0.3);
+      }
+
+      /* 🔴 Danger badge */
+      &[color="danger"] {
+        --background: linear-gradient(135deg,
+          rgba(239, 68, 68, 0.1) 0%,
+          rgba(220, 38, 38, 0.05) 100%
+        );
+        --color: var(--medical-red-700);
+        border-color: rgba(239, 68, 68, 0.3);
+        animation: medical-pulse 3s infinite;
+      }
+    }
+  }
+}
+
+/* 🎭 Animaciones médicas */
+@keyframes medical-float {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-20px) rotate(180deg);
+  }
+}
+
+@keyframes medical-rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* 📱 Responsive premium */
+@media (max-width: 480px) {
+  #card-login {
+    margin: 1rem;
+    border-radius: 20px !important;
+  }
+
+  ion-card-header {
+    padding: 1.5rem 1rem 0.5rem;
+
+    ion-card-title {
+      font-size: 1.6rem !important;
+    }
+  }
+
+  ion-card-content {
+    padding: 0 1rem 1.5rem;
+  }
+}
+
+/* 🔧 Botón configurar servidor */
+.config-server-btn {
+  --color: var(--medical-blue-600) !important;
+  --background: transparent !important;
+  font-size: 0.9rem !important;
+  font-weight: 500 !important;
+  letter-spacing: 0.3px;
+  transition: var(--transition-medical) !important;
+
+  &:hover {
+    --color: var(--medical-blue-700) !important;
+    --background: rgba(59, 130, 246, 0.05) !important;
+    transform: scale(1.05);
+  }
+
+  ion-icon {
+    margin-right: 0.5rem !important;
+    font-size: 1rem !important;
+  }
 }

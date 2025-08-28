@@ -1,9 +1,17 @@
 <div id="login">
   <ion-card id="card-login">
     <ion-card-header>
-      <ion-card-title>Iniciar Sesión</ion-card-title>
+      <!-- 🏥 Icono médico premium -->
+      <div class="medical-icon-container">
+        <ion-icon name="medical" class="medical-icon"></ion-icon>
+        <div class="medical-pulse-ring"></div>
+      </div>
+      
+      <ion-card-title>
+        🏥 Sistema de Caracterización
+      </ion-card-title>
       <ion-card-subtitle>
-        Por favor ingrese los datos a continuaci&oacute;n
+        Acceso seguro al sistema médico
       </ion-card-subtitle>
     </ion-card-header>
 
@@ -23,16 +31,21 @@
           <ion-input formControlName="password" type="password"></ion-input>
         </ion-item>
 
-        <ion-item>
-          <ion-label aria-label="server" position="floating">
-            Server
-          </ion-label>
-          <ion-input formControlName="server" type="text"></ion-input>
-        </ion-item>
-
         <ion-button expand="full" type="submit" [disabled]="!loginForm.valid"
           >Iniciar Sesión</ion-button
         >
+        
+        <!-- 🔧 Enlace para configurar servidor -->
+        <div class="ion-text-center ion-margin-top">
+          <ion-button 
+            fill="clear" 
+            size="small" 
+            (click)="openServerConfig()"
+            class="config-server-btn">
+            <ion-icon name="settings" slot="start"></ion-icon>
+            Configurar Servidor
+          </ion-button>
+        </div>
         <div class="ion-text-center ion-margin-top">
           <ion-badge
             *ngIf="!siInicioSesion"

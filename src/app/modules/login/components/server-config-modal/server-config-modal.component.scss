@@ -1,0 +1,154 @@
+/* 🔧 Modal de Configuración de Servidor - Versión Funcional */
+
+ion-content {
+  --background: #f8fafc;
+}
+
+.config-container {
+  padding: 20px;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.header-section {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.server-icon {
+  font-size: 3rem;
+  color: #3b82f6;
+  margin-bottom: 16px;
+}
+
+h2 {
+  color: #1e293b;
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin: 0 0 8px 0;
+}
+
+p {
+  color: #64748b;
+  font-size: 0.9rem;
+  margin: 0;
+}
+
+/* Form Items */
+ion-item {
+  --background: white;
+  --border-color: #e2e8f0;
+  --border-width: 1px;
+  --border-style: solid;
+  border-radius: 12px;
+  margin: 12px 0;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+
+  &.is-invalid {
+    --border-color: #ef4444;
+  }
+}
+
+/* Validation Messages */
+.validation-message {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: #ef4444;
+  font-size: 0.85rem;
+  margin: 4px 12px 12px 12px;
+
+  ion-icon {
+    font-size: 1rem;
+  }
+}
+
+/* Error Message */
+.error-message {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: #fee2e2;
+  color: #dc2626;
+  border: 1px solid #fecaca;
+  border-radius: 8px;
+  padding: 12px;
+  margin: 16px 0;
+
+  ion-icon {
+    font-size: 1.2rem;
+    flex-shrink: 0;
+  }
+
+  span {
+    font-size: 0.9rem;
+    line-height: 1.4;
+  }
+}
+
+/* Success Message */
+.success-message {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: #dcfce7;
+  color: #16a34a;
+  border: 1px solid #bbf7d0;
+  border-radius: 8px;
+  padding: 12px;
+  margin: 16px 0;
+
+  ion-icon {
+    font-size: 1.2rem;
+    flex-shrink: 0;
+  }
+
+  span {
+    font-size: 0.9rem;
+    line-height: 1.4;
+  }
+}
+
+/* Button Container */
+.button-container {
+  margin-top: 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* Primary Button */
+ion-button[type="submit"] {
+  height: 50px;
+  font-weight: 600;
+  font-size: 1rem;
+  
+  ion-spinner {
+    margin-right: 8px;
+  }
+}
+
+/* Cancel Button */
+ion-button[fill="clear"] {
+  height: 44px;
+  --color: #64748b;
+  
+  &:hover {
+    --color: #475569;
+  }
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+  .config-container {
+    padding: 16px;
+  }
+  
+  .server-icon {
+    font-size: 2.5rem;
+  }
+  
+  h2 {
+    font-size: 1.3rem;
+  }
+}

@@ -1,0 +1,111 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>🔧 Configurar Servidor</ion-title>
+    <ion-buttons slot="end">
+      <ion-button fill="clear" (click)="closeModal()">
+        <ion-icon name="close"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="config-container">
+    <div class="header-section">
+      <ion-icon name="server" class="server-icon"></ion-icon>
+      <h2>Configuración del Servidor</h2>
+      <p>Solo administradores pueden configurar la URL del servidor</p>
+    </div>
+
+    <form [formGroup]="configForm" (ngSubmit)="onSubmit()">
+      <!-- URL del Servidor -->
+      <ion-item>
+        <ion-input 
+          formControlName="serverUrl" 
+          type="url" 
+          label="URL del Servidor"
+          labelPlacement="floating"
+          placeholder="https://api.ejemplo.com"
+          [class.is-invalid]="configForm.get('serverUrl')?.invalid && configForm.get('serverUrl')?.touched">
+        </ion-input>
+      </ion-item>
+      <div class="validation-message" *ngIf="configForm.get('serverUrl')?.invalid && configForm.get('serverUrl')?.touched">
+        <ion-icon name="warning"></ion-icon>
+        URL del servidor es requerida
+      </div>
+
+      <!-- Usuario Administrador -->
+      <ion-item>
+        <ion-input 
+          formControlName="adminUsername" 
+          type="text"
+          label="Usuario Administrador"
+          labelPlacement="floating"
+          [class.is-invalid]="configForm.get('adminUsername')?.invalid && configForm.get('adminUsername')?.touched">
+        </ion-input>
+      </ion-item>
+      <div class="validation-message" *ngIf="configForm.get('adminUsername')?.invalid && configForm.get('adminUsername')?.touched">
+        <ion-icon name="warning"></ion-icon>
+        Usuario administrador es requerido
+      </div>
+
+      <!-- Contraseña Administrador -->
+      <ion-item>
+        <ion-input 
+          formControlName="adminPassword" 
+          [type]="showPassword ? 'text' : 'password'"
+          label="Contraseña Administrador"
+          labelPlacement="floating"
+          [class.is-invalid]="configForm.get('adminPassword')?.invalid && configForm.get('adminPassword')?.touched">
+        </ion-input>
+        <ion-button 
+          fill="clear" 
+          slot="end" 
+          (click)="togglePassword()">
+          <ion-icon 
+            [name]="showPassword ? 'eye-off' : 'eye'">
+          </ion-icon>
+        </ion-button>
+      </ion-item>
+      <div class="validation-message" *ngIf="configForm.get('adminPassword')?.invalid && configForm.get('adminPassword')?.touched">
+        <ion-icon name="warning"></ion-icon>
+        Contraseña de administrador es requerida
+      </div>
+
+      <!-- Mensaje de error -->
+      <div class="error-message" *ngIf="errorMessage">
+        <ion-icon name="alert-circle"></ion-icon>
+        <span>{{ errorMessage }}</span>
+      </div>
+
+      <!-- Mensaje de éxito -->
+      <div class="success-message" *ngIf="successMessage">
+        <ion-icon name="checkmark-circle"></ion-icon>
+        <span>{{ successMessage }}</span>
+      </div>
+
+      <!-- Botones -->
+      <div class="button-container">
+        <ion-button 
+          type="submit" 
+          expand="block" 
+          [disabled]="!configForm.valid || isLoading"
+          color="primary">
+          <ion-spinner *ngIf="isLoading" name="crescent"></ion-spinner>
+          <span *ngIf="!isLoading">
+            <ion-icon name="shield-checkmark" slot="start"></ion-icon>
+            Validar y Guardar
+          </span>
+        </ion-button>
+        
+        <ion-button 
+          fill="clear" 
+          expand="block" 
+          (click)="closeModal()"
+          [disabled]="isLoading">
+          Cancelar
+        </ion-button>
+      </div>
+    </form>
+  </div>
+</ion-content>

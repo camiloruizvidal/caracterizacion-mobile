@@ -1,0 +1,265 @@
+/* 🏥 MENÚ LATERAL MÉDICO ULTRA PREMIUM */
+
+/* 🎯 Menú principal con gradiente médico */
+ion-menu {
+  /* 🌟 Fondo con gradiente médico vertical */
+  --background: linear-gradient(180deg,
+    var(--medical-blue-50) 0%,
+    rgba(59, 130, 246, 0.05) 25%,
+    rgba(37, 99, 235, 0.03) 50%,
+    rgba(59, 130, 246, 0.05) 75%,
+    var(--medical-blue-50) 100%
+  );
+  --color: var(--medical-gray-800);
+  
+  /* 💎 Efectos de cristal */
+  backdrop-filter: blur(20px) saturate(120%);
+  border-right: 1px solid rgba(59, 130, 246, 0.1);
+  box-shadow: 
+    4px 0 20px rgba(59, 130, 246, 0.08),
+    inset -1px 0 0 rgba(255, 255, 255, 0.1);
+
+  /* ✨ Patrón médico sutil */
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: 
+      radial-gradient(circle at 20% 30%, rgba(59, 130, 246, 0.03) 1px, transparent 1px),
+      radial-gradient(circle at 80% 70%, rgba(37, 99, 235, 0.03) 1px, transparent 1px);
+    background-size: 40px 40px, 60px 60px;
+    pointer-events: none;
+    opacity: 0.5;
+  }
+}
+
+/* 🎭 Header del menú premium */
+ion-menu ion-header {
+  ion-toolbar {
+    --background: linear-gradient(135deg,
+      rgba(59, 130, 246, 0.1) 0%,
+      rgba(37, 99, 235, 0.05) 100%
+    );
+    --color: var(--medical-blue-800);
+    border-bottom: 1px solid rgba(59, 130, 246, 0.15);
+    backdrop-filter: blur(10px);
+    
+    ion-title {
+      font-weight: 700 !important;
+      font-size: 1.3rem !important;
+      letter-spacing: 0.5px;
+      background: var(--gradient-medical-primary);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      text-shadow: 0 2px 4px rgba(59, 130, 246, 0.1);
+      position: relative;
+
+      /* 🏥 Icono médico en el título */
+      &::before {
+        content: '🏥';
+        position: absolute;
+        left: -2rem;
+        top: 50%;
+        transform: translateY(-50%);
+        font-size: 1.2rem;
+        filter: drop-shadow(0 2px 4px rgba(59, 130, 246, 0.3));
+      }
+    }
+  }
+}
+
+/* 📝 Contenido del menú */
+ion-menu ion-content {
+  --background: transparent;
+  
+  /* 📋 Lista del menú premium */
+  .menu-list {
+    padding: 1rem 0.5rem;
+    background: transparent;
+    
+    ion-item {
+      --background: rgba(255, 255, 255, 0.05);
+      --border-radius: 12px;
+      --padding-start: 16px;
+      --padding-end: 16px;
+      --inner-padding-end: 16px;
+      --min-height: 52px;
+      margin-bottom: 0.5rem;
+      border: 1px solid rgba(59, 130, 246, 0.1);
+      backdrop-filter: blur(10px);
+      transition: var(--transition-medical);
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+
+      /* ✨ Brillo superior sutil */
+      &::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 1px;
+        background: linear-gradient(90deg,
+          transparent 0%,
+          rgba(255, 255, 255, 0.3) 50%,
+          transparent 100%
+        );
+      }
+
+      /* 🌟 Efectos hover premium */
+      &:hover {
+        --background: linear-gradient(135deg,
+          rgba(59, 130, 246, 0.15) 0%,
+          rgba(37, 99, 235, 0.08) 100%
+        );
+        transform: translateX(8px) scale(1.02);
+        box-shadow: 
+          4px 4px 20px rgba(59, 130, 246, 0.15),
+          inset 0 1px 0 rgba(255, 255, 255, 0.2);
+        border-color: rgba(59, 130, 246, 0.3);
+
+        /* 💫 Efecto shimmer en hover */
+        &::after {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: -100%;
+          width: 100%;
+          height: 100%;
+          background: linear-gradient(90deg,
+            transparent 0%,
+            rgba(255, 255, 255, 0.2) 50%,
+            transparent 100%
+          );
+          animation: medical-shimmer 0.8s ease-out;
+        }
+      }
+
+      /* 🎯 Estados activos */
+      &.activated {
+        --background: linear-gradient(135deg,
+          var(--medical-blue-500) 0%,
+          var(--medical-blue-600) 100%
+        );
+        --color: white;
+        border-color: var(--medical-blue-600);
+        box-shadow: 
+          0 4px 15px rgba(59, 130, 246, 0.3),
+          inset 0 1px 0 rgba(255, 255, 255, 0.3);
+        
+        ion-icon {
+          filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+        }
+      }
+
+      /* 🚪 Cerrar sesión con estilo especial */
+      &.cerrar-sesion {
+        margin-top: 1rem;
+        --background: linear-gradient(135deg,
+          rgba(239, 68, 68, 0.1) 0%,
+          rgba(220, 38, 38, 0.05) 100%
+        );
+        border-color: rgba(239, 68, 68, 0.2);
+
+        &:hover {
+          --background: linear-gradient(135deg,
+            rgba(239, 68, 68, 0.15) 0%,
+            rgba(220, 38, 38, 0.08) 100%
+          );
+          border-color: rgba(239, 68, 68, 0.4);
+        }
+
+        ion-icon {
+          color: var(--medical-red-500) !important;
+        }
+
+        ion-label {
+          color: var(--medical-red-600) !important;
+          font-weight: 600 !important;
+        }
+      }
+
+      /* 🎨 Iconos premium */
+      ion-icon {
+        color: var(--medical-blue-600) !important;
+        font-size: 1.3rem !important;
+        margin-right: 1rem !important;
+        filter: drop-shadow(0 1px 2px rgba(59, 130, 246, 0.2));
+        transition: var(--transition-medical);
+      }
+
+      /* 📝 Labels premium */
+      ion-label {
+        color: var(--medical-gray-700) !important;
+        font-weight: 600 !important;
+        font-size: 1rem !important;
+        letter-spacing: 0.3px;
+        transition: var(--transition-medical);
+      }
+    }
+  }
+}
+
+/* 🎭 Toolbar del contenido principal */
+.ion-page ion-header {
+  ion-toolbar {
+    --background: linear-gradient(135deg,
+      rgba(255, 255, 255, 0.95) 0%,
+      rgba(248, 250, 252, 0.9) 100%
+    );
+    --color: var(--medical-blue-800);
+    backdrop-filter: blur(20px) saturate(120%);
+    border-bottom: 1px solid rgba(59, 130, 246, 0.1);
+    box-shadow: 0 2px 10px rgba(59, 130, 246, 0.05);
+
+    ion-title {
+      font-weight: 700 !important;
+      font-size: 1.2rem !important;
+      letter-spacing: 0.5px;
+      color: var(--medical-blue-800) !important;
+    }
+
+    /* 🍔 Botón de menú premium */
+    ion-menu-button {
+      --color: var(--medical-blue-600);
+      --background: rgba(59, 130, 246, 0.1);
+      --border-radius: 8px;
+      --padding-start: 8px;
+      --padding-end: 8px;
+      transition: var(--transition-medical);
+
+      &:hover {
+        --background: rgba(59, 130, 246, 0.2);
+        --color: var(--medical-blue-700);
+        transform: scale(1.1);
+      }
+    }
+  }
+}
+
+/* 📱 Contenido principal premium */
+.ion-page ion-content {
+  --background: var(--gradient-medical-background);
+  position: relative;
+
+  /* 🌟 Patrón sutil de fondo */
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: 
+      radial-gradient(circle at 25% 25%, rgba(59, 130, 246, 0.02) 1px, transparent 1px),
+      radial-gradient(circle at 75% 75%, rgba(37, 99, 235, 0.02) 1px, transparent 1px);
+    background-size: 60px 60px, 90px 90px;
+    pointer-events: none;
+    opacity: 0.3;
+  }
+}

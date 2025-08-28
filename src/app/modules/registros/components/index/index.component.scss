@@ -1,0 +1,109 @@
+/* 🏥 TARJETA DE ADVERTENCIA MÉDICA PREMIUM */
+.warning-card {
+  --background: linear-gradient(135deg,
+    rgba(245, 158, 11, 0.1) 0%,
+    rgba(217, 119, 6, 0.05) 100%
+  ) !important;
+  border: 1px solid rgba(245, 158, 11, 0.3) !important;
+  border-radius: 16px !important;
+  box-shadow: 
+    0 8px 25px rgba(245, 158, 11, 0.15),
+    0 4px 15px rgba(217, 119, 6, 0.1) !important;
+  backdrop-filter: blur(10px) saturate(120%) !important;
+  animation: medical-warning-pulse 3s ease-in-out infinite;
+
+  ion-card-content {
+    background: transparent !important;
+  }
+}
+
+.warning-content {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.warning-icon {
+  font-size: 3rem !important;
+  color: var(--medical-yellow-600) !important;
+  filter: drop-shadow(0 4px 8px rgba(245, 158, 11, 0.3));
+  animation: medical-warning-bounce 2s ease-in-out infinite;
+}
+
+.warning-text {
+  color: var(--medical-yellow-800) !important;
+  font-size: 1rem !important;
+  font-weight: 600 !important;
+  margin: 0;
+  line-height: 1.5;
+  text-shadow: 0 1px 2px rgba(245, 158, 11, 0.2);
+}
+
+.update-button {
+  --background: linear-gradient(135deg,
+    var(--medical-yellow-500) 0%,
+    var(--medical-yellow-600) 100%
+  ) !important;
+  --color: white !important;
+  --border-radius: 12px !important;
+  --padding-top: 12px !important;
+  --padding-bottom: 12px !important;
+  --padding-start: 20px !important;
+  --padding-end: 20px !important;
+  --box-shadow: 
+    0 6px 20px rgba(245, 158, 11, 0.3),
+    0 3px 10px rgba(217, 119, 6, 0.2) !important;
+  font-weight: 700 !important;
+  font-size: 1.1rem !important;
+  letter-spacing: 0.5px;
+  text-transform: none !important;
+  margin-top: 0.5rem;
+  transition: var(--transition-medical) !important;
+
+  &:hover {
+    --box-shadow: 
+      0 8px 25px rgba(245, 158, 11, 0.4),
+      0 4px 15px rgba(217, 119, 6, 0.3) !important;
+    transform: translateY(-2px) scale(1.05);
+  }
+
+  &:active {
+    transform: translateY(0px) scale(1.02);
+  }
+
+  ion-icon {
+    font-size: 1.3rem !important;
+    margin-right: 0.5rem !important;
+  }
+}
+
+/* 🎭 Animaciones médicas para advertencias */
+@keyframes medical-warning-pulse {
+  0%, 100% {
+    box-shadow: 
+      0 8px 25px rgba(245, 158, 11, 0.15),
+      0 4px 15px rgba(217, 119, 6, 0.1);
+  }
+  50% {
+    box-shadow: 
+      0 12px 35px rgba(245, 158, 11, 0.25),
+      0 6px 20px rgba(217, 119, 6, 0.15);
+  }
+}
+
+@keyframes medical-warning-bounce {
+  0%, 100% {
+    transform: scale(1) rotate(0deg);
+  }
+  25% {
+    transform: scale(1.1) rotate(-5deg);
+  }
+  50% {
+    transform: scale(1.15) rotate(0deg);
+  }
+  75% {
+    transform: scale(1.1) rotate(5deg);
+  }
+}
