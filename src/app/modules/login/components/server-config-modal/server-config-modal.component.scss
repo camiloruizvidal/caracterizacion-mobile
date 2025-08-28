@@ -1,154 +1,533 @@
-/* 🔧 Modal de Configuración de Servidor - Versión Funcional */
+/* 🔧 Modal de Configuración de Servidor - DISEÑO MÉDICO PREMIUM $3000 USD */
 
+/* Modal Content Premium */
 ion-content {
-  --background: #f8fafc;
+  --background: linear-gradient(135deg, 
+    rgba(248, 250, 252, 0.95) 0%, 
+    rgba(241, 245, 249, 0.98) 100%) !important;
+  
+  &::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: 
+      radial-gradient(circle at 20% 20%, rgba(59, 130, 246, 0.03) 0%, transparent 50%),
+      radial-gradient(circle at 80% 80%, rgba(16, 185, 129, 0.02) 0%, transparent 50%),
+      radial-gradient(circle at 40% 60%, rgba(139, 92, 246, 0.02) 0%, transparent 50%);
+    pointer-events: none;
+    z-index: 0;
+  }
 }
 
+/* Toolbar Premium */
+ion-toolbar {
+  --background: linear-gradient(135deg, 
+    var(--medical-blue-600) 0%, 
+    var(--medical-blue-700) 50%,
+    var(--medical-blue-800) 100%) !important;
+  --color: white !important;
+  box-shadow: 
+    0 8px 32px rgba(59, 130, 246, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2) !important;
+  position: relative;
+  overflow: hidden;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, 
+      transparent, 
+      rgba(255, 255, 255, 0.1), 
+      transparent);
+    animation: medical-shimmer 3s ease-in-out infinite;
+  }
+
+  ion-title {
+    font-weight: 700 !important;
+    font-size: 1.2rem !important;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    letter-spacing: 0.3px;
+  }
+
+  ion-button {
+    --color: rgba(255, 255, 255, 0.9) !important;
+    --background: transparent !important;
+    transition: var(--transition-medical) !important;
+    
+    &:hover {
+      --color: white !important;
+      --background: rgba(255, 255, 255, 0.1) !important;
+      transform: scale(1.05);
+    }
+  }
+}
+
+/* Container Premium */
 .config-container {
-  padding: 20px;
+  position: relative;
+  z-index: 1;
+  padding: 2rem 1.5rem;
   max-width: 500px;
   margin: 0 auto;
 }
 
+/* Header Section Premium */
 .header-section {
   text-align: center;
-  margin-bottom: 30px;
+  margin-bottom: 2.5rem;
+  position: relative;
 }
 
+/* Server Icon Premium */
 .server-icon {
-  font-size: 3rem;
-  color: #3b82f6;
-  margin-bottom: 16px;
+  font-size: 4rem !important;
+  background: linear-gradient(135deg, 
+    var(--medical-blue-500) 0%, 
+    var(--medical-blue-600) 50%,
+    var(--medical-green-500) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  filter: drop-shadow(0 8px 24px rgba(59, 130, 246, 0.4));
+  animation: medical-float 3s ease-in-out infinite;
+  margin-bottom: 1.5rem;
+  position: relative;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80px;
+    height: 80px;
+    border: 2px solid var(--medical-blue-300);
+    border-radius: 50%;
+    animation: medical-heartbeat-critical 2s ease-in-out infinite;
+    opacity: 0.4;
+  }
+
+  &::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100px;
+    height: 100px;
+    border: 1px solid var(--medical-blue-200);
+    border-radius: 50%;
+    animation: medical-heartbeat-critical 2s ease-in-out infinite;
+    animation-delay: 0.5s;
+    opacity: 0.2;
+  }
 }
 
+/* Titles Premium */
 h2 {
-  color: #1e293b;
-  font-size: 1.5rem;
-  font-weight: 600;
-  margin: 0 0 8px 0;
+  color: var(--medical-blue-800) !important;
+  font-size: 1.8rem !important;
+  font-weight: 700 !important;
+  margin: 0 0 0.75rem 0 !important;
+  background: linear-gradient(135deg, 
+    var(--medical-blue-700) 0%, 
+    var(--medical-blue-600) 50%,
+    var(--medical-green-600) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-shadow: 0 4px 12px rgba(59, 130, 246, 0.1);
+  letter-spacing: 0.3px;
+  position: relative;
+  
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: -8px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 3px;
+    background: linear-gradient(90deg, 
+      var(--medical-blue-400), 
+      var(--medical-green-400), 
+      var(--medical-blue-400));
+    border-radius: 2px;
+    opacity: 0.6;
+  }
 }
 
 p {
-  color: #64748b;
-  font-size: 0.9rem;
-  margin: 0;
+  color: var(--medical-gray-600) !important;
+  font-size: 1rem !important;
+  margin: 0 0 2rem 0 !important;
+  font-weight: 400;
+  line-height: 1.6;
+  text-align: center;
 }
 
-/* Form Items */
+/* Form Items Premium */
 ion-item {
-  --background: white;
-  --border-color: #e2e8f0;
-  --border-width: 1px;
-  --border-style: solid;
-  border-radius: 12px;
-  margin: 12px 0;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  --background: var(--glass-background) !important;
+  --border-color: var(--glass-border) !important;
+  --border-width: 1px !important;
+  --border-style: solid !important;
+  border-radius: 16px !important;
+  margin: 1.5rem 0 !important;
+  backdrop-filter: var(--glass-backdrop) !important;
+  box-shadow: var(--shadow-medical-soft) !important;
+  transition: var(--transition-medical) !important;
+  position: relative;
+  overflow: hidden;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, 
+      var(--medical-blue-400) 0%, 
+      var(--medical-green-400) 50%, 
+      var(--medical-blue-400) 100%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  &:focus-within {
+    --border-color: var(--medical-blue-400) !important;
+    --background: rgba(255, 255, 255, 0.95) !important;
+    transform: translateY(-2px);
+    box-shadow: 
+      var(--shadow-medical-strong),
+      0 0 0 4px rgba(59, 130, 246, 0.1) !important;
+
+    &::before {
+      opacity: 1;
+    }
+  }
 
   &.is-invalid {
-    --border-color: #ef4444;
+    --border-color: var(--medical-red-400) !important;
+    --background: rgba(239, 68, 68, 0.02) !important;
+    animation: medical-warning-wiggle 0.5s ease-in-out;
+
+    &::before {
+      background: var(--medical-red-400);
+      opacity: 1;
+    }
+  }
+
+  ion-input {
+    --color: var(--medical-gray-800) !important;
+    font-weight: 500 !important;
+    --padding-start: 20px !important;
+    --padding-end: 20px !important;
+    font-size: 1rem !important;
+  }
+
+  ion-button[slot="end"] {
+    --color: var(--medical-blue-500) !important;
+    --background: transparent !important;
+    margin-right: 8px;
+    transition: var(--transition-medical) !important;
+
+    &:hover {
+      --color: var(--medical-blue-600) !important;
+      --background: rgba(59, 130, 246, 0.08) !important;
+      transform: scale(1.1);
+    }
+
+    ion-icon {
+      font-size: 1.3rem !important;
+    }
   }
 }
 
-/* Validation Messages */
+/* Validation Messages Premium */
 .validation-message {
   display: flex;
   align-items: center;
-  gap: 6px;
-  color: #ef4444;
-  font-size: 0.85rem;
-  margin: 4px 12px 12px 12px;
+  gap: 0.75rem;
+  color: var(--medical-red-600) !important;
+  font-size: 0.85rem !important;
+  margin: 0.5rem 1.5rem 1rem 1.5rem !important;
+  font-weight: 500;
+  animation: medical-warning-bounce 0.5s ease-out;
+  background: rgba(239, 68, 68, 0.05);
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+  border-left: 4px solid var(--medical-red-400);
 
   ion-icon {
-    font-size: 1rem;
+    font-size: 1.1rem !important;
+    color: var(--medical-red-500) !important;
+    animation: medical-warning-pulse 2s ease-in-out infinite;
   }
 }
 
-/* Error Message */
+/* Error Message Premium */
 .error-message {
   display: flex;
-  align-items: center;
-  gap: 8px;
-  background: #fee2e2;
-  color: #dc2626;
-  border: 1px solid #fecaca;
-  border-radius: 8px;
-  padding: 12px;
-  margin: 16px 0;
+  align-items: flex-start;
+  gap: 1rem;
+  background: linear-gradient(135deg, 
+    rgba(239, 68, 68, 0.08) 0%, 
+    rgba(220, 38, 38, 0.04) 100%);
+  border: 1px solid var(--medical-red-200);
+  border-left: 4px solid var(--medical-red-400);
+  border-radius: 12px;
+  padding: 1.25rem;
+  margin: 1.5rem 0;
+  backdrop-filter: blur(10px);
+  animation: medical-fade-out 0.3s ease-out reverse;
+  box-shadow: 
+    0 4px 20px rgba(239, 68, 68, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.5);
 
   ion-icon {
-    font-size: 1.2rem;
+    font-size: 1.5rem !important;
+    color: var(--medical-red-500) !important;
+    animation: medical-warning-pulse 2s ease-in-out infinite;
     flex-shrink: 0;
+    margin-top: 2px;
   }
 
   span {
-    font-size: 0.9rem;
-    line-height: 1.4;
+    color: var(--medical-red-700) !important;
+    font-weight: 500 !important;
+    font-size: 0.95rem !important;
+    line-height: 1.5;
   }
 }
 
-/* Success Message */
+/* Success Message Premium */
 .success-message {
   display: flex;
-  align-items: center;
-  gap: 8px;
-  background: #dcfce7;
-  color: #16a34a;
-  border: 1px solid #bbf7d0;
-  border-radius: 8px;
-  padding: 12px;
-  margin: 16px 0;
+  align-items: flex-start;
+  gap: 1rem;
+  background: linear-gradient(135deg, 
+    rgba(16, 185, 129, 0.08) 0%, 
+    rgba(5, 150, 105, 0.04) 100%);
+  border: 1px solid var(--medical-green-200);
+  border-left: 4px solid var(--medical-green-400);
+  border-radius: 12px;
+  padding: 1.25rem;
+  margin: 1.5rem 0;
+  backdrop-filter: blur(10px);
+  animation: medical-success-bounce 0.5s ease-out;
+  box-shadow: 
+    0 4px 20px rgba(16, 185, 129, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.5);
 
   ion-icon {
-    font-size: 1.2rem;
+    font-size: 1.5rem !important;
+    color: var(--medical-green-500) !important;
+    animation: medical-success-bounce 1s ease-out;
     flex-shrink: 0;
+    margin-top: 2px;
   }
 
   span {
-    font-size: 0.9rem;
-    line-height: 1.4;
+    color: var(--medical-green-700) !important;
+    font-weight: 500 !important;
+    font-size: 0.95rem !important;
+    line-height: 1.5;
   }
 }
 
-/* Button Container */
+/* Button Container Premium */
 .button-container {
-  margin-top: 30px;
+  margin-top: 2.5rem;
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 1rem;
+  position: relative;
 }
 
-/* Primary Button */
+/* Primary Button Premium */
 ion-button[type="submit"] {
-  height: 50px;
-  font-weight: 600;
-  font-size: 1rem;
-  
+  --background: linear-gradient(135deg, 
+    var(--medical-blue-600) 0%, 
+    var(--medical-blue-700) 50%,
+    var(--medical-green-600) 100%) !important;
+  --background-hover: linear-gradient(135deg, 
+    var(--medical-blue-700) 0%, 
+    var(--medical-blue-800) 50%,
+    var(--medical-green-700) 100%) !important;
+  --color: white !important;
+  --border-radius: 16px !important;
+  height: 56px !important;
+  font-weight: 700 !important;
+  font-size: 1.1rem !important;
+  letter-spacing: 0.5px;
+  box-shadow: 
+    var(--shadow-medical-strong),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  transition: var(--transition-medical) !important;
+  position: relative;
+  overflow: hidden;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, 
+      transparent, 
+      rgba(255, 255, 255, 0.2), 
+      transparent);
+    transition: left 0.6s ease;
+  }
+
+  &:hover:not([disabled]) {
+    transform: translateY(-3px);
+    box-shadow: 
+      0 12px 40px rgba(59, 130, 246, 0.4),
+      0 0 0 4px rgba(59, 130, 246, 0.1),
+      inset 0 1px 0 rgba(255, 255, 255, 0.3);
+
+    &::before {
+      left: 100%;
+    }
+  }
+
+  &:active:not([disabled]) {
+    transform: translateY(-1px);
+  }
+
+  &[disabled] {
+    --background: var(--medical-gray-300) !important;
+    --color: var(--medical-gray-500) !important;
+    transform: none !important;
+    box-shadow: none !important;
+    opacity: 0.7;
+  }
+
   ion-spinner {
-    margin-right: 8px;
+    margin-right: 0.75rem;
+    --color: white;
+  }
+
+  ion-icon {
+    font-size: 1.2rem !important;
+    margin-right: 0.5rem;
   }
 }
 
-/* Cancel Button */
+/* Cancel Button Premium */
 ion-button[fill="clear"] {
-  height: 44px;
-  --color: #64748b;
-  
-  &:hover {
-    --color: #475569;
+  --color: var(--medical-gray-600) !important;
+  --background: transparent !important;
+  height: 48px !important;
+  font-weight: 500 !important;
+  font-size: 1rem !important;
+  transition: var(--transition-medical) !important;
+  border-radius: 12px !important;
+
+  &:hover:not([disabled]) {
+    --color: var(--medical-gray-700) !important;
+    --background: rgba(107, 114, 128, 0.08) !important;
+    transform: scale(1.02);
+  }
+
+  &[disabled] {
+    --color: var(--medical-gray-400) !important;
+    transform: none !important;
+    opacity: 0.6;
   }
 }
 
-/* Responsive */
+/* Responsive Premium */
 @media (max-width: 480px) {
   .config-container {
-    padding: 16px;
+    padding: 1.5rem 1rem;
   }
-  
-  .server-icon {
-    font-size: 2.5rem;
-  }
-  
+
   h2 {
-    font-size: 1.3rem;
+    font-size: 1.6rem !important;
   }
+
+  p {
+    font-size: 0.9rem !important;
+    margin-bottom: 1.5rem !important;
+  }
+
+  .server-icon {
+    font-size: 3rem !important;
+    margin-bottom: 1rem;
+
+    &::before {
+      width: 60px;
+      height: 60px;
+    }
+
+    &::after {
+      width: 80px;
+      height: 80px;
+    }
+  }
+
+  ion-item {
+    margin: 1rem 0 !important;
+  }
+
+  ion-button[type="submit"] {
+    height: 52px !important;
+    font-size: 1rem !important;
+  }
+
+  .button-container {
+    margin-top: 2rem;
+  }
+}
+
+/* Animaciones Premium */
+@keyframes medical-shimmer {
+  0% { left: -100%; }
+  50% { left: 100%; }
+  100% { left: 100%; }
+}
+
+/* Entrada del modal Premium */
+:host {
+  --transition-medical: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  animation: medical-page-enter 0.4s ease-out;
+}
+
+/* Partículas flotantes de fondo */
+.config-container::before {
+  content: '';
+  position: absolute;
+  top: 10%;
+  right: 10%;
+  width: 4px;
+  height: 4px;
+  background: var(--medical-blue-300);
+  border-radius: 50%;
+  animation: medical-particle-float 6s ease-in-out infinite;
+  opacity: 0.4;
+}
+
+.config-container::after {
+  content: '';
+  position: absolute;
+  bottom: 20%;
+  left: 15%;
+  width: 6px;
+  height: 6px;
+  background: var(--medical-green-300);
+  border-radius: 50%;
+  animation: medical-particle-float 8s ease-in-out infinite reverse;
+  opacity: 0.3;
 }
